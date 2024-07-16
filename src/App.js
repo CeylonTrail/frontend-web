@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import './assets/styles/style.css';
 import Header from "./components/header";
+// import Header2 from "./components/header2";
+
 
 function App() {
   return (

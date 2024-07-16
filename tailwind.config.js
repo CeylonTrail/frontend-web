@@ -19,7 +19,10 @@ module.exports = {
       secondaryDark1: '#294D61',
       warningLight: '#FC3A4E',
       SecondaryLight:"#E7E7E7"
-    }
+    },
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'], // Setting Poppins as the default sans font
+    },
   },
 }
 

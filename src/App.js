@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './assets/styles/style.css';
 import Header from "./components/header";
-// import Header2 from "./components/header2";
+import Signin from "./components/signin"
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
     //   </header> */}
     // </div>
     <div>
-      <Header />
+      <Signin />
     </div>
   );
 }

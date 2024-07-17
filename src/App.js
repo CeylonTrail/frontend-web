@@ -1,6 +1,10 @@
 // import logo from './logo.svg';
-import './assets/styles/style.css';
+import "./assets/styles/style.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
+import SpRedirectPage from "./components/SpRedirectPage";
+import SetUpMarketPlace from "./components/SetUpMarketPlace";
+import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 
 function App() {
   return (
@@ -22,6 +26,14 @@ function App() {
     // </div>
     <div>
       <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SpRedirectPage />} />
+          <Route path="/set-market" element={<SetUpMarketPlace />} />
+          <Route path="/profile-view-traveller" element={<MarketPlaceProfileOwnView />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

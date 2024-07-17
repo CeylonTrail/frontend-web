@@ -10,7 +10,7 @@ const SpRedirectPage = () => {
   };
 
   return (
-    <div className="bg-[#E7E7E7] flex items-center justify-center p-10">
+    <div className="bg-[#E7E7E7] flex items-center justify-center p-10 pt-32">
       <div
         className="bg-cover bg-center relative"
         style={{

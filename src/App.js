@@ -5,6 +5,8 @@ import Header from "./components/header";
 import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
+import Signin from "./components/signin"
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
     //   </header> */}
     // </div>
     <div>
+
       <Header />
       <BrowserRouter>
         <Routes>
@@ -34,6 +37,9 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+
+      <Signin />
+
     </div>
   );
 }

@@ -7,6 +7,7 @@ import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 import Signin from "./components/signin"
 import SubscriptionPlan from "./components/SubscriptionPlan";
+import Chat from "./components/Chat";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/set-market" element={<SetUpMarketPlace />} />
           <Route path="/profile-view-traveller" element={<MarketPlaceProfileOwnView />} />
           <Route path="/subscription-plan" element={<SubscriptionPlan />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </BrowserRouter>
 

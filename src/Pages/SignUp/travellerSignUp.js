@@ -1,6 +1,6 @@
-import { SimpleInput, Password, Email } from "./inputFields";
-import { PrimaryButton } from "./Button";
-import googleLogo from "../assets/img/GoogleLogo.png"
+import { SimpleInput, Password, Email } from "../../components/inputFields";
+import { PrimaryButton } from "../../components/Button";
+import googleLogo from "../../assets/img/GoogleLogo.png"
 
 export default () => {
     return (
@@ -39,7 +39,7 @@ export default () => {
                     Sign Up With Google
                 </button>
 
-                
+
             </div>
         </>
     )

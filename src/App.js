@@ -5,8 +5,8 @@ import Header from "./components/header";
 import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
-import SignUp from "./components/signup"
-import Login from "./components/login"
+import SignUp from "./Pages/SignUp/signup"
+import Login from "./Pages/login"
 
 
 function App() {

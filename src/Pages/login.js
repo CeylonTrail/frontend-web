@@ -1,12 +1,12 @@
-import Header from "./header2";
+import Header from "../components/header2";
 import Traveler from "../assets/img/Traveller signup.svg"
 
-import {  Password, Email } from "./inputFields";
-import { PrimaryButton } from "./Button";
+import { Password, Email } from "../components/inputFields";
+import { PrimaryButton } from "../components/Button";
 import googleLogo from "../assets/img/GoogleLogo.png"
 
 export default () => {
-    
+
     return (
         <div className="w-full">
             <div className="bg-primaryDark1 h-5">
@@ -27,14 +27,14 @@ export default () => {
                                 {/* <p className="">Already have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</a></p> */}
                             </div>
                         </div>
-                   
+
 
 
                         <form
                             onSubmit={(e) => e.preventDefault()}
                             className="space-y-5 flex flex-col w-full items-center"
                         >
-                            
+
                             <div className="w-full">
                                 <Email pholder={"Email"} />
                             </div>
@@ -43,15 +43,15 @@ export default () => {
                                 <div className="w-full flex justify-end">
                                     <a href="/signup" className="text-center text-primary hover:text-primaryDark1">Forgot password?</a>
                                 </div>
-                                
+
                             </div>
 
                             <div className="w-full">
-                                <input type="checkbox" id="remember-me-checkbox" className="border-primary"/>
+                                <input type="checkbox" id="remember-me-checkbox" className="border-primary" />
                                 <label form="remember-me-checkbox" className="text-primary">Remember Me</label>
                             </div>
-                            
-                           
+
+
                             {/* <div className="flex items-center justify-between text-sm w-full">
                                 <div className="flex items-center gap-x-3">
                                     <input type="checkbox"  className="checkbox-item peer hidden" />
@@ -64,12 +64,12 @@ export default () => {
                                 </div>
                                
                             </div> */}
-                            
+
                             <div >
                                 <PrimaryButton name={"Log In"} />
                             </div>
-                            
-                          
+
+
                         </form>
                         <div className="relative">
                             <span className="block w-full h-px bg-secondary"></span>
@@ -85,7 +85,7 @@ export default () => {
                                 Log in With Google
                             </button>
 
-                          
+
                         </div>
 
                         <div className="w-full flex flex-row justify-center">

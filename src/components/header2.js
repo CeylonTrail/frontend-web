@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { PrimaryButton} from './Button'
-import signin from './signup'
+// import signin from '../Pages/signup'
 
 export default (prop) => {
 

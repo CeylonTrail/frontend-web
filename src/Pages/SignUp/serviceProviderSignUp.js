@@ -1,6 +1,6 @@
-import { SimpleInput, Password, Email ,DropdownInput} from "./inputFields";
-import { PrimaryButton } from "./Button";
-import googleLogo from "../assets/img/GoogleLogo.png"
+import { SimpleInput, Password, Email, DropdownInput } from "../../components/inputFields";
+import { PrimaryButton } from "../../components/Button";
+// import googleLogo from "../../assets/img/GoogleLogo.png"
 
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
                 onSubmit={(e) => e.preventDefault()}
                 className="space-y-5 flex flex-col w-full items-center"
             >
-                <div className="w-full flex f-row gap-1">   
+                <div className="w-full flex f-row gap-1">
                     <SimpleInput pholder={"First name"} />
                     <SimpleInput pholder={"Last name"} />
                 </div>
@@ -31,8 +31,8 @@ export default () => {
                 </div>
 
             </form>
-           
-            
+
+
         </>
     )
 }

@@ -1,7 +1,7 @@
 import Header from "./header2";
 import Traveler from "../assets/img/Traveller signup.svg"
 import { useState } from "react";
-import { PrimaryButton,SecondaryButton } from "./Button";
+import { PrimaryButton,} from "./Button";
 import TravellerSignUp from "./travellerSignUp";
 import ServiceProviderSignUp from "./serviceProviderSignUp";
 
@@ -9,12 +9,12 @@ export default () => {
     const[isTravellerSignup, setIsTravellerSignup] = useState(true);
 
     const handleTravellerClick = () => {
-        console.log ("traveller")
+   
         setIsTravellerSignup(true);
     };
 
     const handleServiceProviderClick = () => {
-        console.log ("service")
+        
         setIsTravellerSignup(false);
     };
     return (

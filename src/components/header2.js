@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PrimaryButton, SecondaryButton } from './Button'
+import { PrimaryButton} from './Button'
 import signin from './signup'
 
 export default () => {
@@ -62,7 +62,7 @@ export default () => {
                     </ul>
                     <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                         <a href="javascript:void(0)" >
-                            <SecondaryButton name={"Login"} />
+                            <PrimaryButton name={"Login"} isActive={"true"} />
                         </a>
                         
                     </div>

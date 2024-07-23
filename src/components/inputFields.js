@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 
 const SimpleInput = ({pholder}) => {
     return (
@@ -59,4 +59,49 @@ const Email = ({ pholder }) => {
     );
 };
 
-export  {SimpleInput,Password,Email};
+
+const DropdownInput = ({ optionList, placeholder }) => {
+    const selectRef = useRef(null);
+
+    useEffect(() => {
+        const handleSelectChange = () => {
+            if (selectRef.current.value === "") {
+                selectRef.current.classList.add('text-gray-400');
+                selectRef.current.classList.remove('text-black');
+            } else {
+                selectRef.current.classList.remove('text-gray-400');
+                selectRef.current.classList.add('text-black');
+            }
+        };
+
+        const selectElement = selectRef.current;
+        selectElement.addEventListener('change', handleSelectChange);
+
+        // Initial call to set the correct color
+        handleSelectChange();
+
+        return () => {
+            selectElement.removeEventListener('change', handleSelectChange);
+        };
+    }, []);
+
+    return (
+        <div className="relative w-full">
+            <select
+                ref={selectRef}
+                className="appearance-none w-full py-2 px-3 border-2 border-secondary bg-SecondaryLight text-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <option value="" disabled selected hidden>{placeholder}</option>
+                {optionList.map((item, index) => (
+                    <option key={index} value={item} className="text-black">{item}</option>
+                ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+        </div>
+    );
+};
+export  {SimpleInput,Password,Email,DropdownInput};

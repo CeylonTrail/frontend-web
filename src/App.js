@@ -6,6 +6,7 @@ import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 import SignUp from "./components/signup"
+import Login from "./components/login"
 
 
 function App() {
@@ -36,7 +37,11 @@ function App() {
           <Route path="/profile-view-traveller" element={<><Header />;<MarketPlaceProfileOwnView /></>} />
 
           {/* log in and signup */}
-          <Route path="/signin" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          
+
+
         </Routes>
       </BrowserRouter>
 

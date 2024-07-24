@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PrimaryButton, } from "../../components/Button";
 import TravellerSignUp from "./travellerSignUp";
 import ServiceProviderSignUp from "./serviceProviderSignUp";
+import Footer from "../../components/footer";
 
 export default () => {
     const [isTravellerSignup, setIsTravellerSignup] = useState(true);
@@ -47,6 +48,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

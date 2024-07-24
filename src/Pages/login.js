@@ -1,9 +1,10 @@
 import Header from "../components/header2";
 import Traveler from "../assets/img/Traveller signup.svg"
-
+import footer from "../components/footer";
 import { Password, Email } from "../components/inputFields";
 import { PrimaryButton } from "../components/Button";
 import googleLogo from "../assets/img/GoogleLogo.png"
+import Footer from "../components/footer";
 
 export default () => {
 
@@ -96,6 +97,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

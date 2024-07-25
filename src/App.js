@@ -9,6 +9,7 @@ import Signin from "./components/signin"
 import SubscriptionPlan from "./components/SubscriptionPlan";
 import Chat from "./components/Chat";
 import SpHotelProfileView from "./components/SpHotelProfileView";
+import SpHotelListing from "./components/SpHotelListing";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/hotel-sp-view" element={<SpHotelProfileView />} />
           <Route path="/subscription-plan" element={<SubscriptionPlan />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/hotel-add-card" element={<SpHotelListing />} />
         </Routes>
       </BrowserRouter>
 

@@ -1,0 +1,169 @@
+/* CSS Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6); /* White background with 60% opacity */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: white;
+  padding: 12px; /* Adjusted padding */
+  border-radius: 26px; /* Corner radius */
+  border: 2px solid #0f969c; /* Border with color #0F969C */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 560px;
+  height: 600px; /* Fixed height to avoid scrolling */
+  display: flex;
+  flex-direction: column; /* Ensure children are stacked vertically */
+  align-items: center; /* Center all children horizontally */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.modal-header {
+  position: relative;
+  padding: 8px; /* Reduced padding */
+  background: #fff;
+  width: 100%; /* Ensure full width for header */
+  text-align: center; /* Center text in header */
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 8px; /* Adjusted for better alignment */
+  right: 8px;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f969c;
+}
+
+.heading-line {
+  height: 2px;
+  width: 100%;
+  background-color: #0f969c;
+  margin: 4px 0 12px; /* Adjusted margins */
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center form content */
+  width: 100%; /* Ensure the form takes full width of its container */
+  overflow-y: auto; /* Allow internal scrolling if needed */
+}
+
+.form-group {
+  margin-bottom: 8px; /* Adjusted margin */
+  width: 100%; /* Ensure full width for form-group */
+  max-width: 440px; /* Limit width for form-group */
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px; /* Reduced margin-bottom */
+}
+
+.form-input,
+.form-textarea {
+  width: 100%; /* Full width of the form-group */
+  padding: 6px 10px; /* Reduced padding */
+  border-radius: 4px;
+  border: 2px solid #6da5c0;
+  outline-color: #0f969c;
+  color: #333;
+  font-size: 0.875rem;
+  margin-bottom: 4px; /* Adjusted margin-bottom */
+}
+
+.form-textarea {
+  resize: vertical;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Center the submit button */
+  width: 100%; /* Ensure full width for footer */
+  margin-top: 12px; /* Adjusted margin-top to create space between form and button */
+}
+
+.submit-button {
+  background-color: #0f969c;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* Full width of the modal content */
+  max-width: 440px; /* Limit width for submit button */
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #0d8a8c;
+}
+
+.dropzone-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem; /* Reduced padding */
+  width: 100%; /* Full width of the form-group */
+  max-width: 440px; /* Limit width for dropzone */
+  height: 120px; /* Set fixed height for dropzone */
+  border: 2px dashed #0f969c;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  margin-bottom: 12px; /* Ensure space below dropzone */
+}
+.additional-images-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* Space between images */
+  justify-content: center; /* Center align images horizontally */
+  align-items: center; /* Center align images vertically */
+}
+
+
+.remove-image-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+
+.additional-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.additional-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.additional-image-container .remove-image-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+

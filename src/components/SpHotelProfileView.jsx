@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../assets/img/shop_cover.png";
 import HotelCardImg from "../assets/img/hotel-card.png";
+import PlusImg from "../assets/img/plus.png";
 import { PrimaryButton, SecondaryButton } from "./Button.js";
+import Modal from "./HotelModal.jsx"; // Import Modal
 
 const SpHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 8; // Updated to display 8 cards per page
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const cardsPerPage = 8;
   const navigate = useNavigate();
 
   const handleSubscribeClick = () => {
@@ -17,7 +20,22 @@ const SpHotelProfileView = () => {
     alert(`Boost Clicked for Card ${index}`);
   };
 
-  const allCards = Array.from({ length: 13 }, (_, index) => index + 1); // Example card data
+  const handleAddListingClick = () => {
+    setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission
+    alert("Form Submitted");
+    handleCloseModal(); // Close modal on form submission
+  };
+
+  const allCards = Array.from({ length: 13 }, (_, index) => index + 1);
 
   // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -33,15 +51,15 @@ const SpHotelProfileView = () => {
   return (
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
       {/* White Background Box */}
-      <div className="absolute inset-0 flex justify-center items-center">
+      <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
           className="absolute bg-white z-[-1]"
-          style={{ width: "1250px", height: "105%" }}
+          style={{ width: "1250px", height: "104%" }}
         ></div>
       </div>
 
       <div className="relative z-10">
-        <div className="overflow-hidden flex justify-center">
+        <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
             style={{ width: "1250px" }}
             className="object-cover object-top"
@@ -54,7 +72,7 @@ const SpHotelProfileView = () => {
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
             style={{
               top: "30px",
-              right: "450px", // Keeps the profile picture at its current position
+              right: "450px",
             }}
           >
             <img
@@ -128,42 +146,63 @@ const SpHotelProfileView = () => {
         </div>
 
         {/* Card Section */}
-        <div className="p-1 flex flex-wrap items-center justify-center gap-2 mt-12">
-          {currentCards.map((card) => (
-            <div
-              key={card}
-              className="flex-shrink-0 m-6 relative overflow-hidden rounded-lg shadow-lg border-2 border-[#0F969C]"
-              style={{ width: "250px", height: "330px" }}
-            >
-              <div className="relative w-full h-full">
-                <img
-                  className="object-cover w-full h-full"
-                  src={HotelCardImg}
-                  alt=""
-                />
-                <div className="absolute top-4 right-4 z-10">
-                  <PrimaryButton
-                    name="Boost"
-                    action={() => handleBoostClick(card)}
-                    isActive={true}
-                    className="py-1.5 px-3.5 text-sm font-bold rounded-full bg-[#0F969C] text-white hover:bg-[#0D8A8C]"
+        <div className="p-1 flex flex-col items-center gap-2 mt-12">
+          <div
+            className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
+            onClick={handleAddListingClick} // Open modal on click
+          >
+            <img
+              style={{ width: "30px", height: "30px" }}
+              className="mr-2"
+              src={PlusImg}
+              alt="plus icon"
+            />
+            ADD LISTING
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {currentCards.map((card) => (
+              <div
+                key={card}
+                className="relative flex-shrink-0 m-6 overflow-hidden rounded-lg shadow-lg border-2 border-[#0F969C] group transition-transform duration-300 transform hover:scale-105"
+                style={{ width: "250px", height: "330px" }}
+              >
+                <div className="relative w-full h-full">
+                  <img
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    src={HotelCardImg}
+                    alt=""
                   />
-                </div>
-                <div
-                  className="absolute bottom-8 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4"
-                  style={{ zIndex: 5 }}
-                >
-                  <div className="text-sm ">
-                    <p className="font-bold text-lg mb-1">Single room</p>
-                    <p>LKR 350/night</p>
+                  <div
+                    className="absolute bottom-8 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
+                    style={{ zIndex: 5 }}
+                  >
+                    <div className="text-sm">
+                      <p className="font-bold text-lg mb-1">Single room</p>
+                      <p>LKR 350/night</p>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <p>⭐ 4.5</p>
+                    </div>
                   </div>
-                  <div className="flex items-center text-sm">
-                    <p>⭐ 4.5</p>
+                  {/* Hover Effect */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black bg-opacity-50 p-4">
+                    <div className="flex flex-col items-center gap-y-2">
+                      <PrimaryButton
+                        name="Boost"
+                        action={() => handleBoostClick(card)}
+                        isActive={true}
+                      />
+                      <SecondaryButton
+                        name="Edit"
+                        action={() => handleBoostClick(card)}
+                        isActive={true}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Pagination Controls */}
@@ -183,6 +222,13 @@ const SpHotelProfileView = () => {
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };

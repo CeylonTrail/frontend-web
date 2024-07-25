@@ -7,6 +7,7 @@ import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 import SignUp from "./Pages/SignUp/signup"
 import Login from "./Pages/login"
+import Community from "./Pages/Community/landing"
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           
 
+          {/* Community */}
+          <Route path="/community" element={<Community/>} />
 
         </Routes>
       </BrowserRouter>

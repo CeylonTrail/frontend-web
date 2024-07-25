@@ -203,21 +203,3 @@
   justify-content: center;
   margin-top: 20px; /* Adjust spacing as needed */
 }
-
-.next-button {
-  background-color: #0F969C;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-  width: 120px;
-}
-
-.next-button:hover {
-  background-color: #0D8A8C;
-}

@@ -1,5 +1,6 @@
 import React from "react";
 import MarketPlaceImg from "../assets/img/MarketPlace.png";
+import "./SetUpMarketPlace.css";
 
 const SetUpMarketPlace = () => {
   return (

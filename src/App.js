@@ -8,6 +8,7 @@ import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 import Signin from "./components/signin"
 import SubscriptionPlan from "./components/SubscriptionPlan";
 import Chat from "./components/Chat";
+import SpHotelProfileView from "./components/SpHotelProfileView";
 
 
 function App() {
@@ -29,20 +30,22 @@ function App() {
     //   </header> */}
     // </div>
     <div>
-
       <Header />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SpRedirectPage />} />
           <Route path="/set-market" element={<SetUpMarketPlace />} />
-          <Route path="/profile-view-traveller" element={<MarketPlaceProfileOwnView />} />
+          <Route
+            path="/profile-view-traveller"
+            element={<MarketPlaceProfileOwnView />}
+          />
+          <Route path="/hotel-sp-view" element={<SpHotelProfileView />} />
           <Route path="/subscription-plan" element={<SubscriptionPlan />} />
           <Route path="/chat" element={<Chat />} />
         </Routes>
       </BrowserRouter>
 
       {/* <Signin /> */}
-
     </div>
   );
 }

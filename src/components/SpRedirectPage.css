@@ -41,17 +41,36 @@
 
 .sp-redirect-button {
   background-color: #0F969C;
+  margin-top: 10px;
   color: white;
-  font-size: 0.875rem; /* text-sm equivalent in Tailwind */
+  height: 33px;
+  width: 185px;
+  font-size: 0.675rem; /* text-sm equivalent in Tailwind */
   font-weight: bold;
-  padding: 0.375rem 0.875rem; /* py-1 px-3 equivalent in Tailwind */
+  padding: 0.5rem 2rem; /* Equivalent to px-8 py-2 */
   border-radius: 9999px; /* rounded-full equivalent in Tailwind */
-  transition: background-color 0.3s;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .sp-redirect-button:hover {
   background-color: #0D8A8C;
 }
+
+.sp-redirect-button:active {
+  background-color: white; /* Active background color */
+  color: #0F969C; /* Active text color */
+  box-shadow: 0 0 0 2px #0F969C; /* Ring offset and ring color */
+}
+
+
+
+
+
+
+
+
+
+
 
 .sp-redirect-description {
   color: #4a4a4a; /* text-gray-700 equivalent in Tailwind */

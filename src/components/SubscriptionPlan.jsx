@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SubscriptionPlan.css"; // Import the CSS file
+import { PrimaryButton } from "./Button.js"; // Import the PrimaryButton component
 
 const SubscriptionPlan = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -105,9 +106,7 @@ const SubscriptionPlan = () => {
           ))}
         </div>
         <div className="next-button-container">
-          <button className="next-button" onClick={handleNextClick}>
-            NEXT
-          </button>
+          <PrimaryButton name="NEXT" action={handleNextClick} isActive={true} />
         </div>
       </div>
     </div>

@@ -1,23 +1,117 @@
 import { SimpleInput, Password, Email } from "../../components/inputFields";
 import { PrimaryButton } from "../../components/Button";
 import googleLogo from "../../assets/img/GoogleLogo.png"
+import signup from "../../API/signup";
+import { useState } from "react";
+import { SuccessAlert } from "../../components/Alerts";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const [touchedFirstName, setTouchedFirstName] = useState(false);
+    const [touchedLastName, setTouchedLastName] = useState(false);
+    const [touchedUserName, setTouchedUserName] = useState(false);
+    const [touchedEmail, setTouchedEmail] = useState(false);
+    const [touchedPassword, setTouchedPassword] = useState(false);
+    
+    const [showAlert, setShowAlert] = useState(false);
+    const navigate = useNavigate(); 
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        const data = {
+            firstname: firstName,
+            lastname: lastName,
+            username: userName,
+            email: email,
+            password: password,
+        };
+        console.log(data);
+
+        try {
+            const response = await signup(data);
+            if (response.status === 200) {
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                    navigate('/login');
+                }, 3000); // Hide the alert after 3 seconds
+            }
+            
+        } catch (error) {
+            
+    
+
+        }
+    }
+
+    const handleOnClose=()=>{
+        setShowAlert(false);
+    }
+
     return (
         <>
             <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSignUp}
                 className="space-y-5 flex flex-col w-full items-center"
             >
-                <div className="w-full flex f-row gap-1">
-                    <SimpleInput pholder={"First name"} />
-                    <SimpleInput pholder={"Last name"} />
+                <div className="w-full flex flex-row gap-1">
+                    <div className="flex flex-col justify-start items-start" >
+                        <SimpleInput pholder={"First name"} value={firstName} onChange={(e) => setFirstName(e.target.value)} onBlur={() => setTouchedFirstName(true)} />
+                        {touchedFirstName && !firstName&&(
+                            <p className="text-warning font-thin text-xs ">First name is required !</p>
+                        )}
+                    </div>
+                    <div className="flex flex-col justify-start items-start">
+                        <SimpleInput pholder={"Last name"} value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={() => setTouchedLastName(true)} />
+                        {touchedLastName && !lastName && (
+                            <p className="text-warning font-thin text-xs ">Last name is required!</p>
+                        )}
+                    </div>
+                    
+                    
                 </div>
-                <div className="w-full">
-                    <Email pholder={"Email"} />
+                <div className="w-full flex flex-col justify-start items-start">
+                    
+                        <SimpleInput
+                            pholder={"User name"}
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            onBlur={() => setTouchedUserName(true)}
+                        />
+                        {touchedUserName && !userName && (
+                            <p className="text-warning font-thin text-xs ">User name is required!</p>
+                        )}
+                    
+                                  
                 </div>
-                <div className="w-full">
-                    <Password pholder={"Password"} />
+                <div className="w-full  flex flex-col justify-start items-start">
+                    <Email
+                        pholder={"Email"}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onBlur={() => setTouchedEmail(true)}
+                    />
+                    {touchedEmail && !email && (
+                        <p className="text-warning font-thin text-xs">Email is required !</p>
+                    )}
+                </div>
+                <div className="w-full  flex flex-col justify-start items-start">
+                    <Password
+                        pholder={"Password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onBlur={() => setTouchedPassword(true)}
+                    />
+                    {touchedPassword && !password && (
+                        <p className="text-warning font-thin text-xs">Password is required</p>
+                    )}
                 </div>
 
                 <div >
@@ -38,9 +132,10 @@ export default () => {
                     />
                     Sign Up With Google
                 </button>
-
+               
 
             </div>
+            {showAlert && <SuccessAlert title="Success" message="You have signed up successfully!" onclose={handleOnClose} />}
         </>
     )
 }

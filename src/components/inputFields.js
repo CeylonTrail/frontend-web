@@ -1,25 +1,28 @@
 import React from 'react';
 import { useState,useEffect,useRef } from "react";
 
-const SimpleInput = ({pholder}) => {
+const SimpleInput = ({ pholder, value, onChange, onBlur }) => {
     return (
-        <div className="flex items-center">
+        <div className="w-full flex items-center">
             <input
                 type="text"
                 className="w-full h-10 border-2 border-secondary rounded-md px-3 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-SecondaryLight"
                 placeholder={pholder}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
             />
         </div>
     );
 };
 
-const Password = ({ pholder }) => {
+const Password = ({ pholder, value, onChange, onBlur }) => {
 
     const [isPasswordHidden, setPasswordHidden] = useState(true)
     return (
-        <div>
+        <div className='w-full'>
             
-            <div className="relative  mt-2">
+            <div className="w-full relative  mt-2">
                 <button className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
                     onClick={() => setPasswordHidden(!isPasswordHidden)}
                 >
@@ -40,6 +43,9 @@ const Password = ({ pholder }) => {
                 <input
                     type={isPasswordHidden ? "password" : "text"}
                     placeholder={pholder}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
                     className="w-full h-10 border-2 border-secondary rounded-md px-3 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-SecondaryLight"
                 />
             </div>
@@ -47,13 +53,16 @@ const Password = ({ pholder }) => {
     )
 };
 
-const Email = ({ pholder }) => {
+const Email = ({ pholder, value, onChange, onBlur }) => {
     return (
-        <div className="flex items-center">
+        <div className="w-full flex items-center">
             <input
                 type="email"
                 className="w-full h-10 border-2 border-secondary rounded-md px-3 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-SecondaryLight"
                 placeholder={pholder}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
             />
         </div>
     );

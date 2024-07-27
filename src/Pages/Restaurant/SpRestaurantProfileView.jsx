@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EquipmentBackgroundImg from "../assets/img/equipment_cover.png";
-import EquipmentCardImg from "../assets/img/equipment-card.png";
+import RestaurantBackgroundImg from "../assets/img/restaurant_cover.png";
+import RestaurantCardImg from "../assets/img/restaurant-card.png";
 import PlusImg from "../assets/img/plus.png";
-import { PrimaryButton, SecondaryButton } from "./Button.js";
-import Modal from "./EquipmentModal.jsx"; // Import Modal
-import BoostModal from "./BoostModal.jsx"; // Import BoostModal
-import EquipmentCard from "./EquipmentCard.jsx";
-import EditEquipmentModal from "./EditEquipmentModal.jsx";
+import { PrimaryButton } from "../../components/Button.js";
+import Modal from "./RestaurantModal.jsx"; // Import Modal
+import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
+import RestaurantCard from "./RestaurantCard.jsx";
+import EditRestaurantModal from "./EditRestaurantModal.jsx";
 
-const SpEquipmentRentalProfileView = () => {
+const SpRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const cardsPerPage = 12;
   const navigate = useNavigate();
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditEquipmentModalOpen, setIsEditEquipmentModalOpen] = useState(false); // State to control edit modal visibility
-  
-  const handleAddEquipmentCardClick = () => {
+  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
+    useState(false); // State to control edit modal visibility
+
+  const handleAddRestaurantCardClick = () => {
     console.log("Popup open");
     setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
   };
@@ -54,116 +55,116 @@ const SpEquipmentRentalProfileView = () => {
     setIsBoostModalOpen(false);
   };
 
-  const handleEditEquipmentCardClick = (card) => {
+  const handleEditRestaurantCardClick = (card) => {
     setSelectedCard(card);
-    setIsEditEquipmentModalOpen(true);
+    setIsEditRestaurantModalOpen(true);
   };
 
-  const handleCloseEditEquipmentModal = () => {
+  const handleCloseEditRestaurantModal = () => {
     setSelectedCard(null);
-    setIsEditEquipmentModalOpen(false);
+    setIsEditRestaurantModalOpen(false);
   };
 
-  const equipments = [
+  const fooditems = [
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 1",
+      price: "LKR 800",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 2",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 3",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 4",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 5",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 6",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 7",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani  8",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 9",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 10",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 11",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 12",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 13",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 14",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Camping Bag 80L",
-      rent: "LKR 200/day",
+      type: "Chicken Briyani 15",
+      price: "LKR 350/night",
       rating: 4.5,
-      src: EquipmentCardImg,
+      src: RestaurantCardImg,
     },
   ];
 
   // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = equipments.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = fooditems.slice(indexOfFirstCard, indexOfLastCard);
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(equipments.length / cardsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(fooditems.length / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -182,7 +183,7 @@ const SpEquipmentRentalProfileView = () => {
           <img
             style={{ width: "1250px" }}
             className="object-cover object-top"
-            src={EquipmentBackgroundImg}
+            src={RestaurantBackgroundImg}
             alt="Mountain"
           />
         </div>
@@ -210,10 +211,10 @@ const SpEquipmentRentalProfileView = () => {
                 action={editProfileClicked}
                 isActive={true}
               />
-              <SecondaryButton
+              <PrimaryButton
                 name="Subscribe"
                 action={handleSubscribeClick}
-                isActive={true}
+                isActive={false}
               />
             </div>
           </div>
@@ -274,7 +275,7 @@ const SpEquipmentRentalProfileView = () => {
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddEquipmentCardClick} // Open modal on click
+            onClick={handleAddRestaurantCardClick} // Open modal on click
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -285,13 +286,13 @@ const SpEquipmentRentalProfileView = () => {
             ADD LISTING
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {currentCards.map((equipment, index) => (
-              <EquipmentCard
+            {currentCards.map((fooditem, index) => (
+              <RestaurantCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
-                equipment={equipment}
+                fooditem={fooditem}
                 handleBoostClick={handleBoostClick}
-                handleEditEquipmentCardClick={handleEditEquipmentCardClick}
+                handleEditRestaurantCardClick={handleEditRestaurantCardClick}
               />
             ))}
           </div>
@@ -325,13 +326,13 @@ const SpEquipmentRentalProfileView = () => {
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
       />
-      <EditEquipmentModal
-        isOpen={isEditEquipmentModalOpen}
-        onRequestClose={handleCloseEditEquipmentModal}
+      <EditRestaurantModal
+        isOpen={isEditRestaurantModalOpen}
+        onRequestClose={handleCloseEditRestaurantModal}
         onSubmit={handleSubmit}
       />
     </div>
   );
 };
 
-export default SpEquipmentRentalProfileView;
+export default SpRestaurantProfileView;

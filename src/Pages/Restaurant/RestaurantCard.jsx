@@ -1,11 +1,11 @@
 import React from "react";
-import { PrimaryButton, SecondaryButton } from "./Button.js";
+import { PrimaryButton } from "../../components/Button.js";
 
-const EquipmentCard = ({
+const RestaurantCard = ({
   card,
-  equipment,
+  fooditem,
   handleBoostClick,
-  handleEditEquipmentCardClick,
+  handleEditRestaurantCardClick,
 }) => {
   return (
     <div
@@ -15,19 +15,19 @@ const EquipmentCard = ({
       <div className="relative w-full h-full">
         <img
           className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-          src={equipment.src}
+          src={fooditem.src}
           alt=""
         />
         <div
-          className="absolute top-5 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
+          className="absolute bottom-8 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
           style={{ zIndex: 5 }}
         >
           <div className="text-sm">
-            <p className="font-bold text-lg mb-1">{equipment.type}</p>
-            <p>{equipment.rent}</p>
+            <p className="font-bold text-lg mb-1">{fooditem.type}</p>
+            <p>{fooditem.price}</p>
           </div>
           <div className="flex items-center text-sm">
-            <p>⭐ {equipment.rating}</p>
+            <p>⭐ {fooditem.rating}</p>
           </div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black bg-opacity-50 p-4">
@@ -37,10 +37,10 @@ const EquipmentCard = ({
               action={() => handleBoostClick(card)}
               isActive={true}
             />
-            <SecondaryButton
+            <PrimaryButton
               name="Edit"
-              action={() => handleEditEquipmentCardClick(card)}
-              isActive={true}
+              action={() => handleEditRestaurantCardClick(card)}
+              isActive={false}
             />
           </div>
         </div>
@@ -49,4 +49,4 @@ const EquipmentCard = ({
   );
 };
 
-export default EquipmentCard;
+export default RestaurantCard;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SubscriptionPlan.css"; // Import the CSS file
+import "./assets/styles/SubscriptionPlan.css"; // Import the CSS file
 import { PrimaryButton } from "./Button.js"; // Import the PrimaryButton component
 
 const SubscriptionPlan = () => {

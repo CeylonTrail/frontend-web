@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MarketPlaceImg from "../assets/img/MarketPlace.png";
-import { PrimaryButton, SecondaryButton } from "./Button.js";
+import { PrimaryButton } from "../../components/Button.js";
 import "./SetUpMarketPlace.css";
 
 const EditMarketPlace = () => {
@@ -230,7 +230,6 @@ const EditMarketPlace = () => {
                     outlineColor: "#0F969C",
                   }}
                   className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  
                 />
               </div>
             </div>
@@ -427,10 +426,10 @@ const EditMarketPlace = () => {
 
             {/* Save Changes Button */}
             <div className="flex justify-end space-x-4">
-              <SecondaryButton
+              <PrimaryButton
                 name="Back"
                 // action={handleSubscribeClick}
-                isActive={true}
+                isActive={false}
               />
               <PrimaryButton
                 name="Save changes"

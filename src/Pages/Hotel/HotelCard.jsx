@@ -1,21 +1,21 @@
 import React from "react";
-import { PrimaryButton, SecondaryButton } from "./Button.js";
+import { PrimaryButton } from "../../components/Button.js";
 
-const RestaurantCard = ({
+const HotelCard = ({
   card,
-  fooditem,
+  room,
   handleBoostClick,
-  handleEditRestaurantCardClick,
+  handleEditListingClick,
 }) => {
   return (
     <div
       className="relative flex-shrink-0 m-6 overflow-hidden rounded-lg shadow-lg border-2 border-[#0F969C] group transition-transform duration-300 transform hover:scale-105"
-      style={{ width: "250px", height: "280px" }}
+      style={{ width: "250px", height: "330px" }}
     >
       <div className="relative w-full h-full">
         <img
           className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-          src={fooditem.src}
+          src={room.src}
           alt=""
         />
         <div
@@ -23,11 +23,11 @@ const RestaurantCard = ({
           style={{ zIndex: 5 }}
         >
           <div className="text-sm">
-            <p className="font-bold text-lg mb-1">{fooditem.type}</p>
-            <p>{fooditem.price}</p>
+            <p className="font-bold text-lg mb-1">{room.type}</p>
+            <p>{room.price}</p>
           </div>
           <div className="flex items-center text-sm">
-            <p>⭐ {fooditem.rating}</p>
+            <p>⭐ {room.rating}</p>
           </div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black bg-opacity-50 p-4">
@@ -37,10 +37,10 @@ const RestaurantCard = ({
               action={() => handleBoostClick(card)}
               isActive={true}
             />
-            <SecondaryButton
+            <PrimaryButton
               name="Edit"
-              action={() => handleEditRestaurantCardClick(card)}
-              isActive={true}
+              action={() => handleEditListingClick(card)}
+              isActive={false}
             />
           </div>
         </div>
@@ -49,4 +49,4 @@ const RestaurantCard = ({
   );
 };
 
-export default RestaurantCard;
+export default HotelCard;

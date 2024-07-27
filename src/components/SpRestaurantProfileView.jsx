@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MarketPlaceBackgroundImg from "../assets/img/shop_cover.png";
-import HotelCardImg from "../assets/img/hotel-card.png";
+import RestaurantBackgroundImg from "../assets/img/restaurant_cover.png";
+import RestaurantCardImg from "../assets/img/restaurant-card.png";
 import PlusImg from "../assets/img/plus.png";
 import { PrimaryButton, SecondaryButton } from "./Button.js";
-import Modal from "./HotelModal.jsx"; // Import Modal
+import Modal from "./RestaurantModal.jsx"; // Import Modal
 import BoostModal from "./BoostModal.jsx"; // Import BoostModal
-import HotelCard from "./HotelCard.jsx";
-import EditHotelModal from "./EditHotelModal.jsx";
+import RestaurantCard from "./RestaurantCard.jsx";
+import EditRestaurantModal from "./EditRestaurantModal.jsx";
 
-
-const SpHotelProfileView = () => {
+const SpRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const cardsPerPage = 8;
+  const cardsPerPage = 12;
   const navigate = useNavigate();
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
-
-  const handleAddListingClick = () => {
+  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] = useState(false); // State to control edit modal visibility
+  
+  const handleAddRestaurantCardClick = () => {
     console.log("Popup open");
     setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
   };
@@ -45,111 +44,128 @@ const SpHotelProfileView = () => {
     // Handle edit profile action
   };
 
- const handleBoostClick = (card) => {
-   setSelectedCard(card);
-   setIsBoostModalOpen(true);
- };
-
- const handleCloseBoostModal = () => {
-   setSelectedCard(null);
-   setIsBoostModalOpen(false);
-  };
-
-  const handleEditListingClick = (card) => {
+  const handleBoostClick = (card) => {
     setSelectedCard(card);
-    setIsEditHotelModalOpen(true);
+    setIsBoostModalOpen(true);
   };
-  
-  const handleCloseEditHotelModal = () => {
+
+  const handleCloseBoostModal = () => {
     setSelectedCard(null);
-    setIsEditHotelModalOpen(false);
-  }
+    setIsBoostModalOpen(false);
+  };
 
+  const handleEditRestaurantCardClick = (card) => {
+    setSelectedCard(card);
+    setIsEditRestaurantModalOpen(true);
+  };
 
-  const rooms = [
+  const handleCloseEditRestaurantModal = () => {
+    setSelectedCard(null);
+    setIsEditRestaurantModalOpen(false);
+  };
+
+  const fooditems = [
     {
-      type: "Single Room 1",
-      price: "LKR 350/night",
+      type: "Chicken Briyani 1",
+      price: "LKR 800",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 2",
+      type: "Chicken Briyani 2",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 3",
+      type: "Chicken Briyani 3",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 4",
+      type: "Chicken Briyani 4",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 5",
+      type: "Chicken Briyani 5",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 6",
+      type: "Chicken Briyani 6",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 7",
+      type: "Chicken Briyani 7",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 8",
+      type: "Chicken Briyani  8",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 9",
+      type: "Chicken Briyani 9",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 10",
+      type: "Chicken Briyani 10",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 11",
+      type: "Chicken Briyani 11",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 12",
+      type: "Chicken Briyani 12",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 13",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 14",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 15",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
     },
   ];
 
   // Calculate the current cards to display
-   const indexOfLastCard = currentPage * cardsPerPage;
-   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-   const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = fooditems.slice(indexOfFirstCard, indexOfLastCard);
 
-   const pageNumbers = [];
-   for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
-     pageNumbers.push(i);
-   }
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(fooditems.length / cardsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
@@ -166,7 +182,7 @@ const SpHotelProfileView = () => {
           <img
             style={{ width: "1250px" }}
             className="object-cover object-top"
-            src={MarketPlaceBackgroundImg}
+            src={RestaurantBackgroundImg}
             alt="Mountain"
           />
         </div>
@@ -252,7 +268,7 @@ const SpHotelProfileView = () => {
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddListingClick} // Open modal on click
+            onClick={handleAddRestaurantCardClick} // Open modal on click
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -263,13 +279,13 @@ const SpHotelProfileView = () => {
             ADD LISTING
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {currentCards.map((room, index) => (
-              <HotelCard
+            {currentCards.map((fooditem, index) => (
+              <RestaurantCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
-                room={room}
+                fooditem={fooditem}
                 handleBoostClick={handleBoostClick}
-                handleEditListingClick={handleEditListingClick}
+                handleEditRestaurantCardClick={handleEditRestaurantCardClick}
               />
             ))}
           </div>
@@ -303,13 +319,13 @@ const SpHotelProfileView = () => {
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
       />
-      <EditHotelModal
-        isOpen={isEditHotelModalOpen}
-        onRequestClose={handleCloseEditHotelModal}
+      <EditRestaurantModal
+        isOpen={isEditRestaurantModalOpen}
+        onRequestClose={handleCloseEditRestaurantModal}
         onSubmit={handleSubmit}
       />
     </div>
   );
 };
 
-export default SpHotelProfileView;
+export default SpRestaurantProfileView;

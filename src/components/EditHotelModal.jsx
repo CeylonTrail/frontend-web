@@ -3,11 +3,13 @@ import "./form.css";
 import cancelImg from "../assets/img/cancel.png";
 import dropFileImg from "../assets/img/drop-file.png";
 
-const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
-  const [displayImage, setDisplayImage] = useState(null);
+const EditHotelModal = ({ isOpen, onRequestClose, onSubmit, room }) => {
+  const [displayImage, setDisplayImage] = useState(room?.src || null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [fileError, setFileError] = useState("");
-  const [isDisplayImageSelected, setIsDisplayImageSelected] = useState(false);
+  const [isDisplayImageSelected, setIsDisplayImageSelected] = useState(
+    !!room?.src
+  );
 
   if (!isOpen) return null;
 
@@ -73,7 +75,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
       <div className="modal-overlay" onClick={onRequestClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
-            <h2 className="modal-title">Add Listing</h2>
+            <h2 className="modal-title">Edit Listing</h2>
             <div className="heading-line"></div>
             <img
               src={cancelImg}
@@ -94,6 +96,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
                 name="title"
                 className="form-input"
                 placeholder="Enter title"
+                defaultValue={room?.type}
                 required
               />
             </div>
@@ -107,6 +110,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
                 className="form-textarea"
                 rows="4"
                 placeholder="Enter description"
+                defaultValue={room?.description}
                 required
               ></textarea>
             </div>
@@ -122,6 +126,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
                 placeholder="Enter price"
                 min="0"
                 step="0.01"
+                defaultValue={room?.price}
                 required
               />
             </div>
@@ -176,11 +181,29 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
               <div className="w-full mb-4">
                 <label htmlFor="additional-images" className="dropzone-label">
                   <div className="mb-2 flex items-center justify-center">
-                    <img
-                      src={dropFileImg}
-                      alt="Drop File"
-                      className="w-10 h-10"
-                    />
+                    {additionalImages.length === 0 && (
+                      <img
+                        src={dropFileImg}
+                        alt="Drop File"
+                        className="image-preview"
+                      />
+                    )}
+                    {additionalImages.map((image, index) => (
+                      <div key={index} className="relative mb-2">
+                        <img
+                          src={image}
+                          alt={`Additional preview ${index + 1}`}
+                          className="image-preview"
+                        />
+                        <button
+                          type="button"
+                          className="remove-image-button"
+                          onClick={() => handleRemoveImage(index, false)}
+                        >
+                          Remove Image
+                        </button>
+                      </div>
+                    ))}
                   </div>
                   <h2 className="text-center text-gray-400 text-xs font-normal leading-4 mb-1">
                     PNG, JPG or GIF, smaller than 15MB
@@ -188,11 +211,6 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
                   <h4 className="text-center text-gray-900 text-sm font-medium leading-snug">
                     Upload additional images
                   </h4>
-                  {fileError && (
-                    <p className="text-red-500 text-sm text-center">
-                      {fileError}
-                    </p>
-                  )}
                   <input
                     id="additional-images"
                     type="file"
@@ -203,28 +221,10 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
                   />
                 </label>
               </div>
-              <div className="additional-images-preview">
-                {additionalImages.map((imgSrc, index) => (
-                  <div key={index} className="additional-image-container">
-                    <img
-                      src={imgSrc}
-                      alt={`Additional ${index + 1}`}
-                      className="additional-image"
-                    />
-                    <button
-                      type="button"
-                      className="remove-image-button"
-                      onClick={() => handleRemoveImage(index, false)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
             </div>
-            <div className="modal-footer">
+            <div className="form-group">
               <button type="submit" className="submit-button">
-                Add Listing
+                Save Changes
               </button>
             </div>
           </form>
@@ -234,4 +234,4 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
   );
 };
 
-export default HotelModal;
+export default EditHotelModal;

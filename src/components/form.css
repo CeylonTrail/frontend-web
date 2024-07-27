@@ -23,6 +23,20 @@
   overflow: hidden; /* Hide any overflow */
 }
 
+.boost-modal-content {
+  background: white;
+  padding: 12px; /* Adjusted padding */
+  border-radius: 26px; /* Corner radius */
+  border: 2px solid #0f969c; /* Border with color #0F969C */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 560px;
+  height: auto; /* Fixed height to avoid scrolling */
+  display: flex;
+  flex-direction: column; /* Ensure children are stacked vertically */
+  align-items: center; /* Center all children horizontally */
+  overflow: hidden; /* Hide any overflow */
+}
+
 .modal-header {
   position: relative;
   padding: 8px; /* Reduced padding */
@@ -66,7 +80,7 @@
 }
 
 .form-label {
-  display: block;
+ 
   font-size: 0.875rem;
   font-weight: 600;
   color: #333;

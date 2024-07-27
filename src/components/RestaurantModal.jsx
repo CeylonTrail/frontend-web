@@ -3,7 +3,7 @@ import "./form.css";
 import cancelImg from "../assets/img/cancel.png";
 import dropFileImg from "../assets/img/drop-file.png";
 
-const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
+const RestaurantModal = ({ isOpen, onRequestClose, onSubmit }) => {
   const [displayImage, setDisplayImage] = useState(null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [fileError, setFileError] = useState("");
@@ -86,7 +86,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
             {/* Form fields */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
-                Room Type
+                Food Type
               </label>
               <input
                 type="text"
@@ -112,7 +112,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
             </div>
             <div className="form-group">
               <label htmlFor="price" className="form-label">
-                Price/night
+                Price
               </label>
               <input
                 type="number"
@@ -234,4 +234,4 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
   );
 };
 
-export default HotelModal;
+export default RestaurantModal;

@@ -1,5 +1,6 @@
 import React from "react";
 import MarketPlaceImg from "../assets/img/MarketPlace.png";
+import { PrimaryButton, SecondaryButton } from "./Button.js";
 import "./SetUpMarketPlace.css";
 
 const SetUpMarketPlace = () => {
@@ -108,7 +109,7 @@ const SetUpMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 bg-[#E7E7E7] focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                   placeholder="Enter shop name"
                 />
               </div>
@@ -149,8 +150,8 @@ const SetUpMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="e.g., Cafe, Boutique"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 bg-[#E7E7E7]"
+                  placeholder="Restaurant"
                 />
               </div>
             </div>
@@ -280,18 +281,50 @@ const SetUpMarketPlace = () => {
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                   />
                 </div>
+                {/* Section with a separating line at the top */}
+                <div className="pt-4 mb-4 border-t border-black">
+                  {/* Verification Document Upload */}
+                  <div className="flex items-center gap-x-3 mb-4">
+                    <label
+                      htmlFor="verification-doc"
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      <strong>Verification</strong>
+                    </label>
+                    <input
+                      id="verification-doc"
+                      name="verificationDoc"
+                      type="file"
+                      // onChange={handleChange}
+                      style={{
+                        borderColor: "#6DA5C0",
+                        outlineColor: "#0F969C",
+                      }}
+                      className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                      placeholder="Upload a document verifying your marketplace"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-600 ml-60">
+                    *Upload a document or photo that verifies your association
+                    with this marketplace.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end gap-3">
-            <button className="bg-[#0F969C] hover:bg-[#0D8A8C] text-white font-bold py-1.5 px-3.5 rounded-full">
-              Reset
-            </button>
-            <button className="bg-[#0F969C] hover:bg-[#0D8A8C] text-white font-bold py-1.5 px-3.5 rounded-full">
-              Create
-            </button>
+          <div className="flex justify-end space-x-4 mt-2">
+            <SecondaryButton
+              name="Reset"
+              // action={handleSubscribeClick}
+              isActive={true}
+            />
+            <PrimaryButton
+              name="Create"
+              // action={editProfileClicked}
+              isActive={true}
+            />
           </div>
         </form>
       </div>

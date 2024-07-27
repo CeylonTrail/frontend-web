@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MarketPlaceImg from "../assets/img/MarketPlace.png";
+import { PrimaryButton, SecondaryButton } from "./Button.js";
 import "./SetUpMarketPlace.css";
 
 const EditMarketPlace = () => {
@@ -16,6 +17,7 @@ const EditMarketPlace = () => {
     physicalAddress: "",
     openingHoursStart: "",
     openingHoursEnd: "",
+    verificationDoc: null,
   });
 
   // Load existing data (mocked here)
@@ -28,13 +30,14 @@ const EditMarketPlace = () => {
         coverImage: "existing-cover-image.png",
         shopName: "Existing Shop",
         shopDescription: "This is an existing shop description.",
-        shopType: "Cafe",
+        shopType: "Restaurant",
         shopOwnerName: "Owner Name",
         shopEmail: "owner@example.com",
         phoneNumber: "123-456-7890",
         physicalAddress: "123 Existing St, City, Country",
         openingHoursStart: "08:00",
         openingHoursEnd: "17:00",
+        verificationDoc: "existing-verification-doc.png",
       };
 
       setFormData(existingData);
@@ -57,6 +60,22 @@ const EditMarketPlace = () => {
     console.log(formData);
   };
 
+  const [docUploaded, setDocUploaded] = useState(false);
+  const [document, setDocument] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setDocument(file);
+      setDocUploaded(true);
+    }
+  };
+
+  const handleEdit = () => {
+    setDocUploaded(false);
+    setDocument(null);
+  };
+
   return (
     <div className="isolate px-5 py-18 sm:py-6 lg:px-6">
       <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl">
@@ -72,7 +91,7 @@ const EditMarketPlace = () => {
               top: "10vh",
             }}
             alt="Market Place"
-            className="w-auto h-auto " // Adjust the negative margin-top as needed
+            className="w-auto h-auto" // Adjust the negative margin-top as needed
           />
         </div>
 
@@ -105,7 +124,7 @@ const EditMarketPlace = () => {
                   borderColor: "#6DA5C0",
                   outlineColor: "#0F969C",
                 }}
-                className="flex-1 rounded-md mt-1 border-2 px-2.5 py-0.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-"
+                className="flex-1 rounded-md mt-1 border-2 px-2.5 py-0.5 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-"
                 placeholder="Upload an image (e.g., logo)"
               />
             </div>
@@ -119,7 +138,7 @@ const EditMarketPlace = () => {
             <div className="flex items-center gap-x-3 mb-0.5">
               <label
                 htmlFor="cover-image"
-                className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                className="w-1/3 text-sm font-semibold leading-4 text-gray-900 "
               >
                 <strong>Cover Image</strong>
               </label>
@@ -132,7 +151,7 @@ const EditMarketPlace = () => {
                   borderColor: "#6DA5C0",
                   outlineColor: "#0F969C",
                 }}
-                className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                 placeholder="Upload a cover image"
               />
             </div>
@@ -187,7 +206,7 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                   placeholder="Describe your shop"
                 />
               </div>
@@ -211,7 +230,7 @@ const EditMarketPlace = () => {
                     outlineColor: "#0F969C",
                   }}
                   className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="e.g., Cafe, Boutique"
+                  
                 />
               </div>
             </div>
@@ -239,8 +258,8 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter owner's name"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm  bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Enter owner name"
                 />
               </div>
 
@@ -262,8 +281,8 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter shop email"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Enter email address"
                 />
               </div>
 
@@ -285,7 +304,7 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                   placeholder="Enter phone number"
                 />
               </div>
@@ -303,12 +322,12 @@ const EditMarketPlace = () => {
                   type="text"
                   value={formData.physicalAddress}
                   onChange={handleChange}
-                  autoComplete="address"
+                  autoComplete="street-address"
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                   placeholder="Enter physical address"
                 />
               </div>
@@ -322,9 +341,9 @@ const EditMarketPlace = () => {
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="opening-hours-start"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900 "
                 >
-                  Opening Hours Start
+                  Start Time
                 </label>
                 <input
                   id="opening-hours-start"
@@ -336,7 +355,7 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                 />
               </div>
 
@@ -345,7 +364,7 @@ const EditMarketPlace = () => {
                   htmlFor="opening-hours-end"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Opening Hours End
+                  End Time
                 </label>
                 <input
                   id="opening-hours-end"
@@ -357,19 +376,67 @@ const EditMarketPlace = () => {
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm bg-[#E7E7E7] placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                 />
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-center mt-6">
-              <button
-                type="submit"
-                className="bg-[#0F969C] text-white font-bold py-2 px-4 rounded-full hover:bg-[#0D8A8C]"
-              >
-                Save Changes
-              </button>
+            <div className="pt-4 mb-4 border-t border-black">
+              <h3 className="text-lg font-bold mb-2">
+                <strong>Verification Document</strong>
+              </h3>
+              <div className="flex items-center gap-x-3 mb-4">
+                <label
+                  htmlFor="verification-doc"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  <strong>Verification</strong>
+                </label>
+                <input
+                  id="verification-doc"
+                  name="verificationDoc"
+                  type="file"
+                  onChange={handleFileChange}
+                  disabled={docUploaded}
+                  style={{
+                    borderColor: "#6DA5C0",
+                    outlineColor: "#0F969C",
+                  }}
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Upload a document verifying your marketplace"
+                />
+              </div>
+              {docUploaded && (
+                <div className="flex items-center gap-x-3 mb-4">
+                  <p className="text-sm text-gray-600">
+                    Document uploaded: {document.name}
+                  </p>
+                  <button
+                    onClick={handleEdit}
+                    className="ml-4 bg-[#0F969C] text-white py-1 px-2 rounded hover:bg-[#0D8A8C] focus:outline-none focus:ring-2 focus:ring-[#0F969C]"
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
+              <p className="text-sm text-gray-600 ml-60">
+                *Upload a document or photo that verifies your association with
+                this marketplace.
+              </p>
+            </div>
+
+            {/* Save Changes Button */}
+            <div className="flex justify-end space-x-4">
+              <SecondaryButton
+                name="Back"
+                // action={handleSubscribeClick}
+                isActive={true}
+              />
+              <PrimaryButton
+                name="Save changes"
+                // action={editProfileClicked}
+                isActive={true}
+              />
             </div>
           </div>
         </form>

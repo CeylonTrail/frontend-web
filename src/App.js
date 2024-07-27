@@ -4,14 +4,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
 import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
-import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
 import Signin from "./components/signin"
 import SubscriptionPlan from "./components/SubscriptionPlan";
 import Chat from "./components/Chat";
 import SpHotelProfileView from "./components/SpHotelProfileView";
 import EditMarketPlace from "./components/EditMarketPlace";
 import SpRestaurantProfileView from "./components/SpRestaurantProfileView";
-
+import SpEquipmentRentalProfileView from "./components/SpEquipmentRentalProfileView";
 
 function App() {
   return (
@@ -38,15 +37,11 @@ function App() {
           <Route path="/" element={<SpRedirectPage />} />
           <Route path="/set-market" element={<SetUpMarketPlace />} />
           <Route path="/edit-market" element={<EditMarketPlace />} />
-          <Route
-            path="/profile-view-traveller"
-            element={<MarketPlaceProfileOwnView />}
-          />
           <Route path="/hotel-sp-view" element={<SpHotelProfileView />} />
           <Route path="/rest-sp-view" element={<SpRestaurantProfileView />} />
+          <Route path="/equip-sp-view" element={< SpEquipmentRentalProfileView/>} />
           <Route path="/subscription-plan" element={<SubscriptionPlan />} />
           <Route path="/chat" element={<Chat />} />
-        
         </Routes>
       </BrowserRouter>
 

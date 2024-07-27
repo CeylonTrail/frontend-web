@@ -202,7 +202,13 @@ const SpHotelProfileView = () => {
             </div>
           </div>
         </div>
-        <div className="border border-[#0F969C] -10 p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-16 flex flex-col lg:flex-row">
+        <div
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white"
+          style={{
+            boxShadow:
+              "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
+          }}
+        >
           {/* Text Section */}
           <div className="lg:w-1/2 pr-8 lg:pl-0">
             <div

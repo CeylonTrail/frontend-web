@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EquipmentBackgroundImg from "../assets/img/equipment_cover.png";
-import EquipmentCardImg from "../assets/img/equipment-card.png";
-import PlusImg from "../assets/img/plus.png";
+import EquipmentBackgroundImg from "../../assets/img/equipment_cover.png";
+import EquipmentCardImg from "../../assets/img/equipment-card.png";
+import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./EquipmentModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal

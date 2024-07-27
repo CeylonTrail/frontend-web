@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MarketPlaceBackgroundImg from "../assets/img/MarketPlaceBackground.jpg";
-import "./SpRedirectPage.css"; // Import the CSS file
+import MarketPlaceBackgroundImg from "../../assets/img/MarketPlaceBackground.jpg";
+import "../../assets/styles/SpRedirectPage.css"; // Import the CSS file
 
 const SpRedirectPage = () => {
   const navigate = useNavigate();

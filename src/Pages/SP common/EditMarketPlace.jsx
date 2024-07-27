@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import MarketPlaceImg from "../assets/img/MarketPlace.png";
+import MarketPlaceImg from "../../assets/img/MarketPlace.png";
 import { PrimaryButton } from "../../components/Button.js";
-import "./SetUpMarketPlace.css";
+import "../../assets/styles/SetUpMarketPlace.css";
 
 const EditMarketPlace = () => {
   // Sample state initialization for form values

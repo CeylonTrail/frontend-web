@@ -3,7 +3,7 @@ import { PrimaryButton } from "../../components/Button";
 import googleLogo from "../../assets/img/GoogleLogo.png"
 import signup from "../../API/signup";
 import { useState } from "react";
-import { SuccessAlert } from "../../components/Alerts";
+import { SuccessAlert,WarningAlert } from "../../components/Alerts";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
@@ -21,7 +21,10 @@ export default () => {
     const [touchedPassword, setTouchedPassword] = useState(false);
     
     const [showAlert, setShowAlert] = useState(false);
-    const navigate = useNavigate(); 
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertTitle, setAlertTitle] = useState('');
+    const [alertType, setAlertType] = useState('');
+    const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -32,28 +35,50 @@ export default () => {
             email: email,
             password: password,
         };
-        console.log(data);
 
         try {
             const response = await signup(data);
-            if (response.status === 200) {
+            console.log(response);
+            if (response.status === 'success') {
+                setAlertTitle('Success');
+                setAlertMessage(response.message);
                 setShowAlert(true);
+                setAlertType('success');
                 setTimeout(() => {
                     setShowAlert(false);
                     navigate('/login');
                 }, 3000); // Hide the alert after 3 seconds
+            } else {
+                setAlertTitle('Error');
+                
+              
+                setAlertMessage(response.message);
+                setShowAlert(true);
+                setAlertType('error');
+                setTimeout(() => {
+                    setShowAlert(false);
+                    
+                }, 3000);
             }
-            
         } catch (error) {
-            
-    
-
+            // console.error(error);
+            setAlertTitle('Error');
+            setAlertMessage(error.message);
+            setShowAlert(true);
+            setAlertType('error');
+            setTimeout(() => {
+                setShowAlert(false);
+                
+            }, 3000);
         }
     }
 
-    const handleOnClose=()=>{
+    const handleOnClose = () => {
+        
         setShowAlert(false);
+        
     }
+
 
     return (
         <>
@@ -133,9 +158,11 @@ export default () => {
                     Sign Up With Google
                 </button>
                
-
+                
             </div>
-            {showAlert && <SuccessAlert title="Success" message="You have signed up successfully!" onclose={handleOnClose} />}
+            {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
+            {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
+          
         </>
     )
 }

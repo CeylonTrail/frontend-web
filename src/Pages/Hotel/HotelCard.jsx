@@ -35,12 +35,12 @@ const HotelCard = ({
             <PrimaryButton
               name="Boost"
               action={() => handleBoostClick(card)}
-              isActive={true}
+              isActive={false}
             />
             <PrimaryButton
               name="Edit"
               action={() => handleEditListingClick(card)}
-              isActive={false}
+              isActive={true}
             />
           </div>
         </div>

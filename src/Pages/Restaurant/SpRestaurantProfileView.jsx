@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
 import RestaurantCardImg from "../../assets/img/restaurant-card.png";
+import RestaurantProfileImg from "../../assets/img/restaurant-profile.png";
 import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx"; // Import Modal
@@ -169,7 +170,7 @@ const SpRestaurantProfileView = () => {
   }
 
   return (
-    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
+    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       {/* White Background Box */}
       <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
@@ -178,32 +179,31 @@ const SpRestaurantProfileView = () => {
         ></div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative">
         <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
-            style={{ width: "1250px" }}
+            style={{ width: "1250px", height: "350px" }}
             className="object-cover object-top"
             src={RestaurantBackgroundImg}
-            alt="Mountain"
+            alt="Cover"
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
             style={{
-              top: "30px",
               right: "450px",
             }}
           >
             <img
               className="object-cover object-center w-full h-full"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
-              alt="Woman looking front"
+              src={RestaurantProfileImg}
+              alt="Logo"
             />
           </div>
           <div
             className="absolute"
-            style={{ left: "1000px", top: "120px", right: "auto" }}
+            style={{ left: "1000px", top: "105px", right: "auto" }}
           >
             <div className="flex space-x-4">
               <PrimaryButton
@@ -220,7 +220,7 @@ const SpRestaurantProfileView = () => {
           </div>
         </div>
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",

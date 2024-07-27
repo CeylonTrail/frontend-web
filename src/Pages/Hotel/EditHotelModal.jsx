@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./form.css";
-import cancelImg from "../assets/img/cancel.png";
-import dropFileImg from "../assets/img/drop-file.png";
+import "../../assets/styles/form.css";
+import cancelImg from "../../assets/img/cancel.png";
+import dropFileImg from "../../assets/img/drop-file.png";
 
 const EditHotelModal = ({ isOpen, onRequestClose, onSubmit, room }) => {
   const [displayImage, setDisplayImage] = useState(room?.src || null);

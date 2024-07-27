@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MarketPlaceBackgroundImg from "../assets/img/shop_cover.png";
-import HotelCardImg from "../assets/img/hotel-card.png";
-import PlusImg from "../assets/img/plus.png";
+import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
+import HotelCardImg from "../../assets/img/hotel-card.png";
+import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./HotelModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal

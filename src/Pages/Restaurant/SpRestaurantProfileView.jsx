@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RestaurantBackgroundImg from "../assets/img/restaurant_cover.png";
-import RestaurantCardImg from "../assets/img/restaurant-card.png";
-import PlusImg from "../assets/img/plus.png";
+import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
+import RestaurantCardImg from "../../assets/img/restaurant-card.png";
+import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal

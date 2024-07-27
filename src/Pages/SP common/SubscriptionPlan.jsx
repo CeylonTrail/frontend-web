@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./assets/styles/SubscriptionPlan.css"; // Import the CSS file
-import { PrimaryButton } from "./Button.js"; // Import the PrimaryButton component
+import "../../assets/styles/SubscriptionPlan.css"; // Import the CSS file
+import { PrimaryButton } from "../../components/Button"; // Import the PrimaryButton component
 
 const SubscriptionPlan = () => {
   const [selectedCard, setSelectedCard] = useState(null);

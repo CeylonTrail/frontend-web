@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./form.css";
-import cancelImg from "../assets/img/cancel.png";
-import dropFileImg from "../assets/img/drop-file.png";
+import "../../assets/styles/form.css";
+import cancelImg from "../../assets/img/cancel.png";
+import dropFileImg from "../../assets/img/drop-file.png";
 
 const EditEquipmentModal = ({ isOpen, onRequestClose, onSubmit, equipment }) => {
   const [displayImage, setDisplayImage] = useState(equipment?.src || null);

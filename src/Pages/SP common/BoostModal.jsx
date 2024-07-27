@@ -1,6 +1,6 @@
 import React from "react";
-import "./form.css";
-import cancelImg from "../assets/img/cancel.png";
+import "../../assets/styles/form.css";
+import cancelImg from "../../assets/img/cancel.png";
 
 const BoostModal = ({ isOpen, onRequestClose }) => {
   if (!isOpen) return null;

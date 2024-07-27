@@ -1,7 +1,7 @@
 import React from "react";
-import MarketPlaceImg from "../assets/img/MarketPlace.png";
-import { PrimaryButton } from "./Button.js";
-import "./SetUpMarketPlace.css";
+import MarketPlaceImg from "../../assets/img/MarketPlace.png";
+import { PrimaryButton } from "../../components/Button";
+import "../../assets/styles/SetUpMarketPlace.css";
 
 const SetUpMarketPlace = () => {
   return (

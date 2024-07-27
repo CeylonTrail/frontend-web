@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MarketPlaceImg from "../../assets/img/MarketPlace.png";
 import { PrimaryButton } from "../../components/Button.js";
 import "../../assets/styles/SetUpMarketPlace.css";
+import { faBedPulse } from "@fortawesome/free-solid-svg-icons";
 
 const EditMarketPlace = () => {
   // Sample state initialization for form values
@@ -77,7 +78,7 @@ const EditMarketPlace = () => {
   };
 
   return (
-    <div className="isolate px-5 py-18 sm:py-6 lg:px-6">
+    <div className="isolate px-5 py-18 sm:py-6 lg:px-6 mt-10">
       <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl">
         {/* Image Section */}
         <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">
@@ -429,12 +430,12 @@ const EditMarketPlace = () => {
               <PrimaryButton
                 name="Back"
                 // action={handleSubscribeClick}
-                isActive={false}
+                isActive={true}
               />
               <PrimaryButton
-                name="Save changes"
+                name="Save"
                 // action={editProfileClicked}
-                isActive={true}
+                isActive={false}
               />
             </div>
           </div>

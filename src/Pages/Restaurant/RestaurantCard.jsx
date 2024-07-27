@@ -35,12 +35,12 @@ const RestaurantCard = ({
             <PrimaryButton
               name="Boost"
               action={() => handleBoostClick(card)}
-              isActive={true}
+              isActive={false}
             />
             <PrimaryButton
               name="Edit"
               action={() => handleEditRestaurantCardClick(card)}
-              isActive={false}
+              isActive={true}
             />
           </div>
         </div>

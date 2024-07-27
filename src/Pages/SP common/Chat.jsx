@@ -4,12 +4,12 @@ import "../../assets/styles/Chat.css";
 const Chat = () => {
   return (
     <div className="container">
-      <div className="row chat-clearfix">
+      <div className="row chat-clearfix mt-14">
         <div className="col-lg-12">
           <div className="chat-card chat-app">
             <div id="plist" className="chat-people-list">
               <div className="flex flex-1 justify-center px-2 lg:ml-7 lg:justify-end ">
-                <div className="max-w-lg w-full lg:max-w-xs">
+                <div className="max-w-lg w-full lg:max-w-xs mt-7">
                   <label htmlFor="search" className="sr-only">
                     Search
                   </label>

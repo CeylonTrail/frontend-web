@@ -1,0 +1,205 @@
+/* Container for the subscription plan */
+.subscription-plan-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  padding: 0 10px; /* Add padding for better spacing on smaller screens */
+}
+
+/* Box for the subscription plan */
+.subscription-plan-box {
+  width: 100%;
+  max-width: 1480px; /* Ensure it doesn’t exceed the viewport width */
+  height: auto; /* Adjust height automatically based on content */
+  background-color: white;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Step text and title text container */
+.header-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Space below header */
+}
+
+/* Step text */
+.step-text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 25px;
+}
+
+/* Title text */
+.title-text {
+  font-size: 24px; /* Adjusted size for better fit */
+  font-weight: 600;
+   margin-left: 25px;
+}
+
+/* Flex container for pricing cards */
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+/* Common class for pricing card */
+.pricing-card {
+  width: 100%;
+  max-width: 320px; /* Increased card width */
+  height: auto; /* Adjust height based on content */
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  background-color: #ffffff;
+  color: #111827;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.05);
+  border-width: 1px;
+  border-color: #0F969C; /* Primary border color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Effect on hover */
+.pricing-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #c8e4f4;
+}
+
+/* Selected state with increased border size */
+.pricing-card.selected {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #c8e4f4;
+  color: white;
+  border-width: 2px; /* Increase border size */
+}
+
+
+/* Header for pricing card */
+.pricing-card-header {
+  margin-bottom: 1rem;
+}
+
+.pricing-card-design {
+  display: inline-block;
+  width: 91%;
+  border-radius: 0.5rem;
+  background-color: #6DA5C0;
+  padding: 0.925rem 1rem;
+  text-align: center;
+  font-size: 1.275rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: #ffffff;
+  margin-left: 14px;
+  margin-top: 10px;
+}
+
+/* Inner padding */
+.pricing-card-inner {
+  padding: 1rem;
+}
+
+.pricing-card-inner-sm {
+  padding: 1rem;
+}
+
+/* Price */
+.pricing-card-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.pricing-card-price span {
+  font-size: 1.525rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #000000;
+}
+
+.pricing-card-price span2 {
+  font-size: 1.025rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #0F969C;
+}
+
+/* Description */
+.pricing-card-description {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: #4b5563;
+}
+
+/* Features list */
+.pricing-card-features {
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.5rem;
+  background-color: #f9fafb;
+  margin-bottom: 30px;
+}
+
+/* Feature item */
+.pricing-card-feature {
+  margin-left: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #4b5563;
+}
+
+.feature-icon {
+  color: #0F969C;
+  margin-right: 0.5rem;
+}
+
+/* Change text color on hover */
+.pricing-card:hover .pricing-card-feature,
+.pricing-card:hover .pricing-card-design,
+.pricing-card:hover .pricing-card-price span2 {
+  color: #0F969C;
+}
+
+.pricing-card:hover .pricing-card-design {
+  color: white;
+}
+
+
+
+
+/* Selected state text color */
+.pricing-card.selected .pricing-card-feature,
+.pricing-card.selected .pricing-card-design,
+.pricing-card.selected .pricing-card-price span2 {
+  color: #0F969C;
+}
+
+.pricing-card.selected .pricing-card-design {
+  color: white;
+}
+.pricing-card.selected .pricing-card-features {
+  color: #f9fafb;
+}
+
+/* Next button container */
+.next-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust spacing as needed */
+}

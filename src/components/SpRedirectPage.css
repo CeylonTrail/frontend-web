@@ -1,0 +1,83 @@
+.sp-redirect-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem; /* p-10 equivalent in Tailwind */
+}
+
+.sp-redirect-background {
+  background-size: cover;
+  background-position: center;
+  height: 585px;
+  width: 1500px;
+  position: relative;
+}
+
+.sp-redirect-card {
+  background-color: white;
+  border: 4px solid #0C7075;
+  border-radius: 0.75rem; /* rounded-lg equivalent in Tailwind */
+  height: 230px;
+  width: 650px;
+  position: absolute;
+  top: 150px;
+  left: 78px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sp-redirect-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem; /* mb-4 equivalent in Tailwind */
+}
+
+.sp-redirect-title {
+  color: #0F969C;
+  font-size: 2.25rem; /* text-4xl equivalent in Tailwind */
+  font-weight: 800; /* font-extrabold equivalent in Tailwind */
+  font-family: 'Poppins', sans-serif;
+}
+
+.sp-redirect-button {
+  background-color: #0F969C;
+  margin-top: 10px;
+  color: white;
+  height: 33px;
+  width: 185px;
+  font-size: 0.675rem; /* text-sm equivalent in Tailwind */
+  font-weight: bold;
+  padding: 0.5rem 2rem; /* Equivalent to px-8 py-2 */
+  border-radius: 9999px; /* rounded-full equivalent in Tailwind */
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sp-redirect-button:hover {
+  background-color: #0D8A8C;
+}
+
+.sp-redirect-button:active {
+  background-color: white; /* Active background color */
+  color: #0F969C; /* Active text color */
+  box-shadow: 0 0 0 2px #0F969C; /* Ring offset and ring color */
+}
+
+
+
+
+
+
+
+
+
+
+
+.sp-redirect-description {
+  color: #4a4a4a; /* text-gray-700 equivalent in Tailwind */
+  margin-top: 0.5rem; /* mt-2 equivalent in Tailwind */
+  font-family: 'Poppins', sans-serif;
+}
+
+.highlight-text {
+  color: #0F969C;
+}

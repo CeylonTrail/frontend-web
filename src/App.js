@@ -5,7 +5,9 @@ import Header from "./components/header";
 import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
 import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
-import Signin from "./components/signin"
+import SignUp from "./Pages/SignUp/signup"
+import Login from "./Pages/login"
+import Community from "./Pages/Community/landing"
 
 
 function App() {
@@ -28,17 +30,25 @@ function App() {
     // </div>
     <div>
 
-      <Header />
+
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SpRedirectPage />} />
-          <Route path="/set-market" element={<SetUpMarketPlace />} />
-          <Route path="/profile-view-traveller" element={<MarketPlaceProfileOwnView />}
-          />
+          <Route path="/" element={<><Header />;<SpRedirectPage /></>} />
+          <Route path="/set-market" element={<><Header />;<SetUpMarketPlace /></>} />
+          <Route path="/profile-view-traveller" element={<><Header />;<MarketPlaceProfileOwnView /></>} />
+
+          {/* log in and signup */}
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          
+
+          {/* Community */}
+          <Route path="/community" element={<Community/>} />
+
         </Routes>
       </BrowserRouter>
 
-      <Signin />
+
 
     </div>
   );

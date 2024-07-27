@@ -3,7 +3,7 @@ import MarketPlaceImg from "../assets/img/MarketPlace.png";
 
 const SetUpMarketPlace = () => {
   return (
-    <div className="isolate bg-[#E7E7E7] px-5 py-18 sm:py-6 lg:px-6">
+    <div className="isolate bg-[#E7E7E7] px-5 py-18  lg:px-6 pt-32">
       <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl">
         {/* Image Section */}
         <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { PrimaryButton, SecondaryButton } from './Button'
-import signin from './signin'
+import { PrimaryButton} from './Button'
+// import signin from '../Pages/signup'
 
-export default () => {
+export default (prop) => {
 
-    const [state, setState] = useState(false)
+    const [state, setState] = useState(false);
+    const type = prop.type;
 
     // Replace javascript:void(0) paths with your paths
     const navigation = [
@@ -12,6 +13,15 @@ export default () => {
         { title: "About Us", path: "javascript:void(0)" },
         { title: "Community", path: "javascript:void(0)" }
     ]
+
+    const navigateLogIn=()=>{
+        window.location.href="/login"
+    
+    }
+    const navigateSignUp = () => { 
+        window.location.href = "/signup"
+    
+    }
 
     useEffect(() => {
         document.onclick = (e) => {
@@ -61,9 +71,14 @@ export default () => {
                         }
                     </ul>
                     <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
-                        <a href="javascript:void(0)" >
-                            <SecondaryButton name={"Login"} />
-                        </a>
+                        
+                        {type === "signup" ? (
+                            <PrimaryButton name="Login" isActive="true" action={navigateLogIn}/>
+                        ) : type === "login" ? (
+                                <PrimaryButton name="Sign Up" isActive="true" action={navigateSignUp} />
+                        ) : null}
+                            
+                     
                         
                     </div>
                 </div>

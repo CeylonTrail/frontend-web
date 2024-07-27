@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MarketPlaceBackgroundImg from "../assets/img/shop_cover.png";
-import HotelCardImg from "../assets/img/hotel-card.png";
+import EquipmentBackgroundImg from "../assets/img/equipment_cover.png";
+import EquipmentCardImg from "../assets/img/equipment-card.png";
 import PlusImg from "../assets/img/plus.png";
-import { PrimaryButton, SecondaryButton } from "./Button.js";
-import Modal from "./HotelModal.jsx"; // Import Modal
-import BoostModal from "./BoostModal.jsx"; // Import BoostModal
-import HotelCard from "./HotelCard.jsx";
-import EditHotelModal from "./EditHotelModal.jsx";
+import { PrimaryButton } from "../../components/Button.js";
+import Modal from "./EquipmentModal.jsx"; // Import Modal
+import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
+import EquipmentCard from "./EquipmentCard.jsx";
+import EditEquipmentModal from "./EditEquipmentModal.jsx";
 
-
-const SpHotelProfileView = () => {
+const SpEquipmentRentalProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const cardsPerPage = 8;
+  const cardsPerPage = 12;
   const navigate = useNavigate();
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
+  const [isEditEquipmentModalOpen, setIsEditEquipmentModalOpen] =
+    useState(false); // State to control edit modal visibility
 
-  const handleAddListingClick = () => {
+  const handleAddEquipmentCardClick = () => {
     console.log("Popup open");
     setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
   };
@@ -45,111 +45,128 @@ const SpHotelProfileView = () => {
     // Handle edit profile action
   };
 
- const handleBoostClick = (card) => {
-   setSelectedCard(card);
-   setIsBoostModalOpen(true);
- };
-
- const handleCloseBoostModal = () => {
-   setSelectedCard(null);
-   setIsBoostModalOpen(false);
-  };
-
-  const handleEditListingClick = (card) => {
+  const handleBoostClick = (card) => {
     setSelectedCard(card);
-    setIsEditHotelModalOpen(true);
+    setIsBoostModalOpen(true);
   };
-  
-  const handleCloseEditHotelModal = () => {
+
+  const handleCloseBoostModal = () => {
     setSelectedCard(null);
-    setIsEditHotelModalOpen(false);
-  }
+    setIsBoostModalOpen(false);
+  };
 
+  const handleEditEquipmentCardClick = (card) => {
+    setSelectedCard(card);
+    setIsEditEquipmentModalOpen(true);
+  };
 
-  const rooms = [
+  const handleCloseEditEquipmentModal = () => {
+    setSelectedCard(null);
+    setIsEditEquipmentModalOpen(false);
+  };
+
+  const equipments = [
     {
-      type: "Single Room 1",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 2",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 3",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 4",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 5",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 6",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 7",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 8",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 9",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 10",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 11",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
     },
     {
-      type: "Single Room 12",
-      price: "LKR 350/night",
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
       rating: 4.5,
-      src: HotelCardImg,
+      src: EquipmentCardImg,
+    },
+    {
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
+      rating: 4.5,
+      src: EquipmentCardImg,
+    },
+    {
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
+      rating: 4.5,
+      src: EquipmentCardImg,
+    },
+    {
+      type: "Camping Bag 80L",
+      rent: "LKR 200/day",
+      rating: 4.5,
+      src: EquipmentCardImg,
     },
   ];
 
   // Calculate the current cards to display
-   const indexOfLastCard = currentPage * cardsPerPage;
-   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-   const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = equipments.slice(indexOfFirstCard, indexOfLastCard);
 
-   const pageNumbers = [];
-   for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
-     pageNumbers.push(i);
-   }
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(equipments.length / cardsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
@@ -166,7 +183,7 @@ const SpHotelProfileView = () => {
           <img
             style={{ width: "1250px" }}
             className="object-cover object-top"
-            src={MarketPlaceBackgroundImg}
+            src={EquipmentBackgroundImg}
             alt="Mountain"
           />
         </div>
@@ -194,10 +211,10 @@ const SpHotelProfileView = () => {
                 action={editProfileClicked}
                 isActive={true}
               />
-              <SecondaryButton
+              <PrimaryButton
                 name="Subscribe"
                 action={handleSubscribeClick}
-                isActive={true}
+                isActive={false}
               />
             </div>
           </div>
@@ -258,7 +275,7 @@ const SpHotelProfileView = () => {
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddListingClick} // Open modal on click
+            onClick={handleAddEquipmentCardClick} // Open modal on click
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -269,13 +286,13 @@ const SpHotelProfileView = () => {
             ADD LISTING
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {currentCards.map((room, index) => (
-              <HotelCard
+            {currentCards.map((equipment, index) => (
+              <EquipmentCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
-                room={room}
+                equipment={equipment}
                 handleBoostClick={handleBoostClick}
-                handleEditListingClick={handleEditListingClick}
+                handleEditEquipmentCardClick={handleEditEquipmentCardClick}
               />
             ))}
           </div>
@@ -309,13 +326,13 @@ const SpHotelProfileView = () => {
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
       />
-      <EditHotelModal
-        isOpen={isEditHotelModalOpen}
-        onRequestClose={handleCloseEditHotelModal}
+      <EditEquipmentModal
+        isOpen={isEditEquipmentModalOpen}
+        onRequestClose={handleCloseEditEquipmentModal}
         onSubmit={handleSubmit}
       />
     </div>
   );
 };
 
-export default SpHotelProfileView;
+export default SpEquipmentRentalProfileView;

@@ -2,22 +2,19 @@
 import "./assets/styles/style.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
-import SpRedirectPage from "./components/SpRedirectPage";
-import SetUpMarketPlace from "./components/SetUpMarketPlace";
+import SpRedirectPage from "./Pages/SP common/SpRedirectPage";
+import SetUpMarketPlace from "./Pages/SP common/SetUpMarketPlace";
 
-import SubscriptionPlan from "./components/SubscriptionPlan";
-import Chat from "./components/Chat";
-import SpHotelProfileView from "./components/SpHotelProfileView";
-import EditMarketPlace from "./components/EditMarketPlace";
-import SpRestaurantProfileView from "./components/SpRestaurantProfileView";
-import SpEquipmentRentalProfileView from "./components/SpEquipmentRentalProfileView";
+import SubscriptionPlan from "./Pages/SP common/SubscriptionPlan";
+import Chat from "./Pages/SP common/Chat";
+import SpHotelProfileView from "./Pages/Hotel/SpHotelProfileView";
+import EditMarketPlace from "./Pages/SP common/EditMarketPlace";
+import SpRestaurantProfileView from "./Pages/Restaurant/SpRestaurantProfileView";
+import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 
-import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
-import SignUp from "./Pages/SignUp/signup"
-import Login from "./Pages/login"
-import Community from "./Pages/Community/landing"
-
-
+import SignUp from "./Pages/SignUp/signup";
+import Login from "./Pages/login";
+import Community from "./Pages/Community/landing";
 
 function App() {
   return (
@@ -38,40 +35,81 @@ function App() {
     //   </header> */}
     // </div>
     <div>
-
-      <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SpRedirectPage />} />
-          <Route path="/set-market" element={<SetUpMarketPlace />} />
-          <Route path="/edit-market" element={<EditMarketPlace />} />
-          <Route path="/hotel-sp-view" element={<SpHotelProfileView />} />
-          <Route path="/rest-sp-view" element={<SpRestaurantProfileView />} />
-          <Route path="/equip-sp-view" element={< SpEquipmentRentalProfileView/>} />
-          <Route path="/subscription-plan" element={<SubscriptionPlan />} />
-          <Route path="/chat" element={<Chat />} />
- 
-// Add Header component  to all routes parts like this  and remove header component which is above BrowserRouter line
-            
-            
-//           <Route path="/" element={<><Header />;<SpRedirectPage /></>} />
-//           <Route path="/set-market" element={<><Header />;<SetUpMarketPlace /></>} />
-//           <Route path="/profile-view-traveller" element={<><Header />;<MarketPlaceProfileOwnView /></>} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />;<SpRedirectPage />
+              </>
+            }
+          />
+          <Route
+            path="/set-market"
+            element={
+              <>
+                <Header />;<SetUpMarketPlace />
+              </>
+            }
+          />
+          <Route
+            path="/edit-market"
+            element={
+              <>
+                <Header />;<EditMarketPlace />
+              </>
+            }
+          />
+          <Route
+            path="/hotel-sp-view"
+            element={
+              <>
+                <Header />;<SpHotelProfileView />
+              </>
+            }
+          />
+          <Route
+            path="/rest-sp-view"
+            element={
+              <>
+                <Header />;<SpRestaurantProfileView />
+              </>
+            }
+          />
+          <Route
+            path="/equip-sp-view"
+            element={
+              <>
+                <Header />;<SpEquipmentRentalProfileView />
+              </>
+            }
+          />
+          <Route
+            path="/subscription-plan"
+            element={
+              <>
+                <Header />;<SubscriptionPlan />
+              </>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <>
+                <Header />;<Chat />
+              </>
+            }
+          />
 
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          
 
           {/* Community */}
-          <Route path="/community" element={<Community/>} />
-
+          <Route path="/community" element={<Community />} />
         </Routes>
       </BrowserRouter>
-
-
-
-
     </div>
   );
 }

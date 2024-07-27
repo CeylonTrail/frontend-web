@@ -4,13 +4,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
 import SpRedirectPage from "./components/SpRedirectPage";
 import SetUpMarketPlace from "./components/SetUpMarketPlace";
-import Signin from "./components/signin"
+
 import SubscriptionPlan from "./components/SubscriptionPlan";
 import Chat from "./components/Chat";
 import SpHotelProfileView from "./components/SpHotelProfileView";
 import EditMarketPlace from "./components/EditMarketPlace";
 import SpRestaurantProfileView from "./components/SpRestaurantProfileView";
 import SpEquipmentRentalProfileView from "./components/SpEquipmentRentalProfileView";
+
+import MarketPlaceProfileOwnView from "./components/MarketPlaceProfileOwnView";
+import SignUp from "./Pages/SignUp/signup"
+import Login from "./Pages/login"
+import Community from "./Pages/Community/landing"
+
+
 
 function App() {
   return (
@@ -31,6 +38,7 @@ function App() {
     //   </header> */}
     // </div>
     <div>
+
       <Header />
       <BrowserRouter>
         <Routes>
@@ -42,10 +50,28 @@ function App() {
           <Route path="/equip-sp-view" element={< SpEquipmentRentalProfileView/>} />
           <Route path="/subscription-plan" element={<SubscriptionPlan />} />
           <Route path="/chat" element={<Chat />} />
+ 
+// Add Header component  to all routes parts like this  and remove header component which is above BrowserRouter line
+            
+            
+//           <Route path="/" element={<><Header />;<SpRedirectPage /></>} />
+//           <Route path="/set-market" element={<><Header />;<SetUpMarketPlace /></>} />
+//           <Route path="/profile-view-traveller" element={<><Header />;<MarketPlaceProfileOwnView /></>} />
+
+          {/* log in and signup */}
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          
+
+          {/* Community */}
+          <Route path="/community" element={<Community/>} />
+
         </Routes>
       </BrowserRouter>
 
-      {/* <Signin /> */}
+
+
+
     </div>
   );
 }

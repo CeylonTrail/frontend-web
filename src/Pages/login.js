@@ -1,22 +1,81 @@
 import Header from "../components/header2";
-import Traveler from "../assets/img/Traveller signup.svg"
-import footer from "../components/footer";
+import LoginImg from "../assets/img/login.svg";
 import { Password, Email } from "../components/inputFields";
 import { PrimaryButton } from "../components/Button";
 import googleLogo from "../assets/img/GoogleLogo.png"
 import Footer from "../components/footer";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import login from "../API/login";
+import { WarningAlert } from "../components/Alerts";
 
 export default () => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [touchedEmail, setTouchedEmail] = useState(false);
+    const [touchedPassword, setTouchedPassword] = useState(false);
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertTitle, setAlertTitle] = useState('');
+    const [alertType, setAlertType] = useState('');
+
+    const handleOnClose = () => {
+
+        setShowAlert(false);
+
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = {
+        
+            email: email,
+            password: password
+        };
+
+        try {
+            const response = await login(data);
+            console.log(response);
+            if (response.status === 'success') {
+                const token = response.token;
+                
+            } else {
+                setAlertTitle('Error');
+
+
+                setAlertMessage(response.message);
+                setShowAlert(true);
+                setAlertType('error');
+                setTimeout(() => {
+                    setShowAlert(false);
+
+                }, 3000);
+            }
+        } catch (error) {
+            // console.error(error);
+            setAlertTitle('Error');
+            setAlertMessage(error.message);
+            setShowAlert(true);
+            setAlertType('error');
+            setTimeout(() => {
+                setShowAlert(false);
+
+            }, 3000);
+        }
+    }
 
     return (
         <div className="w-full">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"login"} />
-            <div className="flex">
+            <div className="flex pb-8">
                 <div className="relative flex-1 hidden items-center justify-center   lg:flex h-full">
-                    <div className="w-2/4 pt-14">
-                        <img src={Traveler} />
+                    <div className="w-2/4 pt-10">
+                        <img src={LoginImg} />
                     </div>
                 </div>
                 <div className="flex-1 flex items-center  ">
@@ -25,24 +84,35 @@ export default () => {
 
                             <div className="mt-5 space-y-2">
                                 <h3 className="text-primaryDark1 text-5xl font-bold ">Log In</h3>
-                                {/* <p className="">Already have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</a></p> */}
+                                
                             </div>
                         </div>
 
 
 
                         <form
-                            onSubmit={(e) => e.preventDefault()}
+                            onSubmit={handleSubmit}
                             className="space-y-5 flex flex-col w-full items-center"
                         >
 
                             <div className="w-full">
-                                <Email pholder={"Email"} />
+                                <Email pholder={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouchedEmail(true)} />
+                                {touchedEmail && !email && (
+                                    <p className="text-warning font-thin text-xs">Email is required !</p>
+                                )}
                             </div>
                             <div className="w-full">
-                                <Password pholder={"Password"} />
+                                <Password
+                                    pholder={"Password"}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    onBlur={() => setTouchedPassword(true)}
+                                />
+                                {touchedPassword && !password && (
+                                    <p className="text-warning font-thin text-xs">Password is required</p>
+                                )}
                                 <div className="w-full flex justify-end">
-                                    <a href="/signup" className="text-center text-primary hover:text-primaryDark1">Forgot password?</a>
+                                    <Link to="/reset_password" className="text-center text-primary hover:text-primaryDark1">Forgot password?</Link>
                                 </div>
 
                             </div>
@@ -53,18 +123,6 @@ export default () => {
                             </div>
 
 
-                            {/* <div className="flex items-center justify-between text-sm w-full">
-                                <div className="flex items-center gap-x-3">
-                                    <input type="checkbox"  className="checkbox-item peer hidden" />
-                                    <label
-                                        htmlFor="remember-me-checkbox"
-                                        className="relative flex w-5 h-5 bg-white peer-checked:bg-indigo-600 rounded-md border ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
-                                    >
-                                    </label>
-                                    <span>Remember me</span>
-                                </div>
-                               
-                            </div> */}
 
                             <div >
                                 <PrimaryButton name={"Log In"} />
@@ -93,6 +151,8 @@ export default () => {
                             <p className="text-secondary font-thin">Don't have an account?</p> <a href="/signup" className="font-medium text-secondary  hover:text-primaryDark1">Sign Up</a>
 
                         </div>
+                        {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
+
 
                     </div>
                 </div>

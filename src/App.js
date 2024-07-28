@@ -15,7 +15,8 @@ import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRen
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
-import LocationSelector from "./components/locationSelector";
+// import LocationSelector from "./components/locationSelector";
+import Resetpw from "./Pages/resetpw";
 
 function App() {
   return (
@@ -106,10 +107,12 @@ function App() {
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/reset_password" element={<Resetpw />} />
+
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-          <Route path="/location" element={<LocationSelector />} />
+          {/* <Route path="/location" element={<LocationSelector />} /> */}
 
         </Routes>
       </BrowserRouter>

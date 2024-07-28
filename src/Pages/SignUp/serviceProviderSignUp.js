@@ -12,7 +12,7 @@ export default () => {
     const [shopType, setShopType] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [location, setLocation] = useState({ lat: null, lng: null });
+    const [username, setUserName] = useState("");
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
 
@@ -46,6 +46,10 @@ export default () => {
                 <div className="w-full flex f-row gap-1">
                     <SimpleInput pholder={"First name"} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     <SimpleInput pholder={"Last name"} value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                </div>
+                <div className="w-full flex f-row gap-1">
+                    <SimpleInput pholder={"User name"} value={username} onChange={(e) => setUserName(e.target.value)} />
+                    
                 </div>
                 <div className="w-full flex f-row gap-1">
                     <SimpleInput pholder={"Shop name"} value={shopName} onChange={(e) => setShopName(e.target.value)} />

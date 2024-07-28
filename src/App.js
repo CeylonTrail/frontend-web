@@ -15,6 +15,7 @@ import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRen
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
+import LocationSelector from "./components/locationSelector";
 
 function App() {
   return (
@@ -108,6 +109,8 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
+          <Route path="/location" element={<LocationSelector />} />
+
         </Routes>
       </BrowserRouter>
     </div>

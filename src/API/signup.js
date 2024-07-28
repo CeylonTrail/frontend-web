@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const signup = async (data) => {
-    const url = 'http://localhost:8083/api/v1/auth/register';
+    const url = 'http://localhost:8083/api/v1/auth/register-traveller';
 
     try {
         const response = await axios.post(url, data, {

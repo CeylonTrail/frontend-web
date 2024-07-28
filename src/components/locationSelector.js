@@ -1,39 +1,69 @@
-// LocationSelector.js
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from "react";
+import {
+    APIProvider,
+    Map,
+    Marker,
+    InfoWindow,
+} from "@vis.gl/react-google-maps";
+import Modal from 'react-modal';
+import { PrimaryButton } from "./Button";
 
-const LocationSelector = ({ onSelectLocation }) => {
-    const mapRef = useRef(null);
-    const [map, setMap] = useState(null);
-    const [marker, setMarker] = useState(null);
+export default function SelectLocation({ onLocationChange }) {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [lat, setLat] = useState(null);
+    const [lng, setLng] = useState(null);
+    const [selectedPosition, setSelectedPosition] = useState(null);
+    const [locationAdded, setLocationAdded] = useState(false);
+    const [buttonName, setButtonName] = useState("Add Location");
+    const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        if (mapRef.current && !map) {
-            const googleMap = new window.google.maps.Map(mapRef.current, {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
-            });
-            setMap(googleMap);
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
 
-            googleMap.addListener('click', (event) => {
-                const lat = event.latLng.lat();
-                const lng = event.latLng.lng();
-
-                if (marker) {
-                    marker.setPosition(event.latLng);
-                } else {
-                    const newMarker = new window.google.maps.Marker({
-                        position: event.latLng,
-                        map: googleMap,
-                    });
-                    setMarker(newMarker);
-                }
-
-                onSelectLocation({ lat, lng });
-            });
+    const handleMapClick = (event) => {
+        console.log('Map Click Event:', event); // Log the event object
+        const lat = event.detail.latLng.lat;
+        const lng = event.detail.latLng.lng;
+        console.log('Latitude:', lat, 'Longitude:', lng); // Log the lat and lng values
+        if (lat && lng) {
+            setSelectedPosition({ lat, lng });
+            setLat(lat);
+            setLng(lng);
+            setModalIsOpen(false);
+            setLocationAdded(true);
+            setButtonName("Change Location");
+            onLocationChange(lat, lng); // Call the onLocationChange prop
         }
-    }, [map, onSelectLocation]);
+    };
 
-    return <div ref={mapRef} style={{ width: '100%', height: '400px' }} />;
-};
+    return (
+        <>
+            <PrimaryButton name={buttonName} action={openModal} isActive={!locationAdded} icon={<span className="material-symbols-outlined">
+                location_on
+            </span>}></PrimaryButton>
 
-export default LocationSelector;
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Select Location">
+                <APIProvider apiKey="AIzaSyD5UzriIXmPtuLot9v4DirHr3LkJzh6tfk">
+                    <div style={{ height: "100vh", width: "100%" }}>
+                        <Map
+                            zoom={15}
+                            center={{ lat: 6.902652922830886, lng: 79.86116883963061 }}
+                            onClick={handleMapClick}
+                            mapId="ee7c577ba3feb614"
+                        >
+                            {selectedPosition && (
+                                <Marker position={selectedPosition} onClick={() => setOpen(true)} />
+                            )}
+
+                            {open && (
+                                <InfoWindow position={selectedPosition} onCloseClick={() => setOpen(false)}>
+                                    <p>Selected Location</p>
+                                </InfoWindow>
+                            )}
+                        </Map>
+                    </div>
+                </APIProvider>
+            </Modal>
+        </>
+    );
+}

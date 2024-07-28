@@ -19,7 +19,7 @@
   padding: 0.625rem; /* 10px */
   background-color: #fff;
   border-bottom: 0.0625rem solid #ddd; /* 1px */
-  height: 5.4rem;
+  height: 6.2rem;
 }
 
 .search-input-wrapper {
@@ -57,7 +57,7 @@
 .pinned-section {
   background-color: #ffffff;
   flex-shrink: 0;
-  height: 14.125rem; /* 226px */
+  height: 16.00rem; /* 226px */
   overflow-y: auto; /* Make the pinned section scrollable if needed */
 }
 
@@ -130,7 +130,7 @@
 
 .contact-name {
   font-weight: bold;
-  font-size: 0.875rem; /* 14px */
+  font-size: 1rem; /* 14px */
 }
 
 .contact-status {
@@ -140,7 +140,7 @@
 
 .contact-last-message {
   color: #999;
-  font-size: 0.75rem; /* 12px */
+   font-size: 0.875rem; 
   margin-top: 0.1875rem; /* 3px */
   width: 100%;
   text-overflow: ellipsis;
@@ -180,6 +180,10 @@
 
 .chat-header-info {
   display: flex;
+  align-items: center;
+}
+.chat-header-info > div {
+  display: flex;
   flex-direction: column;
 }
 
@@ -198,7 +202,7 @@
   padding: 1.25rem; /* 20px */
   overflow-y: auto;
   background-color: #f9f9f9;
-  font-family: sans-serif;
+  font-family: Helvetica;
 }
 
 .message {
@@ -306,6 +310,7 @@
   padding: 0.625rem; /* 10px */
   border-radius: 0.625rem; /* 10px */
   background-color: #ffffff;
+   font-size: 0.875rem; /* 14px */
 }
 
 .message.sent p {
@@ -351,6 +356,8 @@
   border: 0.0625rem solid #6da5c0; /* 1px */
   border-radius: 1.25rem; /* 20px */
   margin-right: 0.75rem; /* 12px */
+  font-size: 0.875rem; /* 14px */
+
 }
 
 .chat-input .input-wrapper {

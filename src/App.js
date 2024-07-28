@@ -8,9 +8,11 @@ import SetUpMarketPlace from "./Pages/SP common/SetUpMarketPlace";
 import SubscriptionPlan from "./Pages/SP common/SubscriptionPlan";
 import Chat from "./Pages/SP common/Chat";
 import SpHotelProfileView from "./Pages/Hotel/SpHotelProfileView";
+import TrHotelProfileView from "./Pages/Hotel/TrHotelProfileView"
 import EditMarketPlace from "./Pages/SP common/EditMarketPlace";
 import SpRestaurantProfileView from "./Pages/Restaurant/SpRestaurantProfileView";
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
+import MarketPlace from "./Pages/SP common/MarketPlace";
 
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
@@ -70,6 +72,14 @@ function App() {
             }
           />
           <Route
+            path="/hotel-tr-view"
+            element={
+              <>
+                <Header />;<TrHotelProfileView />
+              </>
+            }
+          />
+          <Route
             path="/rest-sp-view"
             element={
               <>
@@ -98,6 +108,15 @@ function App() {
             element={
               <>
                 <Header />;<Chat />
+              </>
+            }
+          />
+
+          <Route
+            path="/market"
+            element={
+              <>
+                <Header />;<MarketPlace />
               </>
             }
           />

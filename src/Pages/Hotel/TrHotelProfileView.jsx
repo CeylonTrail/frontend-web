@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
-import RestaurantCardImg from "../../assets/img/restaurant-card.png";
-import RestaurantProfileImg from "../../assets/img/restaurant-profile.png";
+import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
+import HotelCardImg from "../../assets/img/hotel-card.png";
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
-import Modal from "./RestaurantModal.jsx"; // Import Modal
+import Modal from "./HotelModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
-import RestaurantCard from "./RestaurantCard.jsx";
-import EditRestaurantModal from "./EditRestaurantModal.jsx";
+import HotelCard from "./HotelCard.jsx";
+import EditHotelModal from "./EditHotelModal.jsx";
 
-const SpRestaurantProfileView = () => {
+const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const cardsPerPage = 12;
+  const cardsPerPage = 8;
   const navigate = useNavigate();
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
-    useState(false); // State to control edit modal visibility
+  const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
 
-  const handleAddRestaurantCardClick = () => {
+  const handleAddListingClick = () => {
     console.log("Popup open");
     setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
   };
@@ -35,10 +34,6 @@ const SpRestaurantProfileView = () => {
     // Handle form submission
     alert("Form Submitted");
     handleCloseModal(); // Close modal on form submission
-  };
-
-  const handleSubscribeClick = () => {
-    navigate("/subscription-plan"); // Redirect to the subscription plan page
   };
 
   const editProfileClicked = () => {
@@ -56,116 +51,98 @@ const SpRestaurantProfileView = () => {
     setIsBoostModalOpen(false);
   };
 
-  const handleEditRestaurantCardClick = (card) => {
+  const handleEditListingClick = (card) => {
     setSelectedCard(card);
-    setIsEditRestaurantModalOpen(true);
+    setIsEditHotelModalOpen(true);
   };
 
-  const handleCloseEditRestaurantModal = () => {
+  const handleCloseEditHotelModal = () => {
     setSelectedCard(null);
-    setIsEditRestaurantModalOpen(false);
+    setIsEditHotelModalOpen(false);
   };
 
-  const fooditems = [
+  const rooms = [
     {
-      type: "Chicken Briyani 1",
-      price: "LKR 800",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 2",
+      type: "Single Room 1",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 3",
+      type: "Single Room 2",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 4",
+      type: "Single Room 3",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 5",
+      type: "Single Room 4",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 6",
+      type: "Single Room 5",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 7",
+      type: "Single Room 6",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani  8",
+      type: "Single Room 7",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 9",
+      type: "Single Room 8",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 10",
+      type: "Single Room 9",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 11",
+      type: "Single Room 10",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 12",
+      type: "Single Room 11",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
     {
-      type: "Chicken Briyani 13",
+      type: "Single Room 12",
       price: "LKR 350/night",
       rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 14",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 15",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
+      src: HotelCardImg,
     },
   ];
 
   // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = fooditems.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(fooditems.length / cardsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -184,8 +161,8 @@ const SpRestaurantProfileView = () => {
           <img
             style={{ width: "1250px", height: "350px" }}
             className="object-cover object-top"
-            src={RestaurantBackgroundImg}
-            alt="Cover"
+            src={MarketPlaceBackgroundImg}
+            alt="Mountain"
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
@@ -197,8 +174,8 @@ const SpRestaurantProfileView = () => {
           >
             <img
               className="object-cover object-center w-full h-full"
-              src={RestaurantProfileImg}
-              alt="Logo"
+              src={HotelProfileImg}
+              alt="Woman looking front"
             />
           </div>
           <div
@@ -211,11 +188,7 @@ const SpRestaurantProfileView = () => {
                 action={editProfileClicked}
                 isActive={true}
               />
-              <PrimaryButton
-                name="Subscribe"
-                action={handleSubscribeClick}
-                isActive={false}
-              />
+              
             </div>
           </div>
         </div>
@@ -239,57 +212,6 @@ const SpRestaurantProfileView = () => {
               style={{ fontSize: "20px", fontWeight: "300" }}
             >
               Good in quality
-            </div>
-            <div
-              className="text-lg font-light mt-2"
-              style={{ fontSize: "18px", fontWeight: "300" }}
-            ></div>
-            <div className="flex items-center mt-2">
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#D3D3D3" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
             </div>
           </div>
 
@@ -326,7 +248,7 @@ const SpRestaurantProfileView = () => {
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddRestaurantCardClick} // Open modal on click
+            onClick={handleAddListingClick} // Open modal on click
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -337,13 +259,13 @@ const SpRestaurantProfileView = () => {
             ADD LISTING
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {currentCards.map((fooditem, index) => (
-              <RestaurantCard
+            {currentCards.map((room, index) => (
+              <HotelCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
-                fooditem={fooditem}
+                room={room}
                 handleBoostClick={handleBoostClick}
-                handleEditRestaurantCardClick={handleEditRestaurantCardClick}
+                handleEditListingClick={handleEditListingClick}
               />
             ))}
           </div>
@@ -377,13 +299,13 @@ const SpRestaurantProfileView = () => {
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
       />
-      <EditRestaurantModal
-        isOpen={isEditRestaurantModalOpen}
-        onRequestClose={handleCloseEditRestaurantModal}
+      <EditHotelModal
+        isOpen={isEditHotelModalOpen}
+        onRequestClose={handleCloseEditHotelModal}
         onSubmit={handleSubmit}
       />
     </div>
   );
 };
 
-export default SpRestaurantProfileView;
+export default TrHotelProfileView;

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "../../assets/styles/Chat.css";
+<<<<<<< HEAD
 import { format } from 'date-fns';
+=======
+>>>>>>> 4b8068d (SP chat page done)
 import {
   FaSearch,
   FaPaperPlane,
@@ -23,6 +26,7 @@ const Chat = () => {
         {
           sender: "Ramesh",
           message: "Hi, I would like to inquire about the hotel rates.",
+<<<<<<< HEAD
           timestamp: "2024-07-28T09:00:00.000Z",
         },
         {
@@ -44,11 +48,21 @@ const Chat = () => {
           sender: "Ramesh",
           message: "Are there any discounts for longer stays?",
           timestamp: "2024-07-28T09:10:00.000Z",
+=======
+        },
+        { sender: "Me", message: "Sure, I'll provide you with the details." },
+        { sender: "Me", message: "Our standard room is $100 per night." },
+        { sender: "Me", message: "The deluxe room is $150 per night." },
+        {
+          sender: "Ramesh",
+          message: "Are there any discounts for longer stays?",
+>>>>>>> 4b8068d (SP chat page done)
         },
         {
           sender: "Me",
           message:
             "Yes, we offer a 10% discount for stays longer than 5 nights.",
+<<<<<<< HEAD
           timestamp: "2024-07-28T09:15:00.000Z",
         },
         {
@@ -56,10 +70,15 @@ const Chat = () => {
           message: "What amenities are included?",
           timestamp: "2024-07-28T09:20:00.000Z",
         },
+=======
+        },
+        { sender: "Ramesh", message: "What amenities are included?" },
+>>>>>>> 4b8068d (SP chat page done)
         {
           sender: "Me",
           message:
             "All rooms include free Wi-Fi, breakfast, and access to the gym.",
+<<<<<<< HEAD
           timestamp: "2024-07-28T09:25:00.000Z",
         },
         {
@@ -76,10 +95,19 @@ const Chat = () => {
           sender: "Ramesh",
           message: "What are the check-in and check-out times?",
           timestamp: "2024-07-28T09:40:00.000Z",
+=======
+        },
+        { sender: "Ramesh", message: "Is there a swimming pool?" },
+        { sender: "Me", message: "Yes, we have an outdoor swimming pool." },
+        {
+          sender: "Ramesh",
+          message: "What are the check-in and check-out times?",
+>>>>>>> 4b8068d (SP chat page done)
         },
         {
           sender: "Me",
           message: "Check-in is at 2 PM and check-out is at 11 AM.",
+<<<<<<< HEAD
           timestamp: "2024-07-28T09:45:00.000Z",
         },
         {
@@ -87,11 +115,18 @@ const Chat = () => {
           message: "Thank you for the information!",
           timestamp: "2024-07-28T09:50:00.000Z",
         },
+=======
+        },
+        { sender: "Ramesh", message: "Thank you for the information!" },
+>>>>>>> 4b8068d (SP chat page done)
         {
           sender: "Me",
           message:
             "You're welcome! Let me know if you have any other questions.",
+<<<<<<< HEAD
           timestamp: "2024-07-28T09:55:00.000Z",
+=======
+>>>>>>> 4b8068d (SP chat page done)
         },
       ],
     },
@@ -196,10 +231,13 @@ const Chat = () => {
     },
   ];
 
+<<<<<<< HEAD
   const formatDate = (timestamp) => {
     return format(new Date(timestamp), "p"); // 'p' for localized time with AM/PM
   };
 
+=======
+>>>>>>> 4b8068d (SP chat page done)
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -303,11 +341,46 @@ const Chat = () => {
       <div className="messenger-chat">
         <div className="chat-header">
           <div className="chat-header-info">
+<<<<<<< HEAD
             <img src={selectedContact.avatar} alt="avatar" />
             <div>
               <span className="chat-header-name">{selectedContact.name}</span>
               <span className="chat-header-status">Last seen: 2 hours ago</span>
+=======
+            <span className="chat-header-name">{selectedContact.name}</span>
+            <span className="chat-header-status">Last seen: 2 hours ago</span>
+          </div>
+          <FaPhone className="call-icon" />
+        </div>
+        <div className="chat-messages">
+          {selectedContact.chatHistory.map((message, index) => (
+            <div
+              key={index}
+              className={`message ${
+                message.sender === "Me" ? "sent" : "received"
+              }`}
+            >
+              {message.sender !== "Me" && (
+                <img src={selectedContact.avatar} alt="avatar" />
+              )}
+              <p>{message.message}</p>
+>>>>>>> 4b8068d (SP chat page done)
             </div>
+          ))}
+        </div>
+        <div className="chat-input">
+          <FaFile className="file-icon" />
+          <div className="input-wrapper">
+            <FaSmile className="emoji-icon" />
+            <input
+              type="text"
+              placeholder="Type a message..."
+              className="input-field"
+            />
+            <button className="send-button">
+              <FaPaperPlane className="send-icon" />
+              Send
+            </button>
           </div>
           <FaPhone className="call-icon" />
         </div>

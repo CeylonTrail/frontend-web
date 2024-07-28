@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
-import HotelCardImg from "../../assets/img/hotel-card.png";
-import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
+import RestaurantCardImg from "../../assets/img/restaurant-card.png";
+import RestaurantProfileImg from "../../assets/img/restaurant-profile.png";
 import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
-import Modal from "./HotelModal.jsx"; // Import Modal
+import Modal from "./RestaurantModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
-import HotelCard from "./HotelCard.jsx";
-import EditHotelModal from "./EditHotelModal.jsx";
-import HotelRatingComponent from "./HotelRatingComponent.jsx";
+import RestaurantCard from "./RestaurantCard.jsx";
+import EditRestaurantModal from "./EditRestaurantModal.jsx";
+import RestaurantRatingComponent from "./RestaurantRatingComponent.jsx";
 
-const TrHotelProfileView = () => {
+const TrRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const cardsPerPage = 8;
+  const cardsPerPage = 12;
   const navigate = useNavigate();
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
+  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
+    useState(false); // State to control edit modal visibility
 
-  const handleAddListingClick = () => {
+  const handleAddRestaurantCardClick = () => {
     console.log("Popup open");
     setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
   };
@@ -35,6 +36,10 @@ const TrHotelProfileView = () => {
     // Handle form submission
     alert("Form Submitted");
     handleCloseModal(); // Close modal on form submission
+  };
+
+  const handleSubscribeClick = () => {
+    navigate("/subscription-plan"); // Redirect to the subscription plan page
   };
 
   const editProfileClicked = () => {
@@ -52,98 +57,116 @@ const TrHotelProfileView = () => {
     setIsBoostModalOpen(false);
   };
 
-  const handleEditListingClick = (card) => {
+  const handleEditRestaurantCardClick = (card) => {
     setSelectedCard(card);
-    setIsEditHotelModalOpen(true);
+    setIsEditRestaurantModalOpen(true);
   };
 
-  const handleCloseEditHotelModal = () => {
+  const handleCloseEditRestaurantModal = () => {
     setSelectedCard(null);
-    setIsEditHotelModalOpen(false);
+    setIsEditRestaurantModalOpen(false);
   };
 
-  const rooms = [
+  const fooditems = [
     {
-      type: "Single Room 1",
-      price: "LKR 350/night",
+      type: "Chicken Briyani 1",
+      price: "LKR 800",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 2",
+      type: "Chicken Briyani 2",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 3",
+      type: "Chicken Briyani 3",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 4",
+      type: "Chicken Briyani 4",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 5",
+      type: "Chicken Briyani 5",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 6",
+      type: "Chicken Briyani 6",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 7",
+      type: "Chicken Briyani 7",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 8",
+      type: "Chicken Briyani  8",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 9",
+      type: "Chicken Briyani 9",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 10",
+      type: "Chicken Briyani 10",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 11",
+      type: "Chicken Briyani 11",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
     },
     {
-      type: "Single Room 12",
+      type: "Chicken Briyani 12",
       price: "LKR 350/night",
       rating: 4.5,
-      src: HotelCardImg,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 13",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 14",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
+    },
+    {
+      type: "Chicken Briyani 15",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: RestaurantCardImg,
     },
   ];
 
   // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = fooditems.slice(indexOfFirstCard, indexOfLastCard);
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(fooditems.length / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -162,8 +185,8 @@ const TrHotelProfileView = () => {
           <img
             style={{ width: "1250px", height: "350px" }}
             className="object-cover object-top"
-            src={MarketPlaceBackgroundImg}
-            alt="Mountain"
+            src={RestaurantBackgroundImg}
+            alt="Cover"
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
@@ -175,8 +198,8 @@ const TrHotelProfileView = () => {
           >
             <img
               className="object-cover object-center w-full h-full"
-              src={HotelProfileImg}
-              alt="Woman looking front"
+              src={RestaurantProfileImg}
+              alt="Logo"
             />
           </div>
           <div
@@ -189,6 +212,11 @@ const TrHotelProfileView = () => {
                 action={editProfileClicked}
                 isActive={true}
               />
+              <PrimaryButton
+                name="Subscribe"
+                action={handleSubscribeClick}
+                isActive={false}
+              />
             </div> */}
           </div>
         </div>
@@ -200,8 +228,7 @@ const TrHotelProfileView = () => {
           }}
         >
           {/* Text Section */}
-          
-           <HotelRatingComponent />
+          <RestaurantRatingComponent />
 
           {/* Statistics Section */}
           <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
@@ -236,7 +263,7 @@ const TrHotelProfileView = () => {
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddListingClick} // Open modal on click
+            onClick={handleAddRestaurantCardClick} // Open modal on click
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -247,13 +274,13 @@ const TrHotelProfileView = () => {
             ADD LISTING
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {currentCards.map((room, index) => (
-              <HotelCard
+            {currentCards.map((fooditem, index) => (
+              <RestaurantCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
-                room={room}
+                fooditem={fooditem}
                 handleBoostClick={handleBoostClick}
-                handleEditListingClick={handleEditListingClick}
+                handleEditRestaurantCardClick={handleEditRestaurantCardClick}
               />
             ))}
           </div>
@@ -287,13 +314,13 @@ const TrHotelProfileView = () => {
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
       />
-      <EditHotelModal
-        isOpen={isEditHotelModalOpen}
-        onRequestClose={handleCloseEditHotelModal}
+      <EditRestaurantModal
+        isOpen={isEditRestaurantModalOpen}
+        onRequestClose={handleCloseEditRestaurantModal}
         onSubmit={handleSubmit}
       />
     </div>
   );
 };
 
-export default TrHotelProfileView;
+export default TrRestaurantProfileView;

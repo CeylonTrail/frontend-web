@@ -15,6 +15,7 @@ import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView"
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
+import SPReviews from "./Pages/SP common/SPReviews";
 
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
@@ -131,6 +132,14 @@ function App() {
             element={
               <>
                 <Header />;<Chat />
+              </>
+            }
+          />
+          <Route
+            path="/sp-review"
+            element={
+              <>
+                <Header />;<SPReviews />
               </>
             }
           />

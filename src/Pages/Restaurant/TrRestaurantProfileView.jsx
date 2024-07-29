@@ -6,18 +6,31 @@ import PlusImg from "../../assets/img/plus.png";
 import RestaurantCardImg from "../../assets/img/restaurant-card.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx";
+<<<<<<< HEAD
 // import BoostModal from "../SP common/BoostModal.jsx";
 import RestaurantCard from "./RestaurantCard.jsx";
 // import EditRestaurantModal from "./EditRestaurantModal.jsx";
+=======
+import BoostModal from "../SP common/BoostModal.jsx";
+import RestaurantCard from "./RestaurantCard.jsx";
+import EditRestaurantModal from "./EditRestaurantModal.jsx";
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
 import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+<<<<<<< HEAD
   // const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   // const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
   //   useState(false);
+=======
+  const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
+    useState(false);
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
   const cardsPerPage = 12;
   const navigate = useNavigate();
 
@@ -30,6 +43,7 @@ const TrRestaurantProfileView = () => {
   };
   // const handleSubscribeClick = () => navigate("/subscription-plan");
   // const editProfileClicked = () => navigate("/edit-market");
+<<<<<<< HEAD
   // const handleBoostClick = (card) => {
   //   setSelectedCard(card);
   //   setIsBoostModalOpen(true);
@@ -46,6 +60,24 @@ const TrRestaurantProfileView = () => {
   //   setSelectedCard(null);
   //   setIsEditRestaurantModalOpen(false);
   // };
+=======
+  const handleBoostClick = (card) => {
+    setSelectedCard(card);
+    setIsBoostModalOpen(true);
+  };
+  const handleCloseBoostModal = () => {
+    setSelectedCard(null);
+    setIsBoostModalOpen(false);
+  };
+  const handleEditRestaurantCardClick = (card) => {
+    setSelectedCard(card);
+    setIsEditRestaurantModalOpen(true);
+  };
+  const handleCloseEditRestaurantModal = () => {
+    setSelectedCard(null);
+    setIsEditRestaurantModalOpen(false);
+  };
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
 
   const fooditems = Array.from({ length: 15 }, (_, i) => ({
     type: `Chicken Briyani ${i + 1}`,

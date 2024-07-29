@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+=======
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
 import Modal from "react-modal"; // Ensure you have react-modal installed
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
@@ -12,8 +15,11 @@ const RatingComponent = () => {
   const [numRatings, setNumRatings] = useState(3);
   const [review, setReview] = useState("");
 
+<<<<<<< HEAD
   const navigate = useNavigate(); // Get the navigate function
 
+=======
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
   const handleClick = (value) => {
     if (rating === 0) {
       setTotalRating(totalRating + value);
@@ -83,10 +89,13 @@ const RatingComponent = () => {
     return stars;
   };
 
+<<<<<<< HEAD
   const handleSeeReviewsClick = () => {
     navigate("/sp-review"); // Navigate to the /sp-review page
   };
 
+=======
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
   return (
     <div className="lg:w-1/2 pr-8 lg:pl-0">
       <div className="flex flex-col items-start mt-4">
@@ -107,6 +116,7 @@ const RatingComponent = () => {
           </div>
 
           <div className="flex items-center mt-1">
+<<<<<<< HEAD
             <a
               href="#!" // Dummy href for the example
               onClick={handleSeeReviewsClick} // Function for navigation
@@ -127,6 +137,71 @@ const RatingComponent = () => {
           </div>
         </div>
       </div>
+=======
+            <button
+              onClick={toggleModal}
+              style={{ fontSize: "1.05rem", padding: "0.25rem 0.5rem" }}
+              className="text-blue-500 underline"
+            >
+              {rating === 0 ? "Rate" : "Edit"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <Modal
+        isOpen={showModal}
+        onRequestClose={toggleModal}
+        contentLabel="Rating Modal"
+        className="modal-overlay"
+        overlayClassName="modal-overlay-bg"
+      >
+        <div
+          className="boost-modal-content"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="modal-header">
+            <h2 className="modal-title">Rate and Review</h2>
+            <div className="heading-line"></div>
+            <img
+              src={cancelImg}
+              alt="Close"
+              className="modal-close-icon"
+              onClick={toggleModal}
+            />
+          </div>
+          <form
+            className="modal-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+              toggleModal();
+            }}
+          >
+            <div className="form-group center-stars">
+              <div className="flex items-center mb-4">
+                {/* Only one line of stars with a single size (e.g., medium) */}
+                {renderStars(rating, "medium")}
+              </div>
+            </div>
+            <div className="form-group">
+              <textarea
+                className="form-textarea"
+                rows="4"
+                placeholder="Write your review here..."
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="modal-footer">
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+>>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
     </div>
   );
 };

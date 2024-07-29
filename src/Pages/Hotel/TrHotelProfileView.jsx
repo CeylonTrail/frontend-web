@@ -3,68 +3,37 @@ import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
-import PlusImg from "../../assets/img/plus.png";
-import { PrimaryButton } from "../../components/Button.js";
-import Modal from "./HotelModal.jsx"; // Import Modal
-import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
-import HotelCard from "./HotelCard.jsx";
-import EditHotelModal from "./EditHotelModal.jsx";
-import HotelRatingComponent from "./HotelRatingComponent.jsx";
+import TrHotelModal from "./TrHotelModal.jsx"; // Import Modal
+import TrHotelCard from "./TrHotelCard.jsx"; // Import Card
+import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false); // State to control hotel modal visibility
+  const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
   const cardsPerPage = 8;
   const navigate = useNavigate();
-  const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
-  const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
 
-  const handleAddListingClick = () => {
-    console.log("Popup open");
-    setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
+  const handleSeeMoreClick = (card) => {
+    setSelectedCard(card);
+    setIsTrHotelModalOpen(true); // Open the modal when "See more" is clicked
   };
 
-  const handleCloseModal = () => {
-    console.log("Closing modal");
-    setIsModalOpen(false);
+  const handleCloseTrHotelModal = () => {
+    setSelectedCard(null);
+    setIsTrHotelModalOpen(false);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission
     alert("Form Submitted");
-    handleCloseModal(); // Close modal on form submission
-  };
-
-  const editProfileClicked = () => {
-    navigate("/edit-market");
-    // Handle edit profile action
-  };
-
-  const handleBoostClick = (card) => {
-    setSelectedCard(card);
-    setIsBoostModalOpen(true);
-  };
-
-  const handleCloseBoostModal = () => {
-    setSelectedCard(null);
-    setIsBoostModalOpen(false);
-  };
-
-  const handleEditListingClick = (card) => {
-    setSelectedCard(card);
-    setIsEditHotelModalOpen(true);
-  };
-
-  const handleCloseEditHotelModal = () => {
-    setSelectedCard(null);
-    setIsEditHotelModalOpen(false);
+    handleCloseTrHotelModal(); // Close modal on form submission
   };
 
   const rooms = [
     {
-      type: "Single Room 1",
+      type: "Luxury Suite",
       price: "LKR 350/night",
       rating: 4.5,
       src: HotelCardImg,
@@ -137,6 +106,7 @@ const TrHotelProfileView = () => {
     },
   ];
 
+
   // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -167,93 +137,110 @@ const TrHotelProfileView = () => {
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
-          <div
-            className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
-            style={{
-              right: "450px",
-            }}
-          >
+          <div className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden">
             <img
               className="object-cover object-center w-full h-full"
               src={HotelProfileImg}
-              alt="Woman looking front"
+              alt="Hotel Profile"
             />
           </div>
-          <div
-            className="absolute"
-            style={{ left: "1000px", top: "105px", right: "auto" }}
-          >
-            {/* <div className="flex space-x-4">
-              <PrimaryButton
-                name="Edit Profile"
-                action={editProfileClicked}
-                isActive={true}
-              />
-            </div> */}
-          </div>
         </div>
+
+        {/* Combined Section: Text, Rating, and Contact Info */}
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
           }}
         >
-          {/* Text Section */}
-          
-           <HotelRatingComponent />
+          <div className="flex items-center justify-between">
+            {/* <!-- First Column: Rating --> */}
+            <div className="flex-1 flex items-center">
+              <RatingComponent />
+            </div>
 
+            {/* <!-- Second Column: Hotel Name and Description --> */}
+            <div className="flex-1 flex flex-col items-center justify-center ml-4">
+              <div
+                className="text-4xl font-semibold whitespace-nowrap"
+                style={{ fontWeight: "400", fontSize: "40px" }}
+              >
+                Blue Hills Residencies
+              </div>
+              <div className="flex flex-col mt-2 items-center">
+                <div className="text-xl font-light italic">Good in quality</div>
+              </div>
+            </div>
+
+            {/* <!-- Third Column: Additional Information --> */}
+            <div className="flex-1 flex flex-col items-end ml-4">
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Hotel</span>
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Email:</span>{" "}
+                contact@bluehills.com
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Phone:</span> +123 456 7890
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
+                9:00 PM
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Address:</span> 123 Blue Hills
+                Road, Hilltown
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Owner:</span> John Doe
+              </div>
+            </div>
+          </div>
           {/* Statistics Section */}
-          <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                100
+          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
+            <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  100
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Listings
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Listings
-              </p>
-            </div>
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                145
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  145
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Followers
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Followers
-              </p>
-            </div>
-            <div className="flex-1 text-center py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                150
+              <div className="flex-1 text-center py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  150
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Following
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Following
-              </p>
             </div>
           </div>
         </div>
 
         {/* Card Section */}
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
-          <div
-            className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddListingClick} // Open modal on click
-          >
-            <img
-              style={{ width: "30px", height: "30px" }}
-              className="mr-2"
-              src={PlusImg}
-              alt="plus icon"
-            />
-            ADD LISTING
+          <div className="mb-4 flex items-center px-4 py-2 text-2xl text-black font-bold rounded-full">
+            LISTINGS
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {currentCards.map((room, index) => (
-              <HotelCard
+              <TrHotelCard
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
                 room={room}
-                handleBoostClick={handleBoostClick}
-                handleEditListingClick={handleEditListingClick}
+                handleSeeMoreClick={handleSeeMoreClick}
               />
             ))}
           </div>
@@ -277,21 +264,15 @@ const TrHotelProfileView = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={handleCloseModal}
-        onSubmit={handleSubmit}
-      />
-      <BoostModal
-        isOpen={isBoostModalOpen}
-        onRequestClose={handleCloseBoostModal}
-        onSubmit={handleSubmit}
-      />
-      <EditHotelModal
-        isOpen={isEditHotelModalOpen}
-        onRequestClose={handleCloseEditHotelModal}
-        onSubmit={handleSubmit}
-      />
+      {/* Hotel Modal */}
+      {isTrHotelModalOpen && (
+        <TrHotelModal
+          isOpen={isTrHotelModalOpen}
+          onRequestClose={handleCloseTrHotelModal}
+          onSubmit={handleSubmit}
+          selectedCard={selectedCard}
+        />
+      )}
     </div>
   );
 };

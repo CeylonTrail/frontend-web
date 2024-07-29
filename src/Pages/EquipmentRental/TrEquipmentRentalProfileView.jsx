@@ -9,7 +9,7 @@ import Modal from "./EquipmentModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import EquipmentCard from "./EquipmentCard.jsx";
 import EditEquipmentModal from "./EditEquipmentModal.jsx";
-import EquipmentRatingComponent from "./EquipmentRatingComponent.jsx";
+import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrEquipmentRentalProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -192,9 +192,9 @@ const TrEquipmentRentalProfileView = () => {
         <div className="relative flex justify-center items-center -mt-24">
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
-            style={{
-              right: "450px",
-            }}
+            // style={{
+            //   right: "450px",
+            // }}
           >
             <img
               className="object-cover object-center w-full h-full"
@@ -220,41 +220,86 @@ const TrEquipmentRentalProfileView = () => {
             </div> */}
           </div>
         </div>
+        {/* Combined Section: Text, Rating, and Contact Info */}
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
           }}
         >
-          {/* Text Section */}
-          <EquipmentRatingComponent />
+          <div className="flex items-center justify-between">
+            {/* <!-- First Column: Rating --> */}
+            <div className="flex-1 flex items-center">
+              <RatingComponent />
+            </div>
+
+            {/* <!-- Second Column: Hotel Name and Description --> */}
+            <div className="flex-1 flex flex-col items-center justify-center ml-4">
+              <div
+                className="text-4xl font-semibold whitespace-nowrap"
+                style={{ fontWeight: "400", fontSize: "40px" }}
+              >
+                Blue Hills Residencies
+              </div>
+              <div className="flex flex-col mt-2 items-center">
+                <div className="text-xl font-light italic">Good in quality</div>
+              </div>
+            </div>
+
+            {/* <!-- Third Column: Additional Information --> */}
+            <div className="flex-1 flex flex-col items-end ml-4">
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Hotel</span>
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Email:</span>{" "}
+                contact@bluehills.com
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Phone:</span> +123 456 7890
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
+                9:00 PM
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Address:</span> 123 Blue Hills
+                Road, Hilltown
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Owner:</span> John Doe
+              </div>
+            </div>
+          </div>
 
           {/* Statistics Section */}
-          <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                100
+          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
+            <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  100
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Listings
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Listings
-              </p>
-            </div>
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                145
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  145
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Followers
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Followers
-              </p>
-            </div>
-            <div className="flex-1 text-center py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                150
+              <div className="flex-1 text-center py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  150
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Following
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Following
-              </p>
             </div>
           </div>
         </div>

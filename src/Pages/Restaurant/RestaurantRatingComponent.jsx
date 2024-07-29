@@ -1,27 +1,24 @@
 import React, { useState } from "react";
 
 const RestaurantRatingComponent = () => {
-  // Initial total rating and number of ratings
-  const initialTotalRating = 35.0; // Example initial total rating (sum of ratings)
-  const initialNumRatings = 7; // Example initial number of ratings
+  const initialTotalRating = 35.0;
+  const initialNumRatings = 7;
 
-  const [rating, setRating] = useState(0); // Current user's rating
-  const [hoverRating, setHoverRating] = useState(0); // Rating being hovered
-  const [showRating, setShowRating] = useState(false); // Show rating stars
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [showRating, setShowRating] = useState(false);
   const [totalRating, setTotalRating] = useState(initialTotalRating);
   const [numRatings, setNumRatings] = useState(initialNumRatings);
 
   const handleClick = (value) => {
     if (rating === 0) {
-      // If no rating has been given yet, add the new rating
       setTotalRating(totalRating + value);
       setNumRatings(numRatings + 1);
     } else {
-      // If a rating has already been given, update the total rating
       setTotalRating(totalRating - rating + value);
     }
     setRating(value);
-    setShowRating(false); // Hide stars after rating is given
+    setShowRating(true);
   };
 
   const handleMouseEnter = (value) => {
@@ -32,108 +29,44 @@ const RestaurantRatingComponent = () => {
     setHoverRating(0);
   };
 
-  const toggleRating = () => {
-    setShowRating(!showRating); // Toggle stars visibility
-  };
-
-  // Calculate the average rating based on totalRating and numRatings
-  const averageRating =
-    numRatings > 0 ? (totalRating / numRatings).toFixed(1) : 0;
-
-  const renderStars = (rating) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    const totalStars = 5;
-
-    for (let i = 1; i <= totalStars; i++) {
-      if (i <= fullStars) {
-        stars.push(
-          <svg
-            key={i}
-            className="w-5 h-5 text-yellow-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 22 20"
-          >
-            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-          </svg>
-        );
-      } else if (i === fullStars + 1 && hasHalfStar) {
-        stars.push(
-          <svg
-            key={i}
-            className="w-5 h-5 text-yellow-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 22 20"
-          >
-            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-          </svg>
-        );
-      } else {
-        stars.push(
-          <svg
-            key={i}
-            className="w-5 h-5 text-gray-300"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 22 20"
-          >
-            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-          </svg>
-        );
-      }
-    }
-    return stars;
-  };
+  const averageRating = totalRating / numRatings;
+  const starRating = Array.from({ length: 5 }, (_, i) => i + 1);
 
   return (
-    <div className="lg:w-1/2 pr-8 lg:pl-0">
-      <div
-        className="text-4xl font-semibold"
-        style={{ fontWeight: "400", fontSize: "40px" }}
-      >
-        Village Kitchen
+    <div className="flex flex-col items-center">
+      <div className="flex items-center">
+        {starRating.map((star) => (
+          <svg
+            key={star}
+            onMouseEnter={() => handleMouseEnter(star)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleClick(star)}
+            xmlns="http://www.w3.org/2000/svg"
+            className={`w-6 h-6 ${
+              star <= (hoverRating || rating)
+                ? "text-yellow-400"
+                : "text-gray-400"
+            } cursor-pointer transition-colors duration-300`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M11.049 2.927C11.293 2.352 11.686 2 12 2s.707.352.951.927l1.362 2.697c.084.168.215.306.379.395l2.982.292c.377.037.715.22.866.548.15.328.103.734-.117 1.022l-2.069 2.021a.62.62 0 00-.16.56l.49 2.855c.078.45-.251.877-.674.986l-2.688.85a.645.645 0 00-.384.331l-1.388 2.445a.615.615 0 01-1.104-.462l.453-2.732a.635.635 0 00-.162-.545l-1.831-1.793a.596.596 0 00-.594-.143l-3.122.56c-.383.067-.722.344-.896.722L2.67 8.94a.645.645 0 01-.167.849l2.982-.292c.164-.089.295-.227.379-.395l1.362-2.697z"
+            />
+          </svg>
+        ))}
+        <span className="ml-2 text-xl font-semibold">
+          {showRating ? rating : averageRating.toFixed(1)}
+        </span>
       </div>
-      <div
-        className="text-xl font-light italic mt-2"
-        style={{ fontSize: "20px", fontWeight: "300" }}
-      >
-        Delicious & Cozy
-      </div>
-      <div className="flex items-center mt-2">
-        <div className="flex items-center">
-          {renderStars(parseFloat(averageRating))}
-          <span className="text-lg ml-2">{averageRating}</span>
-        </div>
-        <div className="flex items-center ms-4">
-          <button onClick={toggleRating} className="text-blue-500 underline">
-            {rating === 0 ? "Give your rating" : "Edit your rating"}
-          </button>
-          {showRating && (
-            <div className="flex items-center ms-4">
-              {[1, 2, 3, 4, 5].map((value) => (
-                <svg
-                  key={value}
-                  className="w-5 h-5 ms-1 cursor-pointer"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{
-                    fill:
-                      value <= (hoverRating || rating) ? "#FFD700" : "#D3D3D3",
-                  }}
-                  viewBox="0 0 22 20"
-                  onClick={() => handleClick(value)}
-                  onMouseEnter={() => handleMouseEnter(value)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className="mt-2 text-sm">
+        <a href="#" className="text-blue-600 hover:underline">
+          Edit your rating
+        </a>
       </div>
     </div>
   );

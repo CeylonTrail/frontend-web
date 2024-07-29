@@ -1,185 +1,77 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
-import RestaurantCardImg from "../../assets/img/restaurant-card.png";
 import RestaurantProfileImg from "../../assets/img/restaurant-profile.png";
 import PlusImg from "../../assets/img/plus.png";
+import RestaurantCardImg from "../../assets/img/restaurant-card.png";
 import { PrimaryButton } from "../../components/Button.js";
-import Modal from "./RestaurantModal.jsx"; // Import Modal
-import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
+import Modal from "./RestaurantModal.jsx";
+import BoostModal from "../SP common/BoostModal.jsx";
 import RestaurantCard from "./RestaurantCard.jsx";
 import EditRestaurantModal from "./EditRestaurantModal.jsx";
-import RestaurantRatingComponent from "./RestaurantRatingComponent.jsx";
+import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
+    useState(false);
   const cardsPerPage = 12;
   const navigate = useNavigate();
-  const [isBoostModalOpen, setIsBoostModalOpen] = useState(false); // State to control boost modal visibility
-  const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
-  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
-    useState(false); // State to control edit modal visibility
 
-  const handleAddRestaurantCardClick = () => {
-    console.log("Popup open");
-    setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
-  };
-
-  const handleCloseModal = () => {
-    console.log("Closing modal");
-    setIsModalOpen(false);
-  };
-
+  const handleAddRestaurantCardClick = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission
     alert("Form Submitted");
-    handleCloseModal(); // Close modal on form submission
+    handleCloseModal();
   };
-
-  const handleSubscribeClick = () => {
-    navigate("/subscription-plan"); // Redirect to the subscription plan page
-  };
-
-  const editProfileClicked = () => {
-    navigate("/edit-market");
-    // Handle edit profile action
-  };
-
+  // const handleSubscribeClick = () => navigate("/subscription-plan");
+  // const editProfileClicked = () => navigate("/edit-market");
   const handleBoostClick = (card) => {
     setSelectedCard(card);
     setIsBoostModalOpen(true);
   };
-
   const handleCloseBoostModal = () => {
     setSelectedCard(null);
     setIsBoostModalOpen(false);
   };
-
   const handleEditRestaurantCardClick = (card) => {
     setSelectedCard(card);
     setIsEditRestaurantModalOpen(true);
   };
-
   const handleCloseEditRestaurantModal = () => {
     setSelectedCard(null);
     setIsEditRestaurantModalOpen(false);
   };
 
-  const fooditems = [
-    {
-      type: "Chicken Briyani 1",
-      price: "LKR 800",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 2",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 3",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 4",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 5",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 6",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 7",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani  8",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 9",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 10",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 11",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 12",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 13",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 14",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-    {
-      type: "Chicken Briyani 15",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: RestaurantCardImg,
-    },
-  ];
+  const fooditems = Array.from({ length: 15 }, (_, i) => ({
+    type: `Chicken Briyani ${i + 1}`,
+    price: "LKR 350/night",
+    rating: 4.5,
+    src: RestaurantCardImg, // assuming image is for demonstration
+  }));
 
-  // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = fooditems.slice(indexOfFirstCard, indexOfLastCard);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(fooditems.length / cardsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const pageNumbers = Array.from(
+    { length: Math.ceil(fooditems.length / cardsPerPage) },
+    (_, i) => i + 1
+  );
 
   return (
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
-      {/* White Background Box */}
       <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
           className="absolute bg-white z-[-1]"
           style={{ width: "1250px", height: "104%" }}
         ></div>
       </div>
-
+      
       <div className="relative">
         <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
@@ -190,80 +82,104 @@ const TrRestaurantProfileView = () => {
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
+         
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
-            style={{
-              right: "450px",
-            }}
+            // style={{
+            //   right: "450px",
+            // }}
           >
             <img
               className="object-cover object-center w-full h-full"
               src={RestaurantProfileImg}
-              alt="Logo"
+              alt="Hotel Profile"
             />
           </div>
-          <div
-            className="absolute"
-            style={{ left: "1000px", top: "105px", right: "auto" }}
-          >
-            {/* <div className="flex space-x-4">
-              <PrimaryButton
-                name="Edit Profile"
-                action={editProfileClicked}
-                isActive={true}
-              />
-              <PrimaryButton
-                name="Subscribe"
-                action={handleSubscribeClick}
-                isActive={false}
-              />
-            </div> */}
-          </div>
         </div>
+
+        {/* Combined Section: Text, Rating, and Contact Info */}
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
           }}
         >
-          {/* Text Section */}
-          <RestaurantRatingComponent />
+         <div className="flex items-center justify-between">
+  {/* <!-- First Column: Rating --> */}
+  <div className="flex-1 flex items-center">
+    <RatingComponent />
+  </div>
+
+  {/* <!-- Second Column: Hotel Name and Description --> */}
+  <div className="flex-1 flex flex-col items-center justify-center ml-4">
+    <div className="text-4xl font-semibold whitespace-nowrap" style={{ fontWeight: "400", fontSize: "40px" }}>
+      Blue Hills Residencies
+    </div>
+    <div className="flex flex-col mt-2 items-center">
+      <div className="text-xl font-light italic">
+        Good in quality
+      </div>
+    </div>
+  </div>
+
+  {/* <!-- Third Column: Additional Information --> */}
+  <div className="flex-1 flex flex-col items-end ml-4">
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Hotel</span>
+    </div>
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Email:</span> contact@bluehills.com
+    </div>
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Phone:</span> +123 456 7890
+    </div>
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Opening Hours:</span> 9:00 AM - 9:00 PM
+    </div>
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Address:</span> 123 Blue Hills Road, Hilltown
+    </div>
+    <div className="text-sm mb-2">
+      <span className="font-semibold">Owner:</span> John Doe
+    </div>
+  </div>
+</div>
 
           {/* Statistics Section */}
-          <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                100
+          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
+            <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  100
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Listings
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Listings
-              </p>
-            </div>
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                145
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  145
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Followers
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Followers
-              </p>
-            </div>
-            <div className="flex-1 text-center py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                150
+              <div className="flex-1 text-center py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  150
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Following
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Following
-              </p>
             </div>
           </div>
         </div>
-
-        {/* Card Section */}
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div
             className="mb-4 flex items-center cursor-pointer px-4 py-2 text-2xl text-black font-bold rounded-full transition-transform duration-300 transform hover:scale-105"
-            onClick={handleAddRestaurantCardClick} // Open modal on click
+            onClick={handleAddRestaurantCardClick}
           >
             <img
               style={{ width: "30px", height: "30px" }}
@@ -285,8 +201,6 @@ const TrRestaurantProfileView = () => {
             ))}
           </div>
         </div>
-
-        {/* Pagination Controls */}
         <div className="flex justify-center mt-8 space-x-2">
           {pageNumbers.map((number) => (
             <button
@@ -303,7 +217,6 @@ const TrRestaurantProfileView = () => {
           ))}
         </div>
       </div>
-
       <Modal
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}

@@ -86,7 +86,7 @@ const HotelModal = ({ isOpen, onRequestClose, onSubmit }) => {
             {/* Form fields */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
-                Room Type
+                Hotel Name
               </label>
               <input
                 type="text"

@@ -1,4 +1,4 @@
-/* CSS Styles */
+/* General Styles */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -9,7 +9,7 @@
   z-index: 50;
 }
 
-.modal-content {
+.modal-content, .modal-content-trhotelmodal, .boost-modal-content {
   background: white;
   padding: 12px; /* Adjusted padding */
   border-radius: 26px; /* Corner radius */
@@ -24,17 +24,11 @@
 }
 
 .boost-modal-content {
-  background: white;
-  padding: 12px; /* Adjusted padding */
-  border-radius: 26px; /* Corner radius */
-  border: 2px solid #0f969c; /* Border with color #0F969C */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 560px;
-  height: auto; /* Fixed height to avoid scrolling */
-  display: flex;
-  flex-direction: column; /* Ensure children are stacked vertically */
-  align-items: center; /* Center all children horizontally */
-  overflow: hidden; /* Hide any overflow */
+  height: auto; /* Adjusted height to fit content */
+}
+
+.modal-content-trhotelmodal{
+  height: auto;
 }
 
 .modal-header {
@@ -79,16 +73,19 @@
   max-width: 440px; /* Limit width for form-group */
 }
 
+.form-row {
+  margin-bottom: 1rem;
+}
+
 .form-label {
- 
   font-size: 0.875rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 4px; /* Reduced margin-bottom */
+  width: auto;
 }
 
-.form-input,
-.form-textarea {
+.form-input, .form-textarea {
   width: 100%; /* Full width of the form-group */
   padding: 6px 10px; /* Reduced padding */
   border-radius: 4px;
@@ -141,6 +138,7 @@
   background-color: #f9f9f9;
   margin-bottom: 12px; /* Ensure space below dropzone */
 }
+
 .additional-images-preview {
   display: flex;
   flex-wrap: wrap;
@@ -148,7 +146,6 @@
   justify-content: center; /* Center align images horizontally */
   align-items: center; /* Center align images vertically */
 }
-
 
 .remove-image-button {
   background-color: red;
@@ -180,4 +177,150 @@
   right: 4px;
 }
 
+/* Tr Hotel Modal Specific Styles */
+.room-description {
+  margin-bottom: 20px;
+}
 
+.room-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.room-price,
+.room-rating {
+  display: flex;
+  align-items: center;
+}
+
+.room-price span,
+.room-rating span {
+  margin-right: 10px;
+}
+
+.room-images {
+  margin-bottom: 20px;
+}
+
+.image-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.room-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.user-rating {
+  margin-bottom: 20px;
+}
+
+
+/* Lightbox Overlay */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Lightbox Content */
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Lightbox Close Icon */
+.lightbox-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* Same-line Styles */
+.same-line {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between label and text */
+}
+
+.same-line .form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.same-line .form-text {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+.contact-info-trhotelmodal {
+  display: flex;
+  justify-content: flex-start; /* Align items to the start */
+  align-items: center; /* Center items vertically */
+  gap: 77px; /* Space between each contact item */
+  margin-top: 20px; /* Space above the contact section */
+  flex-wrap: nowrap; /* Prevent wrapping to the next line */
+}
+
+.contact-link, .form-text {
+  display: flex;
+  align-items: center; /* Align the icon and text vertically */
+  text-decoration: none; /* Remove underline from links */
+  color: #333; /* Text color */
+}
+
+.contact-link:hover, .form-text:hover {
+  color: #007bff; /* Change to your preferred color on hover */
+}
+
+.contact-link .fa-icon, .form-text .fa-icon {
+  margin-right: 8px; /* Space between icon and text */
+}
+.stars {
+  display: flex;
+  align-items: center;
+}
+
+.stars.medium {
+  font-size: 24px; /* Adjust size as needed */
+}
+
+.star {
+  color: #d3d3d3; /* Default star color (light gray) */
+  transition: color 0.3s ease;
+}
+
+.star.selected {
+  color: #ffd700; /* Selected star color (yellow) */
+}
+
+.star:hover {
+  color: #ffa500; /* Hover color (orange) */
+}

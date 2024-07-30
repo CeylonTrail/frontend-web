@@ -16,6 +16,7 @@ import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRen
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
 import SPReviews from "./Pages/SP common/SPReviews";
+import SPViewReviews from "./Pages/SP common/SPViewReviews";
 
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
@@ -135,6 +136,14 @@ function App() {
             element={
               <>
                 <Header />;<SPReviews />
+              </>
+            }
+          />
+          <Route
+            path="/sp-view-review"
+            element={
+              <>
+                <Header />;<SPViewReviews />
               </>
             }
           />

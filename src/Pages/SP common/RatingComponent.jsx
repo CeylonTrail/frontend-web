@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import Modal from "react-modal"; // Ensure you have react-modal installed
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
@@ -10,6 +11,8 @@ const RatingComponent = () => {
   const [totalRating, setTotalRating] = useState(15.0);
   const [numRatings, setNumRatings] = useState(3);
   const [review, setReview] = useState("");
+
+  const navigate = useNavigate(); // Get the navigate function
 
   const handleClick = (value) => {
     if (rating === 0) {
@@ -80,6 +83,10 @@ const RatingComponent = () => {
     return stars;
   };
 
+  const handleSeeReviewsClick = () => {
+    navigate("/sp-review"); // Navigate to the /sp-review page
+  };
+
   return (
     <div className="lg:w-1/2 pr-8 lg:pl-0">
       <div className="flex flex-col items-start mt-4">
@@ -100,69 +107,26 @@ const RatingComponent = () => {
           </div>
 
           <div className="flex items-center mt-1">
-            <button
-              onClick={toggleModal}
-              style={{ fontSize: "1.05rem", padding: "0.25rem 0.5rem" }}
-              className="text-blue-500 underline"
+            <a
+              href="#!" // Dummy href for the example
+              onClick={handleSeeReviewsClick} // Function for navigation
+              style={{
+                fontSize: "1.05rem",
+                padding: "0.5rem 1rem",
+                color: "#0f969c", // Text color
+                textDecoration: "none", // Remove underline
+                borderRadius: "0.25rem", // Rounded corners
+                display: "inline-block", // Makes the link behave like a button
+                textAlign: "center",
+                cursor: "pointer",
+                transition: "background-color 0.3s, transform 0.2s",
+              }}
             >
-              {rating === 0 ? "Rate" : "Edit"}
-            </button>
+              See reviews
+            </a>
           </div>
         </div>
       </div>
-
-      <Modal
-        isOpen={showModal}
-        onRequestClose={toggleModal}
-        contentLabel="Rating Modal"
-        className="modal-overlay"
-        overlayClassName="modal-overlay-bg"
-      >
-        <div
-          className="boost-modal-content"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="modal-header">
-            <h2 className="modal-title">Rate and Review</h2>
-            <div className="heading-line"></div>
-            <img
-              src={cancelImg}
-              alt="Close"
-              className="modal-close-icon"
-              onClick={toggleModal}
-            />
-          </div>
-          <form
-            className="modal-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-              toggleModal();
-            }}
-          >
-            <div className="form-group center-stars">
-              <div className="flex items-center mb-4">
-                {/* Only one line of stars with a single size (e.g., medium) */}
-                {renderStars(rating, "medium")}
-              </div>
-            </div>
-            <div className="form-group">
-              <textarea
-                className="form-textarea"
-                rows="4"
-                placeholder="Write your review here..."
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="modal-footer">
-              <button type="submit" className="submit-button">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      </Modal>
     </div>
   );
 };

@@ -36,6 +36,7 @@
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.8",
@@ -45,6 +46,15 @@
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.0",
 
+=======
+<<<<<<< HEAD
+    "react-scroll": "^1.9.0",
+=======
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.8",
+>>>>>>> b8a4b32 (review page done for traveller view)
+>>>>>>> dea1530 (review page done for traveller view)
     "web-vitals": "^2.1.4"
   },
   "scripts": {

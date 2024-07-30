@@ -20,6 +20,8 @@ const TrHotelProfileView = () => {
 import TrHotelModal from "./TrHotelModal.jsx"; // Import Modal
 import TrHotelCard from "./TrHotelCard.jsx"; // Import Card
 import RatingComponent from "../SP common/RatingComponent.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -128,6 +130,10 @@ const TrHotelProfileView = () => {
 =======
     handleCloseTrHotelModal(); // Close modal on form submission
   };
+  // const handleRedirect = (event) => {
+  //   event.preventDefault(); // Prevent default link behavior
+  //   window.location.href = "/sp-review"; // Perform navigation
+  // };
 
   const rooms = [
     {
@@ -416,12 +422,17 @@ const TrHotelProfileView = () => {
             </button>
           ))}
         </div>
+<<<<<<< HEAD
         {/* <div className="floating-button">
+=======
+        <div className="spreview-floating-button">
+>>>>>>> dea1530 (review page done for traveller view)
           <a
             href="#!" // Set href to a dummy value
             aria-label="Leave Feedback"
             // onClick={handleRedirect} // Attach click handler for navigation
           >
+<<<<<<< HEAD
             <FontAwesomeIcon
               icon={faFacebookMessenger}
               size="2x"
@@ -429,6 +440,11 @@ const TrHotelProfileView = () => {
             />{" "}
           </a>
         </div> */}
+=======
+            <FontAwesomeIcon icon={faComments} size="2x" color="#0F969C" />
+          </a>
+        </div>
+>>>>>>> dea1530 (review page done for traveller view)
       </div>
 
 <<<<<<< HEAD

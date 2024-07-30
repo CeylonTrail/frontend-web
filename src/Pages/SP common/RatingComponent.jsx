@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 =======
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+>>>>>>> dea1530 (review page done for traveller view)
 import Modal from "react-modal"; // Ensure you have react-modal installed
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
@@ -16,10 +20,15 @@ const RatingComponent = () => {
   const [review, setReview] = useState("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const navigate = useNavigate(); // Get the navigate function
 
 =======
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+  const navigate = useNavigate(); // Get the navigate function
+
+>>>>>>> dea1530 (review page done for traveller view)
   const handleClick = (value) => {
     if (rating === 0) {
       setTotalRating(totalRating + value);
@@ -90,12 +99,18 @@ const RatingComponent = () => {
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dea1530 (review page done for traveller view)
   const handleSeeReviewsClick = () => {
     navigate("/sp-review"); // Navigate to the /sp-review page
   };
 
+<<<<<<< HEAD
 =======
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> dea1530 (review page done for traveller view)
   return (
     <div className="lg:w-1/2 pr-8 lg:pl-0">
       <div className="flex flex-col items-start mt-4">
@@ -117,6 +132,9 @@ const RatingComponent = () => {
 
           <div className="flex items-center mt-1">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dea1530 (review page done for traveller view)
             <a
               href="#!" // Dummy href for the example
               onClick={handleSeeReviewsClick} // Function for navigation
@@ -131,6 +149,7 @@ const RatingComponent = () => {
                 cursor: "pointer",
                 transition: "background-color 0.3s, transform 0.2s",
               }}
+<<<<<<< HEAD
             >
               See reviews
             </a>
@@ -142,12 +161,15 @@ const RatingComponent = () => {
               onClick={toggleModal}
               style={{ fontSize: "1.05rem", padding: "0.25rem 0.5rem" }}
               className="text-blue-500 underline"
+=======
+>>>>>>> dea1530 (review page done for traveller view)
             >
-              {rating === 0 ? "Rate" : "Edit"}
-            </button>
+              See reviews
+            </a>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
 
       <Modal
         isOpen={showModal}
@@ -202,6 +224,8 @@ const RatingComponent = () => {
         </div>
       </Modal>
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> dea1530 (review page done for traveller view)
     </div>
   );
 };

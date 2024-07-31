@@ -324,3 +324,37 @@
 .star:hover {
   color: #ffa500; /* Hover color (orange) */
 }
+
+
+
+.floating-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.floating-button a {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #0F969C;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+      margin-bottom: 2rem;
+    margin-right: 1rem;
+}
+
+.floating-button a:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.floating-button .fa-facebook-messenger {
+  font-size: 2rem; /* Adjust size as needed */
+  color: #e0eaea; /* Adjust color as needed */
+}

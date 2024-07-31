@@ -9,6 +9,9 @@ import Modal from "./HotelModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import HotelCard from "./HotelCard.jsx";
 import EditHotelModal from "./EditHotelModal.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+import "../../assets/styles/form.css"; 
 
 
 const SpHotelProfileView = () => {
@@ -65,6 +68,10 @@ const SpHotelProfileView = () => {
     setSelectedCard(null);
     setIsEditHotelModalOpen(false);
   };
+   const handleRedirect = (event) => {
+     event.preventDefault();
+     navigate("/chat");
+   };
 
   const rooms = [
     {
@@ -225,8 +232,7 @@ const SpHotelProfileView = () => {
             <div
               className="text-lg font-light mt-2"
               style={{ fontSize: "18px", fontWeight: "300" }}
-            >
-            </div>
+            ></div>
             <div className="flex items-center mt-2">
               <svg
                 className="w-4 h-4 ms-1"
@@ -347,6 +353,19 @@ const SpHotelProfileView = () => {
               {number}
             </button>
           ))}
+        </div>
+        <div className="floating-button">
+          <a
+            href="#!" // Set href to a dummy value
+            aria-label="Contact via Facebook Messenger"
+            onClick={handleRedirect} // Attach click handler for navigation
+          >
+            <FontAwesomeIcon
+              icon={faFacebookMessenger}
+              size="2x"
+              color="#0F969C"
+            />{" "}
+          </a>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../assets/styles/SPViewReviews.css"; // Import the CSS file
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
+import ReviewImg from "../../assets/img/review.png";
 
 const initialReviews = [
   {
@@ -132,6 +133,7 @@ const SPViewReviews = () => {
   };
 
   return (
+    
     <div className="spview-reviews-container">
       <h1 className="spreview-reviews-heading">Customer Reviews</h1>
       <div className="spview-reviews-list">

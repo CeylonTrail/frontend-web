@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState } from "react";
 import "../../assets/styles/SPViewReviews.css"; // Import the CSS file
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -192,16 +192,5 @@ const SPViewReviews = () => {
 };
 
 export default SPViewReviews;
-=======
-import React from 'react'
 
-const SPViewReviews = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
 
-export default SPViewReviews;
->>>>>>> dea1530 (review page done for traveller view)

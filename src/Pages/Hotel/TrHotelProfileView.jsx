@@ -4,6 +4,9 @@ import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 import TrHotelModal from "./TrHotelModal.jsx";
 import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
@@ -16,6 +19,7 @@ const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+<<<<<<< HEAD
 =======
 import TrHotelModal from "./TrHotelModal.jsx"; // Import Modal
 import TrHotelCard from "./TrHotelCard.jsx"; // Import Card
@@ -28,16 +32,22 @@ const TrHotelProfileView = () => {
   const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false); // State to control hotel modal visibility
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const cardsPerPage = 8;
   const navigate = useNavigate();
 
   const handleSeeMoreClick = (card) => {
     setSelectedCard(card);
 <<<<<<< HEAD
+<<<<<<< HEAD
     setIsTrHotelModalOpen(true);
 =======
     setIsTrHotelModalOpen(true); // Open the modal when "See more" is clicked
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+    setIsTrHotelModalOpen(true);
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   };
 
   const handleCloseTrHotelModal = () => {
@@ -49,6 +59,9 @@ const TrHotelProfileView = () => {
     event.preventDefault();
     alert("Form Submitted");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
     handleCloseTrHotelModal();
   };
 
@@ -127,6 +140,7 @@ const TrHotelProfileView = () => {
      },
    ];
 
+<<<<<<< HEAD
 =======
     handleCloseTrHotelModal(); // Close modal on form submission
   };
@@ -213,6 +227,8 @@ const TrHotelProfileView = () => {
 
   // Calculate the current cards to display
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
@@ -251,9 +267,12 @@ const TrHotelProfileView = () => {
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         {/* Combined Section: Text, Rating, and Contact Info */}
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
         <div
           className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
@@ -263,17 +282,23 @@ const TrHotelProfileView = () => {
         >
           <div className="flex items-center justify-between">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             {/* <!-- First Column: Rating --> */}
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <div className="flex-1 flex items-center">
               <RatingComponent />
             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             {/* <!-- Second Column: Hotel Name and Description --> */}
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <div className="flex-1 flex flex-col items-center justify-center ml-4">
               <div
                 className="text-4xl font-semibold whitespace-nowrap"
@@ -284,6 +309,9 @@ const TrHotelProfileView = () => {
               <div className="flex flex-col mt-2 items-center">
                 <div className="text-xl font-light italic">Good in quality</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
               </div>
             </div>
 
@@ -330,6 +358,7 @@ const TrHotelProfileView = () => {
                   Followers
                 </p>
               </div>
+<<<<<<< HEAD
 =======
               </div>
             </div>
@@ -379,6 +408,8 @@ const TrHotelProfileView = () => {
                 </p>
               </div>
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
               <div className="flex-1 text-center py-6">
                 <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
                   150
@@ -423,16 +454,23 @@ const TrHotelProfileView = () => {
           ))}
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         {/* <div className="floating-button">
 =======
         <div className="spreview-floating-button">
 >>>>>>> dea1530 (review page done for traveller view)
+=======
+        {/* <div className="floating-button">
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
           <a
             href="#!" // Set href to a dummy value
             aria-label="Leave Feedback"
             // onClick={handleRedirect} // Attach click handler for navigation
           >
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <FontAwesomeIcon
               icon={faFacebookMessenger}
               size="2x"
@@ -440,6 +478,7 @@ const TrHotelProfileView = () => {
             />{" "}
           </a>
         </div> */}
+<<<<<<< HEAD
 =======
             <FontAwesomeIcon icon={faComments} size="2x" color="#0F969C" />
           </a>
@@ -451,6 +490,10 @@ const TrHotelProfileView = () => {
 =======
       {/* Hotel Modal */}
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+      </div>
+
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
       {isTrHotelModalOpen && (
         <TrHotelModal
           isOpen={isTrHotelModalOpen}

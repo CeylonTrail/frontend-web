@@ -7,6 +7,7 @@ import RestaurantCardImg from "../../assets/img/restaurant-card.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 // import BoostModal from "../SP common/BoostModal.jsx";
 import RestaurantCard from "./RestaurantCard.jsx";
 // import EditRestaurantModal from "./EditRestaurantModal.jsx";
@@ -15,22 +16,33 @@ import BoostModal from "../SP common/BoostModal.jsx";
 import RestaurantCard from "./RestaurantCard.jsx";
 import EditRestaurantModal from "./EditRestaurantModal.jsx";
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+// import BoostModal from "../SP common/BoostModal.jsx";
+import RestaurantCard from "./RestaurantCard.jsx";
+// import EditRestaurantModal from "./EditRestaurantModal.jsx";
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   // const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   // const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
   //   useState(false);
+<<<<<<< HEAD
 =======
   const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
     useState(false);
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const cardsPerPage = 12;
   const navigate = useNavigate();
 
@@ -44,6 +56,9 @@ const TrRestaurantProfileView = () => {
   // const handleSubscribeClick = () => navigate("/subscription-plan");
   // const editProfileClicked = () => navigate("/edit-market");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   // const handleBoostClick = (card) => {
   //   setSelectedCard(card);
   //   setIsBoostModalOpen(true);
@@ -60,6 +75,7 @@ const TrRestaurantProfileView = () => {
   //   setSelectedCard(null);
   //   setIsEditRestaurantModalOpen(false);
   // };
+<<<<<<< HEAD
 =======
   const handleBoostClick = (card) => {
     setSelectedCard(card);
@@ -78,6 +94,8 @@ const TrRestaurantProfileView = () => {
     setIsEditRestaurantModalOpen(false);
   };
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 
   const fooditems = Array.from({ length: 15 }, (_, i) => ({
     type: `Chicken Briyani ${i + 1}`,

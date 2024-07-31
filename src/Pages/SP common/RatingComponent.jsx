@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-=======
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
+
+
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
->>>>>>> dea1530 (review page done for traveller view)
+
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+
 import Modal from "react-modal"; // Ensure you have react-modal installed
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
@@ -19,16 +19,16 @@ const RatingComponent = () => {
   const [numRatings, setNumRatings] = useState(3);
   const [review, setReview] = useState("");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   const navigate = useNavigate(); // Get the navigate function
 
-=======
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
+
+
   const navigate = useNavigate(); // Get the navigate function
 
->>>>>>> dea1530 (review page done for traveller view)
+
+  const navigate = useNavigate(); // Get the navigate function
+
   const handleClick = (value) => {
     if (rating === 0) {
       setTotalRating(totalRating + value);
@@ -100,17 +100,23 @@ const RatingComponent = () => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> dea1530 (review page done for traveller view)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const handleSeeReviewsClick = () => {
     navigate("/sp-review"); // Navigate to the /sp-review page
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
 =======
 >>>>>>> dea1530 (review page done for traveller view)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   return (
     <div className="lg:w-1/2 pr-8 lg:pl-0">
       <div className="flex flex-col items-start mt-4">
@@ -133,8 +139,11 @@ const RatingComponent = () => {
           <div className="flex items-center mt-1">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> dea1530 (review page done for traveller view)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <a
               href="#!" // Dummy href for the example
               onClick={handleSeeReviewsClick} // Function for navigation
@@ -150,12 +159,16 @@ const RatingComponent = () => {
                 transition: "background-color 0.3s, transform 0.2s",
               }}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             >
               See reviews
             </a>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
 =======
             <button
               onClick={toggleModal}
@@ -226,6 +239,8 @@ const RatingComponent = () => {
 >>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
 =======
 >>>>>>> dea1530 (review page done for traveller view)
+=======
+>>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
     </div>
   );
 };

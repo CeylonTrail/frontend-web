@@ -19,7 +19,7 @@ export default () => {
         setIsTravellerSignup(false);
     };
     return (
-        <div className="w-full">
+        <div className="w-full mb-5">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"signup"} />
@@ -38,10 +38,13 @@ export default () => {
                                 {/* <p className="">Already have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</a></p> */}
                             </div>
                         </div>
-                        <PrimaryButton name={"Traveller"} action={handleTravellerClick} isActive={isTravellerSignup} />
-                        <PrimaryButton name={"Service Provider"} action={handleServiceProviderClick} isActive={!isTravellerSignup} />
-                        {isTravellerSignup ? <TravellerSignUp /> : <ServiceProviderSignUp />}
+                        {/* <div className="flex flex-col"> */}
+                            <PrimaryButton name={"Traveller"} action={handleTravellerClick} isActive={isTravellerSignup} />
+                            <PrimaryButton name={"Service Provider"} action={handleServiceProviderClick} isActive={!isTravellerSignup} />
+                            {isTravellerSignup ? <TravellerSignUp /> : <ServiceProviderSignUp />}
 
+                        {/* </div> */}
+                        
 
 
 

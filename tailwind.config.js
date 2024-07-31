@@ -18,7 +18,8 @@ module.exports = {
       primaryDark3: '#05161A',
       secondaryDark1: '#294D61',
       warningLight: '#FC3A4E',
-      SecondaryLight:"#E7E7E7"
+      SecondaryLight: "#E7E7E7",
+      Gray:"#374151"
     },
     fontFamily: {
       sans: ['Poppins', 'sans-serif'], // Setting Poppins as the default sans font

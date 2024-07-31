@@ -3,22 +3,24 @@ import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
-import TrHotelModal from "./TrHotelModal.jsx"; // Import Modal
-import TrHotelCard from "./TrHotelCard.jsx"; // Import Card
+import TrHotelModal from "./TrHotelModal.jsx";
+import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+// import { faComments } from "@fortawesome/free-solid-svg-icons";
+// import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+// import "../../assets/styles/form.css"; 
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false); // State to control hotel modal visibility
-  const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
+  const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   const cardsPerPage = 8;
   const navigate = useNavigate();
 
   const handleSeeMoreClick = (card) => {
     setSelectedCard(card);
-    setIsTrHotelModalOpen(true); // Open the modal when "See more" is clicked
+    setIsTrHotelModalOpen(true);
   };
 
   const handleCloseTrHotelModal = () => {
@@ -28,92 +30,85 @@ const TrHotelProfileView = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission
     alert("Form Submitted");
-    handleCloseTrHotelModal(); // Close modal on form submission
+    handleCloseTrHotelModal();
   };
-  // const handleRedirect = (event) => {
-  //   event.preventDefault(); // Prevent default link behavior
-  //   window.location.href = "/sp-review"; // Perform navigation
-  // };
 
-  const rooms = [
-    {
-      type: "Luxury Suite",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 2",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 3",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 4",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 5",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 6",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 7",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 8",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 9",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 10",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 11",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 12",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-  ];
+   const rooms = [
+     {
+       type: "Luxury Suite",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 2",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 3",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 4",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 5",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 6",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 7",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 8",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 9",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 10",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 11",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+     {
+       type: "Single Room 12",
+       price: "LKR 350/night",
+       rating: 4.5,
+       src: HotelCardImg,
+     },
+   ];
 
-
-  // Calculate the current cards to display
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
@@ -124,8 +119,7 @@ const TrHotelProfileView = () => {
   }
 
   return (
-    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
-      {/* White Background Box */}
+    <div className="relative max-w-full mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
           className="absolute bg-white z-[-1]"
@@ -152,7 +146,6 @@ const TrHotelProfileView = () => {
           </div>
         </div>
 
-        {/* Combined Section: Text, Rating, and Contact Info */}
         <div
           className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
@@ -161,12 +154,10 @@ const TrHotelProfileView = () => {
           }}
         >
           <div className="flex items-center justify-between">
-            {/* <!-- First Column: Rating --> */}
             <div className="flex-1 flex items-center">
               <RatingComponent />
             </div>
 
-            {/* <!-- Second Column: Hotel Name and Description --> */}
             <div className="flex-1 flex flex-col items-center justify-center ml-4">
               <div
                 className="text-4xl font-semibold whitespace-nowrap"
@@ -179,7 +170,6 @@ const TrHotelProfileView = () => {
               </div>
             </div>
 
-            {/* <!-- Third Column: Additional Information --> */}
             <div className="flex-1 flex flex-col items-end ml-4">
               <div className="text-sm mb-2">
                 <span className="font-semibold">Hotel</span>
@@ -204,8 +194,8 @@ const TrHotelProfileView = () => {
               </div>
             </div>
           </div>
-          {/* Statistics Section */}
-          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
+
+          <div className="border border-[#0F969C] flex flex-col lg:flex-row justify-center bg-white mt-3">
             <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
               <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
                 <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
@@ -235,7 +225,6 @@ const TrHotelProfileView = () => {
           </div>
         </div>
 
-        {/* Card Section */}
         <div className="p-1 flex flex-col items-center gap-2 mt-12">
           <div className="mb-4 flex items-center px-4 py-2 text-2xl text-black font-bold rounded-full">
             LISTINGS
@@ -252,7 +241,6 @@ const TrHotelProfileView = () => {
           </div>
         </div>
 
-        {/* Pagination Controls */}
         <div className="flex justify-center mt-8 space-x-2">
           {pageNumbers.map((number) => (
             <button
@@ -268,18 +256,21 @@ const TrHotelProfileView = () => {
             </button>
           ))}
         </div>
-        <div className="spreview-floating-button">
+        {/* <div className="floating-button">
           <a
             href="#!" // Set href to a dummy value
             aria-label="Leave Feedback"
             // onClick={handleRedirect} // Attach click handler for navigation
           >
-            <FontAwesomeIcon icon={faComments} size="2x" color="#0F969C" />
+            <FontAwesomeIcon
+              icon={faFacebookMessenger}
+              size="2x"
+              color="#0F969C"
+            />{" "}
           </a>
-        </div>
+        </div> */}
       </div>
 
-      {/* Hotel Modal */}
       {isTrHotelModalOpen && (
         <TrHotelModal
           isOpen={isTrHotelModalOpen}

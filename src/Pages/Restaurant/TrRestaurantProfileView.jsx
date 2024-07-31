@@ -6,18 +6,18 @@ import PlusImg from "../../assets/img/plus.png";
 import RestaurantCardImg from "../../assets/img/restaurant-card.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx";
-import BoostModal from "../SP common/BoostModal.jsx";
+// import BoostModal from "../SP common/BoostModal.jsx";
 import RestaurantCard from "./RestaurantCard.jsx";
-import EditRestaurantModal from "./EditRestaurantModal.jsx";
+// import EditRestaurantModal from "./EditRestaurantModal.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
 
 const TrRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
+  // const [isBoostModalOpen, setIsBoostModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
-    useState(false);
+  // const [isEditRestaurantModalOpen, setIsEditRestaurantModalOpen] =
+  //   useState(false);
   const cardsPerPage = 12;
   const navigate = useNavigate();
 
@@ -30,22 +30,22 @@ const TrRestaurantProfileView = () => {
   };
   // const handleSubscribeClick = () => navigate("/subscription-plan");
   // const editProfileClicked = () => navigate("/edit-market");
-  const handleBoostClick = (card) => {
-    setSelectedCard(card);
-    setIsBoostModalOpen(true);
-  };
-  const handleCloseBoostModal = () => {
-    setSelectedCard(null);
-    setIsBoostModalOpen(false);
-  };
-  const handleEditRestaurantCardClick = (card) => {
-    setSelectedCard(card);
-    setIsEditRestaurantModalOpen(true);
-  };
-  const handleCloseEditRestaurantModal = () => {
-    setSelectedCard(null);
-    setIsEditRestaurantModalOpen(false);
-  };
+  // const handleBoostClick = (card) => {
+  //   setSelectedCard(card);
+  //   setIsBoostModalOpen(true);
+  // };
+  // const handleCloseBoostModal = () => {
+  //   setSelectedCard(null);
+  //   setIsBoostModalOpen(false);
+  // };
+  // const handleEditRestaurantCardClick = (card) => {
+  //   setSelectedCard(card);
+  //   setIsEditRestaurantModalOpen(true);
+  // };
+  // const handleCloseEditRestaurantModal = () => {
+  //   setSelectedCard(null);
+  //   setIsEditRestaurantModalOpen(false);
+  // };
 
   const fooditems = Array.from({ length: 15 }, (_, i) => ({
     type: `Chicken Briyani ${i + 1}`,
@@ -195,8 +195,8 @@ const TrRestaurantProfileView = () => {
                 key={indexOfFirstCard + index}
                 index={indexOfFirstCard + index}
                 fooditem={fooditem}
-                handleBoostClick={handleBoostClick}
-                handleEditRestaurantCardClick={handleEditRestaurantCardClick}
+                // handleBoostClick={handleBoostClick}
+                // handleEditRestaurantCardClick={handleEditRestaurantCardClick}
               />
             ))}
           </div>
@@ -222,16 +222,16 @@ const TrRestaurantProfileView = () => {
         onRequestClose={handleCloseModal}
         onSubmit={handleSubmit}
       />
-      <BoostModal
+      {/* <BoostModal
         isOpen={isBoostModalOpen}
         onRequestClose={handleCloseBoostModal}
         onSubmit={handleSubmit}
-      />
-      <EditRestaurantModal
+      /> */}
+      {/* <EditRestaurantModal
         isOpen={isEditRestaurantModalOpen}
         onRequestClose={handleCloseEditRestaurantModal}
         onSubmit={handleSubmit}
-      />
+      /> */}
     </div>
   );
 };

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-
-
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-
 import Modal from "react-modal"; // Ensure you have react-modal installed
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
@@ -18,14 +11,6 @@ const RatingComponent = () => {
   const [totalRating, setTotalRating] = useState(15.0);
   const [numRatings, setNumRatings] = useState(3);
   const [review, setReview] = useState("");
-
-
-  const navigate = useNavigate(); // Get the navigate function
-
-
-
-  const navigate = useNavigate(); // Get the navigate function
-
 
   const navigate = useNavigate(); // Get the navigate function
 
@@ -98,25 +83,10 @@ const RatingComponent = () => {
     return stars;
   };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dea1530 (review page done for traveller view)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const handleSeeReviewsClick = () => {
     navigate("/sp-review"); // Navigate to the /sp-review page
   };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> dea1530 (review page done for traveller view)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   return (
     <div className="lg:w-1/2 pr-8 lg:pl-0">
       <div className="flex flex-col items-start mt-4">
@@ -137,13 +107,6 @@ const RatingComponent = () => {
           </div>
 
           <div className="flex items-center mt-1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dea1530 (review page done for traveller view)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <a
               href="#!" // Dummy href for the example
               onClick={handleSeeReviewsClick} // Function for navigation
@@ -158,89 +121,12 @@ const RatingComponent = () => {
                 cursor: "pointer",
                 transition: "background-color 0.3s, transform 0.2s",
               }}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             >
               See reviews
             </a>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-=======
-            <button
-              onClick={toggleModal}
-              style={{ fontSize: "1.05rem", padding: "0.25rem 0.5rem" }}
-              className="text-blue-500 underline"
-=======
->>>>>>> dea1530 (review page done for traveller view)
-            >
-              See reviews
-            </a>
-          </div>
-        </div>
-      </div>
-<<<<<<< HEAD
-
-      <Modal
-        isOpen={showModal}
-        onRequestClose={toggleModal}
-        contentLabel="Rating Modal"
-        className="modal-overlay"
-        overlayClassName="modal-overlay-bg"
-      >
-        <div
-          className="boost-modal-content"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="modal-header">
-            <h2 className="modal-title">Rate and Review</h2>
-            <div className="heading-line"></div>
-            <img
-              src={cancelImg}
-              alt="Close"
-              className="modal-close-icon"
-              onClick={toggleModal}
-            />
-          </div>
-          <form
-            className="modal-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-              toggleModal();
-            }}
-          >
-            <div className="form-group center-stars">
-              <div className="flex items-center mb-4">
-                {/* Only one line of stars with a single size (e.g., medium) */}
-                {renderStars(rating, "medium")}
-              </div>
-            </div>
-            <div className="form-group">
-              <textarea
-                className="form-textarea"
-                rows="4"
-                placeholder="Write your review here..."
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="modal-footer">
-              <button type="submit" className="submit-button">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      </Modal>
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> dea1530 (review page done for traveller view)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
     </div>
   );
 };

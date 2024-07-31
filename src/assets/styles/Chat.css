@@ -19,15 +19,7 @@
   padding: 0.625rem; /* 10px */
   background-color: #fff;
   border-bottom: 0.0625rem solid #ddd; /* 1px */
-<<<<<<< HEAD
-<<<<<<< HEAD
   height: 6.2rem;
-=======
-  height: 5.4rem;
->>>>>>> 4b8068d (SP chat page done)
-=======
-  height: 6.2rem;
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 }
 
 .search-input-wrapper {
@@ -65,15 +57,7 @@
 .pinned-section {
   background-color: #ffffff;
   flex-shrink: 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
   height: 16.00rem; /* 226px */
-=======
-  height: 14.125rem; /* 226px */
->>>>>>> 4b8068d (SP chat page done)
-=======
-  height: 16.00rem; /* 226px */
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   overflow-y: auto; /* Make the pinned section scrollable if needed */
 }
 
@@ -146,15 +130,7 @@
 
 .contact-name {
   font-weight: bold;
-<<<<<<< HEAD
-<<<<<<< HEAD
   font-size: 1rem; /* 14px */
-=======
-  font-size: 0.875rem; /* 14px */
->>>>>>> 4b8068d (SP chat page done)
-=======
-  font-size: 1rem; /* 14px */
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 }
 
 .contact-status {
@@ -164,15 +140,7 @@
 
 .contact-last-message {
   color: #999;
-<<<<<<< HEAD
-<<<<<<< HEAD
    font-size: 0.875rem; 
-=======
-  font-size: 0.75rem; /* 12px */
->>>>>>> 4b8068d (SP chat page done)
-=======
-   font-size: 0.875rem; 
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   margin-top: 0.1875rem; /* 3px */
   width: 100%;
   text-overflow: ellipsis;
@@ -212,19 +180,10 @@
 
 .chat-header-info {
   display: flex;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   align-items: center;
 }
 .chat-header-info > div {
   display: flex;
-<<<<<<< HEAD
-=======
->>>>>>> 4b8068d (SP chat page done)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   flex-direction: column;
 }
 
@@ -243,15 +202,7 @@
   padding: 1.25rem; /* 20px */
   overflow-y: auto;
   background-color: #f9f9f9;
-<<<<<<< HEAD
-<<<<<<< HEAD
   font-family: Helvetica;
-=======
-  font-family: sans-serif;
->>>>>>> 4b8068d (SP chat page done)
-=======
-  font-family: Helvetica;
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 }
 
 .message {
@@ -359,14 +310,7 @@
   padding: 0.625rem; /* 10px */
   border-radius: 0.625rem; /* 10px */
   background-color: #ffffff;
-<<<<<<< HEAD
-<<<<<<< HEAD
    font-size: 0.875rem; /* 14px */
-=======
->>>>>>> 4b8068d (SP chat page done)
-=======
-   font-size: 0.875rem; /* 14px */
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 }
 
 .message.sent p {
@@ -412,16 +356,8 @@
   border: 0.0625rem solid #6da5c0; /* 1px */
   border-radius: 1.25rem; /* 20px */
   margin-right: 0.75rem; /* 12px */
-<<<<<<< HEAD
-<<<<<<< HEAD
   font-size: 0.875rem; /* 14px */
 
-=======
->>>>>>> 4b8068d (SP chat page done)
-=======
-  font-size: 0.875rem; /* 14px */
-
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 }
 
 .chat-input .input-wrapper {

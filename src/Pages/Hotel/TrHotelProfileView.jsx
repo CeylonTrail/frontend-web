@@ -3,51 +3,24 @@ import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
 import TrHotelModal from "./TrHotelModal.jsx";
 import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faComments } from "@fortawesome/free-solid-svg-icons";
 // import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
-// import "../../assets/styles/form.css"; 
+// import "../../assets/styles/form.css";
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-<<<<<<< HEAD
-=======
-import TrHotelModal from "./TrHotelModal.jsx"; // Import Modal
-import TrHotelCard from "./TrHotelCard.jsx"; // Import Card
-import RatingComponent from "../SP common/RatingComponent.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
-
-const TrHotelProfileView = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false); // State to control hotel modal visibility
-  const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const cardsPerPage = 8;
   const navigate = useNavigate();
 
   const handleSeeMoreClick = (card) => {
     setSelectedCard(card);
-<<<<<<< HEAD
-<<<<<<< HEAD
     setIsTrHotelModalOpen(true);
-=======
-    setIsTrHotelModalOpen(true); // Open the modal when "See more" is clicked
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
-    setIsTrHotelModalOpen(true);
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   };
 
   const handleCloseTrHotelModal = () => {
@@ -58,96 +31,8 @@ const TrHotelProfileView = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     alert("Form Submitted");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
     handleCloseTrHotelModal();
   };
-
-   const rooms = [
-     {
-       type: "Luxury Suite",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 2",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 3",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 4",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 5",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 6",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 7",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 8",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 9",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 10",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 11",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 12",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-   ];
-
-<<<<<<< HEAD
-=======
-    handleCloseTrHotelModal(); // Close modal on form submission
-  };
-  // const handleRedirect = (event) => {
-  //   event.preventDefault(); // Prevent default link behavior
-  //   window.location.href = "/sp-review"; // Perform navigation
-  // };
 
   const rooms = [
     {
@@ -224,11 +109,6 @@ const TrHotelProfileView = () => {
     },
   ];
 
-
-  // Calculate the current cards to display
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
@@ -266,13 +146,6 @@ const TrHotelProfileView = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        {/* Combined Section: Text, Rating, and Contact Info */}
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
         <div
           className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
@@ -281,24 +154,10 @@ const TrHotelProfileView = () => {
           }}
         >
           <div className="flex items-center justify-between">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            {/* <!-- First Column: Rating --> */}
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <div className="flex-1 flex items-center">
               <RatingComponent />
             </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            {/* <!-- Second Column: Hotel Name and Description --> */}
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <div className="flex-1 flex flex-col items-center justify-center ml-4">
               <div
                 className="text-4xl font-semibold whitespace-nowrap"
@@ -308,10 +167,6 @@ const TrHotelProfileView = () => {
               </div>
               <div className="flex flex-col mt-2 items-center">
                 <div className="text-xl font-light italic">Good in quality</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
               </div>
             </div>
 
@@ -358,58 +213,6 @@ const TrHotelProfileView = () => {
                   Followers
                 </p>
               </div>
-<<<<<<< HEAD
-=======
-              </div>
-            </div>
-
-            {/* <!-- Third Column: Additional Information --> */}
-            <div className="flex-1 flex flex-col items-end ml-4">
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Hotel</span>
-              </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Email:</span>{" "}
-                contact@bluehills.com
-              </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Phone:</span> +123 456 7890
-              </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
-                9:00 PM
-              </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Address:</span> 123 Blue Hills
-                Road, Hilltown
-              </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Owner:</span> John Doe
-              </div>
-            </div>
-          </div>
-          {/* Statistics Section */}
-          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
-            <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
-              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                  100
-                </div>
-                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                  Listings
-                </p>
-              </div>
-              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                  145
-                </div>
-                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                  Followers
-                </p>
-              </div>
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
               <div className="flex-1 text-center py-6">
                 <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
                   150
@@ -453,24 +256,12 @@ const TrHotelProfileView = () => {
             </button>
           ))}
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
         {/* <div className="floating-button">
-=======
-        <div className="spreview-floating-button">
->>>>>>> dea1530 (review page done for traveller view)
-=======
-        {/* <div className="floating-button">
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
           <a
             href="#!" // Set href to a dummy value
             aria-label="Leave Feedback"
             // onClick={handleRedirect} // Attach click handler for navigation
           >
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
             <FontAwesomeIcon
               icon={faFacebookMessenger}
               size="2x"
@@ -478,22 +269,8 @@ const TrHotelProfileView = () => {
             />{" "}
           </a>
         </div> */}
-<<<<<<< HEAD
-=======
-            <FontAwesomeIcon icon={faComments} size="2x" color="#0F969C" />
-          </a>
-        </div>
->>>>>>> dea1530 (review page done for traveller view)
       </div>
 
-<<<<<<< HEAD
-=======
-      {/* Hotel Modal */}
->>>>>>> c31e338 (Hotel Traveller View done and other tr view pages initiated)
-=======
-      </div>
-
->>>>>>> 50e2e69387a3bbaa4e6a2efd0a6a42ced1223221
       {isTrHotelModalOpen && (
         <TrHotelModal
           isOpen={isTrHotelModalOpen}

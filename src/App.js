@@ -23,7 +23,7 @@ import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
 // import LocationSelector from "./components/locationSelector";
 import Resetpw from "./Pages/resetpw";
-
+import TravellerProfile from "./Pages/Community/Profile"
 import Landing from "./Pages/landing";
 
 
@@ -154,7 +154,7 @@ function App() {
           />
 
           <Route
-            path="/market"
+            path=""
             element={
               <>
                 <Header />;<MarketPlace />
@@ -170,8 +170,11 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-          <Route path="/landing" element={<Landing />} />
+         
+          <Route path="/profile" element={<TravellerProfile />} />
 
+            {/* Home Page */}
+          <Route path="/landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>
     </div>

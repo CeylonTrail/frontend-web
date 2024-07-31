@@ -68,11 +68,11 @@ export default () => {
     }
 
     return (
-        <div className="w-full mb-5">
+        <div className="w-full ">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"login"} />
-            <div className="flex pb-8">
+            <div className="flex pb-8 mb-5">
                 <div className="relative flex-1 hidden items-center justify-center   lg:flex h-full">
                     <div className="w-2/4 pt-10">
                         <img src={LoginImg} />

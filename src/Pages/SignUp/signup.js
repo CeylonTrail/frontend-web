@@ -19,11 +19,11 @@ export default () => {
         setIsTravellerSignup(false);
     };
     return (
-        <div className="w-full mb-5">
+        <div className="w-full">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"signup"} />
-            <div className="flex">
+            <div className="flex mb-5">
                 <div className="relative flex-1 hidden items-center justify-center   lg:flex h-full">
                     <div className="w-2/4 pt-14">
                         <img src={Traveler} />

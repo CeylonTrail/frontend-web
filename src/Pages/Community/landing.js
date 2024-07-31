@@ -50,7 +50,7 @@ export default () => {
 
     return (
         <>
-            <Header />
+            <Header type={"traveller"} />
             <div className="flex flex-row justify-around">
                 <FilterBar />
                 <div className="flex flex-col items-center mt-24 w-full max-w-screen-md mx-auto ml-80">
@@ -64,7 +64,7 @@ export default () => {
                     <CommunityPost />
                 </div>
 
-                <div className="flex flex-col items-center mt-24  mx-auto ">
+                <div className="flex flex-col items-center mt-24  mx-auto gap-2 fixed right-0 bottom-0 top-0 mr-2">
                     <Analytics />
                     <ChatWindow />
                 </div>

@@ -9,11 +9,9 @@ import Modal from "./EquipmentModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import EquipmentCard from "./EquipmentCard.jsx";
 import EditEquipmentModal from "./EditEquipmentModal.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
-import "../../assets/styles/form.css"; 
+import RatingComponent from "../SP common/RatingComponent.jsx";
 
-const SpEquipmentRentalProfileView = () => {
+const TrEquipmentRentalProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const cardsPerPage = 12;
@@ -67,10 +65,6 @@ const SpEquipmentRentalProfileView = () => {
   const handleCloseEditEquipmentModal = () => {
     setSelectedCard(null);
     setIsEditEquipmentModalOpen(false);
-  };
-  const handleRedirect = (event) => {
-    event.preventDefault();
-    navigate("/chat");
   };
 
   const equipments = [
@@ -198,9 +192,9 @@ const SpEquipmentRentalProfileView = () => {
         <div className="relative flex justify-center items-center -mt-24">
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
-            style={{
-              right: "450px",
-            }}
+            // style={{
+            //   right: "450px",
+            // }}
           >
             <img
               className="object-cover object-center w-full h-full"
@@ -212,7 +206,7 @@ const SpEquipmentRentalProfileView = () => {
             className="absolute"
             style={{ left: "1000px", top: "105px", right: "auto" }}
           >
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <PrimaryButton
                 name="Edit Profile"
                 action={editProfileClicked}
@@ -223,108 +217,89 @@ const SpEquipmentRentalProfileView = () => {
                 action={handleSubscribeClick}
                 isActive={false}
               />
-            </div>
+            </div> */}
           </div>
         </div>
+        {/* Combined Section: Text, Rating, and Contact Info */}
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
           }}
         >
-          {/* Text Section */}
-          <div className="lg:w-1/2 pr-8 lg:pl-0">
-            <div
-              className="text-4xl font-semibold"
-              style={{ fontWeight: "400", fontSize: "40px" }}
-            >
-              Blue Hills Residencies
+          <div className="flex items-center justify-between">
+            {/* <!-- First Column: Rating --> */}
+            <div className="flex-1 flex items-center">
+              <RatingComponent />
             </div>
-            <div
-              className="text-xl font-light italic mt-2"
-              style={{ fontSize: "20px", fontWeight: "300" }}
-            >
-              Good in quality
+
+            {/* <!-- Second Column: Hotel Name and Description --> */}
+            <div className="flex-1 flex flex-col items-center justify-center ml-4">
+              <div
+                className="text-4xl font-semibold whitespace-nowrap"
+                style={{ fontWeight: "400", fontSize: "40px" }}
+              >
+                Blue Hills Residencies
+              </div>
+              <div className="flex flex-col mt-2 items-center">
+                <div className="text-xl font-light italic">Good in quality</div>
+              </div>
             </div>
-            <div
-              className="text-lg font-light mt-2"
-              style={{ fontSize: "18px", fontWeight: "300" }}
-            ></div>
-            <div className="flex items-center mt-2">
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#FFD700" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-              <svg
-                className="w-4 h-4 ms-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ fill: "#D3D3D3" }}
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
+
+            {/* <!-- Third Column: Additional Information --> */}
+            <div className="flex-1 flex flex-col items-end ml-4">
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Hotel</span>
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Email:</span>{" "}
+                contact@bluehills.com
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Phone:</span> +123 456 7890
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
+                9:00 PM
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Address:</span> 123 Blue Hills
+                Road, Hilltown
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Owner:</span> John Doe
+              </div>
             </div>
           </div>
 
           {/* Statistics Section */}
-          <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                100
+          <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">
+            <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  100
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Listings
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Listings
-              </p>
-            </div>
-            <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                145
+              <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  145
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Followers
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Followers
-              </p>
-            </div>
-            <div className="flex-1 text-center py-6">
-              <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                150
+              <div className="flex-1 text-center py-6">
+                <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
+                  150
+                </div>
+                <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
+                  Following
+                </p>
               </div>
-              <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                Following
-              </p>
             </div>
           </div>
         </div>
@@ -372,19 +347,6 @@ const SpEquipmentRentalProfileView = () => {
             </button>
           ))}
         </div>
-        <div className="floating-button">
-          <a
-            href="#!" // Set href to a dummy value
-            aria-label="Contact via Facebook Messenger"
-            onClick={handleRedirect} // Attach click handler for navigation
-          >
-            <FontAwesomeIcon
-              icon={faFacebookMessenger}
-              size="2x"
-              color="#0F969C"
-            />{" "}
-          </a>
-        </div>
       </div>
 
       <Modal
@@ -406,4 +368,4 @@ const SpEquipmentRentalProfileView = () => {
   );
 };
 
-export default SpEquipmentRentalProfileView;
+export default TrEquipmentRentalProfileView;

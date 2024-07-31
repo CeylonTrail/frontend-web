@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./HotelModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import HotelCard from "./HotelCard.jsx";
 import EditHotelModal from "./EditHotelModal.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+import "../../assets/styles/form.css"; 
+
 
 const SpHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,6 +68,10 @@ const SpHotelProfileView = () => {
     setSelectedCard(null);
     setIsEditHotelModalOpen(false);
   };
+   const handleRedirect = (event) => {
+     event.preventDefault();
+     navigate("/chat");
+   };
 
   const rooms = [
     {
@@ -150,7 +159,7 @@ const SpHotelProfileView = () => {
   }
 
   return (
-    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
+    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       {/* White Background Box */}
       <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
@@ -159,10 +168,10 @@ const SpHotelProfileView = () => {
         ></div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative">
         <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
-            style={{ width: "1250px" }}
+            style={{ width: "1250px", height: "350px" }}
             className="object-cover object-top"
             src={MarketPlaceBackgroundImg}
             alt="Mountain"
@@ -172,19 +181,18 @@ const SpHotelProfileView = () => {
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
             style={{
-              top: "30px",
               right: "450px",
             }}
           >
             <img
               className="object-cover object-center w-full h-full"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+              src={HotelProfileImg}
               alt="Woman looking front"
             />
           </div>
           <div
             className="absolute"
-            style={{ left: "1000px", top: "120px", right: "auto" }}
+            style={{ left: "1000px", top: "105px", right: "auto" }}
           >
             <div className="flex space-x-4">
               <PrimaryButton
@@ -201,7 +209,7 @@ const SpHotelProfileView = () => {
           </div>
         </div>
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
@@ -220,6 +228,57 @@ const SpHotelProfileView = () => {
               style={{ fontSize: "20px", fontWeight: "300" }}
             >
               Good in quality
+            </div>
+            <div
+              className="text-lg font-light mt-2"
+              style={{ fontSize: "18px", fontWeight: "300" }}
+            ></div>
+            <div className="flex items-center mt-2">
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#D3D3D3" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
             </div>
           </div>
 
@@ -294,6 +353,19 @@ const SpHotelProfileView = () => {
               {number}
             </button>
           ))}
+        </div>
+        <div className="floating-button">
+          <a
+            href="#!" // Set href to a dummy value
+            aria-label="Contact via Facebook Messenger"
+            onClick={handleRedirect} // Attach click handler for navigation
+          >
+            <FontAwesomeIcon
+              icon={faFacebookMessenger}
+              size="2x"
+              color="#0F969C"
+            />{" "}
+          </a>
         </div>
       </div>
 

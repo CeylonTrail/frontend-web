@@ -1,0 +1,258 @@
+.spreview-container {
+  /* min-height: 80vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  margin-top: 3.25rem;
+  box-sizing: border-box; /* Ensure padding is included in height calculations */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.spreview-card-container {
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  /* padding: 1.25rem 1.25rem 4rem; */
+  color: #1f2937;
+  /* height: 80vh; */
+  box-sizing: border-box; /* Ensure padding is included in height calculations */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.spreview-content {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative; /* Add relative positioning for arrows */
+  /* height: 10rem; */
+}
+
+.spreview-header {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.spreview-heading {
+  font-size: 2.85rem;
+  font-weight: 700;
+  margin-top: 4.25rem;
+  color: #0F969C;
+}
+
+.spreview-subheading {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.spreview-separator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.spreview-separator span {
+  display: inline-block;
+  height: 0.25rem;
+  background-color: #6DA5C0;
+  margin: 0 0.25rem;
+}
+
+.spreview-separator span:nth-child(1),
+.spreview-separator span:nth-child(5) {
+  width: 0.25rem;
+}
+
+.spreview-separator span:nth-child(2),
+.spreview-separator span:nth-child(4) {
+  width: 0.75rem;
+}
+
+.spreview-separator span:nth-child(3) {
+  width: 10rem;
+}
+
+.spreview-review-grid {
+  display: grid;
+  gap: 2rem; /* Adjust the gap as needed */
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.spreview-review-grid.sm\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.spreview-review-grid.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.slick-slide {
+  margin: 0 1rem; /* Horizontal spacing for each slide */
+  height: 11rem;
+}
+.slick-track {
+  height: 10.7rem; /* Fix height to 11rem */
+  /* overflow: hidden; Prevent scrolling */
+}
+
+.spreview-review-card {
+  background-color: #ffffff;
+  border: 1px solid #0F969C;
+  padding: 1.25rem;
+  color: #1f2937;
+  font-weight: 300;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  height: auto; /* Auto height for better content adjustment */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+
+.spreview-review-card.zoomed {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.spreview-review-card .spreview-review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.spreview-review-card .spreview-review-img {
+  overflow: hidden;
+  border-radius: 9999px;
+  width: 3rem; /* Slightly larger for better visibility */
+  height: 3rem; /* Maintain aspect ratio */
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.spreview-review-card .spreview-review-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spreview-review-card .spreview-review-author {
+  flex-grow: 1;
+  padding-left: 1rem; /* More padding for better spacing */
+}
+
+.spreview-review-card .spreview-review-author h6 {
+  font-weight: 700;
+  font-size: 1rem; /* Slightly larger font size */
+  margin: 0;
+  color: #4b5563;
+}
+
+.spreview-review-card .spreview-star-rating {
+  margin-top: 0.25rem; /* Adjust spacing from author name */
+  display: flex;
+  align-items: center;
+}
+
+.spreview-review-card .spreview-star-rating span {
+  font-size: 1.25rem; /* Size of the stars */
+  color: gold; /* Gold color for the stars */
+}
+
+.spreview-review-card .spreview-review-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.5rem; /* Space above text */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spreview-review-card.zoomed .spreview-review-text {
+  max-height: none; /* Remove height restriction on zoom */
+}
+
+.spreview-floating-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.spreview-floating-button a {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #0F969C;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+      margin-bottom: 2rem;
+    margin-right: 1rem;
+}
+
+.spreview-floating-button a:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.spreview-floating-button .fa-comments {
+  font-size: 2rem; /* Adjust size as needed */
+  color: #e0eaea; /* Adjust color as needed */
+}
+
+.spreview-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  color: #0F969C;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  z-index: 10; /* Ensure arrows are above other content */
+}
+
+.spreview-arrow:hover {
+  background-color: #0F969C;
+  color: #ffffff;
+}
+
+.spreview-next {
+  position: absolute;
+  top: 60%;
+  right: 1rem; /* Adjust as needed */
+  transform: translateY(-50%);
+}
+
+.spreview-prev {
+  position: absolute;
+  top: 60%;
+  left: 1rem; /* Adjust as needed */
+  transform: translateY(-50%);
+}
+
+.spreview-star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.spreview-star {
+  font-size: 1.25rem; /* Adjust size as needed */
+  color: #d3d3d3; /* Default color for unfilled stars */
+  margin-right: 2px; /* Optional spacing between stars */
+}
+
+.spreview-star.filled {
+  color: gold; /* Gold color for filled stars */
+}

@@ -1,220 +1,345 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../assets/styles/Chat.css";
+import { format } from 'date-fns';
+import {
+  FaSearch,
+  FaPaperPlane,
+  FaFile,
+  FaSmile,
+  FaPhone,
+  FaThumbtack,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const Chat = () => {
+  const contacts = [
+    {
+      id: 1,
+      name: "Ramesh Perera",
+      lastMessage: "Thank you for the information!",
+      lastTime: "10:30 AM",
+      avatar: "https://randomuser.me/api/portraits/men/4.jpg",
+      chatHistory: [
+        {
+          sender: "Ramesh",
+          message: "Hi, I would like to inquire about the hotel rates.",
+          timestamp: "2024-07-28T09:00:00.000Z",
+        },
+        {
+          sender: "Me",
+          message: "Sure, I'll provide you with the details.",
+          timestamp: "2024-07-28T09:05:00.000Z",
+        },
+        {
+          sender: "Me",
+          message: "Our standard room is $100 per night.",
+          timestamp: "2024-07-28T09:06:00.000Z",
+        },
+        {
+          sender: "Me",
+          message: "The deluxe room is $150 per night.",
+          timestamp: "2024-07-28T09:07:00.000Z",
+        },
+        {
+          sender: "Ramesh",
+          message: "Are there any discounts for longer stays?",
+          timestamp: "2024-07-28T09:10:00.000Z",
+        },
+        {
+          sender: "Me",
+          message:
+            "Yes, we offer a 10% discount for stays longer than 5 nights.",
+          timestamp: "2024-07-28T09:15:00.000Z",
+        },
+        {
+          sender: "Ramesh",
+          message: "What amenities are included?",
+          timestamp: "2024-07-28T09:20:00.000Z",
+        },
+        {
+          sender: "Me",
+          message:
+            "All rooms include free Wi-Fi, breakfast, and access to the gym.",
+          timestamp: "2024-07-28T09:25:00.000Z",
+        },
+        {
+          sender: "Ramesh",
+          message: "Is there a swimming pool?",
+          timestamp: "2024-07-28T09:30:00.000Z",
+        },
+        {
+          sender: "Me",
+          message: "Yes, we have an outdoor swimming pool.",
+          timestamp: "2024-07-28T09:35:00.000Z",
+        },
+        {
+          sender: "Ramesh",
+          message: "What are the check-in and check-out times?",
+          timestamp: "2024-07-28T09:40:00.000Z",
+        },
+        {
+          sender: "Me",
+          message: "Check-in is at 2 PM and check-out is at 11 AM.",
+          timestamp: "2024-07-28T09:45:00.000Z",
+        },
+        {
+          sender: "Ramesh",
+          message: "Thank you for the information!",
+          timestamp: "2024-07-28T09:50:00.000Z",
+        },
+        {
+          sender: "Me",
+          message:
+            "You're welcome! Let me know if you have any other questions.",
+          timestamp: "2024-07-28T09:55:00.000Z",
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: "Ahmed Mansoor",
+      lastMessage: "Are we meeting today?",
+      lastTime: "9:00 AM",
+      avatar: "https://randomuser.me/api/portraits/men/5.jpg",
+      chatHistory: [
+        { sender: "Ahmed", message: "Are we meeting today?" },
+        { sender: "Me", message: "Yes, at 3 PM." },
+      ],
+    },
+    {
+      id: 3,
+      name: "Linda Smith",
+      lastMessage: "Can you send the report?",
+      lastTime: "8:45 AM",
+      avatar: "https://randomuser.me/api/portraits/women/6.jpg",
+      chatHistory: [
+        { sender: "Linda", message: "Can you send the report?" },
+        { sender: "Me", message: "Sure, I'll send it by noon." },
+      ],
+    },
+    {
+      id: 4,
+      name: "John Doe",
+      lastMessage: "Let's catch up later.",
+      lastTime: "Yesterday",
+      avatar: "https://randomuser.me/api/portraits/men/7.jpg",
+      chatHistory: [
+        { sender: "John", message: "Let's catch up later." },
+        { sender: "Me", message: "Absolutely, talk to you then!" },
+      ],
+    },
+    {
+      id: 5,
+      name: "Emily Davis",
+      lastMessage: "Happy Birthday!",
+      lastTime: "Yesterday",
+      avatar: "https://randomuser.me/api/portraits/women/8.jpg",
+      chatHistory: [
+        { sender: "Emily", message: "Happy Birthday!" },
+        { sender: "Me", message: "Thank you so much!" },
+      ],
+    },
+    {
+      id: 6,
+      name: "Daniel Lee",
+      lastMessage: "See you tomorrow.",
+      lastTime: "Yesterday",
+      avatar: "https://randomuser.me/api/portraits/men/6.jpg",
+      chatHistory: [
+        { sender: "Daniel", message: "See you tomorrow." },
+        { sender: "Me", message: "Looking forward to it!" },
+      ],
+    },
+    {
+      id: 7,
+      name: "Sarah Johnson",
+      lastMessage: "Let's finalize the deal.",
+      lastTime: "Yesterday",
+      avatar: "https://randomuser.me/api/portraits/women/7.jpg",
+      chatHistory: [
+        { sender: "Sarah", message: "Let's finalize the deal." },
+        { sender: "Me", message: "I'll send over the documents." },
+      ],
+    },
+    {
+      id: 8,
+      name: "Michael Brown",
+      lastMessage: "Can we reschedule our meeting?",
+      lastTime: "2 days ago",
+      avatar: "https://randomuser.me/api/portraits/men/8.jpg",
+      chatHistory: [
+        { sender: "Michael", message: "Can we reschedule our meeting?" },
+        { sender: "Me", message: "Sure, how about Thursday?" },
+      ],
+    },
+    {
+      id: 9,
+      name: "Jessica Wilson",
+      lastMessage: "Thank you for your help.",
+      lastTime: "2 days ago",
+      avatar: "https://randomuser.me/api/portraits/women/9.jpg",
+      chatHistory: [
+        { sender: "Jessica", message: "Thank you for your help." },
+        { sender: "Me", message: "You're welcome!" },
+      ],
+    },
+    {
+      id: 10,
+      name: "David Martinez",
+      lastMessage: "Happy Anniversary!",
+      lastTime: "3 days ago",
+      avatar: "https://randomuser.me/api/portraits/men/9.jpg",
+      chatHistory: [
+        { sender: "David", message: "Happy Anniversary!" },
+        { sender: "Me", message: "Thank you, David!" },
+      ],
+    },
+  ];
+
+  const formatDate = (timestamp) => {
+    return format(new Date(timestamp), "p"); // 'p' for localized time with AM/PM
+  };
+
+  const [selectedContact, setSelectedContact] = useState(contacts[0]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const pinnedContacts = filteredContacts.slice(0, 3);
+  const allMessagesContacts = filteredContacts.slice(3);
+
+  const truncateMessage = (message, limit) => {
+    return message.length > limit
+      ? message.substring(0, limit - 5) + "..."
+      : message;
+  };
+
   return (
-    <div className="container">
-      <div className="row chat-clearfix">
-        <div className="col-lg-12">
-          <div className="chat-card chat-app">
-            <div id="plist" className="chat-people-list">
-              <div className="flex flex-1 justify-center px-2 lg:ml-7 lg:justify-end ">
-                <div className="max-w-lg w-full lg:max-w-xs">
-                  <label htmlFor="search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="flex items-center gap-1 px-2 border border-secondary rounded-lg bg-SecondaryLight ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-secondary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      className="w-full px-2 py-2 text-secondary bg-transparent rounded-md outline-none bg-SecondaryLight placeholder-secondary"
-                    />
-                  </div>
-                </div>
-              </div>
-              <ul className="list-unstyled chat-list mt-2 mb-0">
-                <li className="chat-clearfix">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Vincent Porter</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-offline"></i> left 7 mins
-                      ago{" "}
-                    </div>
-                  </div>
-                </li>
-                <li className="chat-clearfix active">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Aiden Chavez</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-online"></i> online{" "}
-                    </div>
-                  </div>
-                </li>
-                <li className="chat-clearfix">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Mike Thomas</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-online"></i> online{" "}
-                    </div>
-                  </div>
-                </li>
-                <li className="chat-clearfix">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Christian Kelly</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-offline"></i> left 10
-                      hours ago{" "}
-                    </div>
-                  </div>
-                </li>
-                <li className="chat-clearfix">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Monica Ward</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-online"></i> online{" "}
-                    </div>
-                  </div>
-                </li>
-                <li className="chat-clearfix">
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                    alt="avatar"
-                  />
-                  <div className="about">
-                    <div className="name">Dean Henry</div>
-                    <div className="status">
-                      {" "}
-                      <i className="fa fa-circle chat-offline"></i> offline
-                      since Oct 28{" "}
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="chat">
-              <div className="chat-header chat-clearfix">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <a
-                      href="javascript:void(0);"
-                      data-toggle="modal"
-                      data-target="#view_info"
-                    >
-                      <img
-                        src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                        alt="avatar"
-                      />
-                    </a>
-                    <div className="chat-about">
-                      <h6 className="m-b-0">Aiden Chavez</h6>
-                      <small>Last seen: 2 hours ago</small>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 hidden-sm text-right">
-                    <a
-                      href="javascript:void(0);"
-                      className="btn btn-outline-secondary"
-                    >
-                      <i className="fa fa-camera"></i>
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      className="btn btn-outline-primary"
-                    >
-                      <i className="fa fa-image"></i>
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      className="btn btn-outline-info"
-                    >
-                      <i className="fa fa-cogs"></i>
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      className="btn btn-outline-warning"
-                    >
-                      <i className="fa fa-question"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="chat-history">
-                <ul className="m-b-0">
-                  <li className="chat-clearfix">
-                    <div className="message-data text-right">
-                      <span className="message-data-time">10:10 AM, Today</span>
-                    </div>
-                    <div className="message other-message float-right">
-                      Hi Aiden, how are you? How is the project coming along?
-                    </div>
-                  </li>
-                  <li className="chat-clearfix">
-                    <div className="message-data">
-                      <img
-                        src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                        alt="avatar"
-                      />
-                      <span className="message-data-time">10:12 AM, Today</span>
-                    </div>
-                    <div className="message my-message">
-                      Are we meeting today?
-                    </div>
-                  </li>
-                  <li className="chat-clearfix">
-                    <div className="message-data text-right">
-                      <span className="message-data-time">10:15 AM, Today</span>
-                    </div>
-                    <div className="message other-message float-right">
-                      Project has been already finished and I have results to
-                      show you.
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="chat-message chat-clearfix">
-                <div className="input-group mb-0">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fa fa-send"></i>
+    <div className="messenger-container">
+      <div className="messenger-sidebar">
+        <div className="search-bar">
+          <div className="search-input-wrapper flex items-center gap-x-3 mb-0.5">
+            <FaSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search Messenger"
+              className="search-input flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+              style={{
+                borderColor: "#6DA5C0",
+                outlineColor: "#0F969C",
+              }}
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
+        </div>
+        <div className="contact-section pinned-section">
+          <div className="section-title">
+            <FaThumbtack className="section-icon" />
+            Pinned
+          </div>
+          <ul className="contact-list">
+            {pinnedContacts.map((contact) => (
+              <li
+                key={contact.id}
+                className={`contact-item ${
+                  selectedContact.id === contact.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedContact(contact)}
+              >
+                <img src={contact.avatar} alt="avatar" />
+                <div className="contact-info">
+                  <div className="contact-info-header">
+                    <span className="contact-name">{contact.name}</span>
+                    <span className="contact-last-time">
+                      {contact.lastTime}
                     </span>
                   </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter text here..."
-                  />
+                  <span className="contact-last-message">
+                    {truncateMessage(contact.lastMessage, 38)}
+                  </span>
                 </div>
-              </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="contact-section all-messages-section">
+          <div className="section-title">
+            <FaEnvelope className="section-icon" />
+            All Messages
+          </div>
+          <ul className="contact-list">
+            {allMessagesContacts.map((contact) => (
+              <li
+                key={contact.id}
+                className={`contact-item ${
+                  selectedContact.id === contact.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedContact(contact)}
+              >
+                <img src={contact.avatar} alt="avatar" />
+                <div className="contact-info">
+                  <div className="contact-info-header">
+                    <span className="contact-name">{contact.name}</span>
+                    <span className="contact-last-time">
+                      {contact.lastTime}
+                    </span>
+                  </div>
+                  <span className="contact-last-message">
+                    {truncateMessage(contact.lastMessage, 38)}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="messenger-chat">
+        <div className="chat-header">
+          <div className="chat-header-info">
+            <img src={selectedContact.avatar} alt="avatar" />
+            <div>
+              <span className="chat-header-name">{selectedContact.name}</span>
+              <span className="chat-header-status">Last seen: 2 hours ago</span>
             </div>
+          </div>
+          <FaPhone className="call-icon" />
+        </div>
+
+        <div className="chat-messages">
+          {selectedContact.chatHistory.map((message, index) => (
+            <div
+              key={index}
+              className={`message ${
+                message.sender === "Me" ? "sent" : "received"
+              }`}
+            >
+              {message.sender !== "Me" && (
+                <img src={selectedContact.avatar} alt="avatar" />
+              )}
+              <p>{message.message}</p>
+            </div>
+          ))}
+        </div>
+        <div className="chat-input">
+          <FaFile className="file-icon" />
+          <div className="input-wrapper">
+            <FaSmile className="emoji-icon" />
+            <input
+              type="text"
+              placeholder="Type a message..."
+              className="input-field"
+            />
+            <button className="send-button">
+              <FaPaperPlane className="send-icon" />
+              Send
+            </button>
           </div>
         </div>
       </div>

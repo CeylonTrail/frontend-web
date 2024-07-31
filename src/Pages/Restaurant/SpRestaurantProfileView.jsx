@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestaurantBackgroundImg from "../../assets/img/restaurant_cover.png";
 import RestaurantCardImg from "../../assets/img/restaurant-card.png";
+import RestaurantProfileImg from "../../assets/img/restaurant-profile.png";
 import PlusImg from "../../assets/img/plus.png";
 import { PrimaryButton } from "../../components/Button.js";
 import Modal from "./RestaurantModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import RestaurantCard from "./RestaurantCard.jsx";
 import EditRestaurantModal from "./EditRestaurantModal.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+import "../../assets/styles/form.css"; 
 
 const SpRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,6 +67,11 @@ const SpRestaurantProfileView = () => {
   const handleCloseEditRestaurantModal = () => {
     setSelectedCard(null);
     setIsEditRestaurantModalOpen(false);
+  };
+
+  const handleRedirect = (event) => {
+    event.preventDefault();
+    navigate("/chat");
   };
 
   const fooditems = [
@@ -169,7 +178,7 @@ const SpRestaurantProfileView = () => {
   }
 
   return (
-    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900">
+    <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       {/* White Background Box */}
       <div className="absolute inset-0 flex justify-center items-center mt-20">
         <div
@@ -178,32 +187,31 @@ const SpRestaurantProfileView = () => {
         ></div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative">
         <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
-            style={{ width: "1250px" }}
+            style={{ width: "1250px", height: "350px" }}
             className="object-cover object-top"
             src={RestaurantBackgroundImg}
-            alt="Mountain"
+            alt="Cover"
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
             style={{
-              top: "30px",
               right: "450px",
             }}
           >
             <img
               className="object-cover object-center w-full h-full"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
-              alt="Woman looking front"
+              src={RestaurantProfileImg}
+              alt="Logo"
             />
           </div>
           <div
             className="absolute"
-            style={{ left: "1000px", top: "120px", right: "auto" }}
+            style={{ left: "1000px", top: "105px", right: "auto" }}
           >
             <div className="flex space-x-4">
               <PrimaryButton
@@ -220,7 +228,7 @@ const SpRestaurantProfileView = () => {
           </div>
         </div>
         <div
-          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white"
+          className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
           style={{
             boxShadow:
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
@@ -239,6 +247,57 @@ const SpRestaurantProfileView = () => {
               style={{ fontSize: "20px", fontWeight: "300" }}
             >
               Good in quality
+            </div>
+            <div
+              className="text-lg font-light mt-2"
+              style={{ fontSize: "18px", fontWeight: "300" }}
+            ></div>
+            <div className="flex items-center mt-2">
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#FFD700" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <svg
+                className="w-4 h-4 ms-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ fill: "#D3D3D3" }}
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
             </div>
           </div>
 
@@ -313,6 +372,19 @@ const SpRestaurantProfileView = () => {
               {number}
             </button>
           ))}
+        </div>
+        <div className="floating-button">
+          <a
+            href="#!" // Set href to a dummy value
+            aria-label="Contact via Facebook Messenger"
+            onClick={handleRedirect} // Attach click handler for navigation
+          >
+            <FontAwesomeIcon
+              icon={faFacebookMessenger}
+              size="2x"
+              color="#0F969C"
+            />{" "}
+          </a>
         </div>
       </div>
 

@@ -59,7 +59,7 @@ const SubscriptionPlan = () => {
 
   return (
     <div className="subscription-plan-container">
-      <div className="subscription-plan-box">
+      <div className="subscription-plan-box mt-10">
         <p className="step-text">STEP 1 OF 2</p>
         <p className="title-text">Choose the plan that’s right for you!</p>
         <div className="pricing-cards">
@@ -106,7 +106,7 @@ const SubscriptionPlan = () => {
           ))}
         </div>
         <div className="next-button-container">
-          <PrimaryButton name="NEXT" action={handleNextClick} isActive={true} />
+          <PrimaryButton name="NEXT" action={handleNextClick} isActive={false} />
         </div>
       </div>
     </div>

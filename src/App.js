@@ -8,9 +8,15 @@ import SetUpMarketPlace from "./Pages/SP common/SetUpMarketPlace";
 import SubscriptionPlan from "./Pages/SP common/SubscriptionPlan";
 import Chat from "./Pages/SP common/Chat";
 import SpHotelProfileView from "./Pages/Hotel/SpHotelProfileView";
+import TrHotelProfileView from "./Pages/Hotel/TrHotelProfileView";
 import EditMarketPlace from "./Pages/SP common/EditMarketPlace";
 import SpRestaurantProfileView from "./Pages/Restaurant/SpRestaurantProfileView";
+import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView";
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
+import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
+import MarketPlace from "./Pages/SP common/MarketPlace";
+import SPReviews from "./Pages/SP common/SPReviews";
+import SPViewReviews from "./Pages/SP common/SPViewReviews";
 
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
@@ -75,6 +81,14 @@ function App() {
             }
           />
           <Route
+            path="/hotel-tr-view"
+            element={
+              <>
+                <Header />;<TrHotelProfileView />
+              </>
+            }
+          />
+          <Route
             path="/rest-sp-view"
             element={
               <>
@@ -83,10 +97,26 @@ function App() {
             }
           />
           <Route
+            path="/rest-tr-view"
+            element={
+              <>
+                <Header />;<TrRestaurantProfileView />
+              </>
+            }
+          />
+          <Route
             path="/equip-sp-view"
             element={
               <>
                 <Header />;<SpEquipmentRentalProfileView />
+              </>
+            }
+          />
+          <Route
+            path="/equip-tr-view"
+            element={
+              <>
+                <Header />;<TrEquipmentRentalProfileView />
               </>
             }
           />
@@ -103,6 +133,31 @@ function App() {
             element={
               <>
                 <Header />;<Chat />
+              </>
+            }
+          />
+          <Route
+            path="/sp-review"
+            element={
+              <>
+                <Header />;<SPReviews />
+              </>
+            }
+          />
+          <Route
+            path="/sp-view-review"
+            element={
+              <>
+                <Header />;<SPViewReviews />
+              </>
+            }
+          />
+
+          <Route
+            path="/market"
+            element={
+              <>
+                <Header />;<MarketPlace />
               </>
             }
           />

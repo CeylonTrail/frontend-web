@@ -1,0 +1,120 @@
+.spview-reviews-container {
+  padding: 1rem; /* Further reduced padding */
+  max-width: 700px; /* Smaller max-width */
+  margin: 40px auto; /* Reduced margin */
+  background-color: #f9f9f9; /* Light background for better contrast */
+  border-radius: 6px; /* Slightly smaller border-radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  margin-top: 5rem;
+  margin-right: 5rem;
+}
+
+.spreview-reviews-heading {
+  font-size: 2.8rem; /* Smaller font size */
+  font-weight: 700;
+  color: #0f969c;
+  border-bottom: 2px solid #0f969c; /* Underline for emphasis */
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem; /* Reduced margin */
+  justify-content: center;
+}
+
+.spview-review-card {
+  background-color: #e5eaed;
+  border: 1px solid #0f969c; /* Thinner border */
+  border-radius: 6px; /* Slightly smaller border-radius */
+  padding: 1rem; /* Reduced padding */
+  margin-bottom: 0.5rem; /* Reduced margin between cards */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  transition: box-shadow 0.3s, transform 0.3s; /* Added transform transition */
+  margin-top: 1.4rem;
+}
+
+.spview-review-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.spview-review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Reduced space between header and text */
+}
+
+.spview-review-img img {
+  border-radius: 50%;
+  width: 50px; /* Smaller profile pic */
+  height: 50px;
+  object-fit: cover;
+  margin-right: 0.75rem; /* Reduced space between profile pic and name */
+}
+
+.spview-review-author {
+  font-weight: 600;
+  font-size: 0.9rem; /* Smaller font size for names */
+}
+
+.spview-review-rating {
+  color: gold;
+  font-size: 0.9rem; /* Smaller size for stars */
+}
+
+.spview-review-text {
+  margin: 0.5rem 0;
+  line-height: 1.4; /* Improved readability */
+  padding-left: 3rem; /* Reduced padding to move text further right */
+}
+
+.spview-review-replies {
+  margin-top: 1rem;
+  padding-left: 4rem; /* Adjusted padding for better alignment */
+}
+
+.spview-review-reply {
+  margin-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  font-style: italic; /* Italicized replies for differentiation */
+}
+
+.spview-review-reply-form {
+  margin-top: 0.5rem;
+}
+
+.spview-review-reply-form textarea {
+  width: calc(100% - 0.75rem); /* Adjusted width for padding */
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem; /* Reduced font size */
+}
+
+.spview-reply-submit {
+  background-color: #0f969c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem; /* Reduced padding */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem; /* Reduced font size */
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+.spview-reply-submit:hover {
+  background-color: #0d8b8c; /* Darker shade on hover */
+}
+
+.spview-reply-button {
+  background-color: #ddd;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #0f969c;
+  font-size: 0.875rem; /* Reduced font size */
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+.spview-reply-button:hover {
+  background-color: #ccc; /* Slightly darker shade on hover */
+}

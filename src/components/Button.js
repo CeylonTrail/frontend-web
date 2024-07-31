@@ -10,7 +10,7 @@ const PrimaryButton = ({ name, action,isActive ,icon}) => {
                 }`}
             onClick={action}
         >
-            { icon}
+            {icon}
             {name}
         </button>
     );

@@ -18,6 +18,9 @@ import Community from "./Pages/Community/landing";
 // import LocationSelector from "./components/locationSelector";
 import Resetpw from "./Pages/resetpw";
 
+import Landing from "./Pages/landing";
+
+
 function App() {
   return (
     // <div className="App">
@@ -112,7 +115,7 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-          {/* <Route path="/location" element={<LocationSelector />} /> */}
+          <Route path="/landing" element={<Landing />} />
 
         </Routes>
       </BrowserRouter>

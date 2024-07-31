@@ -24,7 +24,7 @@ export default () => {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full mb-5">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"login"} />

@@ -5,8 +5,7 @@ import {
     Marker,
     InfoWindow,
 } from "@vis.gl/react-google-maps";
-import Modal from 'react-modal';
-import { PrimaryButton } from "./Button";
+
 
 export default function SelectLocation({ onLocationChange }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -38,18 +37,20 @@ export default function SelectLocation({ onLocationChange }) {
 
     return (
         <>
-            <PrimaryButton name={buttonName} action={openModal} isActive={!locationAdded} icon={<span className="material-symbols-outlined">
-                location_on
-            </span>}></PrimaryButton>
-
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Select Location">
+            
                 <APIProvider apiKey="AIzaSyD5UzriIXmPtuLot9v4DirHr3LkJzh6tfk">
-                    <div style={{ height: "100vh", width: "100%" }}>
+                    <div className="w-full h-60">
                         <Map
-                            zoom={15}
-                            center={{ lat: 6.902652922830886, lng: 79.86116883963061 }}
+                            defaultZoom={15}
+                            defaultCenter={{ lat: 6.902652922830886, lng: 79.86116883963061 }}
                             onClick={handleMapClick}
-                            mapId="ee7c577ba3feb614"
+                        mapId="ee7c577ba3feb614"
+                        options={{
+                            scrollwheel: true, // Enable zooming with mouse scroll
+                            draggable: true, // Enable dragging the map
+                            zoomControl: true, // Enable zoom control buttons
+                            mapTypeControl: true, // Enable map type control
+                        }}
                         >
                             {selectedPosition && (
                                 <Marker position={selectedPosition} onClick={() => setOpen(true)} />
@@ -63,7 +64,7 @@ export default function SelectLocation({ onLocationChange }) {
                         </Map>
                     </div>
                 </APIProvider>
-            </Modal>
+            
         </>
     );
 }

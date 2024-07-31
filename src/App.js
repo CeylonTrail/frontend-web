@@ -15,6 +15,11 @@ import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRen
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
+// import LocationSelector from "./components/locationSelector";
+import Resetpw from "./Pages/resetpw";
+
+import Landing from "./Pages/landing";
+
 
 function App() {
   return (
@@ -105,9 +110,13 @@ function App() {
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/reset_password" element={<Resetpw />} />
+
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
+          <Route path="/landing" element={<Landing />} />
+
         </Routes>
       </BrowserRouter>
     </div>

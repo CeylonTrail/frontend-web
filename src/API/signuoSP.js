@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const signup = async (data) => {
-    const url = 'http://localhost:8083/api/v1/auth/register-traveller';
+    const url = 'http://localhost:8083/api/v1/auth/register-service-provider';
 
     try {
         const response = await axios.post(url, data, {
@@ -19,8 +19,8 @@ const signup = async (data) => {
     } catch (error) {
         if (error.response && error.response.data) {
             const { code, message, data } = error.response.data;
-            
-            if (code === 409 && data === "Email is already taken!") {  
+
+            if (code === 409 && data === "Email is already taken!") {
                 return { status: 'error', message: 'Email is already taken' };
             }
             else if (code === 400 && message === "Validation Errors" && data.username[0] === "Username must be between 3 and 50 characters") {

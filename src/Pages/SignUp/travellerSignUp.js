@@ -27,49 +27,60 @@ export default () => {
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
+        
         e.preventDefault();
-        const data = {
-            firstname: firstName,
-            lastname: lastName,
-            username: userName,
-            email: email,
-            password: password,
-        };
+        if (firstName && userName && email && password) {
+        
+        
+            const data = {
+                firstname: firstName,
+                lastname: lastName || "",
+                username: userName,
+                email: email,
+                password: password,
+            };
 
-        try {
-            const response = await signup(data);
-            console.log(response);
-            if (response.status === 'success') {
-                setAlertTitle('Success');
-                setAlertMessage(response.message);
-                setShowAlert(true);
-                setAlertType('success');
-                setTimeout(() => {
-                    setShowAlert(false);
-                    navigate('/login');
-                }, 3000); // Hide the alert after 3 seconds
-            } else {
-                setAlertTitle('Error');
+            try {
+                const response = await signup(data);
+                console.log(response);
+                if (response.status === 'success') {
+                    setAlertTitle('Success');
+                    setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('success');
+                    setTimeout(() => {
+                        setShowAlert(false);
+                        navigate('/login');
+                    }, 3000); // Hide the alert after 3 seconds
+                } else {
+                    setAlertTitle('Error');
                 
               
-                setAlertMessage(response.message);
+                    setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('error');
+                    setTimeout(() => {
+                        setShowAlert(false);
+                    
+                    }, 3000);
+                }
+            } catch (error) {
+                // console.error(error);
+                setAlertTitle('Error');
+                setAlertMessage(error.message);
                 setShowAlert(true);
                 setAlertType('error');
                 setTimeout(() => {
                     setShowAlert(false);
-                    
+                
                 }, 3000);
             }
-        } catch (error) {
-            // console.error(error);
-            setAlertTitle('Error');
-            setAlertMessage(error.message);
-            setShowAlert(true);
-            setAlertType('error');
-            setTimeout(() => {
-                setShowAlert(false);
-                
-            }, 3000);
+        }
+        else {
+            !firstName && setTouchedFirstName(true);
+            !userName && setTouchedUserName(true);
+            !email && setTouchedEmail(true);
+            !password && setTouchedPassword(true);
         }
     }
 
@@ -83,21 +94,21 @@ export default () => {
     return (
         <>
             <form
-                onSubmit={handleSignUp}
+                // onSubmit={handleSignUp}
                 className="space-y-5 flex flex-col w-full items-center"
             >
                 <div className="w-full flex flex-row gap-1">
                     <div className="flex flex-col justify-start items-start" >
                         <SimpleInput pholder={"First name"} value={firstName} onChange={(e) => setFirstName(e.target.value)} onBlur={() => setTouchedFirstName(true)} />
-                        {touchedFirstName && !firstName&&(
+                        {touchedFirstName && !firstName &&(
                             <p className="text-warning font-thin text-xs ">First name is required !</p>
                         )}
                     </div>
                     <div className="flex flex-col justify-start items-start">
-                        <SimpleInput pholder={"Last name"} value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={() => setTouchedLastName(true)} />
-                        {touchedLastName && !lastName && (
+                        <SimpleInput pholder={"Last name (Optional)"} value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={() => setTouchedLastName(true)} />
+                        {/* {touchedLastName && !lastName && (
                             <p className="text-warning font-thin text-xs ">Last name is required!</p>
-                        )}
+                        )} */}
                     </div>
                     
                     
@@ -140,7 +151,7 @@ export default () => {
                 </div>
 
                 <div >
-                    <PrimaryButton name={"Sign up"} />
+                    <PrimaryButton name={"Sign up"} action={handleSignUp} />
                 </div>
 
             </form>
@@ -160,7 +171,9 @@ export default () => {
                
                 
             </div>
-            {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
+            {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />}
+            {showAlert && alertType === 'success' && <SuccessAlert title={"Confirm Email"} message={"We have sent an email to confirm your account"} onclose={handleOnClose} />}
+
             {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
           
         </>

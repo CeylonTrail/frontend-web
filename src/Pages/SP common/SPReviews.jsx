@@ -6,9 +6,11 @@ import "../../assets/styles/form.css"; // Import the CSS file
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faStarHalfAlt, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 import Modal from "react-modal";
 import cancelImg from "../../assets/img/cancel.png"; // Adjust path as needed
+import { useNavigate } from "react-router-dom"; // Use useNavigate hook
 
 const reviews = [
   {
@@ -60,6 +62,7 @@ const reviews = [
     rating: 5,
   },
 ];
+
 const NextArrow = ({ onClick }) => (
   <div className="spreview-arrow spreview-next" onClick={onClick}>
     &gt;
@@ -94,6 +97,8 @@ const SPReviews = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const handleCardClick = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
@@ -103,13 +108,16 @@ const SPReviews = () => {
   };
 
   const handleSubmit = () => {
-    // Handle form submission
     console.log("Rating:", rating);
     console.log("Review:", review);
   };
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
+  };
+
+  const goBackButtonClick = () => {
+    navigate("/hotel-tr-view"); // Use navigate for redirection
   };
 
   const settings = {
@@ -138,6 +146,9 @@ const SPReviews = () => {
 
   return (
     <div className="spreview-container">
+      <div className="spreview-back-button" onClick={goBackButtonClick}>
+        <FontAwesomeIcon icon={faArrowLeft} size="2x" color="#0F969C" />
+      </div>
       <div className="spreview-card-container">
         <div className="spreview-content">
           <div className="spreview-header">
@@ -186,7 +197,8 @@ const SPReviews = () => {
           onClick={toggleModal}
           style={{ cursor: "pointer" }}
         >
-          <FontAwesomeIcon icon={faComments} size="2x" color="#0F969C" />
+          <FontAwesomeIcon icon={faStarHalfAlt} size="2x" color="#ffffff" />
+          <span className="review-text">Give your review</span>
         </a>
       </div>
 

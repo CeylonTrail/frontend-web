@@ -205,3 +205,10 @@
   justify-content: center;
   margin-top: 20px; /* Adjust spacing as needed */
 }
+/* Styling for the back arrow */
+.back-arrow {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #0F969C;
+}
+

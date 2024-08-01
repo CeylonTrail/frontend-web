@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
 import dropFileImg from "../../assets/img/drop-file.png";
 
-const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => {
+const EditRestaurantModal = ({
+  isOpen,
+  onRequestClose,
+  onSubmit,
+  fooditem,
+}) => {
+  const [title, setTitle] = useState(fooditem?.type || "");
+  const [description, setDescription] = useState(fooditem?.description || "");
+  const [price, setPrice] = useState(fooditem?.price || "");
   const [displayImage, setDisplayImage] = useState(fooditem?.src || null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [fileError, setFileError] = useState("");
   const [isDisplayImageSelected, setIsDisplayImageSelected] = useState(
     !!fooditem?.src
   );
+
+  useEffect(() => {
+    if (fooditem) {
+      setTitle(fooditem.type || "");
+      setDescription(fooditem.description || "");
+      setPrice(fooditem.price || "");
+      setDisplayImage(fooditem.src || null);
+      setIsDisplayImageSelected(!!fooditem.src);
+    }
+  }, [fooditem]);
 
   if (!isOpen) return null;
 
@@ -70,6 +88,18 @@ const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => 
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = {
+      type: title,
+      description,
+      price,
+      displayImage,
+      additionalImages,
+    };
+    onSubmit(formData);
+  };
+
   return (
     <>
       <div className="modal-overlay" onClick={onRequestClose}>
@@ -84,7 +114,7 @@ const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => 
               onClick={onRequestClose}
             />
           </div>
-          <form className="modal-form" onSubmit={onSubmit}>
+          <form className="modal-form" onSubmit={handleSubmit}>
             {/* Form fields */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
@@ -96,7 +126,8 @@ const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => 
                 name="title"
                 className="form-input"
                 placeholder="Enter title"
-                defaultValue={fooditem?.type}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
@@ -110,7 +141,8 @@ const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => 
                 className="form-textarea"
                 rows="4"
                 placeholder="Enter description"
-                defaultValue={fooditem?.description}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
             </div>
@@ -126,7 +158,8 @@ const EditRestaurantModal = ({ isOpen, onRequestClose, onSubmit, fooditem }) => 
                 placeholder="Enter price"
                 min="0"
                 step="0.01"
-                defaultValue={fooditem?.price}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 required
               />
             </div>

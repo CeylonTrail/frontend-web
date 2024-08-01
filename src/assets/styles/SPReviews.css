@@ -202,9 +202,35 @@
   transform: scale(1.1);
 }
 
-.spreview-floating-button .fa-comments {
+.spreview-floating-button .fa-star-sharp-half-stroke {
   font-size: 2rem; /* Adjust size as needed */
-  color: #e0eaea; /* Adjust color as needed */
+  color: #0F969C; /* Adjust color as needed */
+}
+
+.spreview-floating-button .review-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  /* margin-bottom: 1rem; */
+  right: 5%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  color: #ffffff; /* Text color */
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.spreview-floating-button a:hover .review-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.spreview-floating-button a:hover .fa-star-half-alt {
+  color: #FFD700; /* Gold color on hover */
+  transition: color 0.3s ease;
 }
 
 .spreview-arrow {
@@ -255,4 +281,26 @@
 
 .spreview-star.filled {
   color: gold; /* Gold color for filled stars */
+}
+.spreview-back-button {
+  position: absolute;
+  top: 8rem; /* Adjust as needed */
+  left: 3rem; /* Adjust as needed */
+  background-color: #ffffff;
+  border: 1px solid #0F969C;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 20; /* Ensure it's above other content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.spreview-back-button:hover {
+  background-color: #92e9ed;
+  color: #ffffff;
+}
+
+.spreview-back-button .fa-arrow-left {
+  font-size: 1.5rem;
 }

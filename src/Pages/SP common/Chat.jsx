@@ -9,7 +9,9 @@ import {
   FaPhone,
   FaThumbtack,
   FaEnvelope,
+  FaArrowLeft,
 } from "react-icons/fa";
+
 
 const Chat = () => {
   const contacts = [
@@ -220,6 +222,11 @@ const Chat = () => {
       : message;
   };
 
+ 
+  const handleBackClick = () => {
+    window.history.back();
+  };
+
   return (
     <div className="messenger-container">
       <div className="messenger-sidebar">
@@ -309,7 +316,9 @@ const Chat = () => {
               <span className="chat-header-status">Last seen: 2 hours ago</span>
             </div>
           </div>
-          <FaPhone className="call-icon" />
+          <div onClick={handleBackClick} className="back-icon">
+            <FaArrowLeft />
+          </div>
         </div>
 
         <div className="chat-messages">

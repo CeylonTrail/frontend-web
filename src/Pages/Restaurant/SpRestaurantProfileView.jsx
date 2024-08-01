@@ -9,9 +9,6 @@ import Modal from "./RestaurantModal.jsx"; // Import Modal
 import BoostModal from "../SP common/BoostModal.jsx"; // Import BoostModal
 import RestaurantCard from "./RestaurantCard.jsx";
 import EditRestaurantModal from "./EditRestaurantModal.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
-import "../../assets/styles/form.css"; 
 
 const SpRestaurantProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,11 +64,6 @@ const SpRestaurantProfileView = () => {
   const handleCloseEditRestaurantModal = () => {
     setSelectedCard(null);
     setIsEditRestaurantModalOpen(false);
-  };
-
-  const handleRedirect = (event) => {
-    event.preventDefault();
-    navigate("/chat");
   };
 
   const fooditems = [
@@ -372,19 +364,6 @@ const SpRestaurantProfileView = () => {
               {number}
             </button>
           ))}
-        </div>
-        <div className="floating-button">
-          <a
-            href="#!" // Set href to a dummy value
-            aria-label="Contact via Facebook Messenger"
-            onClick={handleRedirect} // Attach click handler for navigation
-          >
-            <FontAwesomeIcon
-              icon={faFacebookMessenger}
-              size="2x"
-              color="#0F969C"
-            />{" "}
-          </a>
         </div>
       </div>
 

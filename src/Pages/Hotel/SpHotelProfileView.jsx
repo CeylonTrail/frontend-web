@@ -158,6 +158,11 @@ const SpHotelProfileView = () => {
     pageNumbers.push(i);
   }
 
+  const handleSeeReviewsClick = () => {
+    navigate("/sp-view-review"); // Navigate to the /sp-review page
+  };
+
+
   return (
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       {/* White Background Box */}
@@ -279,6 +284,25 @@ const SpHotelProfileView = () => {
               >
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
               </svg>
+              <div className="flex items-center mt-1">
+                <a
+                  href="#!" // Dummy href for the example
+                  onClick={handleSeeReviewsClick} // Function for navigation
+                  style={{
+                    fontSize: "1.05rem",
+                    padding: "0.5rem 1rem",
+                    color: "#0f969c", // Text color
+                    textDecoration: "none", // Remove underline
+                    borderRadius: "0.25rem", // Rounded corners
+                    display: "inline-block", // Makes the link behave like a button
+                    textAlign: "center",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s, transform 0.2s",
+                  }}
+                >
+                  See reviews
+                </a>
+              </div>
             </div>
           </div>
 
@@ -354,7 +378,7 @@ const SpHotelProfileView = () => {
             </button>
           ))}
         </div>
-        <div className="floating-button">
+        <div className="sp-own-view-floating-button">
           <a
             href="#!" // Set href to a dummy value
             aria-label="Contact via Facebook Messenger"

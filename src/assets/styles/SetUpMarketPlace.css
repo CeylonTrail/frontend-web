@@ -71,3 +71,32 @@
   border-radius: 0.375rem; /* rounded-md equivalent in Tailwind */
   border: 2px solid #6DA5C
 }
+
+/* VerificationStatus.css */
+.verification-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.verification-icon.verified {
+  background-color: #28a745; /* Green */
+}
+
+.verification-icon.pending {
+  background-color: #ffc107; /* Yellow */
+}
+
+.verification-icon.rejected {
+  background-color: #dc3545; /* Red */
+}
+
+.verification-icon span {
+  margin-left: 0.5rem;
+}

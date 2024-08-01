@@ -7,9 +7,15 @@ import TrHotelModal from "./TrHotelModal.jsx";
 import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faComments } from "@fortawesome/free-solid-svg-icons";
-// import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
-// import "../../assets/styles/form.css"; 
+import {
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faLinkedin,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +23,7 @@ const TrHotelProfileView = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const cardsPerPage = 8;
   const navigate = useNavigate();
+
 
   const handleSeeMoreClick = (card) => {
     setSelectedCard(card);
@@ -175,22 +182,48 @@ const TrHotelProfileView = () => {
                 <span className="font-semibold">Hotel</span>
               </div>
               <div className="text-sm mb-2">
-                <span className="font-semibold">Email:</span>{" "}
-                contact@bluehills.com
-              </div>
-              <div className="text-sm mb-2">
                 <span className="font-semibold">Phone:</span> +123 456 7890
               </div>
               <div className="text-sm mb-2">
-                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
-                9:00 PM
+                <span className="font-semibold">Opening Hours:</span>
+                <br />
+                Mon - Fri: 9:00 AM - 9:00 PM
+                <br />
+                Sat - Sun: 10:00 AM - 6:00 PM
               </div>
               <div className="text-sm mb-2">
                 <span className="font-semibold">Address:</span> 123 Blue Hills
                 Road, Hilltown
               </div>
-              <div className="text-sm mb-2">
-                <span className="font-semibold">Owner:</span> John Doe
+              <div className="flex items-center space-x-2 mt-2">
+                <a
+                  href="https://www.facebook.com/yourpage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+                <a
+                  href="https://www.twitter.com/yourpage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a
+                  href="https://www.instagram.com/yourpage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                <a
+                  href="https://www.yourwebsite.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faGlobe} />
+                </a>
               </div>
             </div>
           </div>

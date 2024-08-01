@@ -11,12 +11,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
 
-
 const Traveller_navigation = [
-  { name: "Community", href: "/community", current: true },
-  { name: "Trips", href: "/trips", current: false },
-  { name: "Market Place", href: "/services", current: false },
-  { name: "Places", href: "/places", current: false },
+
+  { name: 'Community', href: '/community', current: true },
+  { name: 'Trips', href: '/trip_dashboard', current: false },
+  { name: 'Market Place', href: '/services', current: false },
+  { name: 'Places', href: '/places', current: false },
+
 ];
 
 const SP_navigation = [
@@ -37,20 +38,25 @@ export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    if (type === "traveller") {
-      setNavigation(Traveller_navigation);
+    const savedNavigationState = localStorage.getItem('navigationState');
+    if (savedNavigationState) {
+      setNavigation(JSON.parse(savedNavigationState));
     } else {
-      setNavigation(SP_navigation);
+      if (type === 'traveller') {
+        setNavigation(Traveller_navigation);
+      } else {
+        setNavigation(SP_navigation);
+      }
     }
   }, [type]);
 
   const handleNavClick = (index) => {
-    setNavigation((prevNavigation) =>
-      prevNavigation.map((item, idx) => ({
-        ...item,
-        current: idx === index,
-      }))
-    );
+    const newNavigation = navigation.map((item, idx) => ({
+      ...item,
+      current: idx === index,
+    }));
+    setNavigation(newNavigation);
+    localStorage.setItem('navigationState', JSON.stringify(newNavigation));
     window.location.href = navigation[index].href;
   };
 
@@ -123,11 +129,7 @@ export default function Example({ type, profilePic, funtion }) {
                       onClick={funtion}
                     >
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src={profilePic}
-                        alt=""
-                      />
+                      <img className="h-8 w-8 rounded-full" src={profilePic} alt="" />
                     </MenuButton>
                   </div>
                 </Menu>

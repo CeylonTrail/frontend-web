@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
-import HotelCardImg from "../../assets/img/hotel-card.png";
+import DeluxeRoomImg from "../../assets/img/deluxeroom.png";
+import DeluxeRoomImg1 from "../../assets/img/deluxeroom1.png";
+import DeluxeRoomImg2 from "../../assets/img/deluxeroom2.png";
+import DeluxeRoomImg3 from "../../assets/img/deluxeroom3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -17,13 +20,18 @@ const TrHotelModal = ({ isOpen, onRequestClose, roomDetails = {} }) => {
   if (!isOpen) return null;
 
   const {
-    title = "Luxury Suite",
-    description = "This luxurious suite offers stunning views of the city, a king-sized bed, a spacious bathroom with a jacuzzi, and complimentary breakfast.",
+    title = "Deluxe Rooms",
+    description = "The Deluxe Rooms are perched on the fifth to seventh floors and combine the beauty and elegance of the charming city with meticulous design touches and sprawling spaces. Facing the Colombo cityscape, these Deluxe Rooms at The Kingsbury, one of the most luxurious 5 Star hotels in Colombo",
     price = "250",
     rating = "4.5",
   } = roomDetails;
 
-  const placeholderImages = new Array(5).fill(HotelCardImg);
+  const placeholderImages = [
+    DeluxeRoomImg,
+    DeluxeRoomImg1,
+    DeluxeRoomImg2,
+    DeluxeRoomImg3,
+  ];
 
   const handleImageClick = (img) => {
     setSelectedImage(img);

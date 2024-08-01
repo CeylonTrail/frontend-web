@@ -23,7 +23,7 @@ const Traveller_navigation = [
 const SP_navigation = [
   { name: "Community", href: "/community", current: false },
   { name: "Shop", href: "/trips", current: true },
-  { name: "Market Place", href: "/services", current: false },
+  { name: "Market Place", href: "/market", current: false },
 ];
 
 function classNames(...classes) {

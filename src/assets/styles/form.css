@@ -255,21 +255,24 @@
 /* Lightbox Content */
 .lightbox-content {
   position: relative;
-  max-width: 90%;
-  max-height: 80%;
+  max-width: 50%;
+  max-height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Lightbox Image */
 .lightbox-image {
   max-width: 100%;
   max-height: 100%;
   display: block;
 }
-
 /* Lightbox Close Icon */
 .lightbox-close-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  right: 0;
+  margin-top: 10px;
   width: 30px;
   height: 30px;
   cursor: pointer;

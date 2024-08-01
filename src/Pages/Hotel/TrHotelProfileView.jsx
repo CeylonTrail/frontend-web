@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
-import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import DeluxeRoomImg from "../../assets/img/deluxeroom.png"
+import PremiumRoomImg from "../../assets/img/premiumroom.png";
+import SuitRoomImg from "../../assets/img/suitroom.png";
+import ExecutiveRoomImg from "../../assets/img/executiveroom.png";
 import TrHotelModal from "./TrHotelModal.jsx";
 import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
@@ -16,10 +19,12 @@ import {
   faLinkedin,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import Profile from "../../assets/img/Profile.svg";
 
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import ReportModal from "../SP common/ReportModal.jsx";
 import Header from "../../components/header.js"
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
 
 
 const TrHotelProfileView = () => {
@@ -27,7 +32,7 @@ const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isTrHotelModalOpen, setIsTrHotelModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const cardsPerPage = 8;
+  const cardsPerPage = 4;
   const navigate = useNavigate();
    const [showDropdown, setShowDropdown] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -73,28 +78,28 @@ const TrHotelProfileView = () => {
 
   const rooms = [
     {
-      type: "Luxury Suite",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
+      type: "Deluxe Rooms",
+      price: "LKR 5000/night",
+      rating: 4.7,
+      src: DeluxeRoomImg,
     },
     {
-      type: "Single Room 2",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
+      type: "Superior Rooms",
+      price: "LKR 3500/night",
+      rating: 5,
+      src: PremiumRoomImg,
     },
     {
-      type: "Single Room 3",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
+      type: "Executive Rooms",
+      price: "LKR 6500/night",
+      rating: 4.8,
+      src: ExecutiveRoomImg,
     },
     {
-      type: "Single Room 4",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
+      type: "Suits",
+      price: "LKR 4000/night",
+      rating: 4.4,
+      src: SuitRoomImg,
     },
     {
       type: "Single Room 5",
@@ -157,7 +162,12 @@ const TrHotelProfileView = () => {
 
   return (
     <>
-      <Header profilePic={HotelProfileImg } />
+      <Header
+        type="traveller"
+        profilePic={Profile}
+        funtion={() => {}}
+      />
+
       <div className="relative max-w-full mx-auto mb-0 rounded-lg text-gray-900 mt-20">
         <div className="absolute inset-0 flex justify-center items-center mt-20">
           <div
@@ -202,7 +212,7 @@ const TrHotelProfileView = () => {
                   className="text-4xl font-semibold whitespace-nowrap"
                   style={{ fontWeight: "400", fontSize: "40px" }}
                 >
-                  Blue Hills Residencies
+                  Pearl of Lanka Inn
                 </div>
                 <div className="flex flex-col mt-2 items-center">
                   <div className="text-xl font-light italic mb-4">

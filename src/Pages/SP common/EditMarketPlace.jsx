@@ -17,7 +17,8 @@ import {
   faClock,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
-
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import Header from "../../components/header.js";
 
 const EditMarketPlace = () => {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ const EditMarketPlace = () => {
     navigate("/hotel-sp-view");
   };
 
-  
   const initialDays = [
     "Monday",
     "Tuesday",
@@ -113,470 +113,477 @@ const EditMarketPlace = () => {
   const [verificationStatus, setVerificationStatus] = useState("Verified"); // Verification status
 
   return (
-    <div className="isolate bg-[#E7E7E7] px-5 py-18 lg:px-6 mt-16 mb-4">
-      <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl ">
-        {/* Image Section */}
-        <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">
-          <img
-            src={MarketPlaceImg}
-            style={{
-              position: "fixed",
-              width: "43vw",
-              height: "90vh",
-              left: "0vw",
-              top: "10vh",
-            }}
-            alt="Market Place"
-            className="w-auto h-auto"
-          />
-        </div>
-
-        {/* Form Section */}
-        <form
-          action="#"
-          method="POST"
-          className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0]"
-        >
-          <div className="mx-auto max-w-lg text-center">
-            <h2 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-4xl mb-10">
-              <strong>Edit Market Place</strong>
-            </h2>
+    <>
+      <Header
+        type="serviceprovider"
+        profilePic={HotelProfileImg}
+        funtion={() => {}}
+      />
+      <div className="isolate bg-[#E7E7E7] px-5 py-18 lg:px-6 mt-24 mb-4">
+        <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl ">
+          {/* Image Section */}
+          <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">
+            <img
+              src={MarketPlaceImg}
+              style={{
+                position: "fixed",
+                width: "43vw",
+                height: "90vh",
+                left: "0vw",
+                top: "10vh",
+              }}
+              alt="Market Place"
+              className="w-auto h-auto"
+            />
           </div>
 
-          <div className="space-y-6">
-            {/* Profile Image Upload */}
-            <div className="flex items-center gap-x-3 mb-0">
-              <label
-                htmlFor="profile-image"
-                className="w-1/3 text-sm font-semibold leading-4 text-gray-900 mb-0"
-              >
-                <strong>Profile Image</strong>
-              </label>
-              <input
-                id="profile-image"
-                name="profile-image"
-                type="file"
-                style={{
-                  borderColor: "#6DA5C0",
-                  outlineColor: "#0F969C",
-                }}
-                className="flex-1 rounded-md mt-1 border-2 px-2.5 py-0.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-"
-                placeholder="Upload an image (e.g., logo)"
-              />
+          {/* Form Section */}
+          <form
+            action="#"
+            method="POST"
+            className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0]"
+          >
+            <div className="mx-auto max-w-lg text-center">
+              <h2 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-4xl mb-10">
+                <strong>Edit Market Place</strong>
+              </h2>
             </div>
 
-            <p className="text-sm text-gray-600 ml-60">
-              *Add a logo or an image that represents your brand to help
-              travelers recognize your shop.
-            </p>
-
-            {/* Cover Image Upload */}
-            <div className="flex items-center gap-x-3 mb-0.5">
-              <label
-                htmlFor="cover-image"
-                className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-              >
-                <strong>Cover Image</strong>
-              </label>
-              <input
-                id="cover-image"
-                name="cover-image"
-                type="file"
-                style={{
-                  borderColor: "#6DA5C0",
-                  outlineColor: "#0F969C",
-                }}
-                className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                placeholder="Upload a cover image"
-              />
-            </div>
-            <p className="text-sm text-gray-600 ml-60">
-              *Upload a cover image to make your shop more appealing. This image
-              will be prominently displayed on your shop's page.
-            </p>
-
-            {/* Marketplace Info */}
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Marketplace Info</strong>
-              </h3>
-              {/* Shop Name */}
-              <div className="flex items-center gap-x-3 mb-0.5">
+            <div className="space-y-6">
+              {/* Profile Image Upload */}
+              <div className="flex items-center gap-x-3 mb-0">
                 <label
-                  htmlFor="shop-name"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  htmlFor="profile-image"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900 mb-0"
                 >
-                  Name
+                  <strong>Profile Image</strong>
                 </label>
                 <input
-                  id="shop-name"
-                  name="shop-name"
-                  type="text"
-                  autoComplete="organization"
-                  readOnly
+                  id="profile-image"
+                  name="profile-image"
+                  type="file"
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 bg-[#E7E7E7]"
-                  placeholder="Enter shop name"
-                  defaultValue="My Market Place"
+                  className="flex-1 rounded-md mt-1 border-2 px-2.5 py-0.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-"
+                  placeholder="Upload an image (e.g., logo)"
                 />
               </div>
 
+              <p className="text-sm text-gray-600 ml-60">
+                *Add a logo or an image that represents your brand to help
+                travelers recognize your shop.
+              </p>
+
+              {/* Cover Image Upload */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="shop-description"
+                  htmlFor="cover-image"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Description
+                  <strong>Cover Image</strong>
                 </label>
-                <textarea
-                  id="shop-description"
-                  name="shop-description"
-                  rows={3}
+                <input
+                  id="cover-image"
+                  name="cover-image"
+                  type="file"
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
                   className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter shop description"
-                  defaultValue="We offer a wide range of products to meet all your needs."
+                  placeholder="Upload a cover image"
                 />
               </div>
+              <p className="text-sm text-gray-600 ml-60">
+                *Upload a cover image to make your shop more appealing. This
+                image will be prominently displayed on your shop's page.
+              </p>
 
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="service-type"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Service Type
-                </label>
-                <input
-                  id="service-type"
-                  name="service-type"
-                  type="text"
-                  readOnly
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md bg-[#E7E7E7] border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter service type"
-                  defaultValue="Retail"
-                />
-              </div>
-
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="address"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Email
-                </label>
-                <input
-                  id="emsil"
-                  name="email"
-                  type="text"
-                  readOnly
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 bg-[#E7E7E7] rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter email address"
-                  defaultValue="bluehills@gmail.com"
-                />
-              </div>
-
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="phone"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Contact Number
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter phone number"
-                  defaultValue="+1 (555) 555-5555"
-                />
-              </div>
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="shop-description"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Physical Address
-                </label>
-                <textarea
-                  id="shop-description"
-                  name="shop-description"
-                  rows={3}
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter shop description"
-                  defaultValue="No 35,Pereira lane, Col 6."
-                />
-              </div>
-            </div>
-
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Service Provider Info</strong>
-              </h3>
-
-              {/* First Name */}
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="first-name"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  First Name
-                </label>
-                <input
-                  id="first-name"
-                  name="first-name"
-                  type="text"
-                  autoComplete="given-name"
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter first name"
-                  defaultValue="John" // Prefilled value
-                />
-              </div>
-
-              {/* Last Name */}
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="last-name"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Last Name
-                </label>
-                <input
-                  id="last-name"
-                  name="last-name"
-                  type="text"
-                  autoComplete="family-name"
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-4 mt-4"
-                  placeholder="Enter last name"
-                  defaultValue="Doe" // Prefilled value
-                />
-              </div>
-
-              {/* Change Password */}
+              {/* Marketplace Info */}
               <div className="border-t border-gray-300 pt-4">
                 <h3 className="text-lg font-bold mb-0.5">
-                  <strong>Change Password</strong>
+                  <strong>Marketplace Info</strong>
                 </h3>
-
-                {/* Current Password */}
+                {/* Shop Name */}
                 <div className="flex items-center gap-x-3 mb-0.5">
                   <label
-                    htmlFor="current-password"
+                    htmlFor="shop-name"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    Current Password
+                    Name
                   </label>
                   <input
-                    id="current-password"
-                    name="current-password"
-                    type="password"
-                    autoComplete="current-password"
+                    id="shop-name"
+                    name="shop-name"
+                    type="text"
+                    autoComplete="organization"
+                    readOnly
                     style={{
                       borderColor: "#6DA5C0",
                       outlineColor: "#0F969C",
                     }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="Enter current password"
+                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 bg-[#E7E7E7]"
+                    placeholder="Enter shop name"
+                    defaultValue="My Market Place"
                   />
                 </div>
 
-                {/* New Password */}
                 <div className="flex items-center gap-x-3 mb-0.5">
                   <label
-                    htmlFor="new-password"
+                    htmlFor="shop-description"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    New Password
+                    Description
                   </label>
-                  <input
-                    id="new-password"
-                    name="new-password"
-                    type="password"
-                    autoComplete="new-password"
+                  <textarea
+                    id="shop-description"
+                    name="shop-description"
+                    rows={3}
                     style={{
                       borderColor: "#6DA5C0",
                       outlineColor: "#0F969C",
                     }}
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="Enter new password"
+                    placeholder="Enter shop description"
+                    defaultValue="We offer a wide range of products to meet all your needs."
                   />
                 </div>
 
-                {/* Confirm New Password */}
                 <div className="flex items-center gap-x-3 mb-0.5">
                   <label
-                    htmlFor="confirm-password"
+                    htmlFor="service-type"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    Confirm Password
+                    Service Type
                   </label>
                   <input
-                    id="confirm-password"
-                    name="confirm-password"
-                    type="password"
-                    autoComplete="new-password"
+                    id="service-type"
+                    name="service-type"
+                    type="text"
+                    readOnly
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 rounded-md bg-[#E7E7E7] border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                    placeholder="Enter service type"
+                    defaultValue="Retail"
+                  />
+                </div>
+
+                <div className="flex items-center gap-x-3 mb-0.5">
+                  <label
+                    htmlFor="address"
+                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="emsil"
+                    name="email"
+                    type="text"
+                    readOnly
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 bg-[#E7E7E7] rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                    placeholder="Enter email address"
+                    defaultValue="bluehills@gmail.com"
+                  />
+                </div>
+
+                <div className="flex items-center gap-x-3 mb-0.5">
+                  <label
+                    htmlFor="phone"
+                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  >
+                    Contact Number
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="text"
                     style={{
                       borderColor: "#6DA5C0",
                       outlineColor: "#0F969C",
                     }}
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="Confirm new password"
+                    placeholder="Enter phone number"
+                    defaultValue="+1 (555) 555-5555"
+                  />
+                </div>
+                <div className="flex items-center gap-x-3 mb-0.5">
+                  <label
+                    htmlFor="shop-description"
+                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  >
+                    Physical Address
+                  </label>
+                  <textarea
+                    id="shop-description"
+                    name="shop-description"
+                    rows={3}
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                    placeholder="Enter shop description"
+                    defaultValue="No 35,Pereira lane, Col 6."
                   />
                 </div>
               </div>
-            </div>
 
-            {/* Opening Hours */}
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Opening Hours</strong>
-              </h3>
-              {initialDays.map((day) => (
-                <div key={day} className="flex items-center gap-x-3 mb-0.5">
-                  <input
-                    type="checkbox"
-                    checked={selectedDays.includes(day)}
-                    onChange={() => handleDayCheckboxChange(day)}
-                    className="form-checkbox"
-                  />
+              <div className="border-t border-gray-300 pt-4">
+                <h3 className="text-lg font-bold mb-0.5">
+                  <strong>Service Provider Info</strong>
+                </h3>
+
+                {/* First Name */}
+                <div className="flex items-center gap-x-3 mb-0.5">
                   <label
-                    htmlFor={`opening-hours-${day}`}
+                    htmlFor="first-name"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    {day}
+                    First Name
                   </label>
-                  {selectedDays.includes(day) && (
-                    <>
-                      <input
-                        id={`opening-hours-${day}-from`}
-                        type="time"
-                        value={daysTimes[day]?.from || ""}
-                        onChange={(e) =>
-                          handleDayChange(day, "from", e.target.value)
-                        }
-                        style={{
-                          borderColor: "#6DA5C0",
-                          outlineColor: "#0F969C",
-                        }}
-                        className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                      />
-                      <span>-</span>
-                      <input
-                        id={`opening-hours-${day}-to`}
-                        type="time"
-                        value={daysTimes[day]?.to || ""}
-                        onChange={(e) =>
-                          handleDayChange(day, "to", e.target.value)
-                        }
-                        style={{
-                          borderColor: "#6DA5C0",
-                          outlineColor: "#0F969C",
-                        }}
-                        className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                      />
-                    </>
-                  )}
+                  <input
+                    id="first-name"
+                    name="first-name"
+                    type="text"
+                    autoComplete="given-name"
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                    placeholder="Enter first name"
+                    defaultValue="John" // Prefilled value
+                  />
                 </div>
-              ))}
-            </div>
 
-            {/* Social Media Links */}
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Social Media Links</strong>
-              </h3>
-              {initialSocialMedia.map(({ name, icon }) => (
-                <div key={name} className="flex items-center gap-x-3 mb-0.5">
-                  <input
-                    type="checkbox"
-                    checked={selectedSocialMedia.includes(name)}
-                    onChange={() => handleSocialMediaCheckboxChange(name)}
-                    className="form-checkbox"
-                  />
+                {/* Last Name */}
+                <div className="flex items-center gap-x-3 mb-0.5">
                   <label
-                    htmlFor={`social-media-${name}`}
+                    htmlFor="last-name"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    {name}
+                    Last Name
                   </label>
-                  {selectedSocialMedia.includes(name) && (
+                  <input
+                    id="last-name"
+                    name="last-name"
+                    type="text"
+                    autoComplete="family-name"
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 mb-4 mt-4"
+                    placeholder="Enter last name"
+                    defaultValue="Doe" // Prefilled value
+                  />
+                </div>
+
+                {/* Change Password */}
+                <div className="border-t border-gray-300 pt-4">
+                  <h3 className="text-lg font-bold mb-0.5">
+                    <strong>Change Password</strong>
+                  </h3>
+
+                  {/* Current Password */}
+                  <div className="flex items-center gap-x-3 mb-0.5">
+                    <label
+                      htmlFor="current-password"
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      Current Password
+                    </label>
                     <input
-                      id={`social-media-${name}`}
-                      type="url"
-                      value={socialMediaLinks[name] || ""}
-                      onChange={(e) =>
-                        handleSocialMediaUrlChange(name, e.target.value)
-                      }
+                      id="current-password"
+                      name="current-password"
+                      type="password"
+                      autoComplete="current-password"
                       style={{
                         borderColor: "#6DA5C0",
                         outlineColor: "#0F969C",
                       }}
                       className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                      placeholder={`Enter ${name} URL`}
+                      placeholder="Enter current password"
                     />
-                  )}
-                </div>
-              ))}
-            </div>
+                  </div>
 
-            {/* Verification Status */}
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Verification Status</strong>
-              </h3>
-              <div className="flex items-center gap-x-2">
-                {renderVerificationIcon(verificationStatus)}
-                <p className="text-sm text-gray-900">{verificationStatus}</p>
+                  {/* New Password */}
+                  <div className="flex items-center gap-x-3 mb-0.5">
+                    <label
+                      htmlFor="new-password"
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      New Password
+                    </label>
+                    <input
+                      id="new-password"
+                      name="new-password"
+                      type="password"
+                      autoComplete="new-password"
+                      style={{
+                        borderColor: "#6DA5C0",
+                        outlineColor: "#0F969C",
+                      }}
+                      className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                      placeholder="Enter new password"
+                    />
+                  </div>
+
+                  {/* Confirm New Password */}
+                  <div className="flex items-center gap-x-3 mb-0.5">
+                    <label
+                      htmlFor="confirm-password"
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      Confirm Password
+                    </label>
+                    <input
+                      id="confirm-password"
+                      name="confirm-password"
+                      type="password"
+                      autoComplete="new-password"
+                      style={{
+                        borderColor: "#6DA5C0",
+                        outlineColor: "#0F969C",
+                      }}
+                      className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                      placeholder="Confirm new password"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Opening Hours */}
+              <div className="border-t border-gray-300 pt-4">
+                <h3 className="text-lg font-bold mb-0.5">
+                  <strong>Opening Hours</strong>
+                </h3>
+                {initialDays.map((day) => (
+                  <div key={day} className="flex items-center gap-x-3 mb-0.5">
+                    <input
+                      type="checkbox"
+                      checked={selectedDays.includes(day)}
+                      onChange={() => handleDayCheckboxChange(day)}
+                      className="form-checkbox"
+                    />
+                    <label
+                      htmlFor={`opening-hours-${day}`}
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      {day}
+                    </label>
+                    {selectedDays.includes(day) && (
+                      <>
+                        <input
+                          id={`opening-hours-${day}-from`}
+                          type="time"
+                          value={daysTimes[day]?.from || ""}
+                          onChange={(e) =>
+                            handleDayChange(day, "from", e.target.value)
+                          }
+                          style={{
+                            borderColor: "#6DA5C0",
+                            outlineColor: "#0F969C",
+                          }}
+                          className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                        />
+                        <span>-</span>
+                        <input
+                          id={`opening-hours-${day}-to`}
+                          type="time"
+                          value={daysTimes[day]?.to || ""}
+                          onChange={(e) =>
+                            handleDayChange(day, "to", e.target.value)
+                          }
+                          style={{
+                            borderColor: "#6DA5C0",
+                            outlineColor: "#0F969C",
+                          }}
+                          className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                        />
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Social Media Links */}
+              <div className="border-t border-gray-300 pt-4">
+                <h3 className="text-lg font-bold mb-0.5">
+                  <strong>Social Media Links</strong>
+                </h3>
+                {initialSocialMedia.map(({ name, icon }) => (
+                  <div key={name} className="flex items-center gap-x-3 mb-0.5">
+                    <input
+                      type="checkbox"
+                      checked={selectedSocialMedia.includes(name)}
+                      onChange={() => handleSocialMediaCheckboxChange(name)}
+                      className="form-checkbox"
+                    />
+                    <label
+                      htmlFor={`social-media-${name}`}
+                      className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                    >
+                      {name}
+                    </label>
+                    {selectedSocialMedia.includes(name) && (
+                      <input
+                        id={`social-media-${name}`}
+                        type="url"
+                        value={socialMediaLinks[name] || ""}
+                        onChange={(e) =>
+                          handleSocialMediaUrlChange(name, e.target.value)
+                        }
+                        style={{
+                          borderColor: "#6DA5C0",
+                          outlineColor: "#0F969C",
+                        }}
+                        className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                        placeholder={`Enter ${name} URL`}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Verification Status */}
+              <div className="border-t border-gray-300 pt-4">
+                <h3 className="text-lg font-bold mb-0.5">
+                  <strong>Verification Status</strong>
+                </h3>
+                <div className="flex items-center gap-x-2">
+                  {renderVerificationIcon(verificationStatus)}
+                  <p className="text-sm text-gray-900">{verificationStatus}</p>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex justify-end space-x-4 mt-2">
+                <PrimaryButton
+                  name="Back"
+                  action={handleBackClick}
+                  isActive={true}
+                />
+                <PrimaryButton
+                  name="Save"
+                  action={handleButtonClick}
+                  isActive={false}
+                />
               </div>
             </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-end space-x-4 mt-2">
-              <PrimaryButton
-                name="Back"
-                action={handleBackClick}
-                isActive={true}
-              />
-              <PrimaryButton
-                name="Save"
-                action={handleButtonClick}
-                isActive={false}
-              />
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

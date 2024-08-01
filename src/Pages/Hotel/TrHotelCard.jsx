@@ -19,7 +19,7 @@ const TrHotelCard = ({
           alt=""
         />
         <div
-          className="absolute bottom-8 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
+          className="absolute top-10 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
           style={{ zIndex: 5 }}
         >
           <div className="text-sm">
@@ -31,12 +31,8 @@ const TrHotelCard = ({
           </div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black bg-opacity-50 p-4">
-          <div className="flex flex-col items-center gap-y-2">
-            {/* <PrimaryButton
-              name="Boost"
-              action={() => handleBoostClick(card)}
-              isActive={false}
-            /> */}
+          <div className="flex flex-col items-center gap-y-2 mt-60">
+
             <PrimaryButton
               name="See more"
               action={() => handleSeeMoreClick(card)}

@@ -11,6 +11,8 @@ import {
   FaEnvelope,
   FaArrowLeft,
 } from "react-icons/fa";
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import Header from "../../components/header.js";
 
 
 const Chat = () => {
@@ -228,7 +230,13 @@ const Chat = () => {
   };
 
   return (
-    <div className="messenger-container">
+    <>
+      <Header
+        type="serviceprovider"
+        profilePic={HotelProfileImg}
+        funtion={() => {}}
+      />
+    <div className="messenger-container pt-10">
       <div className="messenger-sidebar">
         <div className="search-bar">
           <div className="search-input-wrapper flex items-center gap-x-3 mb-0.5">
@@ -352,7 +360,8 @@ const Chat = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

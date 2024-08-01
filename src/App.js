@@ -17,6 +17,7 @@ import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRen
 import MarketPlace from "./Pages/SP common/MarketPlace";
 import SPReviews from "./Pages/SP common/SPReviews";
 import SPViewReviews from "./Pages/SP common/SPViewReviews";
+import SavedItemsPage from "./Pages/SP common/SavedItemsPage";
 
 import SignUp from "./Pages/SignUp/signup";
 import Login from "./Pages/login";
@@ -63,7 +64,7 @@ function App() {
             path="/sp"
             element={
               <>
-                <Header />;<SpRedirectPage />
+                <SpRedirectPage />
               </>
             }
           />
@@ -71,7 +72,7 @@ function App() {
             path="/set-market"
             element={
               <>
-                <Header />;<SetUpMarketPlace />
+                <SetUpMarketPlace />
               </>
             }
           />
@@ -79,7 +80,7 @@ function App() {
             path="/edit-market"
             element={
               <>
-                <Header />;<EditMarketPlace />
+                <EditMarketPlace />
               </>
             }
           />
@@ -87,7 +88,7 @@ function App() {
             path="/hotel-sp-view"
             element={
               <>
-                <Header />;<SpHotelProfileView />
+                <SpHotelProfileView />
               </>
             }
           />
@@ -95,7 +96,7 @@ function App() {
             path="/hotel-tr-view"
             element={
               <>
-                <Header />;<TrHotelProfileView />
+                <TrHotelProfileView />
               </>
             }
           />
@@ -135,7 +136,7 @@ function App() {
             path="/subscription-plan"
             element={
               <>
-                <Header />;<SubscriptionPlan />
+                <SubscriptionPlan />
               </>
             }
           />
@@ -143,7 +144,7 @@ function App() {
             path="/chat"
             element={
               <>
-                <Header />;<Chat />
+                <Chat />
               </>
             }
           />
@@ -151,7 +152,7 @@ function App() {
             path="/sp-review"
             element={
               <>
-                <Header />;<SPReviews />
+                <SPReviews />
               </>
             }
           />
@@ -159,16 +160,24 @@ function App() {
             path="/sp-view-review"
             element={
               <>
-                <Header />;<SPViewReviews />
+                <SPViewReviews />
               </>
             }
           />
 
           <Route
-            path=""
+            path="/market"
             element={
               <>
-                <Header />;<MarketPlace />
+                <MarketPlace />
+              </>
+            }
+          />
+          <Route
+            path="/saved"
+            element={
+              <>
+                <Header />;<SavedItemsPage />
               </>
             }
           />
@@ -180,11 +189,19 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-          <Route path="/mbpop" element={<MassageBoxPop message={"shdbadh"} description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"} />} />
+          <Route
+            path="/mbpop"
+            element={
+              <MassageBoxPop
+                message={"shdbadh"}
+                description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"}
+              />
+            }
+          />
 
           <Route path="/profile" element={<TravellerProfile />} />
 
-            {/* Home Page */}
+          {/* Home Page */}
           <Route path="/landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>

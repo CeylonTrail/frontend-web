@@ -11,7 +11,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
 
-
 const Traveller_navigation = [
   { name: "Community", href: "/community", current: true },
   { name: "Trips", href: "/trips", current: false },
@@ -22,7 +21,7 @@ const Traveller_navigation = [
 const SP_navigation = [
   { name: "Community", href: "/community", current: false },
   { name: "Shop", href: "/trips", current: true },
-  { name: "Market Place", href: "/services", current: false },
+  { name: "Market Place", href: "/market", current: false },
 ];
 
 function classNames(...classes) {

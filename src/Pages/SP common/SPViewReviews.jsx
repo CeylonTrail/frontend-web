@@ -4,6 +4,8 @@ import "../../assets/styles/SPViewReviews.css"; // Import the CSS file
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import ReviewImg from "../../assets/img/review.png";
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import Header from "../../components/header.js";
 
 const initialReviews = [
   {
@@ -134,7 +136,12 @@ const SPViewReviews = () => {
   };
 
   return (
-    
+    <>
+      <Header
+        type="serviceprovider"
+        profilePic={HotelProfileImg}
+        funtion={() => {}}
+      />
     <div className="spview-reviews-container">
       <h1 className="spreview-reviews-heading">Customer Reviews</h1>
       <div className="spview-reviews-list">
@@ -187,7 +194,8 @@ const SPViewReviews = () => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+      </>
   );
 };
 

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "../../assets/styles/SPReviews.css"; // Import the CSS file
 import "../../assets/styles/form.css"; // Import the CSS file
-
+import Profile from "../../assets/img/Profile.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStarHalfAlt, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
+import HotelProfileImg from "../../assets/img/hotel-profile.png";
+import Header from "../../components/header.js";
 import Modal from "react-modal";
 import cancelImg from "../../assets/img/cancel.png"; // Adjust path as needed
 import { useNavigate } from "react-router-dom"; // Use useNavigate hook
@@ -145,118 +146,121 @@ const SPReviews = () => {
   };
 
   return (
-    <div className="spreview-container">
-      <div className="spreview-back-button" onClick={goBackButtonClick}>
-        <FontAwesomeIcon icon={faArrowLeft} size="2x" color="#0F969C" />
-      </div>
-      <div className="spreview-card-container">
-        <div className="spreview-content">
-          <div className="spreview-header">
-            <h1 className="spreview-heading">What people are saying.</h1>
-            <h3 className="spreview-subheading">
-              Check out our guests' reviews and discover their memorable
-              experiences!
-            </h3>
-            <div className="spreview-separator">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          <Slider {...settings}>
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className={`spreview-review-card ${
-                  expandedIndex === index ? "expanded" : ""
-                }`}
-                onClick={() => handleCardClick(index)}
-              >
-                <div className="spreview-review-header">
-                  <div className="spreview-review-img">
-                    <img src={review.img} alt={review.name} />
-                  </div>
-                  <div className="spreview-review-author">
-                    <h6>{review.name}</h6>
-                    <StarRating rating={review.rating} />
-                  </div>
-                </div>
-                <div className="spreview-review-text">
-                  <p>{review.text}</p>
-                </div>
-              </div>
-            ))}
-          </Slider>
+    <>
+      <Header type="traveller" profilePic={Profile} funtion={() => {}} />
+      <div className="spreview-container">
+        <div className="spreview-back-button" onClick={goBackButtonClick}>
+          <FontAwesomeIcon icon={faArrowLeft} size="2x" color="#0F969C" />
         </div>
-      </div>
-      <div className="spreview-floating-button">
-        <a
-          aria-label="Leave Feedback"
-          onClick={toggleModal}
-          style={{ cursor: "pointer" }}
-        >
-          <FontAwesomeIcon icon={faStarHalfAlt} size="2x" color="#ffffff" />
-          <span className="review-text">Give your review</span>
-        </a>
-      </div>
-
-      <Modal
-        isOpen={showModal}
-        onRequestClose={toggleModal}
-        contentLabel="Rating Modal"
-        className="modal-overlay"
-        overlayClassName="modal-overlay-bg"
-      >
-        <div
-          className="boost-modal-content"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="modal-header">
-            <h2 className="modal-title">Rate and Review</h2>
-            <div className="heading-line"></div>
-            <img
-              src={cancelImg}
-              alt="Close"
-              className="modal-close-icon"
-              onClick={toggleModal}
-            />
+        <div className="spreview-card-container mt-5">
+          <div className="spreview-content">
+            <div className="spreview-header">
+              <h1 className="spreview-heading">What people are saying.</h1>
+              <h3 className="spreview-subheading">
+                Check out our guests' reviews and discover their memorable
+                experiences!
+              </h3>
+              <div className="spreview-separator">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <Slider {...settings}>
+              {reviews.map((review, index) => (
+                <div
+                  key={index}
+                  className={`spreview-review-card ${
+                    expandedIndex === index ? "expanded" : ""
+                  }`}
+                  onClick={() => handleCardClick(index)}
+                >
+                  <div className="spreview-review-header">
+                    <div className="spreview-review-img">
+                      <img src={review.img} alt={review.name} />
+                    </div>
+                    <div className="spreview-review-author">
+                      <h6>{review.name}</h6>
+                      <StarRating rating={review.rating} />
+                    </div>
+                  </div>
+                  <div className="spreview-review-text">
+                    <p>{review.text}</p>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
-          <form
-            className="modal-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-              toggleModal();
-            }}
+        </div>
+        <div className="spreview-floating-button">
+          <a
+            aria-label="Leave Feedback"
+            onClick={toggleModal}
+            style={{ cursor: "pointer" }}
           >
-            <div className="form-group center-stars">
-              <div className="flex items-center mb-4">
-                <StarRating
-                  rating={rating}
-                  onRatingChange={handleRatingChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <textarea
-                className="form-textarea"
-                rows="4"
-                placeholder="Write your review here..."
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="modal-footer">
-              <button type="submit" className="submit-button">
-                Submit
-              </button>
-            </div>
-          </form>
+            <FontAwesomeIcon icon={faStarHalfAlt} size="2x" color="#ffffff" />
+            <span className="review-text">Give your review</span>
+          </a>
         </div>
-      </Modal>
-    </div>
+
+        <Modal
+          isOpen={showModal}
+          onRequestClose={toggleModal}
+          contentLabel="Rating Modal"
+          className="modal-overlay"
+          overlayClassName="modal-overlay-bg"
+        >
+          <div
+            className="boost-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h2 className="modal-title">Rate and Review</h2>
+              <div className="heading-line"></div>
+              <img
+                src={cancelImg}
+                alt="Close"
+                className="modal-close-icon"
+                onClick={toggleModal}
+              />
+            </div>
+            <form
+              className="modal-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+                toggleModal();
+              }}
+            >
+              <div className="form-group center-stars">
+                <div className="flex items-center mb-4">
+                  <StarRating
+                    rating={rating}
+                    onRatingChange={handleRatingChange}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <textarea
+                  className="form-textarea"
+                  rows="4"
+                  placeholder="Write your review here..."
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                ></textarea>
+              </div>
+              <div className="modal-footer">
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
+      </div>
+    </>
   );
 };
 

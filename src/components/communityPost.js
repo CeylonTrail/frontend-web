@@ -51,23 +51,25 @@ const CommunityPost = ({ posts }) => {
                         <div>
                             <div className="flex items-center mt-2 ml-4 mr-2">
                                 <div className="flex-none w-10 h-10 rounded-full">
-                                    <img src={item.authorLogo} className="w-full h-full rounded-full" alt={item.authorName} />
+                                    <img src={item.user.profilePictureUrl} className="w-full h-full rounded-full" alt={item.user.username} />
                                 </div>
                                 <div className="ml-3">
-                                    <span className="block text-gray-900">{item.authorName}</span>
-                                    <span className="block text-gray-400 text-sm">{item.date}</span>
+                                    <span className="block text-gray-900">{item.user.username}</span>
+                                    <span className="block text-gray-400 text-sm">{item.createdAt}</span>
                                 </div>
                             </div>
                             <div className="pt-3 ml-4 mr-2 mb-3">
-                                <p className="text-gray-400 text-sm mt-1">{item.desc}</p>
+                                <p className="text-gray-400 text-sm mt-1">{item.content}</p>
                             </div>
                             <div className="grid grid-cols-3 gap-2 ml-4 mr-2">
-                                {item.imgs.slice(0, 2).map((img, imgKey) => (
-                                    <img key={imgKey} src={img} loading="lazy" alt={item.title} className="w-full h-48 rounded" />
+                                {item.images.slice(0, 2).map((image) => (
+                                    <img src={image} loading="lazy" alt="Post Image" className="w-full h-48 rounded" />
                                 ))}
+
                                 {item.imgs.length > 2 && (
                                     <div className=" w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
                                         +{item.imgs.length - 2}
+
                                     </div>
                                 )}
                             </div>
@@ -99,17 +101,17 @@ const CommunityPost = ({ posts }) => {
                     <div className="bg-white p-6 rounded-lg max-w-xl mx-auto h-4/5 overflow-auto">
                         <div className="flex items-center my-4 ml-2 mr-2">
                             <div className="flex-none w-10 h-10 rounded-full">
-                                <img src={selectedPost.authorLogo} className="w-full h-full rounded-full" alt={selectedPost.authorName} />
+                                <img src={selectedPost.user.profilePictureUrl} className="w-full h-full rounded-full" alt={selectedPost.user.useraname} />
                             </div>
                             <div className="ml-3">
-                                <span className="block text-gray-900">{selectedPost.authorName}</span>
-                                <span className="block text-gray-400 text-sm">{selectedPost.date}</span>
+                                <span className="block text-gray-900">{selectedPost.user.useraname}</span>
+                                <span className="block text-gray-400 text-sm">{selectedPost.createdAt}</span>
                             </div>
                         </div>
-                        <p className="mb-4">{selectedPost.desc}</p>
+                        <p className="mb-4">{selectedPost.content}</p>
                         <div className="grid grid-cols-1 gap-2">
-                            {selectedPost.imgs.map((img, imgKey) => (
-                                <img key={imgKey} src={img} loading="lazy" alt={selectedPost.title} className="w-full rounded" />
+                            {selectedPost.images.map((image) => (
+                                <img src={image} loading="lazy" alt="Post Image" className="w-full rounded" />
                             ))}
                         </div>
                         <div className="mt-4 flex flex-row justify-around">

@@ -1,27 +1,208 @@
 import Header from "../components/header2";
 import FPW from "../assets/img/Forgot password.png"
 import footer from "../components/footer";
-import { Password, Email } from "../components/inputFields";
+import { Password, Email, OTPInput } from "../components/inputFields";
 import { PrimaryButton } from "../components/Button";
 import googleLogo from "../assets/img/GoogleLogo.png"
 import Footer from "../components/footer";
 import { useState } from "react";
-import { SimpleInput } from "../components/inputFields";
+// import { SimpleInput, } from "../components/inputFields";
+import {sendEmail,validateOTP,resetPw} from "../API/reset_pw";
+import { WarningAlert, SuccessAlert } from "../components/Alerts";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
 
     const [email, setEmail] = useState("");
-    const[otp,setOtp]=useState("");
+    const [otp, setOtp] = useState("");
+    const [newpassword, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const [showOTP, setShowOTP] = useState(false);
+    const [showResetPW, setShowresetPW] = useState(false);
+    const [showEmail, setShowEmail] = useState(true);
+    
+    const [touchedEmail, setTouchedEmail] = useState(false);
+    const [touchedOtp, setTouchedOtp] = useState(false);
+    const [touchednewPassword, setTouchednewPassword] = useState(false);
+    const [touchedconfirmPassword, setTouchedconfirmPassword] = useState(false);
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertTitle, setAlertTitle] = useState('');
+    const [alertType, setAlertType] = useState('');
+    const navigate = useNavigate();
+
+    const handleOnClose = () => { 
+        setShowAlert(false);
+    }
+
+    const handleSendEmail = async (e) => {
         e.preventDefault();
-        const data = {
-            email,
-            otp
-        }
-        console.log(data);
+        if (email) {
+            const data = {
+                email: email
+            };
 
+            try {
+                const response = await sendEmail(data);
+                // console.log(response);
+                if (response.status === 'success') {
+                    setAlertTitle('OTP has been sent');
+                    // setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('success');
+                    setTimeout(() => {
+                        setShowOTP(true);
+                        setShowAlert(false);
+                        setShowEmail(false);
+                    }, 2000); // Hide the alert after 3 seconds
+                } else {
+                    setAlertTitle('Error');
+                    setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('error');
+                    setTimeout(() => {
+                        setShowAlert(false);
+
+                    }, 3000);
+                }
+            } catch (error) {
+                // console.error(error);
+                setAlertTitle('Error');
+                setAlertMessage(error.message);
+                setShowAlert(true);
+                setAlertType('error');
+                setTimeout(() => {
+                    setShowAlert(false);
+
+                }, 3000);
+            }
+        }
+        else {
+            
+            !email && setTouchedEmail(true);
+            
+        }
+    }
+
+    const handleValidateOTP = async (e) => {
+        e.preventDefault();
+        if (otp) {
+            const data = {
+                otp: otp
+            };
+
+            try {
+                const response = await validateOTP(data);
+                // console.log(response);
+                if (response.status === 'success') {
+                    setAlertTitle('Otp validated successfully');
+                    // setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('success');
+                    setTimeout(() => {
+                        setShowresetPW(true);
+                        setShowEmail(false);
+                        setShowOTP(false);
+                        setShowAlert(false);
+                    }, 2000); // Hide the alert after 3 seconds
+                } else {
+                    setAlertTitle('Error');
+                    setAlertMessage(response.message);
+                    setShowAlert(true);
+                    setAlertType('error');
+                    setTimeout(() => {
+                        setShowAlert(false);
+
+                    }, 3000);
+                }
+            } catch (error) {
+                // console.error(error);
+                setAlertTitle('Error');
+                setAlertMessage(error.message);
+                setShowAlert(true);
+                setAlertType('error');
+                setTimeout(() => {
+                    setShowAlert(false);
+                    setShowEmail(false);
+                }, 3000);
+            }
+        }
+        else {
+
+            !otp && setTouchedOtp(true);
+
+        }
+    }
+
+    const handleOtpChange = (newOtp) => {
+        setOtp(newOtp);
+        setTouchedOtp(true);
     };
+
+    const handleResetPassword = async (e) => { 
+        e.preventDefault();
+        if (newpassword && confirmPassword) {
+            if (newpassword === confirmPassword) {
+                const data = {
+                    email: email,
+                    otp: otp,
+                    password: newpassword
+                };
+                console.log(data)
+                try {
+                    const response = await resetPw(data);
+                    // console.log(response);
+                    if (response.status === 'success') {
+                        setAlertTitle('Password reset successfully');
+                        // setAlertMessage(response.message);
+                        setShowAlert(true);
+                        setAlertType('success');
+                        setTimeout(() => {
+                            // setShowresetPW(true);
+                            // setShowOTP(false);
+                            navigate('/login');
+                            setShowAlert(false);
+                        }, 2000); // Hide the alert after 3 seconds
+                    } else {
+                        setAlertTitle('Error');
+                        setAlertMessage(response.message);
+                        setShowAlert(true);
+                        setAlertType('error');
+                        setTimeout(() => {
+                            setShowAlert(false);
+
+                        }, 3000);
+                    }
+                } catch (error) {
+                    // console.error(error);
+                    setAlertTitle('Error');
+                    setAlertMessage(error.message);
+                    setShowAlert(true);
+                    setAlertType('error');
+                    setTimeout(() => {
+                        setShowAlert(false);
+
+                    }, 3000);
+                }
+            }
+            else {
+                setAlertTitle('Error');
+                setAlertMessage('Passwords do not match');
+                setShowAlert(true);
+                setAlertType('error');
+                setTimeout(() => {
+                    setShowAlert(false);
+
+                }, 3000);
+            }
+        }
+        else {
+            !newpassword && setTouchednewPassword(true);
+            !confirmPassword && setTouchedconfirmPassword(true);
+        }
+    }
 
     return (
         <div className="w-full mb-5">
@@ -47,54 +228,77 @@ export default () => {
 
 
                         <form
-                            onSubmit={handleSubmit}
+                            // onSubmit={handleSubmit}
                             className="space-y-5 flex flex-col w-full items-center"
                         >
+                            {showEmail && <>
+                                <div className="w-full">
+                                    <Email
+                                        pholder={"Email"}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        onBlur={() => setTouchedEmail(true)}
+                                    />
+                                    {touchedEmail && !email && (
+                                        <p className="text-warning font-thin text-xs">Email is required !</p>
+                                    )}
 
-                            <div className="w-full">
-                                <Email pholder={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
-                                <div className="w-full flex justify-end">
-                                    <a href="#ndjsd" className="text-center text-primary hover:text-primaryDark1">Send OTP</a>
                                 </div>
+                                <div >
+                                    <PrimaryButton name={"Send OTP"} action={handleSendEmail} />
+                                </div>
+                            </>}
+                            
+                            {
+                                showOTP && <>
+                                    <div className="w-full">
+                                        <OTPInput value={otp} onChange={handleOtpChange} />
+                                        {touchedOtp && !otp && (
+                                            <p className="text-warning font-thin text-xs">OTP is required !</p>
+                                        )}
+                                    </div>
+                                    <div >
+                                        <PrimaryButton name={"Verify OTP"} action={handleValidateOTP} />
+                                    </div>
+                                </>
+                            }
 
-                            </div>
+                            {
+                                showResetPW && <>
+                                    <Password pholder={"New Password"} value={newpassword} onChange={(e) => setPassword(e.target.value)} onBlur={() => setTouchednewPassword(true)} />
+                                    {touchednewPassword && !newpassword && (
+                                        <p className="text-warning font-thin text-xs">New Password is required !</p>
+                                    )}
+                                    {touchednewPassword && newpassword && newpassword.length <= 6 && (
+                                        <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
+                                    )}
 
-                            <div className="w-full">
+                                    <Password pholder={"Confirm Password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} onBlur={() => setTouchedconfirmPassword(true)} />
+                                    {touchedconfirmPassword && !confirmPassword && (
+                                        <p className="text-warning font-thin text-xs">New Password is required !</p>
+                                    )}
+                                    {touchedconfirmPassword && confirmPassword && confirmPassword.length <= 6 && (
+                                        <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
+                                    )}
+                                    <PrimaryButton name={"Reset Password"} action={handleResetPassword} />
+                                </>
+                            }
+
+                            {/* <div className="w-full">
                                 <SimpleInput pholder={"OTP"} value={otp} onChange={(e) => setOtp(e.target.value)} />
                                 
-                            </div>
+                            </div> */}
 
                          
 
 
 
-                            <div >
-                                <PrimaryButton name={"Reset Password"} />
-                            </div>
-
+                            
 
                         </form>
-                        {/* <div className="relative">
-                            <span className="block w-full h-px bg-secondary"></span>
-                            <p className="inline-block w-fit text-sm bg-SecondaryLight px-2 absolute -top-2 inset-x-0 mx-auto text-secondary">Or continue with</p>
-                        </div>
-                        <div className="flex w-full items-center justify-center">
-                            <button className="flex items-center justify-center px-4 py-2 border-2 border-primary rounded-full text-primary text-l font-semibold hover:bg-secondary hover:text-white transition-colors duration-300">
-                                <img
-                                    src={googleLogo}
-                                    alt="Google Logo"
-                                    className="w-6 h-6 mr-2"
-                                />
-                                Log in With Google
-                            </button>
-
-
-                        </div>
-
-                        <div className="w-full flex flex-row justify-center">
-                            <p className="text-secondary font-thin">Don't have an account?</p> <a href="/signup" className="font-medium text-secondary  hover:text-primaryDark1">Sign Up</a>
-
-                        </div> */}
+                        {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />}
+                        {/* {showAlert && alertType === 'success' && <MassageBoxPop message={alertTitle} description={alertMessage} open={showAlert} onClose={handleOnClose} />} */}
+                        {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle}  onclose={handleOnClose} />}
 
                     </div>
                 </div>

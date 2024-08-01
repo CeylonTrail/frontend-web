@@ -86,7 +86,7 @@ export default () => {
                 "serviceType": handleShopType(shopType)
                 
             };
-            console.log(data);
+            
             try {
                 const response = await signup(data);
                 console.log(response);
@@ -198,6 +198,9 @@ export default () => {
                         />
                         {touchedPassword && !password && (
                             <p className="text-warning font-thin text-xs">Password is required</p>
+                        )}
+                        {touchedPassword && password && password.length <= 6 && (
+                            <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
                         )}
                     </div>
                     <div className="w-full  flex flex-col justify-start items-start">

@@ -5,6 +5,7 @@ import signup from "../../API/signup";
 import { useState } from "react";
 import { SuccessAlert,WarningAlert } from "../../components/Alerts";
 import { useNavigate } from "react-router-dom";
+import MassageBoxPop from "../../components/MassageBoxPop";
 
 export default () => {
 
@@ -148,6 +149,9 @@ export default () => {
                     {touchedPassword && !password && (
                         <p className="text-warning font-thin text-xs">Password is required</p>
                     )}
+                    {touchedPassword && password && password.length <= 6 && (
+                        <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
+                    )}
                 </div>
 
                 <div >
@@ -172,8 +176,8 @@ export default () => {
                 
             </div>
             {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />}
-            {showAlert && alertType === 'success' && <SuccessAlert title={"Confirm Email"} message={"We have sent an email to confirm your account"} onclose={handleOnClose} />}
-
+            {showAlert && alertType === 'success' && <MassageBoxPop message={"Registation Successfull!"} type="success" description={"We have sent you an email to validate account."} />}
+            
             {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
           
         </>

@@ -8,6 +8,7 @@ import TrHotelCard from "./TrHotelCard.jsx";
 import RatingComponent from "../SP common/RatingComponent.jsx";
 import { PrimaryButton } from "../../components/Button.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+<<<<<<< HEAD
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
@@ -21,6 +22,11 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import ReportModal from "../SP common/ReportModal.jsx";
 import Header from "../../components/header.js"
 
+=======
+// import { faComments } from "@fortawesome/free-solid-svg-icons";
+// import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
+// import "../../assets/styles/form.css";
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
 
 const TrHotelProfileView = () => {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -71,80 +77,80 @@ const TrHotelProfileView = () => {
     handleCloseTrHotelModal();
   };
 
-   const rooms = [
-     {
-       type: "Luxury Suite",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 2",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 3",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 4",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 5",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 6",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 7",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 8",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 9",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 10",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 11",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 12",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-   ];
+  const rooms = [
+    {
+      type: "Luxury Suite",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 2",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 3",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 4",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 5",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 6",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 7",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 8",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 9",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 10",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 11",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 12",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+  ];
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;

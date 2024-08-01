@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../assets/styles/Chat.css";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import {
   FaSearch,
   FaPaperPlane,

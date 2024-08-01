@@ -23,8 +23,11 @@ import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
 // import LocationSelector from "./components/locationSelector";
 import Resetpw from "./Pages/resetpw";
-
+import TravellerProfile from "./Pages/Community/Profile"
 import Landing from "./Pages/landing";
+
+
+import MassageBoxPop from "./components/MassageBoxPop";
 
 
 function App() {
@@ -162,7 +165,7 @@ function App() {
           />
 
           <Route
-            path="/market"
+            path=""
             element={
               <>
                 <Header />;<MarketPlace />
@@ -177,6 +180,14 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
+<<<<<<< HEAD
+=======
+          <Route path="/mbpop" element={<MassageBoxPop message={"shdbadh"} description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"} />} />
+
+          <Route path="/profile" element={<TravellerProfile />} />
+
+            {/* Home Page */}
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
           <Route path="/landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>

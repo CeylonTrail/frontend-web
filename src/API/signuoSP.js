@@ -20,10 +20,10 @@ const signup = async (data) => {
         if (error.response && error.response.data) {
             const { code, message, data } = error.response.data;
 
-            if (code === 409 && data === "Email is already taken!") {
+            if (code === 409 && data === "Email is already taken") {
                 return { status: 'error', message: 'Email is already taken' };
             }
-            else if (code === 400 && message === "Validation Errors" && data.username[0] === "Username must be between 3 and 50 characters") {
+            else if (code === 400 && message === "Validation Error" && data.username[0] ) {
                 return { status: 'Validation Errors', message: data.username[0] };
             }
             else {

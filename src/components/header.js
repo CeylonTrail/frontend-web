@@ -11,7 +11,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
 
+
 const Traveller_navigation = [
+<<<<<<< HEAD
   { name: "Community", href: "/community", current: true },
   { name: "Trips", href: "/trips", current: false },
   { name: "Market Place", href: "/services", current: false },
@@ -22,6 +24,18 @@ const SP_navigation = [
   { name: "Community", href: "/community", current: false },
   { name: "Shop", href: "/trips", current: true },
   { name: "Market Place", href: "/services", current: false },
+=======
+  { name: 'Community', href: '/community', current: true },
+  { name: 'Trips', href: '/trips', current: false },
+  { name: 'Market Place', href: '/services', current: false },
+  { name: 'Places', href: '/places', current: false },
+];
+
+const SP_navigation = [
+  { name: 'Community', href: '/community', current: false },
+  { name: 'Shop', href: '/trips', current: true },
+  { name: 'Market Place', href: '/services', current: false },
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
 ];
 
 function classNames(...classes) {
@@ -32,7 +46,11 @@ function handleLogoNavigate() {
   window.location.href = "/landing";
 }
 
+<<<<<<< HEAD
 export default function Example({ type, profilePic, funtion }) {
+=======
+export default function Example({ type,profilePic,funtion }) {
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
@@ -94,7 +112,11 @@ export default function Example({ type, profilePic, funtion }) {
                             : "text-secondary hover:text-teal-700",
                           "px-3 py-2 text-sm font-semibold"
                         )}
+<<<<<<< HEAD
                         aria-current={item.current ? "page" : undefined}
+=======
+                        aria-current={item.current ? 'page' : undefined}
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
                         onClick={(e) => {
                           e.preventDefault();
                           handleNavClick(index);
@@ -117,10 +139,14 @@ export default function Example({ type, profilePic, funtion }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
+<<<<<<< HEAD
                     <MenuButton
                       className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                       onClick={funtion}
                     >
+=======
+                    <MenuButton className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500" onClick={funtion}>
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -146,7 +172,11 @@ export default function Example({ type, profilePic, funtion }) {
                       : "text-gray-500 hover:bg-teal-500 hover:text-white",
                     "block px-3 py-2 rounded-md text-base font-medium"
                   )}
+<<<<<<< HEAD
                   aria-current={item.current ? "page" : undefined}
+=======
+                  aria-current={item.current ? 'page' : undefined}
+>>>>>>> dbdbd2d09a2045e79f9f83847c122a3f5432f831
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(index);

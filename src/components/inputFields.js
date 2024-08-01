@@ -117,4 +117,56 @@ const DropdownInput = ({ optionList, placeholder, value, onChange }) => {
     );
 };
 
-export  {SimpleInput,Password,Email,DropdownInput};
+
+const OTPInput = ({ value, onChange }) => {
+    const fieldsRef = useRef();
+    const [state, setState] = useState({ code1: "", code2: "", code3: "", code4: "", code5: "", code6: "" });
+
+    // Switch to input fields method
+    const inputFocus = (e) => {
+        const elements = fieldsRef.current.children;
+        const dataIndex = +e.target.getAttribute("data-index");
+        if (e.key === "Delete" || e.key === "Backspace") {
+            const next = dataIndex - 1;
+            if (next > -1) {
+                elements[next].focus();
+            }
+        } else {
+            const next = dataIndex + 1;
+            if (next < elements.length && e.target.value.trim() !== "" && e.key.length === 1) {
+                elements[next].focus();
+            }
+        }
+    };
+
+    const handleChange = (e, codeNumber) => {
+        const value = e.target.value.slice(-1);
+        setState({ ...state, [codeNumber]: value });
+
+        const newState = { ...state, [codeNumber]: value };
+        const finalValue = Object.values(newState).join("");
+        onChange(finalValue);
+    };
+
+    return (
+        <div>
+            <div ref={fieldsRef} className="mt-2 flex items-center gap-x-2">
+                {Object.keys(state).map((code, index) => (
+                    <input
+                        key={index}
+                        type="text"
+                        data-index={index}
+                        placeholder="0"
+                        value={state[code]}
+                        className="w-12 h-12 rounded-lg border focus:border-indigo-600 outline-none text-center text-2xl"
+                        onChange={(e) => handleChange(e, `code${index + 1}`)}
+                        onKeyUp={inputFocus}
+                        maxLength={1}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export  {SimpleInput,Password,Email,DropdownInput,OTPInput};

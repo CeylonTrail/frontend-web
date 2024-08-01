@@ -27,6 +27,9 @@ import TravellerProfile from "./Pages/Community/Profile"
 import Landing from "./Pages/landing";
 
 
+import MassageBoxPop from "./components/MassageBoxPop";
+
+
 function App() {
   return (
     // <div className="App">
@@ -170,7 +173,8 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-         
+          <Route path="/mbpop" element={<MassageBoxPop message={"shdbadh"} description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"} />} />
+
           <Route path="/profile" element={<TravellerProfile />} />
 
             {/* Home Page */}

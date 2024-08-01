@@ -52,7 +52,7 @@ export default () => {
                     setTimeout(() => {
                         setShowAlert(false);
                         navigate('/login');
-                    }, 3000); // Hide the alert after 3 seconds
+                    }, 5000); // Hide the alert after 3 seconds
                 } else {
                     setAlertTitle('Error');
                 
@@ -89,6 +89,11 @@ export default () => {
         
         setShowAlert(false);
         
+    }
+
+    const handleOnCloseSuccess = () => {
+        setShowAlert(false);
+        navigate('/login');
     }
 
 
@@ -175,9 +180,10 @@ export default () => {
                
                 
             </div>
-            {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />}
-            {showAlert && alertType === 'success' && <MassageBoxPop message={"Registation Successfull!"} type="success" description={"We have sent you an email to validate account."} />}
-            
+            {showAlert && alertType === 'success' && <MassageBoxPop message={alertTitle} description={"We have sent you an email to validate your account"} open={showAlert} onClose={handleOnCloseSuccess} />}
+        
+            {/* {showAlert && alertType === 'success' && <SuccessAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} */}
+
             {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
           
         </>

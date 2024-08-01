@@ -251,7 +251,7 @@ export default () => {
                             
                             {
                                 showOTP && <>
-                                    <div className="w-full">
+                                    <div className="w-full flex justicy-center align-center">
                                         <OTPInput value={otp} onChange={handleOtpChange} />
                                         {touchedOtp && !otp && (
                                             <p className="text-warning font-thin text-xs">OTP is required !</p>
@@ -265,21 +265,26 @@ export default () => {
 
                             {
                                 showResetPW && <>
-                                    <Password pholder={"New Password"} value={newpassword} onChange={(e) => setPassword(e.target.value)} onBlur={() => setTouchednewPassword(true)} />
-                                    {touchednewPassword && !newpassword && (
-                                        <p className="text-warning font-thin text-xs">New Password is required !</p>
-                                    )}
-                                    {touchednewPassword && newpassword && newpassword.length <= 6 && (
-                                        <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
-                                    )}
-
-                                    <Password pholder={"Confirm Password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} onBlur={() => setTouchedconfirmPassword(true)} />
-                                    {touchedconfirmPassword && !confirmPassword && (
-                                        <p className="text-warning font-thin text-xs">New Password is required !</p>
-                                    )}
-                                    {touchedconfirmPassword && confirmPassword && confirmPassword.length <= 6 && (
-                                        <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
-                                    )}
+                                    <div>
+                                        <Password pholder={"New Password"} value={newpassword} onChange={(e) => setPassword(e.target.value)} onBlur={() => setTouchednewPassword(true)} />
+                                        {touchednewPassword && !newpassword && (
+                                            <p className="text-warning font-thin text-xs">New Password is required !</p>
+                                        )}
+                                        {touchednewPassword && newpassword && newpassword.length <= 6 && (
+                                            <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
+                                        )}
+                                    </div>
+                                    
+                                    <div>
+                                        <Password pholder={"Confirm Password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} onBlur={() => setTouchedconfirmPassword(true)} />
+                                        {touchedconfirmPassword && !confirmPassword && (
+                                            <p className="text-warning font-thin text-xs">New Password is required !</p>
+                                        )}
+                                        {touchedconfirmPassword && confirmPassword && confirmPassword.length <= 6 && (
+                                            <p className="text-warning font-thin text-xs">Password must be longer than 6 characters</p>
+                                        )}
+                                    </div>
+                                    
                                     <PrimaryButton name={"Reset Password"} action={handleResetPassword} />
                                 </>
                             }

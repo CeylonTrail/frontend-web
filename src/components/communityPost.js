@@ -65,9 +65,11 @@ const CommunityPost = ({ posts }) => {
                                 {item.images.slice(0, 2).map((image) => (
                                     <img src={image} loading="lazy" alt="Post Image" className="w-full h-48 rounded" />
                                 ))}
-                                {item.images.length > 2 && (
-                                    <div className="relative w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
-                                        +{item.images.length - 2}
+
+                                {item.imgs.length > 2 && (
+                                    <div className=" w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
+                                        +{item.imgs.length - 2}
+
                                     </div>
                                 )}
                             </div>

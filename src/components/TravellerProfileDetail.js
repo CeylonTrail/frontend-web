@@ -1,7 +1,12 @@
 import React from 'react';
-import {PrimaryButton as Button} from './Button';
+import { PrimaryButton as Button } from './Button';
 
-export default ({pic}) => {
+
+export default ({ pic }) => {
+    
+    const handleEdit = () => { 
+        window.location.href = "/edit_tr_profile";
+    }
     return (
         <div className="bg-white p-4  rounded shadow-md mt-12 w-full max-h-[46rem]">
             <div className="flex flex-col items-center">
@@ -33,7 +38,7 @@ export default ({pic}) => {
                         <p className='text-xs'>Phone Number: 0762365456</p>
                         <p className='text-xs'>Email: traveller@gmail.com</p>
                     </div>
-                    <Button name="Edit Profile" />
+                    <Button name="Edit Profile" action={handleEdit} />
                 </div>
                 
             </div>

@@ -25,7 +25,11 @@ import Community from "./Pages/Community/landing";
 import Resetpw from "./Pages/resetpw";
 import TravellerProfile from "./Pages/Community/Profile"
 import Landing from "./Pages/landing";
-
+import TripDashboard from "./Pages/Trips/dashboard"
+import PlanTrips from "./Pages/Trips/planTrips";
+import CurrentTrip from "./Pages/Trips/currentTrip";
+import SavedTrips from "./Pages/Trips/savedTrips";
+import EditProfile from "./Pages/Community/editProf";
 
 import MassageBoxPop from "./components/MassageBoxPop";
 
@@ -173,9 +177,17 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-          <Route path="/mbpop" element={<MassageBoxPop message={"shdbadh"} description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"} />} />
+         
 
           <Route path="/profile" element={<TravellerProfile />} />
+          <Route path="/edit_tr_profile" element={<EditProfile />} />
+
+
+          {/* Trip */}
+          <Route path="/trip_dashboard" element={<TripDashboard />} />
+          <Route path="/plan_trip" element={<PlanTrips />} />
+          <Route path="/current_trip" element={<CurrentTrip />} />
+          <Route path="/saved_trips" element={<SavedTrips />} />
 
             {/* Home Page */}
           <Route path="/landing" element={<Landing />} />

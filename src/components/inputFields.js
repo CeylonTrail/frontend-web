@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const SimpleInput = ({ pholder, value, onChange, onBlur }) => {
     return (
@@ -23,7 +23,7 @@ const Password = ({ pholder, value, onChange, onBlur }) => {
         <div className='w-full'>
             <div className="w-full relative mt-2">
                 <button
-                    type="button" // Change button type to "button"
+                    type="button"
                     className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
                     onClick={() => setPasswordHidden(!isPasswordHidden)}
                 >
@@ -53,7 +53,6 @@ const Password = ({ pholder, value, onChange, onBlur }) => {
     )
 };
 
-
 const Email = ({ pholder, value, onChange, onBlur }) => {
     return (
         <div className="w-full flex items-center">
@@ -68,7 +67,6 @@ const Email = ({ pholder, value, onChange, onBlur }) => {
         </div>
     );
 };
-
 
 const DropdownInput = ({ optionList, placeholder, value, onChange }) => {
     const selectRef = useRef(null);
@@ -117,12 +115,10 @@ const DropdownInput = ({ optionList, placeholder, value, onChange }) => {
     );
 };
 
-
 const OTPInput = ({ value, onChange }) => {
     const fieldsRef = useRef();
     const [state, setState] = useState({ code1: "", code2: "", code3: "", code4: "", code5: "", code6: "" });
 
-    // Switch to input fields method
     const inputFocus = (e) => {
         const elements = fieldsRef.current.children;
         const dataIndex = +e.target.getAttribute("data-index");
@@ -149,7 +145,7 @@ const OTPInput = ({ value, onChange }) => {
     };
 
     return (
-        <div>
+        <div className='w-full flex items-center justify-center'>
             <div ref={fieldsRef} className="mt-2 flex items-center gap-x-2">
                 {Object.keys(state).map((code, index) => (
                     <input
@@ -169,4 +165,4 @@ const OTPInput = ({ value, onChange }) => {
     );
 };
 
-export  {SimpleInput,Password,Email,DropdownInput,OTPInput};
+export { SimpleInput, Password, Email, DropdownInput, OTPInput };

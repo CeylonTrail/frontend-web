@@ -59,6 +59,14 @@ function App() {
             path="/"
             element={
               <>
+                <Landing />
+              </>
+            }
+          />
+          <Route
+            path="/sp"
+            element={
+              <>
                 <Header />;<SpRedirectPage />
               </>
             }
@@ -173,7 +181,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset_password" element={<Resetpw />} />
-
 
           {/* Community */}
           <Route path="/community" element={<Community />} />

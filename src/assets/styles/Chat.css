@@ -273,10 +273,11 @@
   border-radius: 0.9375rem; /* 15px */
 }
 
-.call-icon {
+.back-icon {
   font-size: 1.5rem; /* 1.5em */
   color: #6da5c0;
   cursor: pointer;
+  margin-right: 1rem;
 }
 
 .chat-messages {

@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import "../../assets/styles/SubscriptionPlan.css"; // Import the CSS file
 import { PrimaryButton } from "../../components/Button"; // Import the PrimaryButton component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"; // Import the arrow icon
+import { useNavigate } from "react-router-dom";
 
 const SubscriptionPlan = () => {
+  const navigate = useNavigate();
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
+  };
+
+  const handleArrowClick = () => {
+    navigate("/hotel-sp-view");
   };
 
   const handleNextClick = () => {
@@ -60,6 +68,11 @@ const SubscriptionPlan = () => {
   return (
     <div className="subscription-plan-container">
       <div className="subscription-plan-box mt-10">
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          className="back-arrow"
+          onClick={handleArrowClick}
+        />
         <p className="step-text">STEP 1 OF 2</p>
         <p className="title-text">Choose the plan that’s right for you!</p>
         <div className="pricing-cards">
@@ -106,7 +119,11 @@ const SubscriptionPlan = () => {
           ))}
         </div>
         <div className="next-button-container">
-          <PrimaryButton name="NEXT" action={handleNextClick} isActive={false} />
+          <PrimaryButton
+            name="NEXT"
+            action={handleNextClick}
+            isActive={false}
+          />
         </div>
       </div>
     </div>

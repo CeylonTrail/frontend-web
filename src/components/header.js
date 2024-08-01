@@ -1,27 +1,37 @@
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/img/logo circle.png';
-import { useEffect, useState } from 'react';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import logo from "../assets/img/logo circle.png";
+import { useEffect, useState } from "react";
 
 const Traveller_navigation = [
+
   { name: 'Community', href: '/community', current: true },
   { name: 'Trips', href: '/trip_dashboard', current: false },
   { name: 'Market Place', href: '/services', current: false },
   { name: 'Places', href: '/places', current: false },
+
 ];
 
 const SP_navigation = [
-  { name: 'Community', href: '/community', current: false },
-  { name: 'Shop', href: '/trips', current: true },
-  { name: 'Market Place', href: '/services', current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Shop", href: "/trips", current: true },
+  { name: "Market Place", href: "/services", current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 function handleLogoNavigate() {
-  window.location.href = '/landing';
+  window.location.href = "/landing";
 }
 
 export default function Example({ type, profilePic, funtion }) {
@@ -51,7 +61,10 @@ export default function Example({ type, profilePic, funtion }) {
   };
 
   return (
-    <Disclosure as="nav" className="bg-white m-1.5 rounded shadow fixed top-0 left-0 right-0 z-100">
+    <Disclosure
+      as="nav"
+      className="bg-white m-1.5 rounded shadow fixed top-0 left-0 right-0 z-100"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -67,9 +80,14 @@ export default function Example({ type, profilePic, funtion }) {
                 </DisclosureButton>
               </div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
-                <button className="flex items-center" onClick={handleLogoNavigate}>
+                <button
+                  className="flex items-center"
+                  onClick={handleLogoNavigate}
+                >
                   <img className="h-16 w-auto" src={logo} alt="CeylonTrail" />
-                  <span className="ml-3 text-4xl font-extrabold text-primary">CeylonTrail</span>
+                  <span className="ml-3 text-4xl font-extrabold text-primary">
+                    CeylonTrail
+                  </span>
                 </button>
                 <div className="items-center sm:ml-6 sm:flex">
                   <div className="flex space-x-4 items-center">
@@ -78,10 +96,12 @@ export default function Example({ type, profilePic, funtion }) {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'text-primaryDark1 font-extrabold text-xl' : 'text-secondary hover:text-teal-700',
-                          'px-3 py-2 text-sm font-semibold'
+                          item.current
+                            ? "text-primaryDark1 font-extrabold text-xl"
+                            : "text-secondary hover:text-teal-700",
+                          "px-3 py-2 text-sm font-semibold"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                         onClick={(e) => {
                           e.preventDefault();
                           handleNavClick(index);
@@ -104,7 +124,10 @@ export default function Example({ type, profilePic, funtion }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <MenuButton className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500" onClick={funtion}>
+                    <MenuButton
+                      className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                      onClick={funtion}
+                    >
                       <span className="sr-only">Open user menu</span>
                       <img className="h-8 w-8 rounded-full" src={profilePic} alt="" />
                     </MenuButton>
@@ -121,10 +144,12 @@ export default function Example({ type, profilePic, funtion }) {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-teal-700 text-white' : 'text-gray-500 hover:bg-teal-500 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-teal-700 text-white"
+                      : "text-gray-500 hover:bg-teal-500 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(index);

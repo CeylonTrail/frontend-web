@@ -1,9 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import MarketPlaceImg from "../../assets/img/MarketPlace.png";
 import { PrimaryButton } from "../../components/Button";
 import "../../assets/styles/SetUpMarketPlace.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+  faLinkedin,
+  faYoutube,
+
+} from "@fortawesome/free-brands-svg-icons";
+
 
 const SetUpMarketPlace = () => {
+  const navigate = useNavigate();
+  const [selectedDays, setSelectedDays] = useState([]);
+
+  const handleButtonClick = () => {
+    navigate("/hotel-sp-view");
+  };
+
+   const handleResetClick = () => {
+     navigate("/hotel-sp-view");
+   };
+
+  const handleDayChange = (day) => {
+    if (selectedDays.includes(day)) {
+      setSelectedDays(selectedDays.filter((d) => d !== day));
+    } else {
+      setSelectedDays([...selectedDays, day]);
+    }
+  };
+
+  const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
+
+  const handleSocialMediaChange = (socialMedia) => {
+    setSelectedSocialMedia((prevSelected) =>
+      prevSelected.includes(socialMedia)
+        ? prevSelected.filter((item) => item !== socialMedia)
+        : [...prevSelected, socialMedia]
+    );
+  };
+
+  
+
+  const socialMediaOptions = [
+    { name: "Facebook", icon: faFacebook, color: "#3b5998" },
+    { name: "Instagram", icon: faInstagram, color: "#E1306C" },
+    { name: "Twitter", icon: faTwitter, color: "#1DA1F2" },
+    { name: "LinkedIn", icon: faLinkedin, color: "#0077b5" },
+    { name: "YouTube", icon: faYoutube, color: "#FF0000" },
+    { name: "Website", icon: faGlobe, color: "#000000" },
+  ];
+
+
   return (
     <div className="isolate bg-[#E7E7E7] px-5 py-18 lg:px-6 mt-16 mb-4">
       <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl ">
@@ -19,7 +72,7 @@ const SetUpMarketPlace = () => {
               top: "10vh",
             }}
             alt="Market Place"
-            className="w-auto h-auto " // Adjust the negative margin-top as needed
+            className="w-auto h-auto"
           />
         </div>
 
@@ -87,10 +140,10 @@ const SetUpMarketPlace = () => {
               will be prominently displayed on your shop's page.
             </p>
 
-            {/* Basic Info */}
+            {/* Marketplace  Info */}
             <div className="border-t border-gray-300 pt-4">
               <h3 className="text-lg font-bold mb-0.5">
-                <strong>Basic Info</strong>
+                <strong>Marketplace Info</strong>
               </h3>
               {/* Shop Name */}
               <div className="flex items-center gap-x-3 mb-0.5">
@@ -98,7 +151,7 @@ const SetUpMarketPlace = () => {
                   htmlFor="shop-name"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Shop Name
+                  Name
                 </label>
                 <input
                   id="shop-name"
@@ -119,7 +172,7 @@ const SetUpMarketPlace = () => {
                   htmlFor="shop-description"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Shop Description
+                  Description
                 </label>
                 <textarea
                   id="shop-description"
@@ -139,7 +192,7 @@ const SetUpMarketPlace = () => {
                   htmlFor="shop-type"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Shop Type
+                  Service Type
                 </label>
                 <input
                   id="shop-type"
@@ -154,40 +207,12 @@ const SetUpMarketPlace = () => {
                   placeholder="Restaurant"
                 />
               </div>
-            </div>
-
-            {/* Contact Info */}
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-bold mb-0.5">
-                <strong>Contact Info</strong>
-              </h3>
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="shop-owner-name"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Shop Owner Name
-                </label>
-                <input
-                  id="shop-owner-name"
-                  name="shop-owner-name"
-                  type="text"
-                  autoComplete="name"
-                  style={{
-                    borderColor: "#6DA5C0",
-                    outlineColor: "#0F969C",
-                  }}
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="Enter your name"
-                />
-              </div>
-
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="shop-email"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Shop Email
+                  Email
                 </label>
                 <input
                   id="shop-email"
@@ -205,14 +230,14 @@ const SetUpMarketPlace = () => {
 
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="phone-number"
+                  htmlFor="shop-contact-number"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Phone Number
+                  Contact Number
                 </label>
                 <input
-                  id="phone-number"
-                  name="phone-number"
+                  id="shop-contact-number"
+                  name="shop-contact-number"
                   type="tel"
                   autoComplete="tel"
                   style={{
@@ -220,111 +245,212 @@ const SetUpMarketPlace = () => {
                     outlineColor: "#0F969C",
                   }}
                   className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="123-456-7890"
+                  placeholder="Enter contact number"
                 />
               </div>
-
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="physical-address"
+                  htmlFor="shop-description"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Physical Address
+                  Physical Adress
                 </label>
                 <textarea
-                  id="physical-address"
-                  name="physical-address"
+                  id="adress"
+                  name="address"
                   rows={3}
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
                   }}
                   className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  placeholder="123 Main St, City, Country"
+                  placeholder="Add your address here"
                 />
               </div>
             </div>
 
-            {/* Location */}
+            {/* Contact Info */}
             <div className="border-t border-gray-300 pt-4">
               <h3 className="text-lg font-bold mb-0.5">
-                <strong>Opening hours</strong>
+                <strong>Service Provider Info</strong>
               </h3>
-              <div className="flex flex-col gap-y-3 mb-0.5">
-                <div className="flex items-center gap-x-3 mb-0.5">
-                  <span className="text-sm font-semibold leading-4 text-gray-900 w-1/3">
-                    From
-                  </span>
-                  <input
-                    id="opening-hours-start"
-                    name="opening-hours-start"
-                    type="time"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  />
-                </div>
-                <div className="flex items-center gap-x-3 mb-2">
-                  <span className="text-sm font-semibold leading-4 text-gray-900 w-1/3">
-                    To
-                  </span>
-                  <input
-                    id="opening-hours-end"
-                    name="opening-hours-end"
-                    type="time"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                  />
-                </div>
-                {/* Section with a separating line at the top */}
-                <div className="pt-4 mb-4 border-t border-black">
-                  {/* Verification Document Upload */}
-                  <div className="flex items-center gap-x-3 mb-4">
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="shop-owner-name"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  First Name
+                </label>
+                <input
+                  id="shop-owner-name"
+                  name="shop-owner-name"
+                  type="text"
+                  autoComplete="name"
+                  style={{
+                    borderColor: "#6DA5C0",
+                    outlineColor: "#0F969C",
+                  }}
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="shop-owner-name"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Last Name
+                </label>
+                <input
+                  id="shop-owner-name"
+                  name="shop-owner-name"
+                  type="text"
+                  autoComplete="name"
+                  style={{
+                    borderColor: "#6DA5C0",
+                    outlineColor: "#0F969C",
+                  }}
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Enter your name"
+                />
+              </div>
+            </div>
+
+            {/* Opening Hours */}
+            <div className="border-t border-gray-300 pt-4">
+              <h3 className="text-lg font-bold mb-0.5">
+                <strong>Opening Hours</strong>
+              </h3>
+              <div className="space-y-2">
+                {[
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday",
+                ].map((day) => (
+                  <div key={day} className="flex items-center gap-x-3 mb-0.5">
                     <label
-                      htmlFor="verification-doc"
+                      htmlFor={`day-${day}`}
                       className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                     >
-                      <strong>Verification</strong>
+                      {day}
                     </label>
                     <input
-                      id="verification-doc"
-                      name="verificationDoc"
-                      type="file"
-                      // onChange={handleChange}
-                      style={{
-                        borderColor: "#6DA5C0",
-                        outlineColor: "#0F969C",
-                      }}
-                      className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                      placeholder="Upload a document verifying your marketplace"
+                      id={`day-${day}`}
+                      name={`day-${day}`}
+                      type="checkbox"
+                      checked={selectedDays.includes(day)}
+                      onChange={() => handleDayChange(day)}
+                      className="h-4 w-4 border-gray-300 rounded text-[#0F969C] focus:ring-[#0F969C]"
                     />
+                    {selectedDays.includes(day) && (
+                      <>
+                        <input
+                          type="time"
+                          name={`${day}-from`}
+                          className="border border-gray-300 rounded-md px-2 py-1"
+                        />
+                        <span>to</span>
+                        <input
+                          type="time"
+                          name={`${day}-to`}
+                          className="border border-gray-300 rounded-md px-2 py-1"
+                        />
+                      </>
+                    )}
                   </div>
-                  <p className="text-sm text-gray-600 ml-60">
-                    *Upload a document or photo that verifies your association
-                    with this marketplace.
-                  </p>
+                ))}
+              </div>
+              <div className="border-t border-gray-300 pt-4 mt-4">
+                <h4 className="text-md font-bold mb-1">Social Media Links</h4>
+                <div className="space-y-2">
+                  {socialMediaOptions.map(({ name, icon, color }) => (
+                    <div
+                      key={name}
+                      className="flex items-center gap-x-3 mb-0.5"
+                    >
+                      <input
+                        id={`social-${name}`}
+                        name={`social-${name}`}
+                        type="checkbox"
+                        checked={selectedSocialMedia.includes(name)}
+                        onChange={() => handleSocialMediaChange(name)}
+                        className="h-4 w-4 border-gray-300 rounded text-[#0F969C] focus:ring-[#0F969C]"
+                      />
+                      <label
+                        htmlFor={`social-${name}`}
+                        className="flex items-center text-sm font-semibold leading-4 text-gray-900"
+                      >
+                        <FontAwesomeIcon
+                          icon={icon}
+                          className="mr-2"
+                          style={{ color }}
+                        />
+                        {name}
+                      </label>
+                      {selectedSocialMedia.includes(name) && (
+                        <input
+                          type="url"
+                          name={`${name}-link`}
+                          style={{
+                            borderColor: "#6DA5C0",
+                            outlineColor: "#0F969C",
+                          }}
+                          className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                          placeholder={`Enter ${name} link`}
+                        />
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
+            {/* Section with a separating line at the top */}
+            <div className="pt-4 mb-4 border-t border-black">
+              {/* Verification Document Upload */}
+              <div className="flex items-center gap-x-3 mb-4">
+                <label
+                  htmlFor="verification-doc"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  <strong>Verification</strong>
+                </label>
+                <input
+                  id="verification-doc"
+                  name="verificationDoc"
+                  type="file"
+                  // onChange={handleChange}
+                  style={{
+                    borderColor: "#6DA5C0",
+                    outlineColor: "#0F969C",
+                  }}
+                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
+                  placeholder="Upload a document verifying your marketplace"
+                />
+              </div>
+              <p className="text-sm text-gray-600 ml-60">
+                *Upload a document or photo that verifies your association with
+                this marketplace.
+              </p>
+            </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end space-x-4 mt-2">
-            <PrimaryButton
-              name="Reset"
-              // action={handleSubscribeClick}
-              isActive={false}
-            />
-            <PrimaryButton
-              name="Create"
-              // action={editProfileClicked}
-              isActive={true}
-            />
+            {/* Submit Button */}
+            <div className="flex justify-end space-x-4 mt-2">
+              <PrimaryButton
+                name="Reset"
+                action={handleResetClick}
+                isActive={true}
+              />
+              <PrimaryButton
+                name="Create"
+                action={handleButtonClick}
+                isActive={false}
+              />
+            </div>
           </div>
         </form>
       </div>

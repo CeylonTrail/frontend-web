@@ -3,7 +3,7 @@ import Profile from "../assets/img/Profile.svg";
 
 const Analytics = () => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md w-full max-w-sm">
+    <div className="bg-white p-4 rounded-lg shadow-md  max-w-sm">
       <div className="flex items-center mb-4">
         <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
         <div className="ml-4">

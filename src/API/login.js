@@ -10,11 +10,13 @@ const login = async (data) => {
                 'Content-Type': 'application/json;charset=UTF-8',
             },
         });
+        console.log(response.data);
+        console.log(typeof response.data.code);
+        if (response.data.message == "Login success") {
 
-        if (response.status === 200 && response.data.message === 'Login success') {
-            return { status: 'success', message: 'Login success', token: data.token[0]};
+            return { status: 'success', message: 'Login success', token: data.accessToken[0]};
         } else {
-            return { status: 'error', message: 'Login success' };
+            return { status: 'error', message: 'Login success na' };
         }
     } catch (error) {
         if (error.response && error.response.data) {
@@ -30,7 +32,7 @@ const login = async (data) => {
                 return { status: 'error', message: message || 'An unknown error occurred' };
             }
         } else {
-            return { status: 'error', message: 'An unknown error occurred' };
+            return { status: 'error', message: 'An unknown error occurredbhib' };
         }
     }
 }

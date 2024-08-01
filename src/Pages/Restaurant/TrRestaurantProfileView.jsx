@@ -71,7 +71,7 @@ const TrRestaurantProfileView = () => {
           style={{ width: "1250px", height: "104%" }}
         ></div>
       </div>
-      
+
       <div className="relative">
         <div className="overflow-hidden flex justify-center mt-5 mb-5">
           <img
@@ -82,7 +82,6 @@ const TrRestaurantProfileView = () => {
           />
         </div>
         <div className="relative flex justify-center items-center -mt-24">
-         
           <div
             className="relative w-40 h-40 border-4 border-white rounded-full overflow-hidden"
             // style={{
@@ -105,46 +104,50 @@ const TrRestaurantProfileView = () => {
               "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
           }}
         >
-         <div className="flex items-center justify-between">
-  {/* <!-- First Column: Rating --> */}
-  <div className="flex-1 flex items-center">
-    <RatingComponent />
-  </div>
+          <div className="flex items-center justify-between">
+            {/* <!-- First Column: Rating --> */}
+            <div className="flex-1 flex items-center">
+              <RatingComponent />
+            </div>
 
-  {/* <!-- Second Column: Hotel Name and Description --> */}
-  <div className="flex-1 flex flex-col items-center justify-center ml-4">
-    <div className="text-4xl font-semibold whitespace-nowrap" style={{ fontWeight: "400", fontSize: "40px" }}>
-      Blue Hills Residencies
-    </div>
-    <div className="flex flex-col mt-2 items-center">
-      <div className="text-xl font-light italic">
-        Good in quality
-      </div>
-    </div>
-  </div>
+            {/* <!-- Second Column: Hotel Name and Description --> */}
+            <div className="flex-1 flex flex-col items-center justify-center ml-4">
+              <div
+                className="text-4xl font-semibold whitespace-nowrap"
+                style={{ fontWeight: "400", fontSize: "40px" }}
+              >
+                Blue Hills Residencies
+              </div>
+              <div className="flex flex-col mt-2 items-center">
+                <div className="text-xl font-light italic">Good in quality</div>
+              </div>
+            </div>
 
-  {/* <!-- Third Column: Additional Information --> */}
-  <div className="flex-1 flex flex-col items-end ml-4">
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Hotel</span>
-    </div>
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Email:</span> contact@bluehills.com
-    </div>
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Phone:</span> +123 456 7890
-    </div>
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Opening Hours:</span> 9:00 AM - 9:00 PM
-    </div>
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Address:</span> 123 Blue Hills Road, Hilltown
-    </div>
-    <div className="text-sm mb-2">
-      <span className="font-semibold">Owner:</span> John Doe
-    </div>
-  </div>
-</div>
+            {/* <!-- Third Column: Additional Information --> */}
+            <div className="flex-1 flex flex-col items-end ml-4">
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Hotel</span>
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Email:</span>{" "}
+                contact@bluehills.com
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Phone:</span> +123 456 7890
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Opening Hours:</span> 9:00 AM -
+                9:00 PM
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Address:</span> 123 Blue Hills
+                Road, Hilltown
+              </div>
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Owner:</span> John Doe
+              </div>
+            </div>
+          </div>
 
           {/* Statistics Section */}
           <div className="border border-[#0F969C]  flex flex-col lg:flex-row justify-center bg-white mt-3">

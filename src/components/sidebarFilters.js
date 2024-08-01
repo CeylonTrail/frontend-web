@@ -84,7 +84,7 @@ const Sidebar = () => {
     return (
         <>
             <nav
-                className="fixed rounded shadow z-40 top-20 left-1.5 w-full bottom-1.5 p-6 bg-white space-y-8 overflow-auto sm:w-80">
+                className="fixed rounded shadow z-40 top-20 left-1.5 w-full bottom-1.5 p-6 bg-white space-y-8 overflow-auto max-w-sm">
                 {/* <div className="sticky top-0 space-y-8 bg-white">
                     <div className='h-20 flex items-center px-4 border-b md:px-8'>
                         <a href='javascript:void(0)' className='flex-none'>

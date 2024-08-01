@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import login from "../API/login";
 import { WarningAlert } from "../components/Alerts";
+import MassageBoxPop from "../components/MassageBoxPop";
 
 export default () => {
 
@@ -41,6 +42,8 @@ export default () => {
             console.log(response);
             if (response.status === 'success') {
                 const token = response.token;
+                setAlertType('success');
+                showAlert(true);
                 
             } else {
                 setAlertTitle('Error');
@@ -68,11 +71,11 @@ export default () => {
     }
 
     return (
-        <div className="w-full mb-5">
+        <div className="w-full ">
             <div className="bg-primaryDark1 h-5">
             </div>
             <Header type={"login"} />
-            <div className="flex pb-8">
+            <div className="flex pb-8 mb-5">
                 <div className="relative flex-1 hidden items-center justify-center   lg:flex h-full">
                     <div className="w-2/4 pt-10">
                         <img src={LoginImg} />
@@ -125,7 +128,7 @@ export default () => {
 
 
                             <div >
-                                <PrimaryButton name={"Log In"} />
+                                <PrimaryButton name={"Log In"} action={handleSubmit} />
                             </div>
 
 
@@ -153,7 +156,7 @@ export default () => {
                         </div>
                         {showAlert && alertType === 'error' && <WarningAlert title={alertTitle} message={alertMessage} onclose={handleOnClose} />} 
 
-
+                        {showAlert && alertType === 'success' && <MassageBoxPop message={"Registation Successfull!"} type="success" description={"We have sent you an email to validate account."} />}
                     </div>
                 </div>
             </div>

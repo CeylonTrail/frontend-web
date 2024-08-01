@@ -9,7 +9,7 @@ import RatingComponent from "../SP common/RatingComponent.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faComments } from "@fortawesome/free-solid-svg-icons";
 // import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
-// import "../../assets/styles/form.css"; 
+// import "../../assets/styles/form.css";
 
 const TrHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,80 +34,80 @@ const TrHotelProfileView = () => {
     handleCloseTrHotelModal();
   };
 
-   const rooms = [
-     {
-       type: "Luxury Suite",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 2",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 3",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 4",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 5",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 6",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 7",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 8",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 9",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 10",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 11",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-     {
-       type: "Single Room 12",
-       price: "LKR 350/night",
-       rating: 4.5,
-       src: HotelCardImg,
-     },
-   ];
+  const rooms = [
+    {
+      type: "Luxury Suite",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 2",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 3",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 4",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 5",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 6",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 7",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 8",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 9",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 10",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 11",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+    {
+      type: "Single Room 12",
+      price: "LKR 350/night",
+      rating: 4.5,
+      src: HotelCardImg,
+    },
+  ];
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;

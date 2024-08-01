@@ -3,17 +3,18 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/img/logo circle.png';
 import { useEffect, useState } from 'react';
 
+
 const Traveller_navigation = [
   { name: 'Community', href: '/community', current: true },
   { name: 'Trips', href: '/trips', current: false },
-  { name: 'Services', href: '/services', current: false },
+  { name: 'Market Place', href: '/services', current: false },
   { name: 'Places', href: '/places', current: false },
 ];
 
 const SP_navigation = [
   { name: 'Community', href: '/community', current: false },
   { name: 'Shop', href: '/trips', current: true },
-  { name: 'Services', href: '/services', current: false },
+  { name: 'Market Place', href: '/services', current: false },
 ];
 
 function classNames(...classes) {
@@ -24,7 +25,7 @@ function handleLogoNavigate() {
   window.location.href = '/landing';
 }
 
-export default function Example({ type }) {
+export default function Example({ type,profilePic,funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
@@ -34,6 +35,16 @@ export default function Example({ type }) {
       setNavigation(SP_navigation);
     }
   }, [type]);
+
+  const handleNavClick = (index) => {
+    setNavigation((prevNavigation) =>
+      prevNavigation.map((item, idx) => ({
+        ...item,
+        current: idx === index,
+      }))
+    );
+    window.location.href = navigation[index].href;
+  };
 
   return (
     <Disclosure as="nav" className="bg-white m-1.5 rounded shadow fixed top-0 left-0 right-0 z-100">
@@ -58,7 +69,7 @@ export default function Example({ type }) {
                 </button>
                 <div className="items-center sm:ml-6 sm:flex">
                   <div className="flex space-x-4 items-center">
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -67,6 +78,10 @@ export default function Example({ type }) {
                           'px-3 py-2 text-sm font-semibold'
                         )}
                         aria-current={item.current ? 'page' : undefined}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(index);
+                        }}
                       >
                         {item.name}
                       </a>
@@ -74,8 +89,6 @@ export default function Example({ type }) {
                   </div>
                 </div>
               </div>
-            
-              
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
@@ -87,11 +100,11 @@ export default function Example({ type }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <MenuButton className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                    <MenuButton className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500" onClick={funtion}>
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={profilePic}
                         alt=""
                       />
                     </MenuButton>
@@ -102,7 +115,7 @@ export default function Example({ type }) {
           </div>
           <DisclosurePanel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              {navigation.map((item, index) => (
                 <DisclosureButton
                   key={item.name}
                   as="a"
@@ -112,6 +125,10 @@ export default function Example({ type }) {
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(index);
+                  }}
                 >
                   {item.name}
                 </DisclosureButton>

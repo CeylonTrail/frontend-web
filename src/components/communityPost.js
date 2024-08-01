@@ -66,7 +66,7 @@ const CommunityPost = ({ posts }) => {
                                     <img key={imgKey} src={img} loading="lazy" alt={item.title} className="w-full h-48 rounded" />
                                 ))}
                                 {item.imgs.length > 2 && (
-                                    <div className="relative w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
+                                    <div className=" w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
                                         +{item.imgs.length - 2}
                                     </div>
                                 )}

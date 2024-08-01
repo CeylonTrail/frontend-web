@@ -1,30 +1,38 @@
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/img/logo circle.png';
-import { useEffect, useState } from 'react';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import logo from "../assets/img/logo circle.png";
+import { useEffect, useState } from "react";
 
 const Traveller_navigation = [
-  { name: 'Community', href: '/community', current: true },
-  { name: 'Trips', href: '/trips', current: false },
-  { name: 'Services', href: '/services', current: false },
-  { name: 'Places', href: '/places', current: false },
+  { name: "Community", href: "/community", current: true },
+  { name: "Trips", href: "/trips", current: false },
+  { name: "Market Place", href: "/services", current: false },
+  { name: "Places", href: "/places", current: false },
 ];
 
 const SP_navigation = [
-  { name: 'Community', href: '/community', current: false },
-  { name: 'Shop', href: '/trips', current: true },
-  { name: 'Services', href: '/services', current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Shop", href: "/trips", current: true },
+  { name: "Market Place", href: "/services", current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 function handleLogoNavigate() {
-  window.location.href = '/landing';
+  window.location.href = "/landing";
 }
 
-export default function Example({ type }) {
+export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
@@ -35,8 +43,21 @@ export default function Example({ type }) {
     }
   }, [type]);
 
+  const handleNavClick = (index) => {
+    setNavigation((prevNavigation) =>
+      prevNavigation.map((item, idx) => ({
+        ...item,
+        current: idx === index,
+      }))
+    );
+    window.location.href = navigation[index].href;
+  };
+
   return (
-    <Disclosure as="nav" className="bg-white m-1.5 rounded shadow fixed top-0 left-0 right-0 z-100">
+    <Disclosure
+      as="nav"
+      className="bg-white m-1.5 rounded shadow fixed top-0 left-0 right-0 z-100"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -52,21 +73,32 @@ export default function Example({ type }) {
                 </DisclosureButton>
               </div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
-                <button className="flex items-center" onClick={handleLogoNavigate}>
+                <button
+                  className="flex items-center"
+                  onClick={handleLogoNavigate}
+                >
                   <img className="h-16 w-auto" src={logo} alt="CeylonTrail" />
-                  <span className="ml-3 text-4xl font-extrabold text-primary">CeylonTrail</span>
+                  <span className="ml-3 text-4xl font-extrabold text-primary">
+                    CeylonTrail
+                  </span>
                 </button>
                 <div className="items-center sm:ml-6 sm:flex">
                   <div className="flex space-x-4 items-center">
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'text-primaryDark1 font-extrabold text-xl' : 'text-secondary hover:text-teal-700',
-                          'px-3 py-2 text-sm font-semibold'
+                          item.current
+                            ? "text-primaryDark1 font-extrabold text-xl"
+                            : "text-secondary hover:text-teal-700",
+                          "px-3 py-2 text-sm font-semibold"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(index);
+                        }}
                       >
                         {item.name}
                       </a>
@@ -74,8 +106,6 @@ export default function Example({ type }) {
                   </div>
                 </div>
               </div>
-            
-              
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
@@ -87,11 +117,14 @@ export default function Example({ type }) {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <MenuButton className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                    <MenuButton
+                      className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                      onClick={funtion}
+                    >
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={profilePic}
                         alt=""
                       />
                     </MenuButton>
@@ -102,16 +135,22 @@ export default function Example({ type }) {
           </div>
           <DisclosurePanel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              {navigation.map((item, index) => (
                 <DisclosureButton
                   key={item.name}
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-teal-700 text-white' : 'text-gray-500 hover:bg-teal-500 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-teal-700 text-white"
+                      : "text-gray-500 hover:bg-teal-500 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(index);
+                  }}
                 >
                   {item.name}
                 </DisclosureButton>

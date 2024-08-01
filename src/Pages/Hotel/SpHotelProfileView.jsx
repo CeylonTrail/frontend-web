@@ -12,7 +12,7 @@ import EditHotelModal from "./EditHotelModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import "../../assets/styles/form.css"; 
-
+import Header from "../../components/header.js";
 
 const SpHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -164,6 +164,8 @@ const SpHotelProfileView = () => {
 
 
   return (
+     <>
+      <Header profilePic={HotelProfileImg } />
     <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-14">
       {/* White Background Box */}
       <div className="absolute inset-0 flex justify-center items-center mt-20">
@@ -408,7 +410,8 @@ const SpHotelProfileView = () => {
         onRequestClose={handleCloseEditHotelModal}
         onSubmit={handleSubmit}
       />
-    </div>
+      </div>
+       </>
   );
 };
 

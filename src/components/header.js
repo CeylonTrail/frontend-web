@@ -15,14 +15,14 @@ const Traveller_navigation = [
 
   { name: 'Community', href: '/community', current: true },
   { name: 'Trips', href: '/trip_dashboard', current: false },
-  { name: 'Market Place', href: '/services', current: false },
+  { name: 'Market Place', href: '/market', current: false },
   { name: 'Places', href: '/places', current: false },
 
 ];
 
 const SP_navigation = [
   { name: "Community", href: "/community", current: false },
-  { name: "Shop", href: "/trips", current: true },
+  { name: "Shop", href: "/hotel-sp-view", current: true },
   { name: "Market Place", href: "/market", current: false },
 ];
 
@@ -44,7 +44,10 @@ export default function Example({ type, profilePic, funtion }) {
     } else {
       if (type === 'traveller') {
         setNavigation(Traveller_navigation);
-      } else {
+      } else if (type === "serviceprovider") {
+        setNavigation(SP_navigation);
+      }
+      else {
         setNavigation(SP_navigation);
       }
     }

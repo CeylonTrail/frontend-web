@@ -223,7 +223,7 @@ const get_community_post= async () => {
 
 const get_public_community_post = async () => {
     const url = `http://localhost:8083/api/v1/post/community-feed/public`;
-
+    console.log("api")
     try {
         const response = await axios.get(url, {
             headers: {

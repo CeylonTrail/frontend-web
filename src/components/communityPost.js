@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Like from "../assets/img/like.svg";
 import Comment from "../assets/img/comment.svg";
 import Share from "../assets/img/share.svg";
+import fromatDate from "../components/FormatDate";
+import { format } from "date-fns";
 
-const CommunityPost = ({ posts }) => {
+const CommunityPost = ({ posts,type }) => {
     const [like, setLike] = useState(0);
     const [comment, setComment] = useState(0);
     const [share, setShare] = useState(0);
@@ -40,7 +42,7 @@ const CommunityPost = ({ posts }) => {
     }
 
     return (
-        <section className="mx-auto max-w-screen-md md:px-8">
+        <section className={`mx-auto md:px-8 ${type === "public" ? "w-full ml-10"  :"max-w-screen-md" }`}>
             <div className="gap-2">
                 {posts.map((item, key) => (
                     <article
@@ -55,7 +57,7 @@ const CommunityPost = ({ posts }) => {
                                 </div>
                                 <div className="ml-3">
                                     <span className="block text-gray-900">{item.user.username}</span>
-                                    <span className="block text-gray-400 text-sm">{item.createdAt}</span>
+                                    <span className="block text-gray-400 text-sm">{fromatDate(item.createdAt)}</span>
                                 </div>
                             </div>
                             <div className="pt-3 ml-4 mr-2 mb-3">
@@ -64,11 +66,12 @@ const CommunityPost = ({ posts }) => {
                             <div className="grid grid-cols-3 gap-2 ml-4 mr-2">
                                 {item.images.slice(0, 2).map((image) => (
                                     <img src={image} loading="lazy" alt="Post Image" className="w-full h-48 rounded" />
+                                    
                                 ))}
 
-                                {item.imgs.length > 2 && (
+                                {item.images.length > 2 && (
                                     <div className=" w-full h-48 rounded bg-SecondaryLight flex items-center justify-center text-xl text-gray-700">
-                                        +{item.imgs.length - 2}
+                                        +{item.images.length - 2}
 
                                     </div>
                                 )}
@@ -76,16 +79,16 @@ const CommunityPost = ({ posts }) => {
                             <div className="border-t border-primary mt-5 flex flex-row justify-around pt-4">
                                 <div className="flex flex-row items-center">
                                     <img src={Like} alt="Like" className="w-8 h-8 text-primary" />
-                                    {like} Likes
+                                    {item.likes.length} Likes
                                 </div>
                                 <div className="flex flex-row items-center">
                                     <img src={Comment} alt="Comment" className="w-8 h-8 text-primary" />
-                                    {comment} Comments
+                                    {item.comments.length} Comments
                                 </div>
-                                <div className="flex flex-row items-center">
+                                {/* <div className="flex flex-row items-center">
                                     <img src={Share} alt="Share" className="w-8 h-8 text-primary" />
                                     {share} Shares
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </article>
@@ -98,7 +101,7 @@ const CommunityPost = ({ posts }) => {
                     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
                     onClick={handleOutsideClick}
                 >
-                    <div className="bg-white p-6 rounded-lg max-w-xl mx-auto h-4/5 overflow-auto">
+                    <div className="bg-white p-6 rounded-lg max-w-xl mx-auto max-h-4/5 overflow-auto h-fit">
                         <div className="flex items-center my-4 ml-2 mr-2">
                             <div className="flex-none w-10 h-10 rounded-full">
                                 <img src={selectedPost.user.profilePictureUrl} className="w-full h-full rounded-full" alt={selectedPost.user.useraname} />
@@ -123,10 +126,10 @@ const CommunityPost = ({ posts }) => {
                                 <img src={Comment} alt="Comment" className="w-8 h-8 text-primary" />
                                 {comment} Comments
                             </div>
-                            <div className="flex flex-row items-center">
+                            {/* <div className="flex flex-row items-center">
                                 <img src={Share} alt="Share" className="w-8 h-8 text-primary" />
                                 {share} Shares
-                            </div>
+                            </div> */}
                         </div>
                         <button onClick={handleClose} className="mt-4 bg-primary text-white py-2 px-4 rounded">
                             Close

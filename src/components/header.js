@@ -26,6 +26,13 @@ const SP_navigation = [
   { name: "Market Place", href: "/market", current: false },
 ];
 
+const publicNav = [
+  { name: 'Community', href: '/community', current: true },
+  { name: 'Market Place', href: '/market', current: false },
+  { name: 'Places', href: '/places', current: false },
+
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -38,20 +45,23 @@ export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    const savedNavigationState = localStorage.getItem('navigationState');
-    if (savedNavigationState) {
-      setNavigation(JSON.parse(savedNavigationState));
-    } else {
-      if (type === 'traveller') {
+    // const savedNavigationState = localStorage.getItem('navigationState');
+    // if (savedNavigationState) {
+    //   setNavigation(JSON.parse(savedNavigationState));
+    // } else {
+      if (type == 'traveller') {
         setNavigation(Traveller_navigation);
-      } else if (type === "serviceprovider") {
+      } else if (type =="serviceprovider") {
         setNavigation(SP_navigation);
       }
+      else if (type == "public") {
+      setNavigation(publicNav);
+    }
       else {
         setNavigation(SP_navigation);
       }
-    }
-  }, [type]);
+    
+  }, );
 
   const handleNavClick = (index) => {
     const newNavigation = navigation.map((item, idx) => ({

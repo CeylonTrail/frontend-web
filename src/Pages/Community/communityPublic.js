@@ -33,7 +33,7 @@ export default () => {
 
     return (
         <>
-            <Header type={"traveller"} profilePic={Profile} funtion={handleProfileClick} />
+            <Header type={"public"} profilePic={Profile} funtion={handleProfileClick} />
             <div className="flex flex-row justify-around">
                 <FilterBar />
                 <div className="flex flex-col items-center mt-24 w-full max-w-screen-md">

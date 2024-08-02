@@ -1,9 +1,12 @@
 import React from 'react';
 import { PrimaryButton as Button } from './Button';
+import skelim from '../assets/img/picskel.png';
 
 
 export default ({ pic }) => {
     
+
+    const followers=["Amal","Kamal","Nimal","Sunil","Manahari","Amal","Kamal","Nimal","Sunil","Manahari"];
     const handleEdit = () => { 
         window.location.href = "/edit_tr_profile";
     }
@@ -45,14 +48,16 @@ export default ({ pic }) => {
             <div className='mt-6'>
                 <h3 className="text-xl font-bold mb-2">Followers</h3>
                 <div className="overflow-auto h-64">
-                    {Array.from({ length: 9 }).map((_, index) => (
+                    {followers.map((user, index) => (
                         <div key={index} className="flex items-center justify-between mb-2">
                             <div className="flex items-center">
                                 <div className="h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">
                                     {/* Follower profile picture */}
-                                    <span className="text-xl">👤</span>
+                                    <span className="text-xl">{ 
+                                        <img src={skelim} className="w-8 h-8 rounded-full" />
+                                    }</span>
                                 </div>
-                                <span className="ml-2">Manahari</span>
+                                <span className="ml-2">{user}</span>
                             </div>
                             <button className="text-teal-500 hover:underline">Unfollow</button>
                         </div>

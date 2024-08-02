@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SideNav = () => {
     const [active, setActive] = useState('Dashboard');
+    const [navlink, setNavlink] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const savedActiveTab = localStorage.getItem('activeTab');
         if (savedActiveTab) {
             setActive(savedActiveTab);
+            
         } else {
             setActive('Dashboard'); // Set a default active tab
         }
+        
     }, []);
+
+    
 
     const handleNavClick = (tabName, href, event) => {
         event.preventDefault(); // Prevent default anchor behavior

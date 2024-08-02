@@ -3,6 +3,7 @@ import Like from "../assets/img/like.svg";
 import Comment from "../assets/img/comment.svg";
 import Share from "../assets/img/share.svg";
 import fromatDate from "../components/FormatDate";
+import profilePic from "../assets/img/picskel.png";
 import { format } from "date-fns";
 
 const CommunityPost = ({ posts,type }) => {
@@ -10,6 +11,8 @@ const CommunityPost = ({ posts,type }) => {
     const [comment, setComment] = useState(0);
     const [share, setShare] = useState(0);
     const [selectedPost, setSelectedPost] = useState(null);
+
+    
 
     const handlePostClick = (post) => {
         setSelectedPost(post);
@@ -53,7 +56,7 @@ const CommunityPost = ({ posts,type }) => {
                         <div>
                             <div className="flex items-center mt-2 ml-4 mr-2">
                                 <div className="flex-none w-10 h-10 rounded-full">
-                                    <img src={item.user.profilePictureUrl} className="w-full h-full rounded-full" alt={item.user.username} />
+                                    <img src={item.user.profilePictureUrl||profilePic} className="w-full h-full rounded-full" alt={item.user.username} />
                                 </div>
                                 <div className="ml-3">
                                     <span className="block text-gray-900">{item.user.username}</span>

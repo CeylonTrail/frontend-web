@@ -9,7 +9,7 @@ const MarketPlace = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
       <Header
-        type="serviceprovider"
+        type="traveller"
         profilePic={HotelProfileImg}
         funtion={() => {}}
         className="fixed top-0 left-0 w-full z-30" // Fixed position, full width, high z-index

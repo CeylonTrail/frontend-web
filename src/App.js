@@ -32,7 +32,7 @@ import CurrentTrip from "./Pages/Trips/currentTrip";
 import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
 
-import MassageBoxPop from "./components/MassageBoxPop";
+import CommunityPublic from "./Pages/Community/communityPublic";
 
 
 function App() {
@@ -193,19 +193,8 @@ function App() {
 
           {/* Community */}
           <Route path="/community" element={<Community />} />
-<<<<<<< HEAD
-          <Route
-            path="/mbpop"
-            element={
-              <MassageBoxPop
-                message={"shdbadh"}
-                description={"hdfyauwheriuahwrihariuaiuwrfuiHWRF"}
-              />
-            }
-          />
-=======
-         
->>>>>>> 7f2e1dce4ea9304edc17e8e1777ca530c96feb98
+          <Route path="/community_public" element={<CommunityPublic />} />
+
 
           <Route path="/profile" element={<TravellerProfile />} />
           <Route path="/edit_tr_profile" element={<EditProfile />} />

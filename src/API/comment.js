@@ -77,3 +77,10 @@ const remove_comment = async (data) => {
         }
     }
 }
+
+
+export default {
+    add_comment,
+    update_comment,
+    remove_comment
+}

@@ -13,7 +13,7 @@ const login = async (data) => {
         console.log(response.data);  // Log the entire response data
         // console.log(typeof response.data.code);  // Log the type of code
         if (response.data.message === "Login success") {
-            return { status: 'success', message: 'Login success', token: response.data.data.accessToken };
+            return { status: 'success', message: 'Login success', token: response.data.data.accessToken,role:response.data.data.role };
         } else {
             return { status: 'error', message: 'Login success' };
         }

@@ -22,7 +22,7 @@ export default function Header(prop) {
     const navigation = [
         { title: "Home", path: "/landing" },
         { title: "About Us", path: aboutPath },
-        { title: "Community", path: "/community" }
+        { title: "Community", path: "/community_public" }
     ];
 
     const navigateLogIn = () => {

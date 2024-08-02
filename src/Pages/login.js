@@ -40,12 +40,19 @@ export default () => {
             console.log(response);
             if (response.status === 'success') {
                 const token = response.token;
+                const role = response.role;
                 setAlertType('success');
                 setAlertMessage('Login success');
                 setAlertTitle('Success');
                 setShowAlert(true);
                 setTimeout(() => {
-                    navigate('/community');
+                    if (role === 'TRAVELLER') {
+                        navigate('/community');
+                    }
+                    else {
+                        navigate('/sp');
+                    }
+                    
                     setShowAlert(false);
                 }, 2000);
             } else {

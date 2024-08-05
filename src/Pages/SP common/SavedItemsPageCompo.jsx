@@ -76,7 +76,7 @@ const SavedItemsPage = () => {
   ];
 
   return (
-    <div className="bg-white p-4 rounded shadow-md">
+    <div className="w-[82%] fixed right-2 bg-white rounded p-6 overflow-auto h-[87.5vh]">
       <div className="flex flex-col items-center">
         {/* Accommodations Section */}
         <div id="accommodation" className="mb-8">

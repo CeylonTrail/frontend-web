@@ -174,17 +174,10 @@ const SpHotelProfileView = () => {
         profilePic={HotelProfileImg}
         funtion={() => {}}
       />
-      <div className="relative max-w-full mx-4 sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mb-0 rounded-lg text-gray-900 mt-24">
+      <div className="relative mt-20 fixed right-2 overflow-auto h-[87.5vh] ">
         {/* White Background Box */}
-        <div className="absolute inset-0 flex justify-center items-center mt-20">
-          <div
-            className="absolute bg-white z-[-1]"
-            style={{ width: "1250px", height: "104%" }}
-          ></div>
-        </div>
-
-        <div className="relative">
-          <div className="overflow-hidden flex justify-center mt-5 mb-5">
+        <div className="relative bg-white w-[1250px] mx-auto">
+          <div className="flex justify-center">
             <img
               style={{ width: "1250px", height: "350px" }}
               className="object-cover object-top"
@@ -202,12 +195,12 @@ const SpHotelProfileView = () => {
               <img
                 className="object-cover object-center w-full h-full"
                 src={HotelProfileImg}
-                alt="Woman looking front"
+                alt="Hotel Profile"
               />
             </div>
             <div
               className="absolute"
-              style={{ left: "1000px", top: "105px", right: "auto" }}
+              style={{ top: "7rem", right: "3.7rem" }}
             >
               <div className="flex space-x-4">
                 <PrimaryButton
@@ -224,7 +217,7 @@ const SpHotelProfileView = () => {
             </div>
           </div>
           <div
-            className="border border-[#0F969C] p-4 rounded-lg mx-4 md:mx-24 lg:mx-40 mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3"
+            className="border border-[#0F969C] p-4 rounded-lg  mt-10 flex flex-col lg:flex-row justify-center items-center bg-white mt-3 w-[1200px] mx-auto"
             style={{
               boxShadow:
                 "0 7px 12px -3px rgba(15, 150, 156, 0.35), 0 -7px 12px -3px rgba(15, 150, 156, 0.35), 7px 0 12px -3px rgba(15, 150, 156, 0.35), -7px 0 12px -3px rgba(15, 150, 156, 0.35)",
@@ -377,7 +370,7 @@ const SpHotelProfileView = () => {
             {pageNumbers.map((number) => (
               <button
                 key={number}
-                className={`py-2 px-4 font-semibold rounded ${
+                className={`py-2 px-4 font-semibold rounded mb-5 ${
                   currentPage === number
                     ? "bg-[#0F969C] text-white"
                     : "bg-white text-[#0F969C]"

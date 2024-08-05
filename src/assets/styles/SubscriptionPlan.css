@@ -1,12 +1,12 @@
 /* Container for the subscription plan */
 .subscription-plan-container {
-  position: relative;
-  width: 100%;
-  display: flex;
+  /* position: relative;
+  /* width: 100%; */
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 20px auto;
-  padding: 0 10px; /* Add padding for better spacing on smaller screens */
+  align-items: center; */ 
+  /* margin: 20px auto; */
+  /* padding: 0 10px; Add padding for better spacing on smaller screens */
 }
 
 /* Box for the subscription plan */

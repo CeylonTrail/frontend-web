@@ -182,7 +182,7 @@ const SpHotelProfileView = () => {
               style={{ width: "1250px", height: "350px" }}
               className="object-cover object-top"
               src={MarketPlaceBackgroundImg}
-              alt="Mountain"
+              alt="Cover"
             />
           </div>
           <div className="relative flex justify-center items-center -mt-24">

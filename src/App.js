@@ -108,7 +108,7 @@ function App() {
             path="/rest-sp-view"
             element={
               <>
-                <Header />;<SpRestaurantProfileView />
+                <SpRestaurantProfileView />
               </>
             }
           />
@@ -116,7 +116,7 @@ function App() {
             path="/rest-tr-view"
             element={
               <>
-                <Header />;<TrRestaurantProfileView />
+                <TrRestaurantProfileView />
               </>
             }
           />
@@ -124,7 +124,7 @@ function App() {
             path="/equip-sp-view"
             element={
               <>
-                <Header />;<SpEquipmentRentalProfileView />
+                <SpEquipmentRentalProfileView />
               </>
             }
           />
@@ -132,7 +132,7 @@ function App() {
             path="/equip-tr-view"
             element={
               <>
-                <Header />;<TrEquipmentRentalProfileView />
+                <TrEquipmentRentalProfileView />
               </>
             }
           />

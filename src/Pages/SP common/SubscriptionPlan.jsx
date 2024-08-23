@@ -82,8 +82,8 @@ const SubscriptionPlan = () => {
         profilePic={HotelProfileImg}
         funtion={() => {}}
       />
-      <div className="subscription-plan-container">
-        <div className="subscription-plan-box mt-20">
+      <div className="subscription-plan-container relative mt-20 fixed overflow-auto h-[87.5vh] ml-6 ">
+        <div className="subscription-plan-box">
           <FontAwesomeIcon
             icon={faArrowLeft}
             className="back-arrow"

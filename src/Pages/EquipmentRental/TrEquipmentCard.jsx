@@ -1,9 +1,9 @@
 import React from "react";
 import { PrimaryButton } from "../../components/Button.js";
 
-const TrRestaurantCard = ({
+const TrEquipmentCard = ({
   card,
-  fooditem,
+  equipment,
   // handleBoostClick,
   handleSeeMoreClick,
 }) => {
@@ -15,23 +15,23 @@ const TrRestaurantCard = ({
       <div className="relative w-full h-full">
         <img
           className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-          src={fooditem.src}
+          src={equipment.src}
           alt=""
         />
         <div
-          className="absolute bottom-8 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
+          className="absolute top-10 left-0 w-full bg-[#0F969C] text-white text-left py-1 flex justify-between items-center px-4 transition-opacity duration-300 group-hover:opacity-0"
           style={{ zIndex: 5 }}
         >
           <div className="text-sm">
-            <p className="font-bold text-lg mb-1">{fooditem.type}</p>
-            <p>{fooditem.price}</p>
+            <p className="font-bold text-lg mb-1">{equipment.type}</p>
+            <p>{equipment.price}</p>
           </div>
           <div className="flex items-center text-sm">
-            <p>⭐ {fooditem.rating}</p>
+            <p>⭐ {equipment.rating}</p>
           </div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black bg-opacity-50 p-4">
-          <div className="flex flex-col items-center gap-y-2">
+          <div className="flex flex-col items-center gap-y-2 mt-60">
             <PrimaryButton
               name="See more"
               action={() => handleSeeMoreClick(card)}
@@ -44,4 +44,4 @@ const TrRestaurantCard = ({
   );
 };
 
-export default TrRestaurantCard;
+export default TrEquipmentCard;

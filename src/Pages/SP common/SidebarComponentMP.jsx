@@ -28,7 +28,7 @@ const SidebarComponentMP = ({ pic }) => {
   const isSavedItemsPage = location.pathname === "/saved";
 
   return (
-    <div className="bg-white p-4 rounded shadow-md h-full">
+    <div className="fixed rounded shadow top-20 left-1.5  bottom-1.5 p-6 space-y-8 overflow-auto  w-[16%] bg-white h-[87.5vh]">
       {/* Profile Picture */}
       {pic && (
         <img

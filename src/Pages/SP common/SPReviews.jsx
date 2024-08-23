@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStarHalfAlt, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
 import Modal from "react-modal";
 import cancelImg from "../../assets/img/cancel.png"; // Adjust path as needed
@@ -118,8 +117,10 @@ const SPReviews = () => {
   };
 
   const goBackButtonClick = () => {
-    navigate("/hotel-tr-view"); // Use navigate for redirection
+    console.log("History length:", window.history.length);
+    navigate(-1);
   };
+
 
   const settings = {
     dots: false,

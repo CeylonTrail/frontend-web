@@ -5,30 +5,26 @@ import DeluxeRoomImg from "../../assets/img/deluxeroom.png";
 import DeluxeRoomImg1 from "../../assets/img/deluxeroom1.png";
 import DeluxeRoomImg2 from "../../assets/img/deluxeroom2.png";
 import DeluxeRoomImg3 from "../../assets/img/deluxeroom3.png";
-import HotelProfileImg from "../../assets/img/hotel-profile.png"; // Import profile picture
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faPhoneAlt,
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom"; // Use useNavigate for React Router v6+
 
-const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) => {
+const TrEquipmentModal = ({ isOpen, onRequestClose, equipmentDetails = {} }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [userRating, setUserRating] = useState(0);
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   if (!isOpen) return null;
 
   const {
-    title = "Pearl of Lanka Inn",
-    type = "Deluxe Rooms",
-    description = "The Deluxe Rooms are perched on the fifth to seventh floors and combine the beauty and elegance of the charming city with meticulous design touches and sprawling spaces. Facing the Colombo cityscape, these Deluxe Rooms at The Kingsbury, one of the most luxurious 5 Star hotels in Colombo",
+    title = "Travel Kit",
+    description = "degfsgefhdgjhndgjyrkhfdytkrhk",
     price = "250",
     rating = "4.5",
-  } = marketcardDetails;
+  } = equipmentDetails;
 
   const placeholderImages = [
     DeluxeRoomImg,
@@ -69,43 +65,16 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
     );
   };
 
-  const handleProfilePicClick = () => {
-    navigate("/hotel-tr-view"); // Redirect to the profile view page using navigate
-  };
-
   return (
     <>
       <div className="modal-overlay" onClick={onRequestClose}>
         <div
           className="modal-content-trhotelmodal"
           onClick={(e) => e.stopPropagation()}
-          style={{ position: "relative" }} // Position relative for absolute children
         >
-          <div
-            className="modal-header"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "20px",
-              marginRight: "45px"// Space below the profile section
-            }}
-          >
-            <img
-              src={HotelProfileImg}
-              alt="Profile"
-              onClick={handleProfilePicClick}
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                cursor: "pointer",
-                marginLeft: "50px",
-              }}
-            />
-            <div style={{ flex: 1 }}>
-              <h2 className="modal-title">{title}</h2>
-            </div>
+          <div className="modal-header">
+            <h2 className="modal-title">{title}</h2>
+            <div className="heading-line"></div>
             <img
               src={cancelImg}
               alt="Close"
@@ -120,10 +89,6 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
                 <p className="form-text">{description}</p>
               </div>
               <div className="form-group">
-                <h3 className="form-label">Type</h3>
-                <p className="form-text">{type}</p>
-              </div>
-              <div className="form-group">
                 <div
                   className="price-rating-container"
                   style={{
@@ -134,7 +99,7 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
                 >
                   <div className="price-rating-details" style={{ flex: 1 }}>
                     <div className="form-row-start">
-                      <h3 className="form-label">Price:</h3>
+                      <h3 className="form-label">Rent per day:</h3>
                       <p className="form-text">${price}</p>
                     </div>
                     <div className="form-row-end">
@@ -188,7 +153,7 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
                     Email
                   </a>
                   <a
-                    href="http://localhost:3000/chat"
+                    href="https://m.me/yourpage"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-link"
@@ -239,4 +204,4 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
   );
 };
 
-export default MarketplaceModal;
+export default TrEquipmentModal;

@@ -62,7 +62,7 @@ const SetUpMarketPlace = () => {
         funtion={() => {}}
       />
 
-      <div className="isolate bg-[#E7E7E7] px-5 py-18 lg:px-6 mt-20 mb-4">
+      <div className="relative mt-20 fixed right-2 overflow-auto h-[87.5vh]">
         <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl ">
           {/* Image Section */}
           <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">

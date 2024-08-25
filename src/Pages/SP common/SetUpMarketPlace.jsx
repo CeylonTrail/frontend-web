@@ -5,6 +5,7 @@ import "../../assets/styles/SetUpMarketPlace.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import set_marketplace from "../../API/marketplace";
 import {
   faFacebook,
   faInstagram,
@@ -16,8 +17,61 @@ import Header from "../../components/header.js";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 
 const SetUpMarketPlace = () => {
+  const [profile_image, setProfileImage] = useState("");
+  const [cover_image, setCoverImage] = useState("");
+  const [shopName, setShopName] = useState("");
+  const [selectedDays, setSelectedDays] = useState({});
+  const [description, setDescription] = useState("");
+  const [serviceType, setServiceType] = useState("");
+  const [email, setEmail] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
+  const [verification, setVerification] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const transformOpeningHours = () => {
+      return Object.entries(selectedDays)
+        .filter(([day, times]) => times)
+        .map(([day, times]) => ({
+          day,
+          startTime: times.from,
+          endTime: times.to,
+        }));
+    };
+
+    const data = {
+      profileImage: profile_image.name,
+      coverImage: cover_image.name,
+      shopName: shopName,
+      description: description,
+      serviceType: serviceType,
+      email: email,
+      contactNumber: contactNumber,
+      address: address,
+      ownerFirstName: firstName,
+      ownerLastName: lastName,
+      openingHours: transformOpeningHours(),
+      socialMediaLinks: selectedSocialMedia,
+      verificationDoc: verification.name,
+    };
+
+    console.log(data);
+
+    // Call the set_marketplace function to send the formData
+    try {
+      await set_marketplace(data);
+      console.log("Marketplace data submitted successfully");
+    } catch (error) {
+      console.error("Error submitting marketplace data", error);
+    }
+  };
+
   const navigate = useNavigate();
-  const [selectedDays, setSelectedDays] = useState([]);
 
   const handleButtonClick = () => {
     navigate("/hotel-sp-view");
@@ -28,20 +82,51 @@ const SetUpMarketPlace = () => {
   };
 
   const handleDayChange = (day) => {
-    if (selectedDays.includes(day)) {
-      setSelectedDays(selectedDays.filter((d) => d !== day));
+    setSelectedDays((prev) => {
+      if (prev[day]) {
+        const updatedDays = { ...prev };
+        delete updatedDays[day];
+        return updatedDays;
+      } else {
+        return {
+          ...prev,
+          [day]: { from: "", to: "" },
+        };
+      }
+    });
+  };
+
+  const handleTimeChange = (day, field, value) => {
+    setSelectedDays((prev) => ({
+      ...prev,
+      [day]: {
+        ...prev[day],
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleSocialMediaChange = (socialMedia) => {
+    const existingIndex = selectedSocialMedia.findIndex(
+      (item) => item.name === socialMedia.name
+    );
+    if (existingIndex !== -1) {
+      setSelectedSocialMedia(
+        selectedSocialMedia.filter((_, index) => index !== existingIndex)
+      );
     } else {
-      setSelectedDays([...selectedDays, day]);
+      setSelectedSocialMedia([
+        ...selectedSocialMedia,
+        { name: socialMedia.name, link: "" },
+      ]);
     }
   };
 
-  const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
-
-  const handleSocialMediaChange = (socialMedia) => {
+  const handleSocialMediaLinkChange = (socialMedia, link) => {
     setSelectedSocialMedia((prevSelected) =>
-      prevSelected.includes(socialMedia)
-        ? prevSelected.filter((item) => item !== socialMedia)
-        : [...prevSelected, socialMedia]
+      prevSelected.map((item) =>
+        item.name === socialMedia.name ? { ...item, link: link } : item
+      )
     );
   };
 
@@ -62,7 +147,7 @@ const SetUpMarketPlace = () => {
         funtion={() => {}}
       />
 
-      <div className="relative mt-20 fixed right-2 overflow-auto h-[87.5vh]">
+      <div className="isolate bg-[#E7E7E7] px-5 py-18 lg:px-6 mt-20 mb-4">
         <div className="flex flex-col lg:flex-row mx-auto mt-0 max-w-6xl ">
           {/* Image Section */}
           <div className="w-full lg:w-2/4 flex justify-center items-center mb-5">
@@ -82,8 +167,7 @@ const SetUpMarketPlace = () => {
 
           {/* Form Section */}
           <form
-            action="#"
-            method="POST"
+            onSubmit={handleSubmit}
             className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0]"
           >
             <div className="mx-auto max-w-lg text-center">
@@ -104,6 +188,7 @@ const SetUpMarketPlace = () => {
                 <input
                   id="profile-image"
                   name="profile-image"
+                  onChange={(e) => setProfileImage(e.target.files[0])}
                   type="file"
                   style={{
                     borderColor: "#6DA5C0",
@@ -130,6 +215,7 @@ const SetUpMarketPlace = () => {
                 <input
                   id="cover-image"
                   name="cover-image"
+                  onChange={(e) => setCoverImage(e.target.files[0])}
                   type="file"
                   style={{
                     borderColor: "#6DA5C0",
@@ -161,6 +247,8 @@ const SetUpMarketPlace = () => {
                     id="shop-name"
                     name="shop-name"
                     type="text"
+                    value={shopName}
+                    onChange={(e) => setShopName(e.target.value)}
                     autoComplete="organization"
                     style={{
                       borderColor: "#6DA5C0",
@@ -181,6 +269,8 @@ const SetUpMarketPlace = () => {
                   <textarea
                     id="shop-description"
                     name="shop-description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     rows={3}
                     style={{
                       borderColor: "#6DA5C0",
@@ -202,6 +292,8 @@ const SetUpMarketPlace = () => {
                     id="shop-type"
                     name="shop-type"
                     type="text"
+                    value={serviceType}
+                    onChange={(e) => setServiceType(e.target.value)}
                     autoComplete="organization"
                     style={{
                       borderColor: "#6DA5C0",
@@ -221,6 +313,8 @@ const SetUpMarketPlace = () => {
                   <input
                     id="shop-email"
                     name="shop-email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     autoComplete="email"
                     style={{
@@ -242,6 +336,8 @@ const SetUpMarketPlace = () => {
                   <input
                     id="shop-contact-number"
                     name="shop-contact-number"
+                    value={contactNumber}
+                    onChange={(e) => setContactNumber(e.target.value)}
                     type="tel"
                     autoComplete="tel"
                     style={{
@@ -262,6 +358,8 @@ const SetUpMarketPlace = () => {
                   <textarea
                     id="adress"
                     name="address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     rows={3}
                     style={{
                       borderColor: "#6DA5C0",
@@ -288,6 +386,8 @@ const SetUpMarketPlace = () => {
                   <input
                     id="shop-owner-name"
                     name="shop-owner-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     type="text"
                     autoComplete="name"
                     style={{
@@ -309,6 +409,8 @@ const SetUpMarketPlace = () => {
                   <input
                     id="shop-owner-name"
                     name="shop-owner-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     type="text"
                     autoComplete="name"
                     style={{
@@ -347,21 +449,27 @@ const SetUpMarketPlace = () => {
                         id={`day-${day}`}
                         name={`day-${day}`}
                         type="checkbox"
-                        checked={selectedDays.includes(day)}
+                        checked={!!selectedDays[day]}
                         onChange={() => handleDayChange(day)}
                         className="h-4 w-4 border-gray-300 rounded text-[#0F969C] focus:ring-[#0F969C]"
                       />
-                      {selectedDays.includes(day) && (
+                      {selectedDays[day] && (
                         <>
                           <input
                             type="time"
-                            name={`${day}-from`}
+                            value={selectedDays[day].from}
+                            onChange={(e) =>
+                              handleTimeChange(day, "from", e.target.value)
+                            }
                             className="border border-gray-300 rounded-md px-2 py-1"
                           />
                           <span>to</span>
                           <input
                             type="time"
-                            name={`${day}-to`}
+                            value={selectedDays[day].to}
+                            onChange={(e) =>
+                              handleTimeChange(day, "to", e.target.value)
+                            }
                             className="border border-gray-300 rounded-md px-2 py-1"
                           />
                         </>
@@ -381,8 +489,12 @@ const SetUpMarketPlace = () => {
                           id={`social-${name}`}
                           name={`social-${name}`}
                           type="checkbox"
-                          checked={selectedSocialMedia.includes(name)}
-                          onChange={() => handleSocialMediaChange(name)}
+                          checked={selectedSocialMedia.some(
+                            (item) => item.name === name
+                          )}
+                          onChange={() =>
+                            handleSocialMediaChange({ name, icon, color })
+                          }
                           className="h-4 w-4 border-gray-300 rounded text-[#0F969C] focus:ring-[#0F969C]"
                         />
                         <label
@@ -396,10 +508,23 @@ const SetUpMarketPlace = () => {
                           />
                           {name}
                         </label>
-                        {selectedSocialMedia.includes(name) && (
+                        {selectedSocialMedia.some(
+                          (item) => item.name === name
+                        ) && (
                           <input
                             type="url"
                             name={`${name}-link`}
+                            value={
+                              selectedSocialMedia.find(
+                                (item) => item.name === name
+                              )?.link || ""
+                            }
+                            onChange={(e) =>
+                              handleSocialMediaLinkChange(
+                                { name, icon, color },
+                                e.target.value
+                              )
+                            }
                             style={{
                               borderColor: "#6DA5C0",
                               outlineColor: "#0F969C",
@@ -426,8 +551,8 @@ const SetUpMarketPlace = () => {
                   <input
                     id="verification-doc"
                     name="verificationDoc"
+                    onChange={(e) => setVerification(e.target.files[0])}
                     type="file"
-                    // onChange={handleChange}
                     style={{
                       borderColor: "#6DA5C0",
                       outlineColor: "#0F969C",
@@ -451,7 +576,7 @@ const SetUpMarketPlace = () => {
                 />
                 <PrimaryButton
                   name="Create"
-                  action={handleButtonClick}
+                  action={handleSubmit}
                   isActive={false}
                 />
               </div>

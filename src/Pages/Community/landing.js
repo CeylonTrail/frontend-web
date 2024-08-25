@@ -77,9 +77,9 @@ export default () => {
     return (
         <>
             <Header type={"traveller"} profilePic={Profile} funtion={handleProfileClick}/>
-            <div className="flex flex-row justify-around">
+            <div className="flex flex-row justify-around w-full">
                 <FilterBar />
-                <div className="flex flex-col items-center mt-24 w-full max-w-screen-md  ">
+                <div className="flex flex-col items-center  w-full max-w-screen-md  ">
                     <span
                         className="bg-white p-4 flex flex-row gap-1 px-8 ml-4 mr-4 w-[704px] shadow-lg rounded-md mb-4 cursor-pointer"
                         onClick={handlePopup}

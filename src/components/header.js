@@ -27,8 +27,8 @@ const SP_navigation = [
 ];
 
 const publicNav = [
-  { name: 'Community', href: '/community', current: true },
-  { name: 'Market Place', href: '/market', current: false },
+  { name: 'Community', href: '/community_public', current: true },
+  { name: 'Market Place', href: '/market_public', current: false },
   { name: 'Places', href: '/places', current: false },
 
 ];
@@ -38,35 +38,37 @@ function classNames(...classes) {
 }
 
 function handleLogoNavigate() {
-  window.location.href = "/landing";
+  window.location.href = "/";
 }
 
 export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    // const savedNavigationState = localStorage.getItem('navigationState');
-    // if (savedNavigationState) {
-    //   setNavigation(JSON.parse(savedNavigationState));
-    // } else {
-      if (type == 'traveller') {
-        setNavigation(Traveller_navigation);
-      } else if (type =="serviceprovider") {
-        setNavigation(SP_navigation);
-      }
-      else if (type == "public") {
-      setNavigation(publicNav);
+    let navItems = [];
+    if (type === 'traveller') {
+      navItems = Traveller_navigation;
+    } else if (type === "serviceprovider") {
+      navItems = SP_navigation;
+    } else if (type === "public") {
+      navItems = publicNav;
+    } else {
+      navItems = SP_navigation;
     }
-      else {
-        setNavigation(SP_navigation);
-      }
-    
-  }, );
+
+    const currentPath = window.location.pathname;
+    const updatedNavItems = navItems.map((item) => ({
+      ...item,
+      current: item.href === currentPath,
+    }));
+
+    setNavigation(updatedNavItems);
+  }, [type]);
 
   const handleNavClick = (index) => {
     const newNavigation = navigation.map((item, idx) => ({
       ...item,
-      current: idx === index,
+      current: idx === index, // Set current to true for the clicked item, false for others
     }));
     setNavigation(newNavigation);
     localStorage.setItem('navigationState', JSON.stringify(newNavigation));

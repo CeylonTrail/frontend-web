@@ -15,6 +15,8 @@ import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView"
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
+import MarketPlacePublic from "./Pages/SP common/MarketPlaceCommon";
+
 import SPReviews from "./Pages/SP common/SPReviews";
 import SPViewReviews from "./Pages/SP common/SPViewReviews";
 import SavedItemsPage from "./Pages/SP common/SavedItemsPage";
@@ -168,7 +170,14 @@ function App() {
               </>
             }
           />
-
+          <Route
+            path="/market_public"
+            element={
+              <>
+                <MarketPlacePublic />
+              </>
+            }
+          />
           <Route
             path="/market"
             element={

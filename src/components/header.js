@@ -10,6 +10,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
+import button from "./Button"
 
 const Traveller_navigation = [
 
@@ -129,13 +130,17 @@ export default function Example({ type, profilePic, funtion }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+                {type === "public" ? (
+                  <a className="text-primary" href="/login">Log in</a>
+                ) : (<button
                   type="button"
                   className="bg-white p-1 rounded-full text-gray-400 hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button>)}
+                
+                
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>

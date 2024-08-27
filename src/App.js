@@ -35,6 +35,7 @@ import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
 
 import CommunityPublic from "./Pages/Community/communityPublic";
+import Loading from "./Pages/loading";
 
 
 function App() {
@@ -216,7 +217,7 @@ function App() {
           <Route path="/saved_trips" element={<SavedTrips />} />
 
           {/* Home Page */}
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </div>

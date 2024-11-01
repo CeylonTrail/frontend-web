@@ -1,18 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState ,useEffect} from "react";
 
 
 // NavLink component
 const NavLink = ({ ...props }) => {
-    const {
-        children,
-        href = "",
-        className = "",
-        active = "",
-    } = props;
+    const { children, href = "", className = "", active = "" } = props;
 
     const [pathname, setPathname] = useState("/");
 
-    const isActive = pathname == href;
+    const isActive = pathname === href;
     const activeClass = isActive ? active : "";
 
     useEffect(() => {
@@ -33,105 +28,104 @@ const Title = ({ children }) => (
     </h3>
 );
 
-// Sections List
-const SectionsList = ({ items }) => (
-    <div className='text-gray-600 px-0 md:px-6'>
-        <ul>
-            {items?.map((item, idx) => (
-                <li key={idx}>
-                    <NavLink
-                        href={item?.href}
-                        active='text-gray-900 border-indigo-600'
-                        className='block w-full py-2 px-0  hover:border-indigo-600 hover:text-gray-900 duration-150'>
-                        {item?.name}
-                    </NavLink>
-                </li>
-            ))}
-        </ul>
-    </div>
+// ToggleButton component
+const ToggleButton = ({ label, isActive, onToggle }) => (
+    <label className="inline-flex items-center cursor-pointer">
+        <input
+            type="checkbox"
+            checked={isActive}
+            onChange={onToggle}
+            className="sr-only peer"
+        />
+        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+            {label}
+        </span>
+        <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+        
+    </label>
 );
 
-// Search Box component
-// const SearchBox = ({ ...props }) => (
-//     <div className='relative w-full'>
-//         <svg
-//             xmlns='http://www.w3.org/2000/svg'
-//             viewBox='0 0 20 20'
-//             fill='currentColor'
-//             className='w-5 h-5 text-gray-400 absolute left-3 inset-y-0 my-auto'>
-//             <path
-//                 fillRule='evenodd'
-//                 d='M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z'
-//                 clipRule='evenodd'
-//             />
-//         </svg>
 
-//         <input
-//             {...props}
-//             type='email'
-//             className='w-full pl-12 pr-3 py-2 bg-white text-sm text-gray-500 bg-transparent outline-none border ring-blue-600 focus:ring-2 shadow-sm rounded-lg duration-200'
-//         />
-//     </div>
-// );
-
-
+// Sidebar component
 const Sidebar = () => {
-    // const lessons = {
-    //     rustLessons: [{ name: "Introduction to Rust", href: "javascript:void(0)" }, { name: "Installing and Setting up Rust", href: "javascript:void(0)" }, { name: "Basic Syntax and Data Types", href: "javascript:void(0)" }, { name: "Control Flow Statements", href: "javascript:void(0)" }, { name: "Functions and Modules", href: "javascript:void(0)" }, { name: "Ownership and Borrowing", href: "javascript:void(0)" }, { name: "Structs and Enums", href: "javascript:void(0)" }, { name: "Traits and Generics", href: "javascript:void(0)" }],
-    //     cargoLessons: [{ name: "Introduction to Cargo", href: "javascript:void(0)" }, { name: "Installing and Configuring Cargo", href: "javascript:void(0)" }, { name: "Basic Cargo Commands", href: "javascript:void(0)" }, { name: "Working with Dependencies", href: "javascript:void(0)" }, { name: "Rust Workspaces with Cargo", href: "javascript:void(0)" }, { name: "Ownership and Borrowing", href: "javascript:void(0)" }, { name: "Structs and Enums", href: "javascript:void(0)" }, { name: "Traits and Generics", href: "javascript:void(0)" },]
-    // }
+    const [recentPosts, setRecentPosts] = useState(false);
+    const [trips, setTrips] = useState(false);
+    const [followedPosts, setFollowedPosts] = useState(false);
+    const [datePosted, setDatePosted] = useState("");
+    const [postedFrom, setPostedFrom] = useState("");
+    const [taggedLocation, setTaggedLocation] = useState("");
 
     return (
-        <>
-            <nav
-                className="fixed rounded shadow z-40 top-20 left-1.5 w-full bottom-1.5 p-6 bg-white space-y-8 overflow-auto max-w-sm">
-                {/* <div className="sticky top-0 space-y-8 bg-white">
-                    <div className='h-20 flex items-center px-4 border-b md:px-8'>
-                        <a href='javascript:void(0)' className='flex-none'>
-                            <img src="https://floatui.com/logo.svg" width={140} className="mx-auto" />
-                        </a>
+        <nav
+            className="fixed rounded shadow z-40 top-20 left-1.5 w-full bottom-1.5 p-6 bg-white space-y-8 overflow-auto max-w-sm">
+            <div className='text-[0.9rem] space-y-6'>
+                <div>
+                    <Title>Filters</Title>
+                    <div className='text-gray-600  px-0 md:px-6'>
+                        <ul className="space-y-2">
+                            <li>
+                                <ToggleButton
+                                    label="Recent Posts"
+                                    isActive={recentPosts}
+                                    onToggle={() => setRecentPosts(!recentPosts)}
+                                />
+                            </li>
+                            <li>
+                                <ToggleButton
+                                    label="Trips"
+                                    isActive={trips}
+                                    onToggle={() => setTrips(!trips)}
+                                />
+                            </li>
+                            <li>
+                                <ToggleButton
+                                    label="Followed Posts"
+                                    isActive={followedPosts}
+                                    onToggle={() => setFollowedPosts(!followedPosts)}
+                                />
+                            </li>
+                            <li>
+                                <label className="block py-2 px-0 text-gray-600">
+                                    Date Posted:
+                                    <input
+                                        type="date"
+                                        value={datePosted}
+                                        onChange={(e) => setDatePosted(e.target.value)}
+                                        className="block w-full mt-1 border-gray-300 rounded-md"
+                                    />
+                                </label>
+                            </li>
+                            <li>
+                                <label className="block py-2 px-0 text-gray-600">
+                                    Posted From:
+                                    <input
+                                        type="text"
+                                        value={postedFrom}
+                                        onChange={(e) => setPostedFrom(e.target.value)}
+                                        className="block w-full mt-1 border-gray-300 rounded-md"
+                                    />
+                                </label>
+                            </li>
+                            <li>
+                                <label className="block py-2 px-0 text-gray-600">
+                                    Tagged Location:
+                                    <input
+                                        type="text"
+                                        value={taggedLocation}
+                                        onChange={(e) => setTaggedLocation(e.target.value)}
+                                        className="block w-full mt-1 border-gray-300 rounded-md"
+                                    />
+                                </label>
+                            </li>
+                        </ul>
                     </div>
-                    <div className='px-4 md:px-8'>
-                        <SearchBox placeholder='Search...' />
-                    </div>
-                </div> */}
-                <div className='text-[0.9rem] space-y-6'>
-                    <>
-                        <div>
-                            <Title>Filters</Title>
-                            <div className='text-gray-600  px-0 md:px-6'>
-                                <ul className="space-y-2">
-                                    
-                                        <li >Recent Posts
-                                            {/* <NavLink
-                                                href={item?.href}
-                                                active='text-gray-900 border-indigo-600'
-                                                className='block w-full py-2 px-0  hover:border-indigo-600 hover:text-gray-900 duration-150'>
-                                                {item?.name}
-                                            </NavLink> */}
-                                        
-                                    </li>
-                                    <li>Trips</li>
-                                    <li>Followed Posts</li>
-                                    <li>Date Posted</li>
-                                    <li>Posted From</li>
-                                    <li>Tagged location</li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        {/* <div>
-                            <Title>Cargo Basics</Title>
-                            <SectionsList items={lessons.cargoLessons} />
-                        </div> */}
-                    </>
                 </div>
+            </div>
 
-                <div className="bottom-3 fixed flex justify-center w-64">
-                    <p className="text-xs font-thin">© 2024 UCSC Undergraduates</p>
-                </div>
-            </nav>
-        </>
+            <div className="bottom-3 fixed flex justify-center w-64">
+                <p className="text-xs font-thin">© 2024 UCSC Undergraduates</p>
+            </div>
+        </nav>
     );
 };
 

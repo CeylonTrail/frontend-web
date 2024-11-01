@@ -20,7 +20,7 @@ export default function Header(prop) {
     }, [place]);
 
     const navigation = [
-        { title: "Home", path: "/landing" },
+        { title: "Home", path: "/" },
         { title: "About Us", path: aboutPath },
         { title: "Community", path: "/community_public" }
     ];

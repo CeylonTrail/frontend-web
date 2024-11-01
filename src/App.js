@@ -15,6 +15,8 @@ import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView"
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
+import MarketPlacePublic from "./Pages/SP common/MarketPlaceCommon";
+
 import SPReviews from "./Pages/SP common/SPReviews";
 import SPViewReviews from "./Pages/SP common/SPViewReviews";
 import SavedItemsPage from "./Pages/SP common/SavedItemsPage";
@@ -33,6 +35,7 @@ import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
 
 import CommunityPublic from "./Pages/Community/communityPublic";
+import Loading from "./Pages/loading";
 
 
 function App() {
@@ -168,7 +171,14 @@ function App() {
               </>
             }
           />
-
+          <Route
+            path="/market_public"
+            element={
+              <>
+                <MarketPlacePublic />
+              </>
+            }
+          />
           <Route
             path="/market"
             element={
@@ -207,7 +217,7 @@ function App() {
           <Route path="/saved_trips" element={<SavedTrips />} />
 
           {/* Home Page */}
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </div>

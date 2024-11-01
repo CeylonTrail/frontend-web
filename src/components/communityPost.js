@@ -101,10 +101,10 @@ const CommunityPost = ({ posts,type }) => {
             {selectedPost && (
                 <div
                     id="popup"
-                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
                     onClick={handleOutsideClick}
                 >
-                    <div className="bg-white p-6 rounded-lg max-w-xl mx-auto max-h-4/5 overflow-auto h-fit">
+                    <div className="bg-white p-6 rounded-lg max-w-xl mx-auto max-h-3/5 overflow-auto h-fit">
                         <div className="flex items-center my-4 ml-2 mr-2">
                             <div className="flex-none w-10 h-10 rounded-full">
                                 <img src={selectedPost.user.profilePictureUrl} className="w-full h-full rounded-full" alt={selectedPost.user.useraname} />

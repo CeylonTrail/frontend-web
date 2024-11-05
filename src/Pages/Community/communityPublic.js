@@ -16,7 +16,7 @@ export default () => {
         try {
             const response = await postAPI.get_public_community_post();
             console.log("Response:", response);
-            if (response.status === 'success') {
+            if (response.status === 'success' ) {
                 setPosts(response.data);
             } else {
                 console.error("Error in fetching posts");

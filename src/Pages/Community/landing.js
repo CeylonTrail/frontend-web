@@ -9,12 +9,14 @@ import imageIcon from "../../assets/img/imageIcon.svg";
 import { PrimaryButton } from "../../components/Button";
 import Analytics from "../../components/TravellerAnalytics";
 import ChatWindow from "../../components/TravellerChatWindow";
+import PrivacyDropdown from "../../components/PrivacyDropdown";
 import postAPI from "../../API/post";
 
 export default () => {
     const [showPopup, setShowPopup] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const popupRef = useRef(null);
+    const [privacy, setPrivacy] = useState("public");
 
     const [posts, setPosts] = useState(null);
 
@@ -97,14 +99,20 @@ export default () => {
 
             </div>
             
-
             {showPopup && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div ref={popupRef} className="bg-white p-6 rounded-lg shadow-lg relative w-11/12 max-w-lg">
                         <h2 className="text-2xl font-semibold mb-4 text-center text-primaryDark1 border-b">Create Post</h2>
                         <div className="flex items-center mb-4">
-                            <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
-                            <span className="ml-4 font-semibold">Travel Enthusiast 2</span>
+                            <div>
+                                <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
+                                <span className="ml-4 font-semibold">Travel Enthusiast 2</span>
+                            </div>
+                            <div>
+                                {/* Pass setPrivacy as a prop to PrivacyDropdown */}
+                                <PrivacyDropdown setPrivacy={setPrivacy} />
+                              
+                            </div>
                         </div>
                         <textarea
                             placeholder="What's on your mind?"
@@ -140,7 +148,13 @@ export default () => {
                         </button>
                     </div>
                 </div>
+               
             )}
+            {/* Display selected privacy option */}
+            {/* <div className="mt-4 text-gray-600">
+                Selected privacy setting: {privacy === "public" ? "Public" : "Only me"}
+            </div> */}
+           
         </>
     );
 };

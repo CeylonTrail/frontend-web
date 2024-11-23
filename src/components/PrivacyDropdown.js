@@ -6,7 +6,7 @@ const PrivacyDropdown = ({ setPrivacy }) => {
     };
 
     return (
-        <div className="relative w-72 max-w-full mx-auto mt-12">
+        <div className="relative w-72 max-w-full mx-auto">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="absolute top-0 bottom-0 w-5 h-5 my-auto text-gray-400 right-3"
@@ -24,6 +24,7 @@ const PrivacyDropdown = ({ setPrivacy }) => {
                 onChange={handlePrivacyChange}
             >
                 <option value="public">Public</option>
+                <option value="followers">Followers</option>
                 <option value="only_me">Only me</option>
             </select>
         </div>

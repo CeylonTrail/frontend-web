@@ -12,6 +12,7 @@ import ChatWindow from "../../components/TravellerChatWindow";
 import PrivacyDropdown from "../../components/PrivacyDropdown";
 import postAPI from "../../API/post";
 import { SuccessAlert, WarningAlert } from "../../components/Alerts";
+import { set } from "date-fns";
 
 const TravellerCommunity = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -24,12 +25,14 @@ const TravellerCommunity = () => {
     const popupRef = useRef(null);
     const [postButton, setPostButton] = useState("Post");
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState(posts);
 
     const fetchPosts = async () => {
         try {
             const response = await postAPI.get_public_community_post();
             if (response.status === "success") {
                 setPosts(response.data);
+                setFilteredPosts(response.data);
             } else {
                 console.error("Error in fetching posts");
             }
@@ -72,15 +75,20 @@ const TravellerCommunity = () => {
 
     const createPost = async () => {
         setPostButton("Posting...");
-        const data = {
-            content,
-            tripId,
-            privacy,
-            images: selectedImages,
-        };
+        const formData = new FormData();
+        
+        // Append text fields
+        formData.append("content", content);
+        formData.append("tripId", tripId);
+        formData.append("privacy", privacy.toUpperCase());
+        
+        // Append image files
+        selectedImages.forEach((image, index) => {
+            formData.append("images", image.file); // Attach the File object
+        });
     
         try {
-            const response = await postAPI.create_post(data);
+            const response = await postAPI.create_post(formData );
             if (response.status === "success") {
                 setAlertData({ title: "Success", message: "Post created successfully" });
                 setShowAlert(true);
@@ -98,6 +106,7 @@ const TravellerCommunity = () => {
         }
     };
     
+    
 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files); // Convert FileList to array
@@ -113,7 +122,8 @@ const TravellerCommunity = () => {
         <>
             <Header type={"traveller"} profilePic={Profile} funtion={handleProfileClick} />
             <div className="flex flex-row justify-around w-full">
-                <FilterBar />
+                <FilterBar  posts={posts}
+                filterPosts={(filtered) => setFilteredPosts(filtered)}/>
                 <div className="flex flex-col items-center mt-24 w-full max-w-screen-md">
                     <span
                         className="bg-white p-4 flex flex-row gap-1 px-8 ml-4 mr-4 w-[704px] shadow-lg rounded-md mb-4 cursor-pointer"
@@ -122,7 +132,7 @@ const TravellerCommunity = () => {
                         <img src={Profile} className="w-12" alt="Profile" />
                         <SimpleInput pholder={"Create a post"} className="w-full ml-4" />
                     </span>
-                    <CommunityPost posts={posts || []} />
+                    <CommunityPost posts={filteredPosts || []} />
                 </div>
                 <div className="flex flex-col items-center mt-24 mx-auto gap-2 fixed right-0 bottom-0 top-0 mr-2 max-w-sm">
                     <Analytics />
@@ -141,7 +151,7 @@ const TravellerCommunity = () => {
                         <div className="flex items-center mb-4 justify-between">
                             <div className="flex flex-row items-center">
                                 <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
-                                <span className="ml-4 font-semibold">Travel Enthusiast</span>
+                                <span className="ml-4 font-semibold">{localStorage.getItem("userName")}</span>
                             </div>
                             <div className="w-48">
                                 <PrivacyDropdown setPrivacy={setPrivacy} />

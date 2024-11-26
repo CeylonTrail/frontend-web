@@ -42,7 +42,7 @@ const CommunityPost = ({ posts, type }) => {
         };
     }, [selectedPost]);
 
-    if (posts === null || posts.length === 0) {
+    if (posts === null || posts.length == 0) {
         console.log("Posts:", posts);
         return <div className="flex justify-center flex-col items-center pt-16">
             <img src={noContent} alt="noContent" className="w-3/5" />
@@ -50,7 +50,7 @@ const CommunityPost = ({ posts, type }) => {
         </div>;
     } else {
         return (
-            <section className={`mx-auto md:px-8 ${type === "public" ? "w-full ml-10" : "max-w-screen-md"}`}>
+            <section className={`mx-auto  ${type === "public" ? "w-full ml-10" : "w-[704px]"}`}>
                 <div className="gap-2">
                     {posts.map((item, key) => (
                         <article
@@ -87,11 +87,11 @@ const CommunityPost = ({ posts, type }) => {
                                 <div className="border-t border-primary mt-5 flex flex-row justify-around pt-4">
                                     <div className="flex flex-row items-center">
                                         <img src={Like} alt="Like" className="w-8 h-8 text-primary" />
-                                        {item.likes.length} Likes
+                                        {item.likeCount} Likes
                                     </div>
                                     <div className="flex flex-row items-center">
                                         <img src={Comment} alt="Comment" className="w-8 h-8 text-primary" />
-                                        {item.comments.length} Comments
+                                        {item.commentCount} Comments
                                     </div>
                                     {/* <div className="flex flex-row items-center">
                                     <img src={Share} alt="Share" className="w-8 h-8 text-primary" />

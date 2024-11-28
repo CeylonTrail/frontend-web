@@ -33,6 +33,8 @@ import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
 
 import CommunityPublic from "./Pages/Community/communityPublic";
+import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
+import Admin from "./Pages/Admin/AdminDashboard";
 
 
 function App() {
@@ -69,6 +71,14 @@ function App() {
             element={
               <>
                 <SpRedirectPage />
+              </>
+            }
+          />
+          <Route
+            path="/user-mgt"
+            element={
+              <>
+                <AdminUserManagement />
               </>
             }
           />
@@ -186,6 +196,9 @@ function App() {
             }
           />
 
+          {/* admin*/}
+          <Route path="/admin" element={<Admin />} />
+
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -195,10 +208,8 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/community_public" element={<CommunityPublic />} />
 
-
           <Route path="/profile" element={<TravellerProfile />} />
           <Route path="/edit_tr_profile" element={<EditProfile />} />
-
 
           {/* Trip */}
           <Route path="/trip_dashboard" element={<TripDashboard />} />

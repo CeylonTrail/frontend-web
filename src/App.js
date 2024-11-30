@@ -40,6 +40,9 @@ import AdminTrPrflView from "./Pages/Admin/AdminTrPrflView";
 import AdminSpPrflView from "./Pages/Admin/AdminSpPrflView";
 import AdminAddSubscriptionPlan from "./Pages/Admin/AdminAddSubscriptionPlan";
 import AdminEditSubscriptionPlan from "./Pages/Admin/AdminEditSubscriptionPlan";
+import AdminBusinessApproval from "./Pages/Admin/AdminBusinessApproval";
+import AdminBusinessApprovalView from "./Pages/Admin/AdminBusinessApprovalView";
+import AdminSubscriptionList from "./Pages/Admin/AdminSubscriptionList";
 
 function App() {
   return (
@@ -78,7 +81,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/set-market"
             element={
@@ -194,6 +196,14 @@ function App() {
           {/* admin*/}
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin-usermgt" element={<AdminUserManagement />} />
+          <Route
+            path="/admin-businessapp"
+            element={<AdminBusinessApproval />}
+          />
+          <Route
+            path="/admin-businessappview"
+            element={<AdminBusinessApprovalView />}
+          />
           <Route path="/admin-trprflview" element={<AdminTrPrflView />} />
           <Route path="/admin-spprflview" element={<AdminSpPrflView />} />
           <Route path="/admin-addplan" element={<AdminAddSubscriptionPlan />} />
@@ -204,6 +214,10 @@ function App() {
           <Route
             path="/admin-subscriptionplan"
             element={<AdminSubscriptionPlan />}
+          />
+          <Route
+            path="/admin-subscriptionlist"
+            element={<AdminSubscriptionList />}
           />
 
           {/* log in and signup */}

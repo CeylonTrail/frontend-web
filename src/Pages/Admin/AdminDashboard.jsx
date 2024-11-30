@@ -11,6 +11,7 @@ import Header from "../../components/header";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import ReactApexChart from "react-apexcharts";
 import DataTable from "react-data-table-component";
+import { Link } from "react-router-dom";
 
 const Admin = () => {
   const totalUsers = 100;
@@ -129,7 +130,11 @@ const Admin = () => {
     },
     {
       name: "Status",
-      selector: (row) => row.status,
+      selector: (row) => (
+        <span style={{ color: getStatusColor(row.status) }}>
+          {row.status}
+        </span>
+      ),
       sortable: true,
     },
     {
@@ -138,6 +143,19 @@ const Admin = () => {
       sortable: true,
     },
   ];
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Approved":
+        return "green";
+      case "Rejected":
+        return "red";
+      case "Pending":
+        return "orange";
+      default:
+        return "black"; // default color
+    }
+  };
 
   const customStyles = {
     header: {
@@ -183,6 +201,7 @@ const Admin = () => {
       },
     },
   };
+
 
   const subscriptions = [
     {
@@ -232,7 +251,7 @@ const Admin = () => {
       />
       <div className="flex flex-1 mt-14">
         <SidebarComponentAdmin />
-        <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[87.5vh]">
+        <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[90.5vh]">
           {/* Content Area with Gradient Background */}
           <div className="bg-[#0F969C] rounded-lg p-6 h-[14.5vh]">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -352,16 +371,18 @@ const Admin = () => {
             </div>
 
             {/* Data Table Section */}
-            <div className="bg-white rounded-lg shadow-md p-6 flex-1 h-64">
-              <h2 className="text-xl font-semibold text-gray-700">
-                Business Profile Approvals
-              </h2>
-              <DataTable
-                columns={columns}
-                data={data}
-                customStyles={customStyles}
-              />
-            </div>
+            <Link to="/admin-businessapp" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 flex-1 h-64 cursor-pointer">
+                <h2 className="text-xl font-semibold text-gray-700">
+                  Business Profile Approvals
+                </h2>
+                <DataTable
+                  columns={columns}
+                  data={data}
+                  customStyles={customStyles}
+                />
+              </div>
+            </Link>
           </div>
 
           {/* Flex Container for Chart and Data Table */}
@@ -369,7 +390,7 @@ const Admin = () => {
             {/* Pie Chart Section */}
             <div className="bg-white rounded-lg shadow-md p-6 flex-1 h-64">
               <h2 className="text-xl font-semibold text-gray-700">
-                Active Users
+                Total Users
               </h2>
               <ReactApexChart
                 options={{

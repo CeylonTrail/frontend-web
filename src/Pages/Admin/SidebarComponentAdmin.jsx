@@ -17,16 +17,16 @@ const SidebarComponentAdmin = ({ pic }) => {
   const handleCategoryClick = (category) => {
     switch (category) {
       case "dashboard":
-        navigate("/admin/dashboard");
+        navigate("/admin");
         break;
       case "user-management":
-        navigate("/admin/user-management");
+        navigate("/admin-usermgt");
         break;
       case "business-management":
-        navigate("/admin/business-management");
+        navigate("/admin-businessapp");
         break;
-      case "revenue-management":
-        navigate("/admin/revenue-management");
+      case "subscription-management":
+        navigate("/admin-subscriptionlist");
         break;
       case "content-moderation":
         navigate("/admin/content-moderation");
@@ -39,8 +39,18 @@ const SidebarComponentAdmin = ({ pic }) => {
     }
   };
 
+  // Mapping categories to their routes for easy comparison
+  const categoryRoutes = {
+    dashboard: "/admin",
+    "user-management": "/admin-usermgt",
+    "business-management": "/admin-businessapp",
+    "subscription-management": "/admin-subscriptionlist",
+    "content-moderation": "/admin/content-moderation",
+    analysis: "/admin/analysis",
+  };
+
   return (
-    <div className="fixed rounded-xl shadow-lg top-20 left-1.5 bottom-1.5 p-6 space-y-8 overflow-auto w-full md:w-[18%] bg-white h-[87.5vh]">
+    <div className="fixed rounded-xl shadow-lg top-20 left-1.5 bottom-1.5 p-6 space-y-8 overflow-auto w-full md:w-[20%] bg-white h-[87.5vh]">
       {pic && (
         <img
           src={pic}
@@ -58,59 +68,36 @@ const SidebarComponentAdmin = ({ pic }) => {
         </div>
         <div className="w-full mb-4">
           <ul className="flex flex-col space-y-2">
-            <li>
-              <button
-                onClick={() => handleCategoryClick("dashboard")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faTachometerAlt} className="mr-2" />{" "}
-                Dashboard
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleCategoryClick("user-management")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faUser} className="mr-2" /> User
-                Management
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleCategoryClick("business-management")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faBriefcase} className="mr-2" /> Business
-                Management
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleCategoryClick("revenue-management")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faChartBar} className="mr-2" /> Revenue
-                Management
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleCategoryClick("content-moderation")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} className="mr-2" />{" "}
-                Content Moderation
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleCategoryClick("analysis")}
-                className="w-full p-2 rounded-lg text-left hover:bg-[#6DA5C0] hover:text-white flex items-center transition duration-200 ease-in-out"
-              >
-                <FontAwesomeIcon icon={faFileAlt} className="mr-2" /> Analysis
-              </button>
-            </li>
+            {Object.entries(categoryRoutes).map(([category, route]) => (
+              <li key={category}>
+                <button
+                  onClick={() => handleCategoryClick(category)}
+                  className={`w-full p-2 rounded-lg text-left flex items-center transition duration-200 ease-in-out ${
+                    location.pathname === route
+                      ? "bg-[#6DA5C0] text-white"
+                      : "hover:bg-[#6DA5C0] hover:text-white"
+                  }`}
+                >
+                  <FontAwesomeIcon
+                    icon={
+                      {
+                        dashboard: faTachometerAlt,
+                        "user-management": faUser,
+                        "business-management": faBriefcase,
+                        "subscription-management": faChartBar,
+                        "content-moderation": faClipboardCheck,
+                        analysis: faFileAlt,
+                      }[category]
+                    }
+                    className="mr-2"
+                  />
+                  {category
+                    .split("-")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

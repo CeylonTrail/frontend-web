@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
 import PlusImg from "../../assets/img/plus.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"; // Import the FontAwesome arrow icon
 
 const AdminSubscriptionPlan = () => {
   const navigate = useNavigate();
@@ -22,14 +24,16 @@ const AdminSubscriptionPlan = () => {
     navigate("/admin-addplan");
   };
 
+  const handleBackClick = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   const handleEditClick = (plan) => {
     navigate("/admin-editplan");
   };
 
   const handleDeleteClick = (plan) => {
-    // Implement delete logic here, e.g., send a request to the backend
     console.log(`Delete clicked for ${plan.name}`);
-    // You might want to show a confirmation dialog or handle errors
   };
 
   const plans = [
@@ -80,7 +84,15 @@ const AdminSubscriptionPlan = () => {
       />
       <div className="admin-subscription-plan-container relative mt-20 fixed overflow-auto h-[87.5vh] ml-6">
         <div className="admin-subscription-plan-box">
-          <p className="admin-title-text">Current Plans are here!</p>
+          <div className="admin-title-container flex items-center mb-4">
+            <button
+              className="back-button flex items-center text-blue-500 hover:text-blue-700 transition duration-200"
+              onClick={handleBackClick}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+            </button>
+            <p className="admin-title-text ml-4">Current Plans are here!</p>
+          </div>
           <div className="admin-pricing-cards flex flex-wrap gap-4 justify-center items-center">
             {plans.map((plan) => (
               <div
@@ -90,7 +102,7 @@ const AdminSubscriptionPlan = () => {
                 }`}
                 onMouseEnter={() => handleCardHover(plan.name)}
                 onMouseLeave={handleCardLeave}
-                onClick={() => handleCardHover(plan.name)} // For touch devices
+                onClick={() => handleCardHover(plan.name)}
               >
                 <div className="admin-pricing-card-header">
                   <a

@@ -16,7 +16,7 @@ import { set } from "date-fns";
 
 const TravellerCommunity = () => {
     const [showPopup, setShowPopup] = useState(false);
-    const [tripId, setTripId] = useState(0);
+    const [tripId, setTripId] = useState(null);
     const [selectedImages, setSelectedImages] = useState([]); // Initialize as array
     const [content, setContent] = useState("");
     const [privacy, setPrivacy] = useState("public");
@@ -79,7 +79,7 @@ const TravellerCommunity = () => {
         
         // Append text fields
         formData.append("content", content);
-        // formData.append("tripId", tripId);
+        formData.append("tripId", tripId);
         formData.append("privacy", privacy.toUpperCase());
         
         // Append image files

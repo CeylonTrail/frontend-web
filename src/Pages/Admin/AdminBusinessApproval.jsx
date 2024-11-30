@@ -3,6 +3,8 @@ import SidebarComponentAdmin from "./SidebarComponentAdmin";
 import Header from "../../components/header";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import DataTable from "react-data-table-component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye} from "@fortawesome/free-solid-svg-icons";
 
 const AdminBusinessApproval = () => {
   const data = [
@@ -55,7 +57,7 @@ const AdminBusinessApproval = () => {
       selector: () => "Service Provider", // Placeholder for type
       sortable: true,
     },
-    
+
     {
       name: "Email",
       selector: (row) => row.email,
@@ -96,7 +98,7 @@ const AdminBusinessApproval = () => {
       cell: (row) => (
         <div className="flex gap-4 items-center">
           <a href={`/admin-spprflview/${row.id}`} className="text-[#6DA5C0]">
-            View
+            <FontAwesomeIcon icon={faEye} className="text-[#6DA5C0]" />{" "}
           </a>
         </div>
       ),

@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Admin = () => {
   const data1 = [
@@ -117,7 +117,7 @@ const Admin = () => {
       cell: (row) => (
         <div className="flex gap-4 items-center">
           <a href={`/admin-trprflview/${row.id}`} className="text-[#6DA5C0]">
-            View
+            <FontAwesomeIcon icon={faEye} className="text-[#6DA5C0]" />{" "}
           </a>
           <button
             onClick={() => alert(`Deleting user: ${row.username}`)}
@@ -189,7 +189,8 @@ const Admin = () => {
       cell: (row) => (
         <div className="flex gap-4 items-center">
           <a href={`/admin-spprflview/${row.id}`} className="text-[#6DA5C0]">
-            View
+            <FontAwesomeIcon icon={faEye} className="text-[#6DA5C0]" />{" "}
+            {/* Replace with a suitable icon */}
           </a>
           <button
             onClick={() => alert(`Deleting service provider: ${row.username}`)}

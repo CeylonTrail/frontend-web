@@ -79,7 +79,7 @@ const TravellerCommunity = () => {
         
         // Append text fields
         formData.append("content", content);
-        formData.append("tripId", tripId);
+        // formData.append("tripId", tripId);
         formData.append("privacy", privacy.toUpperCase());
         
         // Append image files

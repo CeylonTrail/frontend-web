@@ -109,13 +109,14 @@ const CommunityPost = ({ posts, type }) => {
                         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
                         onClick={handleOutsideClick}
                     >
-                        <div className="bg-white p-6 rounded-lg max-w-xl mx-auto max-h-3/5 overflow-auto h-fit">
+                        <div className="bg-white p-6 rounded-lg w-[44rem] mx-auto max-h-3/5 overflow-auto h-fit min-h-[22rem] flex flex-col justify-evenly">
                             <div className="flex items-center my-4 ml-2 mr-2">
                                 <div className="flex-none w-10 h-10 rounded-full">
-                                    <img src={selectedPost.user.profilePictureUrl} className="w-full h-full rounded-full" alt={selectedPost.user.useraname} />
+                                    <img src={selectedPost.user.profilePictureUrl || profilePic} className="w-full h-full rounded-full" alt={selectedPost.user.useraname} />
                                 </div>
+                                {console.log()}
                                 <div className="ml-3">
-                                    <span className="block text-gray-900">{selectedPost.user.useraname}</span>
+                                    <span className="block text-gray-900">{selectedPost.user.username}</span>
                                     <span className="block text-gray-400 text-sm">{selectedPost.createdAt}</span>
                                 </div>
                             </div>

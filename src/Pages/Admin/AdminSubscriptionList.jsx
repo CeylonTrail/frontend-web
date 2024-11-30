@@ -134,7 +134,7 @@ const AdminSubscriptionList = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header
-        type="traveller"
+        type="admin"
         profilePic={HotelProfileImg}
         function={() => {}}
       />

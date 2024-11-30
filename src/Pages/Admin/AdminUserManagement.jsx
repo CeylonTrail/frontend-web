@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Admin = () => {
   const data1 = [
@@ -15,6 +15,7 @@ const Admin = () => {
       username: "johndoe",
       email: "john.doe@example.com",
       createdOn: "2023-10-01",
+      isActive: true, // Boolean value for account status
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ const Admin = () => {
       username: "janesmith",
       email: "jane.smith@example.com",
       createdOn: "2023-10-05",
+      isActive: false,
     },
     {
       id: 3,
@@ -31,6 +33,7 @@ const Admin = () => {
       username: "alicej",
       email: "alice.johnson@example.com",
       createdOn: "2023-10-10",
+      isActive: true,
     },
     {
       id: 4,
@@ -39,61 +42,53 @@ const Admin = () => {
       username: "bobb",
       email: "bob.brown@example.com",
       createdOn: "2023-10-15",
+      isActive: false,
     },
   ];
 
   const data2 = [
     {
       id: 1,
-      firstName: "David",
-      lastName: "Smith",
+      serviceName: "Cleaning Service",
+      serviceType: "Housekeeping",
       username: "davidsmith",
-      email: "david.smith@example.com",
-      ownerName: "Owner 1",
       createdOn: "2023-10-01",
-      status: "approved",
+      isActive: true, // Boolean value for account status
+      verificationStatus: "Verified", // Verification status
     },
     {
       id: 2,
-      firstName: "Laura",
-      lastName: "Jones",
+      serviceName: "Catering Service",
+      serviceType: "Food & Beverages",
       username: "lauraj",
-      email: "laura.jones@example.com",
-      ownerName: "Owner 2",
       createdOn: "2023-10-05",
-      status: "pending",
+      isActive: false,
+      verificationStatus: "Pending",
     },
     {
       id: 3,
-      firstName: "Mark",
-      lastName: "Taylor",
+      serviceName: "Transportation Service",
+      serviceType: "Travel",
       username: "markt",
-      email: "mark.taylor@example.com",
-      ownerName: "Owner 3",
       createdOn: "2023-10-10",
-      status: "rejected",
+      isActive: true,
+      verificationStatus: "Rejected",
     },
     {
       id: 4,
-      firstName: "Emily",
-      lastName: "Davis",
+      serviceName: "Event Planning",
+      serviceType: "Events",
       username: "emilyd",
-      email: "emily.davis@example.com",
-      ownerName: "Owner 4",
       createdOn: "2023-10-15",
-      status: "approved",
+      isActive: false,
+      verificationStatus: "Verified",
     },
   ];
 
   const columns1 = [
     {
-      name: "First Name",
-      selector: (row) => row.firstName,
-      sortable: true,
-    },
-    {
-      name: "Last Name",
-      selector: (row) => row.lastName,
+      name: "Full Name",
+      selector: (row) => `${row.firstName} ${row.lastName}`,
       sortable: true,
     },
     {
@@ -107,25 +102,33 @@ const Admin = () => {
       sortable: true,
     },
     {
-      name: "Created On",
+      name: "Created Date",
       selector: (row) => row.createdOn,
       sortable: true,
       right: true,
     },
     {
+      name: "Account Status",
+      selector: (row) => (
+        <span
+          style={{
+            color: row.isActive ? "green" : "red",
+          }}
+        >
+          {row.isActive ? "Activated" : "Not Activated"}
+        </span>
+      ),
+      sortable: true,
+    },
+    {
       name: "Action",
       cell: (row) => (
-        <div className="flex gap-4 items-center">
-          <a href={`/admin-trprflview/${row.id}`} className="text-[#6DA5C0]">
-            <FontAwesomeIcon icon={faEye} className="text-[#6DA5C0]" />{" "}
-          </a>
-          <button
-            onClick={() => alert(`Deleting user: ${row.username}`)}
-            className="hover:text-red-700"
-          >
-            <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
-          </button>
-        </div>
+        <button
+          onClick={() => alert(`Deleting user: ${row.username}`)}
+          className="hover:text-red-700"
+        >
+          <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
+        </button>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
@@ -135,13 +138,13 @@ const Admin = () => {
 
   const columns2 = [
     {
-      name: "Name",
-      selector: (row) => `${row.firstName} ${row.lastName}`,
+      name: "Service Name",
+      selector: (row) => row.serviceName,
       sortable: true,
     },
     {
-      name: "Type",
-      selector: (row) => "Service Provider", // Placeholder for type
+      name: "Service Type",
+      selector: (row) => row.serviceType,
       sortable: true,
     },
     {
@@ -150,36 +153,38 @@ const Admin = () => {
       sortable: true,
     },
     {
-      name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
-    },
-    {
-      name: "Owner's Name",
-      selector: (row) => row.ownerName,
-      sortable: true,
-    },
-    {
-      name: "Created On",
+      name: "Created Date",
       selector: (row) => row.createdOn,
       sortable: true,
       right: true,
     },
     {
-      name: "Status",
+      name: "Account Status",
+      selector: (row) => (
+        <span
+          style={{
+            color: row.isActive ? "green" : "red",
+          }}
+        >
+          {row.isActive ? "Activated" : "Not Activated"}
+        </span>
+      ),
+      sortable: true,
+    },
+    {
+      name: "Verification Status",
       selector: (row) => (
         <span
           style={{
             color:
-              row.status === "approved"
+              row.verificationStatus === "Verified"
                 ? "green"
-                : row.status === "rejected"
-                ? "red"
-                : "orange",
-            fontWeight: "bold",
+                : row.verificationStatus === "Pending"
+                ? "orange"
+                : "red",
           }}
         >
-          {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
+          {row.verificationStatus}
         </span>
       ),
       sortable: true,
@@ -187,11 +192,13 @@ const Admin = () => {
     {
       name: "Action",
       cell: (row) => (
-        <div className="flex gap-4 items-center">
-          <a href={`/admin-spprflview/${row.id}`} className="text-[#6DA5C0]">
-            <FontAwesomeIcon icon={faEye} className="text-[#6DA5C0]" />{" "}
-            {/* Replace with a suitable icon */}
-          </a>
+        <div className="flex space-x-2">
+          <button
+            onClick={() => alert(`Viewing service provider: ${row.username}`)}
+            className="hover:text-blue-700"
+          >
+            <FontAwesomeIcon icon={faEye} className="text-blue-500 mr-4" />
+          </button>
           <button
             onClick={() => alert(`Deleting service provider: ${row.username}`)}
             className="hover:text-red-700"
@@ -246,11 +253,7 @@ const Admin = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header
-        type="traveller"
-        profilePic={HotelProfileImg}
-        function={() => {}}
-      />
+      <Header type="admin" profilePic={HotelProfileImg} function={() => {}} />
       <div className="flex flex-1 mt-8">
         <SidebarComponentAdmin />
         <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[94.5vh]">
@@ -286,7 +289,7 @@ const Admin = () => {
               <div className="w-[300px] relative">
                 <input
                   type="text"
-                  placeholder="Search providers..."
+                  placeholder="Search service providers..."
                   value={search2}
                   onChange={(e) => setSearch2(e.target.value)}
                   className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"

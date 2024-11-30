@@ -245,7 +245,7 @@ const Admin = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header
-        type="traveller"
+        type="admin"
         profilePic={HotelProfileImg}
         function={() => {}}
       />
@@ -334,7 +334,7 @@ const Admin = () => {
               >
                 <div>
                   <h3 className="text-lg font-semibold mb-1 text-gray-600">
-                    Inquiries
+                    Subscriptions
                   </h3>
                   <p className="text-3xl font-bold text-left">
                     {totalInquiries}

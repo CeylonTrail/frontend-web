@@ -92,7 +92,7 @@ const AdminEditSubscriptionPlan = () => {
   return (
     <>
       <Header
-        type="serviceprovider"
+        type="admin"
         profilePic={HotelProfileImg}
         funtion={() => {}}
       />

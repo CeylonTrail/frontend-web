@@ -6,9 +6,9 @@ import {
   faBriefcase,
   faChartBar,
   faClipboardCheck,
-  faFileAlt,
   faTachometerAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import bottomImage from "../../assets/img/admin.png"; // Import the image
 
 const SidebarComponentAdmin = ({ pic }) => {
   const navigate = useNavigate();
@@ -28,11 +28,8 @@ const SidebarComponentAdmin = ({ pic }) => {
       case "subscription-management":
         navigate("/admin-subscriptionlist");
         break;
-      case "content-moderation":
-        navigate("/admin/content-moderation");
-        break;
-      case "analysis":
-        navigate("/admin/analysis");
+      case "report-handling":
+        navigate("/admin-post-reports");
         break;
       default:
         break;
@@ -45,12 +42,11 @@ const SidebarComponentAdmin = ({ pic }) => {
     "user-management": "/admin-usermgt",
     "business-management": "/admin-businessapp",
     "subscription-management": "/admin-subscriptionlist",
-    "content-moderation": "/admin/content-moderation",
-    analysis: "/admin/analysis",
+    "report-handling": "/admin-post-reports",
   };
 
   return (
-    <div className="fixed rounded-xl shadow-lg top-20 left-1.5 bottom-1.5 p-6 space-y-8 overflow-auto w-full md:w-[20%] bg-white h-[87.5vh]">
+    <div className="fixed rounded-xl shadow-lg top-20 left-1.5 bottom-1.5 p-6 space-y-8 overflow-auto w-full md:w-[20%] bg-white h-[87.5vh] border border-[#6DA5C0]">
       {pic && (
         <img
           src={pic}
@@ -60,11 +56,12 @@ const SidebarComponentAdmin = ({ pic }) => {
       )}
       <div className="flex flex-col items-center">
         <div className="w-full mb-4 relative">
-          <input
+          {/* Uncomment for search functionality */}
+          {/* <input
             type="text"
             placeholder="Search..."
             className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"
-          />
+          /> */}
         </div>
         <div className="w-full mb-4">
           <ul className="flex flex-col space-y-2">
@@ -72,10 +69,13 @@ const SidebarComponentAdmin = ({ pic }) => {
               <li key={category}>
                 <button
                   onClick={() => handleCategoryClick(category)}
-                  className={`w-full p-2 rounded-lg text-left flex items-center transition duration-200 ease-in-out ${
-                    location.pathname === route
+                  className={`w-full p-2 rounded-lg text-left flex items-center transition duration-200 ease-in-out shadow-sm hover:shadow-lg transform hover:scale-105 ${
+                    location.pathname === route ||
+                    (category === "report-handling" &&
+                      (location.pathname === "/admin-post-reports" ||
+                        location.pathname === "/admin-post-reports-view"))
                       ? "bg-[#6DA5C0] text-white"
-                      : "hover:bg-[#6DA5C0] hover:text-white"
+                      : "bg-white hover:bg-[#6DA5C0] hover:text-white"
                   }`}
                 >
                   <FontAwesomeIcon
@@ -85,22 +85,31 @@ const SidebarComponentAdmin = ({ pic }) => {
                         "user-management": faUser,
                         "business-management": faBriefcase,
                         "subscription-management": faChartBar,
-                        "content-moderation": faClipboardCheck,
-                        analysis: faFileAlt,
+                        "report-handling": faClipboardCheck,
                       }[category]
                     }
                     className="mr-2"
                   />
-                  {category
-                    .split("-")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}
+                  <span className="text-base font-medium">
+                    {category
+                      .split("-")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </span>
                 </button>
               </li>
             ))}
           </ul>
         </div>
       </div>
+      {/* Add the bottom image here */}
+      <img
+        src={bottomImage} // Use the imported image directly
+        alt="Bottom Decorative"
+        className="w-full object-cover mt-auto rounded-lg"
+      />
     </div>
   );
 };

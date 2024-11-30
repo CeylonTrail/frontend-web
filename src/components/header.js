@@ -33,6 +33,9 @@ const publicNav = [
 
 ];
 
+const Admin_Navigation = [
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -51,13 +54,13 @@ export default function Example({ type, profilePic, funtion }) {
     // } else {
       if (type == 'traveller') {
         setNavigation(Traveller_navigation);
-      } else if (type =="serviceprovider") {
+      } else if (type == "serviceprovider") {
         setNavigation(SP_navigation);
-      }
-      else if (type == "public") {
-      setNavigation(publicNav);
-    }
-      else {
+      } else if (type == "admin") {
+        setNavigation(Admin_Navigation);
+      } else if (type == "public") {
+        setNavigation(publicNav);
+      } else {
         setNavigation(SP_navigation);
       }
     

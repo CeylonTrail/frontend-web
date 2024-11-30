@@ -8,9 +8,9 @@ import Header from "../../components/header.js";
 const AdminSpPrflView = () => {
   const navigate = useNavigate();
 
-   const handleBackClick = () => {
-     navigate("/admin-usermgt"); // Redirect to /user-mgt
-   };
+  const handleBackClick = () => {
+    navigate("/admin-usermgt"); // Redirect to /user-mgt
+  };
 
   // Dummy data for Service Provider Info
   const dummyData = {
@@ -20,16 +20,13 @@ const AdminSpPrflView = () => {
     email: "contact@elitetravels.com",
     ownerName: "Alice Johnson",
     createdOn: "2023-12-15",
-    status: "Active",
+    status: "Approved",
+    accountStatus: "Activated", // Added Account Status
   };
 
   return (
     <>
-      <Header
-        type="serviceprovider"
-        profilePic={HotelProfileImg}
-        funtion={() => {}}
-      />
+      <Header type="admin" profilePic={HotelProfileImg} funtion={() => {}} />
       <div className="relative flex items-center justify-center h-[87.5vh]">
         <div className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0] max-w-3xl">
           <div className="text-center">
@@ -54,7 +51,7 @@ const AdminSpPrflView = () => {
                   name="name"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.name}
                 />
               </div>
@@ -72,7 +69,7 @@ const AdminSpPrflView = () => {
                   name="type"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.type}
                 />
               </div>
@@ -90,7 +87,7 @@ const AdminSpPrflView = () => {
                   name="username"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.username}
                 />
               </div>
@@ -108,7 +105,7 @@ const AdminSpPrflView = () => {
                   name="email"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.email}
                 />
               </div>
@@ -126,7 +123,7 @@ const AdminSpPrflView = () => {
                   name="owner-name"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.ownerName}
                 />
               </div>
@@ -144,7 +141,7 @@ const AdminSpPrflView = () => {
                   name="created-on"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.createdOn}
                 />
               </div>
@@ -155,15 +152,33 @@ const AdminSpPrflView = () => {
                   htmlFor="status"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Status
+                  Verification Status
                 </label>
                 <input
                   id="status"
                   name="status"
                   type="text"
                   readOnly
-                  className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
                   defaultValue={dummyData.status}
+                />
+              </div>
+
+              {/* Account Status */}
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="account-status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Account Status
+                </label>
+                <input
+                  id="account-status"
+                  name="account-status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={dummyData.accountStatus}
                 />
               </div>
             </div>

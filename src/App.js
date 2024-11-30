@@ -31,18 +31,19 @@ import PlanTrips from "./Pages/Trips/planTrips";
 import CurrentTrip from "./Pages/Trips/currentTrip";
 import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
-
 import CommunityPublic from "./Pages/Community/communityPublic";
-import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
+
 import Admin from "./Pages/Admin/AdminDashboard";
+import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
 import AdminSubscriptionPlan from "./Pages/Admin/AdminSubscriptionPlan";
-import AdminTrPrflView from "./Pages/Admin/AdminTrPrflView";
 import AdminSpPrflView from "./Pages/Admin/AdminSpPrflView";
 import AdminAddSubscriptionPlan from "./Pages/Admin/AdminAddSubscriptionPlan";
 import AdminEditSubscriptionPlan from "./Pages/Admin/AdminEditSubscriptionPlan";
 import AdminBusinessApproval from "./Pages/Admin/AdminBusinessApproval";
 import AdminBusinessApprovalView from "./Pages/Admin/AdminBusinessApprovalView";
 import AdminSubscriptionList from "./Pages/Admin/AdminSubscriptionList";
+import AdminPostReports from "./Pages/Admin/AdminPostReports";
+import AdminPostReportsView from "./Pages/Admin/AdminPostReportsView";
 
 function App() {
   return (
@@ -204,7 +205,6 @@ function App() {
             path="/admin-businessappview"
             element={<AdminBusinessApprovalView />}
           />
-          <Route path="/admin-trprflview" element={<AdminTrPrflView />} />
           <Route path="/admin-spprflview" element={<AdminSpPrflView />} />
           <Route path="/admin-addplan" element={<AdminAddSubscriptionPlan />} />
           <Route
@@ -218,6 +218,11 @@ function App() {
           <Route
             path="/admin-subscriptionlist"
             element={<AdminSubscriptionList />}
+          />
+          <Route path="/admin-post-reports" element={<AdminPostReports />} />
+          <Route
+            path="/admin-post-reports-view"
+            element={<AdminPostReportsView />}
           />
 
           {/* log in and signup */}

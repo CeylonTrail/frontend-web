@@ -16,7 +16,7 @@ import { set } from "date-fns";
 
 const TravellerCommunity = () => {
     const [showPopup, setShowPopup] = useState(false);
-    const [tripId, setTripId] = useState(null);
+    const [tripId, setTripId] = useState(0);
     const [selectedImages, setSelectedImages] = useState([]); // Initialize as array
     const [content, setContent] = useState("");
     const [privacy, setPrivacy] = useState("public");

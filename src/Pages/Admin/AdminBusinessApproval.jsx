@@ -150,8 +150,8 @@ const AdminBusinessApproval = () => {
       />
       <div className="flex flex-1 mt-8">
         <SidebarComponentAdmin />
-        <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[94.5vh]">
-          <div className="my-6 p-4 bg-white rounded-lg shadow-md">
+        <div className="w-[80%] fixed right-2 p-6 overflow-auto">
+          <div className="my-6 p-4 bg-white rounded-lg shadow-md h-[87.5vh]">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">Business Approvals</h2>
               <div className="w-[300px] relative">

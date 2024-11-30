@@ -133,16 +133,12 @@ const AdminSubscriptionList = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header
-        type="admin"
-        profilePic={HotelProfileImg}
-        function={() => {}}
-      />
+      <Header type="admin" profilePic={HotelProfileImg} function={() => {}} />
       <div className="flex flex-1 mt-14">
         <SidebarComponentAdmin />
-        <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[94.5vh]">
+        <div className="w-[80%] fixed right-2 p-6 overflow-auto ">
           {/* Section for Subscription Plans */}
-          <div className="bg-white p-4 mb-6 rounded-lg shadow-md flex items-center justify-between">
+          <div className="bg-white p-4 mb-6 rounded-lg shadow-md flex items-center justify-between ">
             <h3 className="text-lg font-semibold text-gray-800">
               Manage Subscription Plans
             </h3>
@@ -155,7 +151,7 @@ const AdminSubscriptionList = () => {
           </div>
 
           {/* Business Subscriptions Table */}
-          <div className="my-6 p-4 bg-white rounded-lg shadow-md">
+          <div className="my-6 p-4 bg-white rounded-lg shadow-md h-[74.5vh]">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">All Subscriptions</h2>
               <div className="w-[300px] relative">

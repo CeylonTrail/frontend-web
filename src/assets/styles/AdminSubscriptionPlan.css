@@ -1,0 +1,168 @@
+
+
+/* Box for the subscription plan */
+.admin-subscription-plan-box {
+  width: 100%;
+  max-width: 1480px; /* Ensure it doesn’t exceed the viewport width */
+  height: 635px; /* Adjust height automatically based on content */
+  background-color: white;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Step text and title text container */
+.admin-header-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Space below header */
+}
+
+.admin-pricing-card-buttons {
+  margin-bottom: 170px; /* Space below header */
+}
+/* Step text */
+.admin-step-text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 25px;
+}
+
+/* Title text */
+.admin-title-text {
+  font-size: 24px; /* Adjusted size for better fit */
+  font-weight: 600;
+  margin-left: 25px;
+}
+
+.admin-pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust spacing between cards */
+  justify-content: center; /* Center the cards and button */
+  align-items: stretch; /* Ensure all items align properly */
+}
+
+/* Common class for pricing card */
+.admin-pricing-card {
+  width: 100%;
+  max-width: 320px; /* Increased card width */
+  height: auto; /* Adjust height based on content */
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #0F969C; /* Primary border color */
+  padding: 16px; /* Added padding */
+  cursor: pointer;
+}
+
+
+.add-plan-card {
+  min-width: 250px;
+  height: auto;
+  background-color: #f9f9f9; /* Match the card style */
+  border-radius: 8px;
+}
+
+
+/* Header for pricing card */
+.admin-pricing-card-header {
+  margin-bottom: 1rem;
+}
+
+.admin-pricing-card-design {
+  display: inline-block;
+  width: 91%;
+  border-radius: 0.5rem;
+  background-color: #0F969C;
+  padding: 0.925rem 1rem;
+  text-align: center;
+  font-size: 1.275rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: #ffffff;
+  margin-left: 14px;
+  margin-top: 10px;
+}
+
+/* Inner padding */
+.admin-pricing-card-inner {
+  padding: 1rem;
+}
+
+.admin-pricing-card-inner-sm {
+  padding: 1rem;
+}
+
+/* Price */
+.admin-pricing-card-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.admin-pricing-card-price span {
+  font-size: 1.525rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #000000; /* Ensure price is initially black */
+}
+
+.admin-pricing-card-price span2 {
+  font-size: 1.025rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: #0F969C;
+}
+
+/* Description */
+.admin-pricing-card-description {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: #4b5563; /* Ensure description is initially colored */
+}
+
+/* Features list */
+.admin-pricing-card-features {
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.5rem;
+  background-color: #f9fafb;
+  margin-bottom: 30px;
+}
+
+/* Feature item */
+.admin-pricing-card-feature {
+  margin-left: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #4b5563; /* Ensure features are initially colored */
+}
+
+.admin-feature-icon {
+  color: #0F969C;
+  margin-right: 0.5rem;
+}
+
+
+
+/* Next button container */
+.admin-next-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust spacing as needed */
+}
+
+/* Styling for the back arrow */
+.admin-back-arrow {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #0F969C;
+}

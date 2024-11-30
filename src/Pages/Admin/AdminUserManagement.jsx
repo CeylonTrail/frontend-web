@@ -116,7 +116,7 @@ const Admin = () => {
       name: "Action",
       cell: (row) => (
         <div className="flex gap-4 items-center">
-          <a href={`/view/${row.id}`} className="text-[#6DA5C0]">
+          <a href={`/admin-trprflview/${row.id}`} className="text-[#6DA5C0]">
             View
           </a>
           <button
@@ -188,7 +188,7 @@ const Admin = () => {
       name: "Action",
       cell: (row) => (
         <div className="flex gap-4 items-center">
-          <a href={`/view/${row.id}`} className="text-[#6DA5C0]">
+          <a href={`/admin-spprflview/${row.id}`} className="text-[#6DA5C0]">
             View
           </a>
           <button

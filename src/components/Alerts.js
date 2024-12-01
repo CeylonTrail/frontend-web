@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const SuccessAlert = ({ title, message, onclose }) => {
     useEffect(() => {
-        const timer = setTimeout(onclose, 2000); // Set timeout for 2 seconds
+        const timer = setTimeout(onclose, 1000); // Set timeout for 1 seconds
         return () => clearTimeout(timer); // Clear timeout if the component unmounts
     }, [onclose]);
 

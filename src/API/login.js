@@ -11,7 +11,7 @@ const login = async (data) => {
             },
         });
      
-        if (response.data.message === "Login success") {
+        if (response.data.code === 200) {
             const token = response.data.data.accessToken;
 
             // Set the token for all subsequent requests
@@ -22,19 +22,13 @@ const login = async (data) => {
                 role:response.data.data.role,
                 userName:response.data.data.username };
         } else {
-            return { status: 'error', message: 'Login success' };
+            return { status: 'error', message: response.data.message };
         }
     } catch (error) {
         console.error(error);  // Log the error
         if (error.response && error.response.data) {
             const { code, message, data } = error.response.data;
-            if (code === 401 && data === "Password is incorrect") {
-                return { status: 'error', message: 'Password is incorrect' };
-            } else if (code === 404 && data === "Email not found") {
-                return { status: 'Validation Errors', message: "Email not found" };
-            } else {
-                return { status: 'error', message: message || 'An unknown error occurred' };
-            }
+            return { status: 'error', message: message || 'An unknown error occurred' };
         } else {
             return { status: 'error', message: 'An unknown error occurred' };
         }

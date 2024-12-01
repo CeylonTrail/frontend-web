@@ -20,7 +20,8 @@ module.exports = {
       warningLight: '#FC3A4E',
       SecondaryLight: "#E7E7E7",
       Gray: "#374151",
-      green:"#00FF00"
+      green:"#00FF00",
+      hoverGray:"#9ca3af"
     },
     fontFamily: {
       sans: ['Poppins', 'sans-serif'], // Setting Poppins as the default sans font

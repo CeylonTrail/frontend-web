@@ -15,6 +15,8 @@ import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView"
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
+import MarketPlacePublic from "./Pages/SP common/MarketPlaceCommon";
+
 import SPReviews from "./Pages/SP common/SPReviews";
 import SPViewReviews from "./Pages/SP common/SPViewReviews";
 import SavedItemsPage from "./Pages/SP common/SavedItemsPage";
@@ -32,6 +34,7 @@ import CurrentTrip from "./Pages/Trips/currentTrip";
 import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
 import CommunityPublic from "./Pages/Community/communityPublic";
+import Loading from "./Pages/loading";
 
 import Admin from "./Pages/Admin/AdminDashboard";
 import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
@@ -47,22 +50,6 @@ import AdminPostReportsView from "./Pages/Admin/AdminPostReportsView";
 
 function App() {
   return (
-    // <div className="App">
-    //   {/* <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header> */}
-    // </div>
     <div>
       <BrowserRouter>
         <Routes>
@@ -178,6 +165,16 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/market_public"
+            element={
+              <>
+                <MarketPlacePublic />
+              </>
+            }
+          />
+
           <Route
             path="/market"
             element={
@@ -240,7 +237,7 @@ function App() {
           <Route path="/current_trip" element={<CurrentTrip />} />
           <Route path="/saved_trips" element={<SavedTrips />} />
           {/* Home Page */}
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </div>

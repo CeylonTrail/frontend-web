@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import Header from "../components/header2";
 import LoginImg from "../assets/img/login.svg";
 import { Password, Email } from "../components/inputFields";
@@ -41,6 +42,8 @@ export default () => {
             if (response.status === 'success') {
                 const token = response.token;
                 const role = response.role;
+                localStorage.setItem('token', token);
+                localStorage.setItem('userName', response.userName);
                 setAlertType('success');
                 setAlertMessage('Login success');
                 setAlertTitle('Success');

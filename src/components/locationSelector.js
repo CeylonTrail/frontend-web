@@ -38,13 +38,13 @@ export default function SelectLocation({ onLocationChange }) {
     return (
         <>
             
-                <APIProvider apiKey="AIzaSyD5UzriIXmPtuLot9v4DirHr3LkJzh6tfk">
+                <APIProvider apiKey="apikey">
                     <div className="w-full h-60">
                         <Map
                             defaultZoom={15}
                             defaultCenter={{ lat: 6.902652922830886, lng: 79.86116883963061 }}
                             onClick={handleMapClick}
-                        mapId="ee7c577ba3feb614"
+                        mapId="id"
                         options={{
                             scrollwheel: true, // Enable zooming with mouse scroll
                             draggable: true, // Enable dragging the map

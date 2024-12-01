@@ -9,7 +9,7 @@ const SpRedirectPage = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/set-market");
+    navigate("/sp-setup");
   };
 
   return (

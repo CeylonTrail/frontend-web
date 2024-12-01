@@ -76,7 +76,7 @@ function App() {
             }
           />
           <Route
-            path="/set-market"
+            path="/sp-setup"
             element={
               <>
                 <SetUpMarketPlace />

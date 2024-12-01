@@ -5,7 +5,7 @@ import "../../assets/styles/SetUpMarketPlace.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import set_marketplace from "../../API/marketplace";
+import set_marketplace from "../../API/sp.js";
 import {
   faFacebook,
   faInstagram,
@@ -17,23 +17,22 @@ import Header from "../../components/header.js";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 
 const SetUpMarketPlace = () => {
-  const [profile_image, setProfileImage] = useState("");
-  const [cover_image, setCoverImage] = useState("");
-  const [shopName, setShopName] = useState("");
-  const [selectedDays, setSelectedDays] = useState({});
+  const navigate = useNavigate();
+
+  const serviceName = localStorage.getItem('serviceName');
+  const serviceType = localStorage.getItem('serviceType');
+
   const [description, setDescription] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [email, setEmail] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [selectedDays, setSelectedDays] = useState({});
   const [selectedSocialMedia, setSelectedSocialMedia] = useState([]);
-  const [verification, setVerification] = useState("");
-
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [coverPicture, setCoverPicture] = useState(null);
+  const [verificationDoc, setVerificationDoc] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const transformOpeningHours = () => {
       return Object.entries(selectedDays)
         .filter(([day, times]) => times)
@@ -43,42 +42,65 @@ const SetUpMarketPlace = () => {
           endTime: times.to,
         }));
     };
-
-    const data = {
-      profileImage: profile_image.name,
-      coverImage: cover_image.name,
-      shopName: shopName,
-      description: description,
-      serviceType: serviceType,
-      email: email,
-      contactNumber: contactNumber,
-      address: address,
-      ownerFirstName: firstName,
-      ownerLastName: lastName,
-      openingHours: transformOpeningHours(),
-      socialMediaLinks: selectedSocialMedia,
-      verificationDoc: verification.name,
-    };
-
-    console.log(data);
-
-    // Call the set_marketplace function to send the formData
+  
+    const formData = new FormData();
+  
+    formData.append("description", description);
+    formData.append("contactNumber", contactNumber);
+    formData.append("address", address);
+    formData.append("openingHours", JSON.stringify(transformOpeningHours()));
+    formData.append("socialMediaLinks", JSON.stringify(selectedSocialMedia));
+  
+    if (profilePicture) {
+      formData.append("profilePicture", profilePicture);
+    }
+    if (coverPicture) {
+      formData.append("coverPicture", coverPicture);
+    }
+    if (verificationDoc) {
+      formData.append("verificationDoc", verificationDoc);
+    }
+  
     try {
-      await set_marketplace(data);
-      console.log("Marketplace data submitted successfully");
+      await set_marketplace(formData);
+      if (serviceType === 'ACCOMMODATION') {
+        navigate('/hotel-sp-view')
+    } else if (serviceType === 'RESTAURANT') {
+        navigate('/rest-sp-view')
+    } else if (serviceType === 'EQUIPMENT') {
+        navigate('/equip-sp-view')
+    } else {
+        navigate('/hotel-sp-view')
+    }
     } catch (error) {
       console.error("Error submitting marketplace data", error);
     }
   };
+  
 
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate("/hotel-sp-view");
+  const handleClear = () => {
+    navigate("/sp-setup");
   };
 
-  const handleResetClick = () => {
-    navigate("/hotel-sp-view");
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePicture(file)
+    }
+  };
+
+  const handleCoverPictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setCoverPicture(file)
+    }
+  };
+
+  const handleVerificationDocChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setVerificationDoc(file)
+    }
   };
 
   const handleDayChange = (day) => {
@@ -172,7 +194,7 @@ const SetUpMarketPlace = () => {
           >
             <div className="mx-auto max-w-lg text-center">
               <h2 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-4xl mb-10">
-                <strong>Set up a Market Place</strong>
+                <strong>Setup Service Provider</strong>
               </h2>
             </div>
 
@@ -180,16 +202,17 @@ const SetUpMarketPlace = () => {
               {/* Profile Image Upload */}
               <div className="flex items-center gap-x-3 mb-0">
                 <label
-                  htmlFor="profile-image"
+                  htmlFor="profile-picture"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900 mb-0"
                 >
-                  <strong>Profile Image</strong>
+                  <strong>Profile Picture</strong>
                 </label>
                 <input
-                  id="profile-image"
-                  name="profile-image"
-                  onChange={(e) => setProfileImage(e.target.files[0])}
+                  id="profile-picture"
+                  name="profile-picture"
                   type="file"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
@@ -207,16 +230,17 @@ const SetUpMarketPlace = () => {
               {/* Cover Image Upload */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="cover-image"
+                  htmlFor="cover-picture"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  <strong>Cover Image</strong>
+                  <strong>Cover Picture</strong>
                 </label>
                 <input
-                  id="cover-image"
-                  name="cover-image"
-                  onChange={(e) => setCoverImage(e.target.files[0])}
+                  id="cover-picture"
+                  name="cover-picture"
                   type="file"
+                  accept="image/*"
+                  onChange={handleCoverPictureChange}
                   style={{
                     borderColor: "#6DA5C0",
                     outlineColor: "#0F969C",
@@ -233,7 +257,7 @@ const SetUpMarketPlace = () => {
               {/* Marketplace  Info */}
               <div className="border-t border-gray-300 pt-4">
                 <h3 className="text-lg font-bold mb-0.5">
-                  <strong>Marketplace Info</strong>
+                  <strong>Shop Info</strong>
                 </h3>
                 {/* Shop Name */}
                 <div className="flex items-center gap-x-3 mb-0.5">
@@ -241,14 +265,13 @@ const SetUpMarketPlace = () => {
                     htmlFor="shop-name"
                     className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                   >
-                    Name
+                    Shop Name
                   </label>
                   <input
                     id="shop-name"
                     name="shop-name"
                     type="text"
-                    value={shopName}
-                    onChange={(e) => setShopName(e.target.value)}
+                    value={serviceName}
                     autoComplete="organization"
                     style={{
                       borderColor: "#6DA5C0",
@@ -256,9 +279,32 @@ const SetUpMarketPlace = () => {
                     }}
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                     placeholder="Enter shop name"
+                    readOnly
                   />
                 </div>
 
+                <div className="flex items-center gap-x-3 mb-0.5">
+                  <label
+                    htmlFor="shop-type"
+                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  >
+                    Service Type
+                  </label>
+                  <input
+                    id="shop-type"
+                    name="shop-type"
+                    type="text"
+                    value={serviceType}
+                    autoComplete="organization"
+                    style={{
+                      borderColor: "#6DA5C0",
+                      outlineColor: "#0F969C",
+                    }}
+                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 bg-[#E7E7E7]"
+                    placeholder="Restaurant"
+                    readOnly
+                  />
+                </div>
                 <div className="flex items-center gap-x-3 mb-0.5">
                   <label
                     htmlFor="shop-description"
@@ -278,54 +324,9 @@ const SetUpMarketPlace = () => {
                     }}
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                     placeholder="Describe your shop"
+                    required
                   />
                 </div>
-
-                <div className="flex items-center gap-x-3 mb-0.5">
-                  <label
-                    htmlFor="shop-type"
-                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                  >
-                    Service Type
-                  </label>
-                  <input
-                    id="shop-type"
-                    name="shop-type"
-                    type="text"
-                    value={serviceType}
-                    onChange={(e) => setServiceType(e.target.value)}
-                    autoComplete="organization"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4 bg-[#E7E7E7]"
-                    placeholder="Restaurant"
-                  />
-                </div>
-                <div className="flex items-center gap-x-3 mb-0.5">
-                  <label
-                    htmlFor="shop-email"
-                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="shop-email"
-                    name="shop-email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    autoComplete="email"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
                 <div className="flex items-center gap-x-3 mb-0.5">
                   <label
                     htmlFor="shop-contact-number"
@@ -367,58 +368,6 @@ const SetUpMarketPlace = () => {
                     }}
                     className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
                     placeholder="Add your address here"
-                  />
-                </div>
-              </div>
-
-              {/* Contact Info */}
-              <div className="border-t border-gray-300 pt-4">
-                <h3 className="text-lg font-bold mb-0.5">
-                  <strong>Service Provider Info</strong>
-                </h3>
-                <div className="flex items-center gap-x-3 mb-0.5">
-                  <label
-                    htmlFor="shop-owner-name"
-                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    id="shop-owner-name"
-                    name="shop-owner-name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    type="text"
-                    autoComplete="name"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="Enter your name"
-                  />
-                </div>
-
-                <div className="flex items-center gap-x-3 mb-0.5">
-                  <label
-                    htmlFor="shop-owner-name"
-                    className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    id="shop-owner-name"
-                    name="shop-owner-name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    type="text"
-                    autoComplete="name"
-                    style={{
-                      borderColor: "#6DA5C0",
-                      outlineColor: "#0F969C",
-                    }}
-                    className="flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-[#0F969C] focus:ring-[#0F969C] sm:text-xs sm:leading-4"
-                    placeholder="Enter your name"
                   />
                 </div>
               </div>
@@ -550,9 +499,10 @@ const SetUpMarketPlace = () => {
                   </label>
                   <input
                     id="verification-doc"
-                    name="verificationDoc"
-                    onChange={(e) => setVerification(e.target.files[0])}
+                    name="verification-doc"
                     type="file"
+                    accept="image/*"
+                    onChange={handleVerificationDocChange}
                     style={{
                       borderColor: "#6DA5C0",
                       outlineColor: "#0F969C",
@@ -570,14 +520,13 @@ const SetUpMarketPlace = () => {
               {/* Submit Button */}
               <div className="flex justify-end space-x-4 mt-2">
                 <PrimaryButton
-                  name="Reset"
-                  action={handleResetClick}
+                  name="Clear"
+                  action={handleClear}
                   isActive={true}
                 />
                 <PrimaryButton
-                  name="Create"
+                  name="Submit"
                   action={handleSubmit}
-                  isActive={false}
                 />
               </div>
             </div>

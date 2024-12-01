@@ -6,15 +6,15 @@ const create_post = async (data) => {
     try {
         const response = await axios.post(url, data, {
             headers: {
-                Accept: 'multipart/form-data',
-                'Content-Type': 'multipart/form-data',
-            },
+                'Content-Type': 'multipart/form-data', 
+                'Accept': 'application/json'
+            },
         });
         console.log(response.data);
-        if (response.data.message === "Post created successfully") {
+        if (response.data.code === 200) {
             return { status: 'success', message: response.data.message};
         } else {
-            return { status: 'error', message: 'An unknown error occurred' };
+            return { status: 'error', message: 'An unknown error occurred1' };
         }
     } catch (error) {
         console.error(error);
@@ -86,57 +86,47 @@ const delete_post = async (data) => {
 
 }
 
-const add_like_post = async (data) => {
-    const url = 'http://localhost:8083/api/v1/post/like';
+const add_like_post = async (postID) => {
+    const url = `http://localhost:8083/api/v1/post/add-like/${postID}`;
 
     try {
-        const response = await axios.post(url, data, {
+        const response = await axios.put(url, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8',
             },
         });
-        console.log(response.data);
-        if (response.data.message === "Like added successfully") {
+        if (response.data.code==200) {
             return { status: 'success', message: response.data.message};
         } else {
             return { status: 'error', message: 'An unknown error occurred' };
         }
     } catch (error) {
-        console.error(error);
-        if (error.response) {
-            return { status: 'error', message: error.response.data.data || 'An unknown error occurred' };
-        } else {
-            return { status: 'error', message: 'An unknown error occurred' };
-        }
-    }
+        return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
+    }  
 
 }
 
-const remove_like_post = async (data) => {
-    const url = 'http://localhost:8083/api/v1/post/like';
+const remove_like_post = async (postID) => {
+    const url = `http://localhost:8083/api/v1/post/remove-like/${postID}`;
 
     try {
-        const response = await axios.delete(url, data, {
+        const response = await axios.put(url, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8',
             },
         });
         console.log(response.data);
-        if (response.data.message === "Like removed successfully") {
+        if (response.data.code==200) {
             return { status: 'success', message: response.data.message};
         } else {
             return { status: 'error', message: 'An unknown error occurred' };
         }
     } catch (error) {
-        console.error(error);
-        if (error.response) {
-            return { status: 'error', message: error.response.data.data || 'An unknown error occurred' };
-        } else {
-            return { status: 'error', message: 'An unknown error occurred' };
-        }
-    }
+        return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
+    }    
+    
 
 }
 
@@ -246,6 +236,25 @@ const get_public_community_post = async () => {
     }
 };
 
+const report_post=async(postId,reason)=>{
+    const url = `http://localhost:8083/api/v1/post/report/${postId}`;
+
+    try {
+        const response = await axios.post(url, reason, {
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json'
+            },
+        });
+        if (response.data.code === 200) {
+            return { status: 'success', message: response.data.message};
+        } else {
+            return { status: 'error', message: 'An unknown error occurred' };
+        }
+    } catch (error) {      
+        return { status: 'error', message: error.message || 'An unknown error occurred' };  
+    }
+}
 
 
 export default {
@@ -257,5 +266,6 @@ export default {
     get_post_by_postId,
     get_user_post,
     get_community_post,
-    get_public_community_post
+    get_public_community_post,
+    report_post
 }

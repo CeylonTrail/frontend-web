@@ -49,19 +49,13 @@ const login = async (data) => {
                 };
             } 
         } else {
-            return { status: 'error', message: 'Login success' };
+            return { status: 'error', message: response.data.message };
         }
     } catch (error) {
         console.error(error);  // Log the error
         if (error.response && error.response.data) {
             const { code, message, data } = error.response.data;
-            if (code === 401 && data === "Password is incorrect") {
-                return { status: 'error', message: 'Password is incorrect' };
-            } else if (code === 404 && data === "Email not found") {
-                return { status: 'Validation Errors', message: "Email not found" };
-            } else {
-                return { status: 'error', message: message || 'An unknown error occurred' };
-            }
+            return { status: 'error', message: message || 'An unknown error occurred' };
         } else {
             return { status: 'error', message: 'An unknown error occurred' };
         }

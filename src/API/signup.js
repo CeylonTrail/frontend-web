@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const signup = async (data) => {
     const url = 'http://localhost:8083/api/v1/auth/register-traveller';
-
+    console.log(data);
     try {
         const response = await axios.post(url, data, {
             headers: {
@@ -27,7 +27,7 @@ const signup = async (data) => {
                 return { status: 'Validation Errors', message: data.username[0] };
             }
             else {
-                return { status: 'error', message: message || 'An unknown error occurred' };
+                return { status: 'error', message: 'An unknown54 error occurred' };
             }
         } else {
             return { status: 'error', message: 'An unknown error occurred' };

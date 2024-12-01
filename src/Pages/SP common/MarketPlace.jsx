@@ -16,7 +16,7 @@ const MarketPlace = () => {
       <div className="flex flex-1 mt-20">
         <SidebarComponentMP />
         <MpContent />
-      </div>
+        </div>
     </div>
   );
 };

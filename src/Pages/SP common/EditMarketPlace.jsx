@@ -571,12 +571,12 @@ const EditMarketPlace = () => {
                 <PrimaryButton
                   name="Back"
                   action={handleBackClick}
-                  isActive={true}
+                  isActive={false}
                 />
                 <PrimaryButton
                   name="Save"
                   action={handleButtonClick}
-                  isActive={false}
+                  isActive={true}
                 />
               </div>
             </div>

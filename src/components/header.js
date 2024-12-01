@@ -34,6 +34,9 @@ const publicNav = [
 
 ];
 
+const Admin_Navigation = [
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -46,6 +49,7 @@ export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
+
     let navItems = [];
     if (type === 'traveller') {
       navItems = Traveller_navigation;
@@ -65,6 +69,7 @@ export default function Example({ type, profilePic, funtion }) {
 
     setNavigation(updatedNavItems);
   }, [type]);
+
 
   const handleNavClick = (index) => {
     const newNavigation = navigation.map((item, idx) => ({

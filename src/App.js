@@ -26,17 +26,27 @@ import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
 // import LocationSelector from "./components/locationSelector";
 import Resetpw from "./Pages/resetpw";
-import TravellerProfile from "./Pages/Community/Profile"
+import TravellerProfile from "./Pages/Community/Profile";
 import Landing from "./Pages/landing";
-import TripDashboard from "./Pages/Trips/dashboard"
+import TripDashboard from "./Pages/Trips/dashboard";
 import PlanTrips from "./Pages/Trips/planTrips";
 import CurrentTrip from "./Pages/Trips/currentTrip";
 import SavedTrips from "./Pages/Trips/savedTrips";
 import EditProfile from "./Pages/Community/editProf";
-
 import CommunityPublic from "./Pages/Community/communityPublic";
 import Loading from "./Pages/loading";
 
+import Admin from "./Pages/Admin/AdminDashboard";
+import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
+import AdminSubscriptionPlan from "./Pages/Admin/AdminSubscriptionPlan";
+import AdminSpPrflView from "./Pages/Admin/AdminSpPrflView";
+import AdminAddSubscriptionPlan from "./Pages/Admin/AdminAddSubscriptionPlan";
+import AdminEditSubscriptionPlan from "./Pages/Admin/AdminEditSubscriptionPlan";
+import AdminBusinessApproval from "./Pages/Admin/AdminBusinessApproval";
+import AdminBusinessApprovalView from "./Pages/Admin/AdminBusinessApprovalView";
+import AdminSubscriptionList from "./Pages/Admin/AdminSubscriptionList";
+import AdminPostReports from "./Pages/Admin/AdminPostReports";
+import AdminPostReportsView from "./Pages/Admin/AdminPostReportsView";
 
 function App() {
   return (
@@ -155,6 +165,7 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/market_public"
             element={
@@ -163,6 +174,7 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/market"
             element={
@@ -179,27 +191,51 @@ function App() {
               </>
             }
           />
+          {/* admin*/}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin-usermgt" element={<AdminUserManagement />} />
+          <Route
+            path="/admin-businessapp"
+            element={<AdminBusinessApproval />}
+          />
+          <Route
+            path="/admin-businessappview"
+            element={<AdminBusinessApprovalView />}
+          />
+          <Route path="/admin-usermgt-sp" element={<AdminSpPrflView />} />
+          <Route path="/admin-addplan" element={<AdminAddSubscriptionPlan />} />
+          <Route
+            path="/admin-editplan"
+            element={<AdminEditSubscriptionPlan />}
+          />
+          <Route
+            path="/admin-subscriptionplan"
+            element={<AdminSubscriptionPlan />}
+          />
+          <Route
+            path="/admin-subscriptionlist"
+            element={<AdminSubscriptionList />}
+          />
+          <Route path="/admin-post-reports" element={<AdminPostReports />} />
+          <Route
+            path="/admin-post-reports-view"
+            element={<AdminPostReportsView />}
+          />
 
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset_password" element={<Resetpw />} />
-
           {/* Community */}
           <Route path="/community" element={<Community />} />
           <Route path="/community_public" element={<CommunityPublic />} />
-
-
           <Route path="/profile" element={<TravellerProfile />} />
           <Route path="/edit_tr_profile" element={<EditProfile />} />
-
-
           {/* Trip */}
           <Route path="/trip_dashboard" element={<TripDashboard />} />
           <Route path="/plan_trip" element={<PlanTrips />} />
           <Route path="/current_trip" element={<CurrentTrip />} />
           <Route path="/saved_trips" element={<SavedTrips />} />
-
           {/* Home Page */}
           <Route path="/loading" element={<Loading />} />
         </Routes>

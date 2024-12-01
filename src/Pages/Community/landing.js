@@ -10,6 +10,7 @@ import { PrimaryButton } from "../../components/Button";
 import Analytics from "../../components/TravellerAnalytics";
 import ChatWindow from "../../components/TravellerChatWindow";
 import PrivacyDropdown from "../../components/PrivacyDropdown";
+import { capitalizeWords } from "../../Functions/FormatName";
 import postAPI from "../../API/post";
 import { SuccessAlert, WarningAlert } from "../../components/Alerts";
 import { set } from "date-fns";
@@ -151,7 +152,7 @@ const TravellerCommunity = () => {
                         <div className="flex items-center mb-4 justify-between">
                             <div className="flex flex-row items-center">
                                 <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
-                                <span className="ml-4 font-semibold">{localStorage.getItem("userName")}</span>
+                                <span className="ml-4 font-semibold">{capitalizeWords(localStorage.getItem("userName"))}</span>
                             </div>
                             <div className="w-48">
                                 <PrivacyDropdown setPrivacy={setPrivacy} />

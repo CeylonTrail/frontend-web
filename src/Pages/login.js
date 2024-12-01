@@ -38,22 +38,36 @@ export default () => {
 
         try {
             const response = await login(data);
-            console.log(response);
+
             if (response.status === 'success') {
-                const token = response.token;
-                const role = response.role;
-                localStorage.setItem('token', token);
+                localStorage.setItem('token', response.token);
                 localStorage.setItem('userName', response.userName);
                 setAlertType('success');
                 setAlertMessage('Login success');
                 setAlertTitle('Success');
                 setShowAlert(true);
                 setTimeout(() => {
-                    if (role === 'TRAVELLER') {
+                    if (response.role === 'TRAVELLER') {
                         navigate('/community');
                     }
-                    else {
-                        navigate('/sp');
+                    else if (response.role === 'ADMIN') {
+                        navigate('/admin');
+                    } else {
+                        localStorage.setItem('serviceName', response.serviceName);
+                        localStorage.setItem('serviceType', response.serviceType);
+                        if (response.setupState){
+                            if (response.serviceType === 'ACCOMMODATION') {
+                                navigate('/hotel-sp-view')
+                            } else if (response.serviceType === 'RESTAURANT') {
+                                navigate('/rest-sp-view')
+                            } else if (response.serviceType === 'EQUIPMENT') {
+                                navigate('/equip-sp-view')
+                            } else {
+                                navigate('/hotel-sp-view')
+                            }
+                        } else {
+                            navigate('/sp')
+                        }
                     }
                     
                     setShowAlert(false);

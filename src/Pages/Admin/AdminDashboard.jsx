@@ -244,11 +244,7 @@ const Admin = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header
-        type="admin"
-        profilePic={HotelProfileImg}
-        function={() => {}}
-      />
+      <Header type="admin" profilePic={HotelProfileImg} function={() => {}} />
       <div className="flex flex-1 mt-14">
         <SidebarComponentAdmin />
         <div className="w-[80%] fixed right-2 p-6 overflow-auto h-[90.5vh]">
@@ -327,7 +323,7 @@ const Admin = () => {
                 />
               </div>
 
-              {/* Inquiries Card */}
+              {/* Subscription Card */}
               <div
                 className="group bg-white rounded-lg shadow-md p-4 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#6DA5C0] hover:text-white hover:shadow-lg"
                 onClick={() => console.log("Inquiries Clicked")}
@@ -410,23 +406,23 @@ const Admin = () => {
             </div>
 
             {/* Data Table Section */}
-            <div className="bg-white rounded-lg shadow-md p-4 flex-1 h-64 overflow-hidden">
-              <h2 className="text-xl font-semibold text-gray-700">
+            <div className="bg-white rounded-lg shadow-lg p-4 flex-1 h-64 overflow-hidden">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Recent Subscriptions
               </h2>
-              <div className="grid grid-cols-2 gap-2 mt-4">
+              <div className="grid grid-cols-2 gap-2 mt-2">
                 {subscriptions.map((subscription) => (
                   <div
                     key={subscription.id}
-                    className="flex items-center space-x-2 p-2 rounded-lg shadow-sm border border-gray-200 bg-white"
+                    className="flex items-center space-x-2 p-2 rounded-lg shadow-sm border border-[#0F969C] bg-white hover:shadow-md transition-shadow duration-200"
                   >
                     <img
                       src={subscription.profilePic}
                       alt={`Subscriber ${subscription.id}`}
-                      className="w-8 h-8 rounded-full"
+                      className="w-10 h-10 rounded-full border-2 border-[#0F969C] transition-transform duration-200 transform hover:scale-110"
                     />
                     <div>
-                      <p className="font-semibold text-gray-800 text-xs">
+                      <p className="font-semibold text-gray-800 text-sm">
                         {subscription.name}
                       </p>
                       <p className="text-xs text-gray-500">

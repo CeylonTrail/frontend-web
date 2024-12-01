@@ -4,6 +4,7 @@ import "../../assets/styles/SetUpMarketPlace.css";
 import { useNavigate, useParams } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
+import SidebarComponentAdmin from "./SidebarComponentAdmin";
 
 const AdminEditSubscriptionPlan = () => {
   const navigate = useNavigate();
@@ -91,12 +92,9 @@ const AdminEditSubscriptionPlan = () => {
 
   return (
     <>
-      <Header
-        type="admin"
-        profilePic={HotelProfileImg}
-        funtion={() => {}}
-      />
+      <Header type="admin" profilePic={HotelProfileImg} funtion={() => {}} />
       <div className="relative flex items-center justify-center h-[87.5vh]">
+        <SidebarComponentAdmin />
         <div className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0] max-w-3xl mt-40">
           <div className="text-center">
             <h2 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-4xl mb-4">

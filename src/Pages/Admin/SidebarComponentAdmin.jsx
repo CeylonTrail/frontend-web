@@ -73,7 +73,17 @@ const SidebarComponentAdmin = ({ pic }) => {
                     location.pathname === route ||
                     (category === "report-handling" &&
                       (location.pathname === "/admin-post-reports" ||
-                        location.pathname === "/admin-post-reports-view"))
+                        location.pathname === "/admin-post-reports-view")) ||
+                    (category === "business-management" &&
+                      (location.pathname === "/admin-businessapp" ||
+                        location.pathname === "/admin-businessappview")) ||
+                    (category === "user-management" &&
+                      (location.pathname === "/admin-usermgt" ||
+                        location.pathname === "/admin-usermgt-sp")) ||
+                    (category === "subscription-management" &&
+                      (location.pathname === "/admin-subscriptionplan" ||
+                        location.pathname === "/admin-addplan" ||
+                        location.pathname === "/admin-editplan"))
                       ? "bg-[#6DA5C0] text-white"
                       : "bg-white hover:bg-[#6DA5C0] hover:text-white"
                   }`}

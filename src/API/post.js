@@ -11,10 +11,10 @@ const create_post = async (data) => {
             },
         });
         console.log(response.data);
-        if (response.data.message === "Post created successfully") {
+        if (response.data.code === 200) {
             return { status: 'success', message: response.data.message};
         } else {
-            return { status: 'error', message: 'An unknown error occurred' };
+            return { status: 'error', message: 'An unknown error occurred1' };
         }
     } catch (error) {
         console.error(error);
@@ -23,10 +23,10 @@ const create_post = async (data) => {
             if (code === 400) {
                 return { status: 'error', message: 'Image upload fail' };
             } else {
-                return { status: 'error', message: message || 'An unknown error occurred' };
+                return { status: 'error', message: message || 'An unknown error occurred2' };
             }
         } else {
-            return { status: 'error', message: 'An unknown error occurred' };
+            return { status: 'error', message: 'An unknown error occurred3' };
         }
     }
 

@@ -1,5 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
 import Header from "../../components/header";
-import FilterBar from "../../components/sidebarFilters";
+// import FilterBar from "../../components/sidebarFilters";
 import CommunityPost from "../../components/communityPost";
 import Profile from "../../assets/img/picskel.png";
 import { useState, useEffect } from "react";
@@ -15,8 +16,8 @@ export default () => {
 
         try {
             const response = await postAPI.get_public_community_post();
-            console.log("Response:", response);
-            if (response.status === 'success') {
+           
+            if (response.status === 'success' ) {
                 setPosts(response.data);
             } else {
                 console.error("Error in fetching posts");

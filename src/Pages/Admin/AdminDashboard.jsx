@@ -12,10 +12,12 @@ import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import ReactApexChart from "react-apexcharts";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {load_dashboard} from "../../API/admin";
 import defaultPicture from "../../assets/img/picskel.png"
 
 const Admin = () => {
+  const navigate = useNavigate();
 
   const [dashboardData, setDashboardData] = useState(null);
 
@@ -23,13 +25,18 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const response = await load_dashboard();
-        setDashboardData(response.data);
+        if (response.status === 'success')
+          setDashboardData(response.data);
+        else if (response.status === 'unauthorized'){
+          localStorage.clear()
+          navigate('/login')
+        }
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
 
   // Display a loading message while data is being fetched
   if (!dashboardData) {

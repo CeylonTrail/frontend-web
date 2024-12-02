@@ -15,7 +15,7 @@ import button from "./Button"
 const Traveller_navigation = [
 
   { name: 'Community', href: '/community', current: true },
-  { name: 'Trips', href: '/trip_dashboard', current: false },
+  { name: 'Trips', href: '/trip', current: false },
   { name: 'Market Place', href: '/market', current: false },
   { name: 'Places', href: '/places', current: false },
 

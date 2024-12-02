@@ -4,7 +4,7 @@ import vectorPlace2 from '../assets/img/vectorPlace2.jpeg';
 import vectorPlace3 from '../assets/img/vectorPlace3.jpg';
 import vectorPlace4 from '../assets/img/vectorPlace4.jpg';
 
-const ContentSection = () => {
+const SavedTrips = () => {
     return (
         <div className="w-[77%] fixed right-2 bg-white rounded p-6 overflow-auto h-[87.5vh]">
             {/* <div className="mb-8">
@@ -52,4 +52,4 @@ const TripCard = ({ title, duration, image }) => {
     );
 };
 
-export default ContentSection;
+export default SavedTrips;

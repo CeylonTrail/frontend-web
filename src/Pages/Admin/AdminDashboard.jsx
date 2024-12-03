@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {load_dashboard} from "../../API/admin";
 import defaultPicture from "../../assets/img/picskel.png"
+import Loading from "../loading.js";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Admin = () => {
 
   // Display a loading message while data is being fetched
   if (!dashboardData) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const {
@@ -217,6 +218,7 @@ const Admin = () => {
 
 
   return (
+
     <div className="flex flex-col min-h-screen">
       <Header type="admin" profilePic={HotelProfileImg} function={() => {}} />
       <div className="flex flex-1 mt-14">

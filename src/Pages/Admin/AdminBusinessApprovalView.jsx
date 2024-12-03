@@ -5,9 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
 import SidebarComponentAdmin from "./SidebarComponentAdmin";
-import { get_pending_sp } from "../../API/admin.js";
+import { get_verification_sp, update_verification_sp } from "../../API/admin.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileAlt, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faFileAlt, faRefresh } from '@fortawesome/free-solid-svg-icons';
 
 const AdminBusinessApprovalView = () => {
 
@@ -24,7 +24,7 @@ const AdminBusinessApprovalView = () => {
 
   const fetchSP = async () => {
     try {
-      const response = await get_pending_sp(id);
+      const response = await get_verification_sp(id);
 
       if (response.status === 'success') {
         setData(response.data);
@@ -49,16 +49,31 @@ const AdminBusinessApprovalView = () => {
   const handleStatusChange = (e) => {
     setApprovalStatus(e.target.value);
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!approvalStatus || approvalStatus === "SELECT ONE") {
+    if (!approvalStatus || approvalStatus === "SELECT_ONE") {
       alert("Please select a valid verification status!");
       return;
     }
-    console.log("Form submitted with status:", approvalStatus);
-    // Add your form submission logic here
+  
+    try {
+      const response2 = await update_verification_sp(id, approvalStatus);
+      if (response2.status === "success") {
+        alert("Verification status updated successfully!");
+        navigate("/admin-businessapp");
+      } else if (response2.status === "unauthorized") {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        alert(`Error: ${response2.message}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An unexpected error occurred. Please try again later.");
+    }
   };
+  
 
   return (
     <>
@@ -350,6 +365,8 @@ const AdminBusinessApprovalView = () => {
                 />
               </div>
 
+
+
               {/* Document Section */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
@@ -384,13 +401,31 @@ const AdminBusinessApprovalView = () => {
                   defaultValue={data.verificationStatusUpdatedAt}
                 />
               </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Current Verification Status
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.verificationStatus}
+                />
+              </div>
+
               {/* Approval Status */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="approval-status"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Verification Status
+                  <FontAwesomeIcon icon={faRefresh} className="mr-2 text-gray-700" />
+                  Update to
                 </label>
                 <select
                   id="approval-status"
@@ -401,18 +436,25 @@ const AdminBusinessApprovalView = () => {
                       ? "bg-green-100 border-green-400"
                       : approvalStatus === "REJECTED"
                       ? "bg-red-100 border-red-400"
+                      : approvalStatus === "PENDING"
+                      ? "bg-orange-100 border-orange-400"
                       : "border-[#6DA5C0]"
                   }`}
                   required
                 >
-                  <option value="SELECT ONE">SELECT ONE</option>
-                  <option value="APPROVED" className="text-green-600">
-                    APPROVED
-                  </option>
-                  <option value="REJECTED" className="text-red-600">
-                    REJECTED
-                  </option>
+                  <option value="SELECT_ONE">SELECT ONE</option>
+                  {data.verificationStatus !== "APPROVED" && (
+                    <option value="APPROVED" style={{ color: "green" }}>APPROVED</option>
+                  )}
+                  {data.verificationStatus !== "REJECTED" && (
+                    <option value="REJECTED" style={{ color: "red" }}>REJECTED</option>
+                  )}
+                  {data.verificationStatus !== "PENDING" && (
+                    <option value="PENDING" style={{ color: "orange" }}>PENDING</option>
+                  )}
                 </select>
+
+
               </div>
             </div>
 

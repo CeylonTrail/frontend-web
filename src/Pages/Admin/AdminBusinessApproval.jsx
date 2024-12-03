@@ -6,7 +6,7 @@ import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { load_pending_sps } from "../../API/admin";
+import { load_verification_sps } from "../../API/admin";
 
 const AdminBusinessApproval = () => {
 
@@ -29,33 +29,28 @@ const AdminBusinessApproval = () => {
       sortable: true,
     },
     {
-      name: "Username",
-      selector: (row) => row.username,
-      sortable: true,
-    },
-    {
       name: "Created On",
       selector: (row) => row.createdAt,
       sortable: true
     },
     {
-      name: "Account Status",
+      name: "Verification Status",
       selector: (row) => (
         <span
           style={{
             color:
-              row.accountStatus === true
+              row.verificationStatus === "APPROVED"
                 ? "green"
-                : "red",
-            fontWeight: "bold",
+                : row.verificationStatus === "PENDING"
+                ? "orange"
+                : row.verificationStatus === "REJECTED"
+                ? "red" : "black"
           }}
         >
-          {row.accountStatus === true
-                ? "Activated"
-                : "Not Activated"}
+          {row.verificationStatus}
         </span>
       ),
-      sortable: true,
+      sortable: true
     },
     {
       name: "Action",
@@ -104,7 +99,7 @@ const AdminBusinessApproval = () => {
 
   const fetchPendingSPs = async () => {
     try {
-      const response = await load_pending_sps();
+      const response = await load_verification_sps();
 
       if (response.status === 'success') 
         setData(response.data.sps);
@@ -148,7 +143,7 @@ const AdminBusinessApproval = () => {
         <div className="w-[80%] fixed right-2 p-6 overflow-auto">
           <div className="my-6 p-4 bg-white rounded-lg shadow-md h-[87.5vh]">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Pending Verification Approvals</h2>
+              <h2 className="text-xl font-semibold">Verification Approvals</h2>
               <div className="w-[300px] relative">
                 <input
                   type="text"

@@ -106,10 +106,10 @@ const Admin = () => {
       selector: (row) => (
         <span
           style={{
-            color: row.isActive ? "green" : "red",
+            color: row.accountStatus ? "green" : "red",
           }}
         >
-          {row.isActive ? "Activated" : "Not Activated"}
+          {row.accountStatus ? "Activated" : "Not Activated"}
         </span>
       ),
       sortable: true

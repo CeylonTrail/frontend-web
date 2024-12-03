@@ -148,7 +148,7 @@ const Admin = () => {
     {
       name: "Status",
       selector: (row) => (
-        <span style={{ color: getStatusColor(row.status) }}>
+        <span style={{ color: getStatusColor(row.verificationStatus) }}>
           {row.verificationStatus}
         </span>
       )

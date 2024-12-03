@@ -96,7 +96,7 @@ const Trip = () => {
                 {isDashboardActive && <TripDashboard/>}
 
                 {/* PlanTrip */}
-                {isPlanTripActive && <PlanTrip/>}
+                {isPlanTripActive && <PlanTrip />}
 
                 {/* Current trip */}
                 {isCurrentTripActive && <CurrentTrip/>}

@@ -159,17 +159,19 @@ export default function Example({ type, profilePic, funtion }) {
                     </MenuButton>
                   </div>
                 </Menu>
-
-                <button
-                type="button"
-                className="ml-3 text-sm px-4 py-2 bg-red-500 text-primary font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                onClick={() => {
-                  localStorage.clear(); 
-                  window.location.href = "/login"; 
-                }}
-                >
-                <img src={LogOut}/>
-                </button>
+                {type!='public' && 
+                 <button
+                 type="button"
+                 className="ml-3 text-sm px-4 py-2 bg-red-500 text-primary font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                 onClick={() => {
+                   localStorage.clear(); 
+                   window.location.href = "/login"; 
+                 }}
+                 >
+                 <img src={LogOut}/>
+                 </button>
+                 }
+               
               </div>
               </div>
             </div>

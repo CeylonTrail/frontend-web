@@ -22,13 +22,13 @@ const Admin = () => {
       sortable: true
     },
     {
-      name: "Username",
-      selector: (row) => row.username,
+      name: "Email",
+      selector: (row) => row.email,
       sortable: true
     },
     {
-      name: "Email",
-      selector: (row) => row.email,
+      name: "Username",
+      selector: (row) => row.username,
       sortable: true
     },
     {
@@ -92,6 +92,11 @@ const Admin = () => {
       sortable: true
     },
     {
+      name: "Username",
+      selector: (row) => row.username,
+      sortable: true
+    },
+    {
       name: "Created Date",
       selector: (row) => row.createdAt,
       sortable: true
@@ -105,25 +110,6 @@ const Admin = () => {
           }}
         >
           {row.isActive ? "Activated" : "Not Activated"}
-        </span>
-      ),
-      sortable: true
-    },
-    {
-      name: "Verification Status",
-      selector: (row) => (
-        <span
-          style={{
-            color:
-              row.verificationStatus === "APPROVED"
-                ? "green"
-                : row.verificationStatus === "PENDING"
-                ? "orange"
-                : row.verificationStatus === "REJECTED"
-                ? "red" : "black"
-          }}
-        >
-          {row.verificationStatus}
         </span>
       ),
       sortable: true

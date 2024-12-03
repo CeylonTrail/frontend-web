@@ -174,8 +174,8 @@ export const get_sp = async (id) => {
     }
 };
 
-export const load_pending_sps = async () => {
-    const url = 'http://localhost:8083/api/v1/admin/user/sp/pending-verification';
+export const load_verification_sps = async () => {
+    const url = 'http://localhost:8083/api/v1/admin/user/sp/verification';
 
     try {
         const response = await axios.get(url, {
@@ -205,8 +205,8 @@ export const load_pending_sps = async () => {
     }
 };
 
-export const get_pending_sp = async (id) => {
-    const url = `http://localhost:8083/api/v1/admin/user/sp/pending-verification/${id}`;
+export const get_verification_sp = async (id) => {
+    const url = `http://localhost:8083/api/v1/admin/user/sp/verification/${id}`;
 
     try {
         const response = await axios.get(url, {
@@ -234,5 +234,34 @@ export const get_pending_sp = async (id) => {
     }
 };
 
-const api = { load_dashboard, load_travellers, load_sps, delete_traveller, delete_sp, get_sp, load_pending_sps, get_pending_sp };
+export const update_verification_sp = async (id, status) => {
+    const url = `http://localhost:8083/api/v1/admin/user/sp/verification/${id}`;
+
+    try {
+        const response = await axios.put(url, status , {
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
+            return { status: 'error', message: 'An unknown error occurred' };
+
+    } catch (error) {
+        console.error(error);
+        if (error.response) {
+            return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
+        } else {
+            return { status: 'error', message: 'An unknown error occurred' };
+        }
+    }
+};
+
+const api = { load_dashboard, load_travellers, load_sps, delete_traveller, delete_sp, get_sp, load_verification_sps, get_verification_sp, update_verification_sp };
 export default api;

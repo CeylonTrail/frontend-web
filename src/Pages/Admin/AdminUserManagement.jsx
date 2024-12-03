@@ -18,20 +18,24 @@ const Admin = () => {
   const columns1 = [
     {
       name: "Full Name",
-      selector: (row) => `${row.firstname} ${row.lastname}`
+      selector: (row) => `${row.firstname} ${row.lastname}`,
+      sortable: true
     },
     {
       name: "Username",
-      selector: (row) => row.username
+      selector: (row) => row.username,
+      sortable: true
     },
     {
       name: "Email",
-      selector: (row) => row.email
+      selector: (row) => row.email,
+      sortable: true
     },
     {
       name: "Created Date",
       selector: (row) => row.createdAt,
       right: true,
+      sortable: true
     },
     {
       name: "Account Status",
@@ -43,7 +47,8 @@ const Admin = () => {
         >
           {row.accountStatus ? "Activated" : "Not Activated"}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Action",
@@ -79,20 +84,24 @@ const Admin = () => {
   const columns2 = [
     {
       name: "Service Name",
-      selector: (row) => row.serviceName
+      selector: (row) => row.serviceName,
+      sortable: true
     },
     {
       name: "Service Type",
-      selector: (row) => row.serviceType
+      selector: (row) => row.serviceType,
+      sortable: true
     },
     {
       name: "Username",
-      selector: (row) => row.username
+      selector: (row) => row.username,
+      sortable: true
     },
     {
       name: "Created Date",
       selector: (row) => row.createdAt,
       right: true,
+      sortable: true
     },
     {
       name: "Account Status",
@@ -104,7 +113,8 @@ const Admin = () => {
         >
           {row.isActive ? "Activated" : "Not Activated"}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Verification Status",
@@ -122,7 +132,8 @@ const Admin = () => {
         >
           {row.verificationStatus}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Action",

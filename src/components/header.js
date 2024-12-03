@@ -10,7 +10,8 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
-import button from "./Button"
+import button from "./Button";
+import LogOut from "../assets/img/logout.svg";
 
 const Traveller_navigation = [
 
@@ -158,9 +159,21 @@ export default function Example({ type, profilePic, funtion }) {
                     </MenuButton>
                   </div>
                 </Menu>
+
+                <button
+                type="button"
+                className="ml-3 text-sm px-4 py-2 bg-red-500 text-primary font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                onClick={() => {
+                  localStorage.clear(); 
+                  window.location.href = "/login"; 
+                }}
+                >
+                <img src={LogOut}/>
+                </button>
+              </div>
               </div>
             </div>
-          </div>
+          
           <DisclosurePanel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item, index) => (

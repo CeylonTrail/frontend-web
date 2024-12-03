@@ -7,15 +7,18 @@ const create_post = async (data) => {
         const response = await axios.post(url, data, {
             headers: {
                 'Content-Type': 'multipart/form-data', 
-                'Accept': 'application/json'
-            },
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        console.log(response.data);
-        if (response.data.code === 200) {
-            return { status: 'success', message: response.data.message};
-        } else {
-            return { status: 'error', message: 'An unknown error occurred1' };
-        }
+        
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
+            return { status: 'error', message: 'An unknown error occurred' };
+
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -32,22 +35,25 @@ const create_post = async (data) => {
 
 }
 
-const update_post = async (data) => {
-    const url = 'http://localhost:8083/api/v1/post';
+const update_post = async (postID, data) => {
+    const url = `http://localhost:8083/api/v1/post/${postID}`;
 
     try {
         const response = await axios.put(url, data, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        console.log(response.data);
-        if (response.data.message === "Post updated successfully") {
-            return { status: 'success', message: response.data.message};
-        } else {
+        
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -59,22 +65,25 @@ const update_post = async (data) => {
 
 }
 
-const delete_post = async (data) => {
-    const url = 'http://localhost:8083/api/v1/post';
+const delete_post = async (postID, data) => {
+    const url = `http://localhost:8083/api/v1/post/${postID}`;
 
     try {
         const response = await axios.delete(url, data, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        console.log(response.data);
-        if (response.data.message === "Post deleted successfully") {
-            return { status: 'success', message: response.data.message};
-        } else {
+        
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -87,20 +96,24 @@ const delete_post = async (data) => {
 }
 
 const add_like_post = async (postID) => {
-    const url = `http://localhost:8083/api/v1/post/add-like/${postID}`;
+    const url = `http://localhost:8083/api/v1/post/like/${postID}`;
 
     try {
         const response = await axios.put(url, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        if (response.data.code==200) {
-            return { status: 'success', message: response.data.message};
-        } else {
+        
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+
     } catch (error) {
         return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
     }  
@@ -108,21 +121,24 @@ const add_like_post = async (postID) => {
 }
 
 const remove_like_post = async (postID) => {
-    const url = `http://localhost:8083/api/v1/post/remove-like/${postID}`;
+    const url = `http://localhost:8083/api/v1/post/like/${postID}`;
 
     try {
-        const response = await axios.put(url, {
+        const response = await axios.delete(url, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        console.log(response.data);
-        if (response.data.code==200) {
-            return { status: 'success', message: response.data.message};
-        } else {
+
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+
     } catch (error) {
         return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
     }    
@@ -130,50 +146,25 @@ const remove_like_post = async (postID) => {
 
 }
 
-const get_post_by_postId = async (data) => {
-    const url = `http://localhost:8083/api/v1/post/${data.postId}`;
+const get_post_by_postId = async (postID) => {
+    const url = `http://localhost:8083/api/v1/post/${postID}`;
 
     try {
         const response = await axios.get(url, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
 
-        console.log(response.data);
-        if (response.data.message === "Post fetched successfully") {
+        if (response.data.code === 200)
             return { status: 'success', message: response.data.message, data: response.data.data };
-        } else {
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
-    } catch (error) {
-        console.error(error);
-        if (error.response) {
-            return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
-        } else {
-            return { status: 'error', message: 'An unknown error occurred' };
-        }
-    }
-};
 
-const get_user_post = async () => {
-    const url = `http://localhost:8083/api/v1/post`;
-
-    try {
-        const response = await axios.get(url, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-        });
-
-        console.log(response.data);
-        if (response.data.message === "Posts fetched successfully") {
-            return { status: 'success', message: response.data.message, data: response.data.data };
-        } else {
-            return { status: 'error', message: 'An unknown error occurred' };
-        }
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -190,17 +181,19 @@ const get_community_post= async () => {
     try {
         const response = await axios.get(url, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
 
-        console.log(response.data);
-        if (response.data.message === "Posts fetched successfully") {
+        if (response.data.code === 200)
             return { status: 'success', message: response.data.message, data: response.data.data };
-        } else {
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -217,15 +210,16 @@ const get_public_community_post = async () => {
     try {
         const response = await axios.get(url, {
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json'
+        },
         });
-        if (response.data.message === "Posts fetched successfully") {
+
+        if (response.data.code === 200)
             return { status: 'success', message: response.data.message, data: response.data.data };
-        } else {
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+        
     } catch (error) {
         console.error(error);
         if (error.response) {
@@ -236,36 +230,41 @@ const get_public_community_post = async () => {
     }
 };
 
-const report_post=async(postId,reason)=>{
+const report_post=async(postId, reason)=>{
     const url = `http://localhost:8083/api/v1/post/report/${postId}`;
 
     try {
         const response = await axios.post(url, reason, {
             headers: {
                 'Content-Type': 'application/json', 
-                'Accept': 'application/json'
-            },
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         });
-        if (response.data.code === 200) {
-            return { status: 'success', message: response.data.message};
-        } else {
+
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
             return { status: 'error', message: 'An unknown error occurred' };
-        }
+    
     } catch (error) {      
         return { status: 'error', message: error.message || 'An unknown error occurred' };  
     }
 }
 
 
-export default {
+const api = {
     create_post,
     update_post,
     delete_post,
     add_like_post,
     remove_like_post,
     get_post_by_postId,
-    get_user_post,
     get_community_post,
     get_public_community_post,
     report_post
-}
+};
+
+export default api;

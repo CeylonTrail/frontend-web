@@ -25,12 +25,15 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const response = await load_dashboard();
+        
         if (response.status === 'success')
           setDashboardData(response.data);
         else if (response.status === 'unauthorized'){
           localStorage.clear()
           navigate('/login')
-        }
+        } else 
+          console.error("Failed to load dashboard data:", response.message);
+    
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
       }
@@ -57,8 +60,6 @@ const Admin = () => {
     pendingBusinessProfiles,
     recentSubscribers,
   } = dashboardData;
-
-  console.log(totalRevenue)
 
  const chartOptions = {
    series: [
@@ -148,7 +149,7 @@ const Admin = () => {
     {
       name: "Status",
       selector: (row) => (
-        <span style={{ color: getStatusColor(row.status) }}>
+        <span style={{ color: getStatusColor(row.verificationStatus) }}>
           {row.verificationStatus}
         </span>
       )

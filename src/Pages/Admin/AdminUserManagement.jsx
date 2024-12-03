@@ -18,20 +18,23 @@ const Admin = () => {
   const columns1 = [
     {
       name: "Full Name",
-      selector: (row) => `${row.firstname} ${row.lastname}`
+      selector: (row) => `${row.firstname} ${row.lastname}`,
+      sortable: true
     },
     {
       name: "Username",
-      selector: (row) => row.username
+      selector: (row) => row.username,
+      sortable: true
     },
     {
       name: "Email",
-      selector: (row) => row.email
+      selector: (row) => row.email,
+      sortable: true
     },
     {
       name: "Created Date",
       selector: (row) => row.createdAt,
-      right: true,
+      sortable: true
     },
     {
       name: "Account Status",
@@ -43,7 +46,8 @@ const Admin = () => {
         >
           {row.accountStatus ? "Activated" : "Not Activated"}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Action",
@@ -79,20 +83,18 @@ const Admin = () => {
   const columns2 = [
     {
       name: "Service Name",
-      selector: (row) => row.serviceName
+      selector: (row) => row.serviceName,
+      sortable: true
     },
     {
       name: "Service Type",
-      selector: (row) => row.serviceType
-    },
-    {
-      name: "Username",
-      selector: (row) => row.username
+      selector: (row) => row.serviceType,
+      sortable: true
     },
     {
       name: "Created Date",
       selector: (row) => row.createdAt,
-      right: true,
+      sortable: true
     },
     {
       name: "Account Status",
@@ -104,7 +106,8 @@ const Admin = () => {
         >
           {row.isActive ? "Activated" : "Not Activated"}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Verification Status",
@@ -122,7 +125,8 @@ const Admin = () => {
         >
           {row.verificationStatus}
         </span>
-      )
+      ),
+      sortable: true
     },
     {
       name: "Action",
@@ -226,11 +230,15 @@ const Admin = () => {
   const fetchTravellers = async () => {
     try {
       const response = await load_travellers();
-      if (response.status === "success") {
+
+      if (response.status === 'success')
         setData1(response.data.travellers);
-      } else {
+      else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
         console.error(response.message);
-      }
+
     } catch (error) {
       console.error("Error fetching travellers data:", error);
     }
@@ -239,11 +247,15 @@ const Admin = () => {
   const fetchServiceProviders = async () => {
     try {
       const response = await load_sps();
-      if (response.status === "success") {
+
+      if (response.status === 'success')
         setData2(response.data.sps);
-      } else {
+      else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
         console.error(response.message);
-      }
+
     } catch (error) {
       console.error("Error fetching service providers data:", error);
     }
@@ -288,7 +300,7 @@ const Admin = () => {
               <div className="w-[300px] relative">
                 <input
                   type="text"
-                  placeholder="Search travellers..."
+                  placeholder="Search Travellers..."
                   value={search1}
                   onChange={(e) => setSearch1(e.target.value)}
                   className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"
@@ -315,7 +327,7 @@ const Admin = () => {
               <div className="w-[300px] relative">
                 <input
                   type="text"
-                  placeholder="Search service providers..."
+                  placeholder="Search Service Providers..."
                   value={search2}
                   onChange={(e) => setSearch2(e.target.value)}
                   className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"

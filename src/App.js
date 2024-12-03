@@ -202,7 +202,7 @@ function App() {
             path="/admin-businessappview"
             element={<AdminBusinessApprovalView />}
           />
-          <Route path="/admin-usermgt-sp" element={<AdminSpPrflView />} />
+          <Route path="/admin-usermgt-sp/:id" element={<AdminSpPrflView />} />
           <Route path="/admin-addplan" element={<AdminAddSubscriptionPlan />} />
           <Route
             path="/admin-editplan"

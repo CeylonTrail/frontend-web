@@ -1,110 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SidebarComponentAdmin from "./SidebarComponentAdmin";
 import Header from "../../components/header";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
+import {load_travellers, load_sps, delete_sp, delete_traveller} from "../../API/admin";
+import Swal from "sweetalert2";
+
 
 const Admin = () => {
-  const data1 = [
-    {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      username: "johndoe",
-      email: "john.doe@example.com",
-      createdOn: "2023-10-01",
-      isActive: true, // Boolean value for account status
-    },
-    {
-      id: 2,
-      firstName: "Jane",
-      lastName: "Smith",
-      username: "janesmith",
-      email: "jane.smith@example.com",
-      createdOn: "2023-10-05",
-      isActive: false,
-    },
-    {
-      id: 3,
-      firstName: "Alice",
-      lastName: "Johnson",
-      username: "alicej",
-      email: "alice.johnson@example.com",
-      createdOn: "2023-10-10",
-      isActive: true,
-    },
-    {
-      id: 4,
-      firstName: "Bob",
-      lastName: "Brown",
-      username: "bobb",
-      email: "bob.brown@example.com",
-      createdOn: "2023-10-15",
-      isActive: false,
-    },
-  ];
 
-  const data2 = [
-    {
-      id: 1,
-      serviceName: "Cleaning Service",
-      serviceType: "Housekeeping",
-      username: "davidsmith",
-      createdOn: "2023-10-01",
-      isActive: true, // Boolean value for account status
-      verificationStatus: "Verified", // Verification status
-    },
-    {
-      id: 2,
-      serviceName: "Catering Service",
-      serviceType: "Food & Beverages",
-      username: "lauraj",
-      createdOn: "2023-10-05",
-      isActive: false,
-      verificationStatus: "Pending",
-    },
-    {
-      id: 3,
-      serviceName: "Transportation Service",
-      serviceType: "Travel",
-      username: "markt",
-      createdOn: "2023-10-10",
-      isActive: true,
-      verificationStatus: "Rejected",
-    },
-    {
-      id: 4,
-      serviceName: "Event Planning",
-      serviceType: "Events",
-      username: "emilyd",
-      createdOn: "2023-10-15",
-      isActive: false,
-      verificationStatus: "Verified",
-    },
-  ];
+  const navigate = useNavigate();
 
   const columns1 = [
     {
       name: "Full Name",
-      selector: (row) => `${row.firstName} ${row.lastName}`,
-      sortable: true,
+      selector: (row) => `${row.firstname} ${row.lastname}`
     },
     {
       name: "Username",
-      selector: (row) => row.username,
-      sortable: true,
+      selector: (row) => row.username
     },
     {
       name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
+      selector: (row) => row.email
     },
     {
       name: "Created Date",
-      selector: (row) => row.createdOn,
-      sortable: true,
+      selector: (row) => row.createdAt,
       right: true,
     },
     {
@@ -112,23 +38,37 @@ const Admin = () => {
       selector: (row) => (
         <span
           style={{
-            color: row.isActive ? "green" : "red",
+            color: row.accountStatus ? "green" : "red",
           }}
         >
-          {row.isActive ? "Activated" : "Not Activated"}
+          {row.accountStatus ? "Activated" : "Not Activated"}
         </span>
-      ),
-      sortable: true,
+      )
     },
     {
       name: "Action",
       cell: (row) => (
         <button
-          onClick={() => alert(`Deleting user: ${row.username}`)}
-          className="hover:text-red-700"
-        >
-          <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
-        </button>
+        onClick={() => {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to undo this action!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              handleDeleteTraveller(row.userId);
+              Swal.fire("Deleted!", "The traveller has been deleted.", "success");
+            }
+          });
+        }}
+        className="hover:text-red-700"
+      >
+        <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
+      </button>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
@@ -139,23 +79,19 @@ const Admin = () => {
   const columns2 = [
     {
       name: "Service Name",
-      selector: (row) => row.serviceName,
-      sortable: true,
+      selector: (row) => row.serviceName
     },
     {
       name: "Service Type",
-      selector: (row) => row.serviceType,
-      sortable: true,
+      selector: (row) => row.serviceType
     },
     {
       name: "Username",
-      selector: (row) => row.username,
-      sortable: true,
+      selector: (row) => row.username
     },
     {
       name: "Created Date",
-      selector: (row) => row.createdOn,
-      sortable: true,
+      selector: (row) => row.createdAt,
       right: true,
     },
     {
@@ -168,8 +104,7 @@ const Admin = () => {
         >
           {row.isActive ? "Activated" : "Not Activated"}
         </span>
-      ),
-      sortable: true,
+      )
     },
     {
       name: "Verification Status",
@@ -177,34 +112,49 @@ const Admin = () => {
         <span
           style={{
             color:
-              row.verificationStatus === "Verified"
+              row.verificationStatus === "APPROVED"
                 ? "green"
-                : row.verificationStatus === "Pending"
+                : row.verificationStatus === "PENDING"
                 ? "orange"
-                : "red",
+                : row.verificationStatus === "REJECTED"
+                ? "red" : "black"
           }}
         >
           {row.verificationStatus}
         </span>
-      ),
-      sortable: true,
+      )
     },
     {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
           <button
-            onClick={() => alert(`Viewing service provider: ${row.username}`)}
+            onClick={() => handleView(row.spId)}
             className="hover:text-blue-700"
           >
             <FontAwesomeIcon icon={faEye} className="text-blue-500 mr-4" />
           </button>
           <button
-            onClick={() => alert(`Deleting service provider: ${row.username}`)}
-            className="hover:text-red-700"
-          >
-            <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
-          </button>
+        onClick={() => {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to undo this action!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              handleDeleteSP(row.userId);
+              Swal.fire("Deleted!", "Service Provider has been deleted.", "success");
+            }
+          });
+        }}
+        className="hover:text-red-700"
+      >
+        <FontAwesomeIcon icon={faTrashAlt} className="text-red-500" />
+      </button>
         </div>
       ),
       ignoreRowClick: true,
@@ -233,23 +183,97 @@ const Admin = () => {
         "&:hover": { backgroundColor: "#E5F4FB" },
       },
     },
-    cells: { style: { padding: "10px" } },
-    pagination: { style: { borderTop: "1px solid #e9ecef" } },
+    cells: { style: { padding: "10px" } }
   };
 
+  const handleView = (id) => {
+    navigate(`/admin-usermgt-sp/${id}`);
+  };
+
+  const handleDeleteTraveller = (id) => {
+    try {
+      const response = delete_traveller(id);
+      if (response.status === "success") {
+        alert(response.message)
+        fetchTravellers()
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error deleting travellers:", error);
+    }
+  };
+
+  const handleDeleteSP = (id) => {
+    try {
+      const response = delete_sp(id);
+      if (response.status === "success") {
+        alert(response.message)
+        fetchServiceProviders()
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error deleting sp:", error);
+    }
+  };
+
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
   const [search1, setSearch1] = useState("");
   const [search2, setSearch2] = useState("");
 
+  const fetchTravellers = async () => {
+    try {
+      const response = await load_travellers();
+      if (response.status === "success") {
+        setData1(response.data.travellers);
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error fetching travellers data:", error);
+    }
+  };
+  
+  const fetchServiceProviders = async () => {
+    try {
+      const response = await load_sps();
+      if (response.status === "success") {
+        setData2(response.data.sps);
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error fetching service providers data:", error);
+    }
+  };
+  
+
+  useEffect(() => {
+    fetchTravellers();
+  }, []);
+  
+  useEffect(() => {
+    fetchServiceProviders();
+  }, []);
+
+
+
   const filteredData1 = data1.filter((item) =>
-    [item.firstName, item.lastName, item.username, item.email]
+    [item.firstname, item.lastname, item.username, item.email]
       .join(" ")
       .toLowerCase()
       .includes(search1.toLowerCase())
   );
 
   const filteredData2 = data2.filter((item) =>
-    item.username.toLowerCase().includes(search2.toLowerCase())
+    [item.serviceName, item.serviceType, item.username]
+      .join(" ")
+      .toLowerCase()
+      .includes(search2.toLowerCase())
   );
+  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -277,6 +301,8 @@ const Admin = () => {
               data={filteredData1}
               customStyles={customStyles}
               pagination
+              paginationPerPage={5}
+              paginationRowsPerPageOptions={[5, 10, 15, 20]}
               responsive
               style={{ height: "400px" }} // Adjust height as needed
             />
@@ -302,6 +328,8 @@ const Admin = () => {
               data={filteredData2}
               customStyles={customStyles}
               pagination
+              paginationPerPage={5}
+              paginationRowsPerPageOptions={[5, 10, 15, 20]}
               responsive
               style={{ height: "400px" }} // Adjust height as needed
             />

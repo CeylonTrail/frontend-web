@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PrimaryButton } from "../../components/Button.js";
 import "../../assets/styles/SetUpMarketPlace.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
 import SidebarComponentAdmin from "./SidebarComponentAdmin";
+import { get_sp } from "../../API/admin.js";
 
 const AdminSpPrflView = () => {
+
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/admin-usermgt"); // Redirect to /user-mgt
+    navigate("/admin-usermgt");
   };
 
-  // Dummy data for Service Provider Info
-  const dummyData = {
-    name: "Elite Travels",
-    type: "Travel Agency",
-    username: "elitetravels123",
-    email: "contact@elitetravels.com",
-    ownerName: "Alice Johnson",
-    createdOn: "2023-12-15",
-    status: "Approved",
-    accountStatus: "Activated", // Added Account Status
+  const [data, setData] = useState([]);
+  const [ownerName, setOwnerName] = useState("")
+
+  const fetchSP = async () => {
+    try {
+      const response = await get_sp(id);
+      if (response.status === "success") {
+        setData(response.data);
+        setOwnerName(response.data.firstname + " " + response.data.lastname)
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error fetching sp data:", error);
+    }
   };
+  
+  useEffect(() => {
+    fetchSP();
+  }, []);
 
   return (
     <>
@@ -46,7 +58,7 @@ const AdminSpPrflView = () => {
                   htmlFor="name"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Name
+                  Service Name
                 </label>
                 <input
                   id="name"
@@ -54,7 +66,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.name}
+                  defaultValue={data.serviceName}
                 />
               </div>
 
@@ -64,7 +76,7 @@ const AdminSpPrflView = () => {
                   htmlFor="type"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Type
+                  Service Type
                 </label>
                 <input
                   id="type"
@@ -72,7 +84,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.type}
+                  defaultValue={data.serviceType}
                 />
               </div>
 
@@ -90,7 +102,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.username}
+                  defaultValue={data.username}
                 />
               </div>
 
@@ -108,7 +120,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.email}
+                  defaultValue={data.email}
                 />
               </div>
 
@@ -126,7 +138,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.ownerName}
+                  defaultValue={ownerName}
                 />
               </div>
 
@@ -144,25 +156,7 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.createdOn}
-                />
-              </div>
-
-              {/* Status */}
-              <div className="flex items-center gap-x-3 mb-0.5">
-                <label
-                  htmlFor="status"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
-                >
-                  Verification Status
-                </label>
-                <input
-                  id="status"
-                  name="status"
-                  type="text"
-                  readOnly
-                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.status}
+                  defaultValue={data.createdAt}
                 />
               </div>
 
@@ -180,11 +174,159 @@ const AdminSpPrflView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.accountStatus}
+                  defaultValue={data.accountStatus}
                 />
               </div>
-            </div>
+            {/* Status */}
+            <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Setup Status
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.setupStatus}
+                />
+              </div>
 
+            <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Verification Status
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.verificationStatus}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Verification Status Updated On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.verificationStatusUpdatedAt}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Description
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.description}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Contact Number
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.contactNumber}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Address
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.address}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Subscription Plan
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.subscriptionPlan}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Subscription Plan Purchase On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.subscriptionPurchaseDate}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Subscription Plan Expiry On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.subscriptionExpiryDate}
+                />
+              </div>
+            
+
+
+          </div>
             {/* Submit Button */}
             <div className="flex justify-end space-x-4 mt-2">
               <PrimaryButton
@@ -193,6 +335,7 @@ const AdminSpPrflView = () => {
                 isActive={true}
               />
             </div>
+            
           </form>
         </div>
       </div>

@@ -13,7 +13,7 @@ const login = async (data) => {
         
         if (response.data.code === 200) {
             const token = response.data.data.accessToken;
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
             if (response.data.data.role === "SERVICE_PROVIDER") {
                 if (response.data.data.setupState) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import LocationCard from "./locationCard";
 import place from "../API/place";
-import { WarningAlert } from "./Alerts";
+import { SuccessAlert, WarningAlert } from "./Alerts";
 import Loading from "../Pages/loading";
 import { PrimaryButton } from "./Button";
 import CalculateDistance from "../Functions/CalculateDistence";
@@ -19,10 +19,16 @@ const CreateTripP1 = ({ location }) => {
   const [selectedPlace, setSelectedPlace] = useState(location);
   const [duration, setDuration] = useState(localStorage.getItem("duration")); 
   
+
+  const [filteredPlaces, setFilteredPlaces] = useState([]); 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [day, setDay] = useState(1);
   const [yourPlan, setYourPlan] = useState({}); 
 
   const [isLoading, setLoading] = useState(false);
+
+  
   const [showWarning, setShowWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState("");
   const [warningTitle, setWarningTitle] = useState("");
@@ -33,6 +39,7 @@ const CreateTripP1 = ({ location }) => {
       const response = await place.get_nearby_places(selectedPlace);
       if (response.status === "success") {
         setPlaces(response.places);
+        setFilteredPlaces(response.places); 
         if (response.places.length > 0) {
           setCenter({
             lat: response.places[5].latitude,
@@ -88,6 +95,13 @@ const CreateTripP1 = ({ location }) => {
     } 
   };
 
+  useEffect(() => {
+    const filtered = allPlaces.filter((place) =>
+      place.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredPlaces(filtered); // Set filtered places to match search query
+  }, [searchQuery, places]);
+
   // Loading the places for the selected location
   useEffect(() => {
     fetchNearestPlaces();
@@ -101,23 +115,32 @@ const CreateTripP1 = ({ location }) => {
     setDay(parseInt(e.target.value)); // Update selected day
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value); // Update search query
+  };
+
   const handleAddToPlan = (place) => {
     setYourPlan((prevPlan) => {
       const updatedPlan = { ...prevPlan };
-      const dayPlan = updatedPlan[day] ? [...updatedPlan[day]] : []; // Ensure a new array
-      dayPlan.push(place); // Add the new place
-      updatedPlan[day] = dayPlan; // Assign the updated array back to the day
+      const dayPlan = updatedPlan[day] ? [...updatedPlan[day]] : [];
+      dayPlan.push(place);
+      updatedPlan[day] = dayPlan;
       return updatedPlan;
     });
+  
+    // Remove the place from the allPlaces list
+    setAllPlaces((prevAllPlaces) => 
+      prevAllPlaces.filter((p) => p.placeId !== place.placeId)
+    );
   
     setSelectedPlace(place);
   
     // Filter out places already in the plan
-    const plannedPlaces = Object.values(yourPlan).flat(); // Get all places in the plan
-    const plannedPlaceIds = new Set(plannedPlaces.map((p) => p.placeId)); // Get their IDs for filtering
+    const plannedPlaces = Object.values(yourPlan).flat();
+    const plannedPlaceIds = new Set(plannedPlaces.map((p) => p.placeId));
   
     const filteredAndSortedPlaces = allPlaces
-      .filter((p) => p.placeId !== place.placeId && !plannedPlaceIds.has(p.placeId)) // Exclude already planned places
+      .filter((p) => p.placeId !== place.placeId && !plannedPlaceIds.has(p.placeId))
       .map((p) => ({
         ...p,
         distance: CalculateDistance(
@@ -133,17 +156,25 @@ const CreateTripP1 = ({ location }) => {
     setPlaces(filteredAndSortedPlaces);
   };
   
-  const handleRemoveFromPlan = (place) => {
-    setYourPlan((prevPlan) => {
-      const updatedPlan = { ...prevPlan };
-      updatedPlan[day] = updatedPlan[day].filter(
-        (p) => p.placeId !== place.placeId
-      );
-      return updatedPlan;
-    });
+  
+ const handleRemoveFromPlan = (place) => {
+  setYourPlan((prevPlan) => {
+    const updatedPlan = { ...prevPlan };
+    updatedPlan[day] = updatedPlan[day].filter(
+      (p) => p.placeId !== place.placeId
+    );
+    return updatedPlan;
+  });
 
-    setPlaces((prev) => [...prev, place]);
-  };
+  // Add the place back to the allPlaces list
+  setAllPlaces((prevAllPlaces) => [
+    ...prevAllPlaces,
+    place
+  ]);
+
+  setPlaces((prev) => [...prev, place]);
+};
+
 
   const handleSavePlan = async () => {
     const today = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
@@ -152,30 +183,31 @@ const CreateTripP1 = ({ location }) => {
     // Prepare the data object
     const planData = {
       destination: location,
-      dayCount: duration,
+      dayCount: parseInt(duration),
       description: localStorage.getItem("description"), // Add your desired description
       createdAt: today,
       updateAt: today,
-      eventSet: Object.entries(yourPlan).map(([day, places]) => ({
-        description: `Plan for Day ${day}`, // Customize per your requirements
-        dayNum: parseInt(day), // Day number
-        places: places.map((place) => ({
-          placeId: place.placeId,
-          name: place.name,
-          latitude: place.latitude,
-          longitude: place.longitude,
-          description: place.description || "No description available",
-          photoUrl: place.photoUrl || "",
-          rating: place.rating || 0,
-        })),
-        createdAt: now,
-        updateAt: now,
-      })),
-    }
-    alert(planData)
+      eventSet: Object.entries(yourPlan).flatMap(([day, places]) =>
+        places.map((place) => ({
+          description: "Event description here", 
+          dayNum: parseInt(day),
+          place: {
+            placeId: place.placeId,
+            name: place.name,
+            latitude: place.latitude,
+            longitude: place.longitude,
+            description: place.description || "No description available",
+            photoUrl: place.photoUrl || "",
+            rating: place.rating || 0,
+          },
+          createdAt: now,
+          updateAt: now,
+        }))
+      ),
+    };
 
     try {
-      // Call the API
+      
       const response = await Trip.plan_trip(planData); // Replace with your actual API function
       setLoading(true)
       if (response.status === "success") {
@@ -231,23 +263,44 @@ const CreateTripP1 = ({ location }) => {
             <div className="bg-white rounded-lg p-4 mb-4">
               <input
                 type="text"
-                placeholder="Search Places"
-                className="w-full p-2 mb-4 border rounded-md"
+                placeholder="Search by place name..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="border p-2 w-full"
               />
-              {places.length > 0 ? (
-                places.map((place) => (
-                  <LocationCard
-                    key={place.placeId}
-                    image={place.photoUrl || "/path/to/placeholder"}
-                    title={place.name}
-                    rating={place.rating}
-                    onClick={() => handleAddToPlan(place)}
-                    buttonText={"+"}
-                  />
-                ))
+              {searchQuery === "" ? (
+                places.length > 0 ? (
+                  places.map((place) => (
+                    <LocationCard
+                      key={place.placeId}
+                      image={place.photoUrl || "/path/to/placeholder"}
+                      title={place.name}
+                      rating={place.rating}
+                      onClick={() => handleAddToPlan(place)}
+                      buttonText={"+"}
+                    />
+                  ))
+                ) : (
+                  <p className="text-center text-gray-500">No places found.</p>
+                )
               ) : (
-                <p className="text-center text-gray-500">No places found.</p>
+                filteredPlaces.length > 0 ? (
+                  filteredPlaces.map((place) => (
+                    <LocationCard
+                      key={place.placeId}
+                      image={place.photoUrl || "/path/to/placeholder"}
+                      title={place.name}
+                      rating={place.rating}
+                      onClick={() => handleAddToPlan(place)}
+                      buttonText={"+"}
+                    />
+                  ))
+                ) : (
+                  <p className="text-center text-gray-500">No search result found.</p>
+                )
               )}
+
+              
             </div>
             <div className="bg-white rounded-lg shadow-md p-4">
               <GoogleMap

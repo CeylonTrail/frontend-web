@@ -1,105 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/styles/form.css";
 import cancelImg from "../../assets/img/cancel.png";
-import dropFileImg from "../../assets/img/drop-file.png";
+import { get_ad, update_ad } from "../../API/sp";
+import { useNavigate } from "react-router-dom";
 
-const EditHotelModal = ({ isOpen, onRequestClose, onSubmit, room }) => {
-  const [displayImage, setDisplayImage] = useState(room?.src || null);
-  const [additionalImages, setAdditionalImages] = useState([]);
-  const [fileError, setFileError] = useState("");
-  const [isDisplayImageSelected, setIsDisplayImageSelected] = useState(
-    !!room?.src
-  );
+const EditHotelModal = ({ isOpen, onRequestClose, onSubmit, id }) => {
+
+  const navigate = useNavigate();
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [rateType, setRateType] = useState("");
+  const [rate, setRate] = useState("");
+
+
+  const fetchAd = async () => {
+    try {
+      const response = await get_ad(id);
+      if (response.status === 'success') {
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setRateType(response.data.rateType);
+        setRate(String(response.data.rate));
+      } else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
+        console.error(response.message);
+    } catch (error) {
+      console.error("Error fetching sp data:", error);
+    }
+  };
+  
+  useEffect(() => {
+    if (!isOpen) return;
+    fetchAd();
+  }, [isOpen]);
 
   if (!isOpen) return null;
+  
+  const Submit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("rateType", rateType);
+    formData.append("rate", parseFloat(rate));
 
-  const validateFile = (file) => {
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
-    const maxSize = 15 * 1024 * 1024; // 15 MB
-
-    if (!allowedTypes.includes(file.type)) {
-      setFileError("Only JPEG, PNG, and GIF images are allowed.");
-      return false;
-    }
-
-    if (file.size > maxSize) {
-      setFileError("File size must be less than 15MB.");
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleDisplayImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file && validateFile(file)) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setDisplayImage(e.target.result);
-        setIsDisplayImageSelected(true);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleAdditionalImagesChange = (event) => {
-    const files = Array.from(event.target.files);
-    const validFiles = [];
-
-    files.forEach((file) => {
-      if (validateFile(file)) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          validFiles.push(e.target.result);
-          if (validFiles.length === files.length) {
-            setAdditionalImages((prev) => [...prev, ...validFiles]);
-            setFileError(""); // Clear any previous error
-          }
-        };
-        reader.readAsDataURL(file);
+    try {
+      const response = await update_ad(id, formData);
+      if (response.status === "success") {
+        alert("Advertisement updated successfully");
+        onRequestClose();
+      } else {
+        alert("Failed to update the advertisement");
+        console.error("Failed to update the advertisement");
       }
-    });
-  };
+    } catch (error) {
+      console.error(error);
+    } 
+  }
 
-  const handleRemoveImage = (index, isDisplayImage) => {
-    if (isDisplayImage) {
-      setDisplayImage(null);
-      setIsDisplayImageSelected(false);
-    } else {
-      setAdditionalImages((prev) => prev.filter((_, i) => i !== index));
-    }
-  };
+  const onClose = (e) => {
+    e.preventDefault();
+    setTitle("");
+    setDescription("");
+    setRateType("");
+    setRate("");
+    onRequestClose();
+  }
 
   return (
     <>
-      <div className="modal-overlay" onClick={onRequestClose}>
+      <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
-            <h2 className="modal-title">Edit Listing</h2>
+            <h2 className="modal-title">Edit Advertisement</h2>
             <div className="heading-line"></div>
             <img
               src={cancelImg}
               alt="Close"
               className="modal-close-icon"
-              onClick={onRequestClose}
+              onClick={onClose}
             />
           </div>
-          <form className="modal-form" onSubmit={onSubmit}>
+          <form className="modal-form" onSubmit={Submit}>
             {/* Form fields */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
-                Room Type
+                Title
               </label>
               <input
                 type="text"
                 id="title"
                 name="title"
                 className="form-input"
-                placeholder="Enter title"
-                defaultValue={room?.type}
+                placeholder="Edit title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="description" className="form-label">
                 Description
@@ -109,122 +111,55 @@ const EditHotelModal = ({ isOpen, onRequestClose, onSubmit, room }) => {
                 name="description"
                 className="form-textarea"
                 rows="4"
-                placeholder="Enter description"
-                defaultValue={room?.description}
+                placeholder="Edit description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
             </div>
             <div className="form-group">
-              <label htmlFor="price" className="form-label">
-                Price/night
-              </label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                className="form-input"
-                placeholder="Enter price"
-                min="0"
-                step="0.01"
-                defaultValue={room?.price}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="display-image" className="form-label">
-                Display Image
-              </label>
-              <div className="w-full mb-4">
-                <label htmlFor="display-image" className="dropzone-label">
-                  <div className="mb-2 flex items-center justify-center">
-                    <img
-                      src={displayImage || dropFileImg}
-                      alt="Drop File"
-                      className="image-preview"
-                    />
-                  </div>
-                  <h2 className="text-center text-gray-400 text-xs font-normal leading-4 mb-1">
-                    PNG, JPG or GIF, smaller than 15MB
-                  </h2>
-                  <h4 className="text-center text-gray-900 text-sm font-medium leading-snug">
-                    {displayImage ? "Change image" : "Upload image"}
-                  </h4>
-                  {fileError && (
-                    <p className="text-red-500 text-sm text-center">
-                      {fileError}
-                    </p>
-                  )}
-                  <input
-                    id="display-image"
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    onChange={handleDisplayImageChange}
-                    disabled={isDisplayImageSelected}
-                  />
+                <label htmlFor="rateType" className="form-label">
+                  Rate Type
                 </label>
-                {displayImage && (
-                  <button
-                    type="button"
-                    className="remove-image-button"
-                    onClick={() => handleRemoveImage(null, true)}
-                  >
-                    Remove Image
-                  </button>
-                )}
+                <select
+                  id="rateType"
+                  name="rateType"
+                  className="form-input"
+                  value={rateType}
+                  onChange={(e) => setRateType(e.target.value)}
+                  required
+                >
+                  <option value="">Select rate type</option>
+                  <option value="FIXED">FIXED</option>
+                  <option value="HOUR">Per Hour</option>
+                  <option value="NIGHT">Per Night</option>
+                  <option value="DAY">Per Day</option>
+                  <option value="WEEK">Per Week</option>
+                  <option value="MONTH">Per Month</option>
+                </select>
               </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="additional-images" className="form-label">
-                Additional Images
-              </label>
-              <div className="w-full mb-4">
-                <label htmlFor="additional-images" className="dropzone-label">
-                  <div className="mb-2 flex items-center justify-center">
-                    {additionalImages.length === 0 && (
-                      <img
-                        src={dropFileImg}
-                        alt="Drop File"
-                        className="image-preview"
-                      />
-                    )}
-                    {additionalImages.map((image, index) => (
-                      <div key={index} className="relative mb-2">
-                        <img
-                          src={image}
-                          alt={`Additional preview ${index + 1}`}
-                          className="image-preview"
-                        />
-                        <button
-                          type="button"
-                          className="remove-image-button"
-                          onClick={() => handleRemoveImage(index, false)}
-                        >
-                          Remove Image
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  <h2 className="text-center text-gray-400 text-xs font-normal leading-4 mb-1">
-                    PNG, JPG or GIF, smaller than 15MB
-                  </h2>
-                  <h4 className="text-center text-gray-900 text-sm font-medium leading-snug">
-                    Upload additional images
-                  </h4>
-                  <input
-                    id="additional-images"
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    multiple
-                    onChange={handleAdditionalImagesChange}
-                  />
+
+              <div className="form-group">
+                <label htmlFor="rate" className="form-label">
+                  Rate
                 </label>
+                <input
+                  type="number"
+                  id="rate"
+                  name="rate"
+                  className="form-input"
+                  placeholder="Edit rate"
+                  min="0.01"
+                  step="0.01"
+                  value={rate}
+                  onChange={(e) => setRate(e.target.value)}
+                  disabled={!rateType}
+                  required
+                />
               </div>
-            </div>
-            <div className="form-group">
+            <div className="modal-footer">
               <button type="submit" className="submit-button">
-                Save Changes
+                Update
               </button>
             </div>
           </form>

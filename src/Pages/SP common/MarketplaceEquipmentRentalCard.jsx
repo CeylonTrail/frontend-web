@@ -89,14 +89,14 @@ const MarketplaceEquipmentRentalCard = ({ card, handleSeeMoreClick }) => {
         className="absolute top-2 right-2 z-10 flex items-center cursor-pointer p-2"
         onClick={handleSaveClick}
       >
-        <div className="bg-white p-1 rounded-full shadow-md">
+        {/* <div className="bg-white p-1 rounded-full shadow-md">
           <FontAwesomeIcon
             icon={isSaved ? faBookmarkSolid : faBookmarkRegular}
             className={`text-xl ${
               isSaved ? "text-[#0F969C]" : "text-gray-500"
             }`}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

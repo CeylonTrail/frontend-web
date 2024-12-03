@@ -57,6 +57,8 @@ export default function Example({ type, profilePic, funtion }) {
       navItems = SP_navigation;
     } else if (type === "public") {
       navItems = publicNav;
+          } else if (type === "admin") {
+      navItems = Admin_Navigation;
     } else {
       navItems = SP_navigation;
     }

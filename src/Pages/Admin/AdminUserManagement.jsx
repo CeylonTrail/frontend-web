@@ -34,7 +34,6 @@ const Admin = () => {
     {
       name: "Created Date",
       selector: (row) => row.createdAt,
-      right: true,
       sortable: true
     },
     {
@@ -93,14 +92,8 @@ const Admin = () => {
       sortable: true
     },
     {
-      name: "Username",
-      selector: (row) => row.username,
-      sortable: true
-    },
-    {
       name: "Created Date",
       selector: (row) => row.createdAt,
-      right: true,
       sortable: true
     },
     {
@@ -237,11 +230,15 @@ const Admin = () => {
   const fetchTravellers = async () => {
     try {
       const response = await load_travellers();
-      if (response.status === "success") {
+
+      if (response.status === 'success')
         setData1(response.data.travellers);
-      } else {
+      else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
         console.error(response.message);
-      }
+
     } catch (error) {
       console.error("Error fetching travellers data:", error);
     }
@@ -250,11 +247,15 @@ const Admin = () => {
   const fetchServiceProviders = async () => {
     try {
       const response = await load_sps();
-      if (response.status === "success") {
+
+      if (response.status === 'success')
         setData2(response.data.sps);
-      } else {
+      else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
         console.error(response.message);
-      }
+
     } catch (error) {
       console.error("Error fetching service providers data:", error);
     }
@@ -299,7 +300,7 @@ const Admin = () => {
               <div className="w-[300px] relative">
                 <input
                   type="text"
-                  placeholder="Search travellers..."
+                  placeholder="Search Travellers..."
                   value={search1}
                   onChange={(e) => setSearch1(e.target.value)}
                   className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"
@@ -326,7 +327,7 @@ const Admin = () => {
               <div className="w-[300px] relative">
                 <input
                   type="text"
-                  placeholder="Search service providers..."
+                  placeholder="Search Service Providers..."
                   value={search2}
                   onChange={(e) => setSearch2(e.target.value)}
                   className="w-full p-2 border rounded-full pl-10 focus:outline-none focus:ring-2 focus:ring-[#6DA5C0] border-[#6DA5C0]"

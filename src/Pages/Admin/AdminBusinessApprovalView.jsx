@@ -1,40 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PrimaryButton } from "../../components/Button.js";
 import "../../assets/styles/SetUpMarketPlace.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
 import SidebarComponentAdmin from "./SidebarComponentAdmin";
+import { get_pending_sp } from "../../API/admin.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileAlt, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const AdminBusinessApprovalView = () => {
+
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/admin-businessapp"); // Updated redirect path
+    navigate("/admin-businessapp");
   };
 
-  // Dummy data for Service Provider Info
-  const dummyData = {
-    name: "Elite Travels",
-    type: "Travel Agency",
-    username: "elitetravels123",
-    email: "contact@elitetravels.com",
-    ownerName: "Alice Johnson",
-    createdOn: "2023-12-15",
-    document: "path/to/document.pdf", // Placeholder for the document path
+
+  const [data, setData] = useState([]);
+  const [ownerName, setOwnerName] = useState("")
+
+  const fetchSP = async () => {
+    try {
+      const response = await get_pending_sp(id);
+
+      if (response.status === 'success') {
+        setData(response.data);
+        setOwnerName(response.data.firstname + " " + response.data.lastname)
+      } else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
+        console.error(response.message);
+
+    } catch (error) {
+      console.error("Error fetching sp data:", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchSP();
+  }, []);
+
+  const [approvalStatus, setApprovalStatus] = React.useState("PENDING");
+
+  const handleStatusChange = (e) => {
+    setApprovalStatus(e.target.value);
   };
 
-  // State for approval status
-  const [approvalStatus, setApprovalStatus] = React.useState("pending");
-
-  const handleStatusChange = (event) => {
-    setApprovalStatus(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Logic for handling submission (e.g., save approval status to the backend)
-    console.log(`Document status updated to: ${approvalStatus}`);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!approvalStatus || approvalStatus === "SELECT ONE") {
+      alert("Please select a valid verification status!");
+      return;
+    }
+    console.log("Form submitted with status:", approvalStatus);
+    // Add your form submission logic here
   };
 
   return (
@@ -46,7 +69,7 @@ const AdminBusinessApprovalView = () => {
         <div className="w-full lg:w-2/3 bg-white p-5 rounded-xl shadow-lg border-2 border-[#6DA5C0] max-w-3xl">
           <div className="text-center">
             <h2 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-4xl mb-4">
-              <strong>Business Info</strong>
+              <strong>Service Provider Infomation</strong>
             </h2>
           </div>
 
@@ -58,13 +81,60 @@ const AdminBusinessApprovalView = () => {
           >
             {/* Service Provider Info */}
             <div className="border-t border-gray-300 pt-4">
+
+            <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="document"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900 flex items-center"
+                >
+                  <FontAwesomeIcon icon={faFileAlt} className="mr-2 text-gray-700" />
+                  Profile Picture
+                </label>
+                {data.profilePictureUrl === null ? (
+                  <p className="flex-1 text-red-600 flex items-center gap-x-1">
+                    No profile Picture Uploaded
+                  </p>
+                ) : (
+                  <a
+                    href={data.profilePictureUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-blue-600 underline flex items-center gap-x-1"
+                  >
+                    View Profile Picture
+                  </a>
+                )}
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="document"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900 flex items-center"
+                >
+                  <FontAwesomeIcon icon={faFileAlt} className="mr-2 text-gray-700" />
+                  Cover Picture
+                </label>
+                {data.coverPictureUrl === null ? (
+                  <p className="flex-1 text-red-600 flex items-center gap-x-1">
+                    No Cover Picture Uploaded
+                  </p>
+                ) : (
+                  <a
+                    href={data.coverPictureUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-blue-600 underline flex items-center gap-x-1"
+                  >
+                    View Cover Picture
+                  </a>
+                )}
+              </div>
               {/* Name */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="name"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Name
+                  Service Name
                 </label>
                 <input
                   id="name"
@@ -72,7 +142,7 @@ const AdminBusinessApprovalView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.name}
+                  defaultValue={data.serviceName}
                 />
               </div>
 
@@ -82,7 +152,7 @@ const AdminBusinessApprovalView = () => {
                   htmlFor="type"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Type
+                  Service Type
                 </label>
                 <input
                   id="type"
@@ -90,25 +160,110 @@ const AdminBusinessApprovalView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.type}
+                  defaultValue={data.serviceType}
                 />
               </div>
-
-              {/* Username */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="username"
+                  htmlFor="status"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Username
+                  Description
                 </label>
                 <input
-                  id="username"
-                  name="username"
+                  id="status"
+                  name="status"
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.username}
+                  defaultValue={data.description}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Contact Number
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.contactNumber}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Address
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.address}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="account-status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Account Status
+                </label>
+                <input
+                  id="account-status"
+                  name="account-status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.accountStatus}
+                />
+              </div>
+
+
+
+              {/* Created On */}
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="created-on"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Created On
+                </label>
+                <input
+                  id="created-on"
+                  name="created-on"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.createdAt}
+                />
+              </div>
+
+
+              {/* Owner's Name */}
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="owner-name"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Owner's Name
+                </label>
+                <input
+                  id="owner-name"
+                  name="owner-name"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={ownerName}
                 />
               </div>
 
@@ -126,43 +281,72 @@ const AdminBusinessApprovalView = () => {
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.email}
+                  defaultValue={data.email}
                 />
               </div>
-
-              {/* Owner's Name */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="owner-name"
+                  htmlFor="username"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Owner's Name
+                  Username
                 </label>
                 <input
-                  id="owner-name"
-                  name="owner-name"
+                  id="username"
+                  name="username"
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.ownerName}
+                  defaultValue={data.username}
                 />
               </div>
 
-              {/* Created On */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
-                  htmlFor="created-on"
+                  htmlFor="status"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Created On
+                  Subscription Plan
                 </label>
                 <input
-                  id="created-on"
-                  name="created-on"
+                  id="status"
+                  name="status"
                   type="text"
                   readOnly
                   className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
-                  defaultValue={dummyData.createdOn}
+                  defaultValue={data.subscriptionPlan}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Subscription Plan Purchase On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.subscriptionPurchaseDate}
+                />
+              </div>
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Subscription Plan Expiry On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.subscriptionExpiryDate}
                 />
               </div>
 
@@ -170,37 +354,64 @@ const AdminBusinessApprovalView = () => {
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="document"
-                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900 flex items-center"
                 >
+                  <FontAwesomeIcon icon={faFileAlt} className="mr-2 text-gray-700" />
                   Verification Document
                 </label>
-                <a
-                  href={dummyData.document}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-blue-600 underline"
-                >
-                  View Document
-                </a>
+                  <a
+                    href={data.verificationDocUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-blue-600 underline flex items-center gap-x-1"
+                  >
+                    View Document
+                  </a>
               </div>
-
+              <div className="flex items-center gap-x-3 mb-0.5">
+                <label
+                  htmlFor="status"
+                  className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
+                >
+                  Document Uploaded On
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  readOnly
+                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 bg-[#E7E7E7] shadow-sm sm:text-xs"
+                  defaultValue={data.verificationStatusUpdatedAt}
+                />
+              </div>
               {/* Approval Status */}
               <div className="flex items-center gap-x-3 mb-0.5">
                 <label
                   htmlFor="approval-status"
                   className="w-1/3 text-sm font-semibold leading-4 text-gray-900"
                 >
-                  Approval Status
+                  Verification Status
                 </label>
                 <select
                   id="approval-status"
                   value={approvalStatus}
                   onChange={handleStatusChange}
-                  className="flex-1 rounded-md border-2 border-[#6DA5C0] px-2.5 py-1 text-gray-900 shadow-sm sm:text-xs"
+                  className={`flex-1 rounded-md border-2 px-2.5 py-1 text-gray-900 shadow-sm sm:text-xs ${
+                    approvalStatus === "APPROVED"
+                      ? "bg-green-100 border-green-400"
+                      : approvalStatus === "REJECTED"
+                      ? "bg-red-100 border-red-400"
+                      : "border-[#6DA5C0]"
+                  }`}
+                  required
                 >
-                  <option value="approved">Approved</option>
-                  <option value="rejected">Rejected</option>
-                  <option value="pending">Pending</option>
+                  <option value="SELECT ONE">SELECT ONE</option>
+                  <option value="APPROVED" className="text-green-600">
+                    APPROVED
+                  </option>
+                  <option value="REJECTED" className="text-red-600">
+                    REJECTED
+                  </option>
                 </select>
               </div>
             </div>
@@ -220,5 +431,6 @@ const AdminBusinessApprovalView = () => {
     </>
   );
 };
+        
 
 export default AdminBusinessApprovalView;

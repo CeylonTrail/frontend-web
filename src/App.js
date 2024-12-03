@@ -199,7 +199,7 @@ function App() {
             element={<AdminBusinessApproval />}
           />
           <Route
-            path="/admin-businessappview"
+            path="/admin-businessappview/:id"
             element={<AdminBusinessApprovalView />}
           />
           <Route path="/admin-usermgt-sp/:id" element={<AdminSpPrflView />} />

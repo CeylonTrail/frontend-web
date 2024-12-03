@@ -22,12 +22,16 @@ const AdminSpPrflView = () => {
   const fetchSP = async () => {
     try {
       const response = await get_sp(id);
-      if (response.status === "success") {
+
+      if (response.status === 'success') {
         setData(response.data);
         setOwnerName(response.data.firstname + " " + response.data.lastname)
-      } else {
+      } else if (response.status === 'unauthorized'){
+        localStorage.clear()
+        navigate('/login')
+      } else 
         console.error(response.message);
-      }
+
     } catch (error) {
       console.error("Error fetching sp data:", error);
     }

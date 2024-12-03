@@ -18,7 +18,8 @@ import { set } from "date-fns";
 const TravellerCommunity = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [tripId, setTripId] = useState(0);
-    const [selectedImages, setSelectedImages] = useState([]); // Initialize as array
+    const [selectedImages, setSelectedImages] = useState([]);
+    const [images, setImages] = useState([]);
     const [content, setContent] = useState("");
     const [privacy, setPrivacy] = useState("public");
     const [showAlert, setShowAlert] = useState(false);
@@ -52,6 +53,7 @@ const TravellerCommunity = () => {
 
     const closePopup = () => {
         setShowPopup(false);
+        setImages([]); // Clear uploading images when closing popup
         setSelectedImages([]); // Clear images when closing popup
         setContent(""); // Clear content
     };
@@ -84,8 +86,8 @@ const TravellerCommunity = () => {
         formData.append("privacy", privacy.toUpperCase());
         
         // Append image files
-        selectedImages.forEach((image, index) => {
-            formData.append("images", image.file); // Attach the File object
+        Array.from(images).forEach((image, index) => {
+            formData.append(`images`, image); // Use `images` as the field name in the DTO.
         });
     
         try {
@@ -110,6 +112,7 @@ const TravellerCommunity = () => {
     
 
     const handleImageChange = (e) => {
+        setImages(e.target.files);
         const files = Array.from(e.target.files); // Convert FileList to array
         const imageUrls = files.map((file) => URL.createObjectURL(file)); // Create object URLs for images
         setSelectedImages((prevImages) => [...prevImages, ...imageUrls]); // Update the state with new images

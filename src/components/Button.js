@@ -1,7 +1,4 @@
-
-
 const PrimaryButton = ({ name, action,isActive ,icon}) => {
-
     return (
         <button
             className={`px-8 py-2 mx-1 font-bold rounded-full duration-150  items-center ${isActive
@@ -16,7 +13,4 @@ const PrimaryButton = ({ name, action,isActive ,icon}) => {
     );
 };
 
-
-
 export  {PrimaryButton};
-

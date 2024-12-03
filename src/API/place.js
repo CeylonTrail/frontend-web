@@ -37,7 +37,7 @@ const get_all_places = async () => {
         const response = await axios.get(url, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization':token,
+                'Authorization':`Bearer ${token}`,
             },
             params:{
                 page : 0
@@ -46,6 +46,8 @@ const get_all_places = async () => {
      
         if (response.data.code === 200) {
             return { status: 'success', message: 'Fetching all places success', places: response.data.data };
+        }else if(response.data.code===401){
+            return { status: 'JWTerror', message: 'Session expired. Please login again.' };  
         } else {
             return { status: 'error', message: response.data.message };
         }

@@ -38,7 +38,7 @@ const PlanTrip = () => {
 
 
     return (
-        <div className="w-[77%] fixed right-2 bg-white rounded p-6  h-[87.5vh] flex flex-row flex-1">
+        <div className="w-[77%] fixed right-2 bg-white rounded p-2  h-[87.5vh] flex flex-row flex-1">
             {showContent === "planTripForm" && (
                 <>
                     <img src={planImage} alt="Plan a trip" />

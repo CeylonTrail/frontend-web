@@ -6,6 +6,12 @@ import CurrentTrip from '../../components/CurrentTrip';
 import TripDashboard from '../../components/TripDashboard';
 import PlanTrip from '../../components/planTrip';
 import SavedTrips from '../../components/savedTrips';
+import { SuccessAlert, WarningAlert } from "../../components/Alerts";
+import Loading from "../loading";
+import Tripapi from '../../API/Trip';
+// import { capitalizeWords } from '../Functions/FormatName';
+
+
 
 const Trip = () => {
     const [isDashboardActive, setDashboardActive]=useState(true);
@@ -14,6 +20,14 @@ const Trip = () => {
     const [isSavedTripActive,setSavedTripActive]=useState(false);
     const [navlink, setNavlink] = useState('');
     const navigate = useNavigate();
+    // const [savedTrips, setSavedTrips] = useState([]);
+    const [isLoading, setLoading] = useState(false);
+    const [tripDetail,setTripDetail]=useState([]);
+    // const [showTripDetail,setShowTripDetail]=useState(false)
+    const [showWarning, setShowWarning] = useState(false);
+    const [warningMessage, setWarningMessage] = useState("");
+    const [warningTitle, setWarningTitle] = useState("");
+    const [currentTripId,setCurrentTripId]=useState(0);
 
     const handleProfileClick = () => {
         window.location.href = "/profile";
@@ -37,6 +51,7 @@ const Trip = () => {
         setCurrentTripActive(true);
         setPlanTripActive(false);
         setSavedTripActive(false);
+        setCurrentTripId(localStorage.getItem("CurrentTrip"))
     }
     const handleSavedTripClick=()=>{
         setDashboardActive(false);
@@ -44,6 +59,40 @@ const Trip = () => {
         setPlanTripActive(false);
         setSavedTripActive(true);
     }
+
+    const getTripById=async (tripID) => {
+        setLoading(true);
+        try {
+            const response = await Tripapi.get_trip(tripID);
+            console.log(response)
+            if (response.status === "success") {
+                setTripDetail(response.data);
+                // setShowTripDetail(true)
+            } else if (response.status === "unauthorized") {
+                setShowWarning(true);
+                setWarningMessage("Session Expired. Please login again!");
+                setWarningTitle("Session Expired");
+                setTimeout(() => {
+                    localStorage.clear();
+                    window.location.href = "/login";
+                }, 1000);
+            } else {
+                setShowWarning(true);
+                setWarningMessage("Failed to fetch trip details. Please try again.!");
+               
+            }
+        } catch (error) {
+            setShowWarning(true);
+            setWarningMessage("An error occurred. Please try again later.!");
+           
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getTripById(currentTripId);
+    }, [currentTripId]);
 
     return (
         <div className="flex flex-col">
@@ -99,7 +148,7 @@ const Trip = () => {
                 {isPlanTripActive && <PlanTrip />}
 
                 {/* Current trip */}
-                {isCurrentTripActive && <CurrentTrip/>}
+                {isCurrentTripActive && <CurrentTrip places={tripDetail}/>}
 
                 {/* Saved Trip */}
                 {isSavedTripActive && <SavedTrips/>}

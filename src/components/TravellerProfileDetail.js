@@ -1,11 +1,12 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import { PrimaryButton as Button } from './Button';
 import skelim from '../assets/img/picskel.png';
+import { capitalizeWords } from '../Functions/FormatName';
 
 
 export default ({ pic }) => {
     
-
     const followers=["Amal","Kamal","Nimal","Sunil","Manahari","Amal","Kamal","Nimal","Sunil","Manahari"];
     const handleEdit = () => { 
         window.location.href = "/edit_tr_profile";
@@ -16,10 +17,10 @@ export default ({ pic }) => {
                 <div className='flex flex-row'>
                     <div className="rounded-full flex items-center justify-center">
 
-                        <img src={pic} className="w-40 rounded-full" />
+                        <img src={skelim} className="w-40 rounded-full" />
                     </div>
                     <div className='ml-4'>
-                        <h2 className="text-2xl font-bold mt-2">Travel Enthusiast 2</h2>
+                        <h2 className="text-2xl font-bold mt-2">{capitalizeWords(localStorage.getItem("firstname"))} {capitalizeWords(localStorage.getItem("lastname"))}</h2>
                         <div className="text-gray-500 flex flex-row text-center max-w-72 my-5">
                             <div className="border-r ">200 Posts</div>
                             <div className="border-r m-y-2">200 Followers</div>

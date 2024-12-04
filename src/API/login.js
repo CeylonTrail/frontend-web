@@ -13,6 +13,7 @@ const login = async (data) => {
         
         if (response.data.code === 200) {
 
+
             localStorage.setItem('firstname', response.data.data.firstname);
             localStorage.setItem('lastname', response.data.data.lastname);
             localStorage.setItem('email', response.data.data.email);

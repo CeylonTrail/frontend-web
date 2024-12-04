@@ -2,7 +2,7 @@ import Header from "../../components/header";
 import FilterBar from "../../components/sidebarFilters";
 import CommunityPost from "../../components/communityPost";
 import { SimpleInput } from "../../components/inputFields";
-import Profile from "../../assets/img/Profile.svg";
+import Profile from "../../assets/img/picskel.png";
 import { useState, useRef, useEffect } from "react";
 import TagIcon from "../../assets/img/TagIcon.svg";
 import imageIcon from "../../assets/img/imageIcon.svg";
@@ -14,6 +14,9 @@ import { capitalizeWords } from "../../Functions/FormatName";
 import postAPI from "../../API/post";
 import { SuccessAlert, WarningAlert } from "../../components/Alerts";
 import { set } from "date-fns";
+import Loading from "../loading";
+import { faU } from "@fortawesome/free-solid-svg-icons";
+
 
 const TravellerCommunity = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -28,8 +31,11 @@ const TravellerCommunity = () => {
     const [postButton, setPostButton] = useState("Post");
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState(posts);
+    const [isLoading, setLoading] = useState(false);
+
 
     const fetchPosts = async () => {
+        setLoading(true)
         try {
             const response = await postAPI.get_public_community_post();
             if (response.status === "success") {
@@ -40,6 +46,9 @@ const TravellerCommunity = () => {
             }
         } catch (error) {
             console.error("Error:", error);
+        }
+        finally{
+            setLoading(false)
         }
     };
 
@@ -76,6 +85,14 @@ const TravellerCommunity = () => {
         };
     }, [showPopup]);
 
+    const incrementPostCount = () => {
+        const currentCount = parseInt(localStorage.getItem("PostCount"), 10) || 0;      
+        const updatedCount = currentCount + 1;    
+        localStorage.setItem("PostCount", updatedCount);   
+        return updatedCount; 
+      };
+      
+
     const createPost = async () => {
         setPostButton("Posting...");
         const formData = new FormData();
@@ -97,6 +114,7 @@ const TravellerCommunity = () => {
                 setShowAlert(true);
                 fetchPosts(); // Refresh posts
                 closePopup(); // Close popup after successful post
+                incrementPostCount();
             } else {
                 setAlertData({ title: "Error", message: "Something went wrong. Please try again." });
                 setShowAlert(true);
@@ -140,8 +158,11 @@ const TravellerCommunity = () => {
                 </div>
                 <div className="flex flex-col items-center mt-24 mx-auto gap-2 fixed right-0 bottom-0 top-0 mr-2 max-w-sm">
                     <Analytics />
-                    <ChatWindow />
+                    
                 </div>
+
+            {/* {isLoading && <Loading />} */}
+
             </div>
             {showPopup && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -154,7 +175,7 @@ const TravellerCommunity = () => {
                         </h2>
                         <div className="flex items-center mb-4 justify-between">
                             <div className="flex flex-row items-center">
-                                <img src={Profile} className="w-12 h-12 rounded-full" alt="Profile" />
+                                <img src={localStorage.getItem("profilePictureUrl")||Profile} className="w-12 h-12 rounded-full" alt="Profile" />
                                 <span className="ml-4 font-semibold">{capitalizeWords(localStorage.getItem("userName"))}</span>
                             </div>
                             <div className="w-48">

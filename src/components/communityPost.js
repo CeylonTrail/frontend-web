@@ -176,7 +176,7 @@ const CommunityPost = ({ posts, type }) => {
         console.log("Posts:", posts);
         return <div className="flex justify-center flex-col items-center pt-16">
             <img src={noContent} alt="noContent" className="w-3/5" />
-            <p>No Posts Available</p>
+            <p>Loading..</p>
         </div>;
     } else {
         return (

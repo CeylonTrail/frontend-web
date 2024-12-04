@@ -5,6 +5,7 @@ import Trip from '../API/Trip';
 import dimage from '../assets/img/vectorPlace4.jpg';
 import { capitalizeWords } from '../Functions/FormatName';
 import CurrentTrip from './CurrentTrip';
+import white_bookark from '../assets/img/bookmark_white.svg'
 
 const TripCard = ({ title, duration, image, onClick, onStart }) => {
     return (
@@ -13,8 +14,8 @@ const TripCard = ({ title, duration, image, onClick, onStart }) => {
             onClick={onClick}
         >
             {/* Saved Icon */}
-            <div className="absolute top-2 right-2 bg-white rounded-full p-2 shadow">
-                <span className="material-icons text-red-500">favorite</span>
+            <div className="absolute top-2 right-2 bg-primary rounded-full p-2 shadow">
+                <img src={white_bookark}/>
             </div>
 
             {/* Image */}
@@ -54,6 +55,10 @@ const SavedTrips = () => {
     const [showWarning, setShowWarning] = useState(false);
     const [warningMessage, setWarningMessage] = useState("");
     const [warningTitle, setWarningTitle] = useState("");
+
+    const [showSuccessAlert,setShowSuccessAlert]=useState(false);
+  const [successTitle,setSuccessTitle]=useState("");
+  const [successMessage,setShowSuccesMessage]=useState("");
 
     const fetchSavedTrips = async () => {
         setLoading(true);
@@ -116,14 +121,17 @@ const SavedTrips = () => {
     }, []);
 
     const handleCardClick = (tripId) => {
-        alert(`Navigating to trip details for Trip ID: ${tripId}`);
+        // alert(`Navigating to trip details for Trip ID: ${tripId}`);/
         getTripById(tripId)
         
     };
 
     const handleStartTrip = (tripId) => {
-        alert(`Starting trip with Trip ID: ${tripId}`);
-        // Implement start trip logic here
+        // alert(`Starting trip with Trip ID: ${tripId}`);
+        localStorage.setItem("CurrentTrip",tripId);
+        setShowSuccessAlert(true);
+        setShowSuccesMessage("Please ove to current trip tab.")
+        setSuccessTitle("Trip started successfully.")
     };
 
     return (
@@ -138,8 +146,8 @@ const SavedTrips = () => {
                                 key={trip.tripId}
                                 title={trip.destination}
                                 duration={`${trip.dayCount} day${trip.dayCount > 1 ? 's' : ''}`}
-                                // image={trip.imageURL || dimage}
-                                image={ dimage}
+                                image={trip.imageURL || dimage}
+                                // image={ dimage}
 
                                 onClick={() => handleCardClick(trip.tripId)}
                                 onStart={() => handleStartTrip(trip.tripId)}

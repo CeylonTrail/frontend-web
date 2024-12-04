@@ -110,7 +110,7 @@ const all_trip = async () => {
     const url = 'http://localhost:8083/api/v1/traveller/all-trip';
 
     try {
-        const response = await axios.post(url,  {
+        const response = await axios.get(url,  {
             headers: {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json',

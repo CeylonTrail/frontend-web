@@ -7,6 +7,7 @@ import Loading from "../Pages/loading";
 import { PrimaryButton } from "./Button";
 import CalculateDistance from "../Functions/CalculateDistence";
 import Trip from "../API/Trip";
+import SavedTrips from "./savedTrips";
 
 const CreateTripP1 = ({ location }) => {
   const [destination, setDestination] = useState(location);
@@ -19,7 +20,7 @@ const CreateTripP1 = ({ location }) => {
   const [selectedPlace, setSelectedPlace] = useState(location);
   const [duration, setDuration] = useState(localStorage.getItem("duration")); 
   
-
+  const[showsaveContent,setShowContent]=useState(true);
   const [filteredPlaces, setFilteredPlaces] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -28,7 +29,10 @@ const CreateTripP1 = ({ location }) => {
 
   const [isLoading, setLoading] = useState(false);
 
-  
+  const [showSuccessAlert,setShowSuccessAlert]=useState(false);
+  const [successTitle,setSuccessTitle]=useState("");
+  const [successMessage,setShowSuccesMessage]=useState("");
+
   const [showWarning, setShowWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState("");
   const [warningTitle, setWarningTitle] = useState("");
@@ -95,6 +99,42 @@ const CreateTripP1 = ({ location }) => {
     } 
   };
 
+
+  const addToSavedTrips = async (tripid)=>{
+    
+      setLoading(true);
+      try {
+          const response = await Trip.save_trip(tripid);
+          console.log(response)
+          if (response.status == "success") {
+              setShowSuccesMessage("Your trip will be in saved tab.");
+              setSuccessTitle("Trip saved successfully")
+              setShowSuccessAlert(true)
+              setTimeout(()=>{
+                setShowContent(true);               
+              },1000)
+          } else if (response.status === "unauthorized") {
+              setShowWarning(true);
+              setWarningMessage("Session Expired. Please login again!");
+              setWarningTitle("Session Expired");
+              setTimeout(() => {
+                  localStorage.clear();
+                  window.location.href = "/login";
+              }, 1000);
+          } else {
+              setShowWarning(true);
+              setWarningMessage("Failed to save trip. Please try again.!");
+             
+          }
+      } catch (error) {
+          setShowWarning(true);
+          setWarningMessage("An error occurred. Please try again later.!");
+         
+      } finally {
+          setLoading(false);
+      }
+  
+  }
   useEffect(() => {
     const filtered = allPlaces.filter((place) =>
       place.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -211,7 +251,7 @@ const CreateTripP1 = ({ location }) => {
       const response = await Trip.plan_trip(planData); // Replace with your actual API function
       setLoading(true)
       if (response.status === "success") {
-        alert("Trip plan saved successfully!");
+        addToSavedTrips(response.data.tripId)
         localStorage.removeItem("yourPlan"); // Clear the plan-related local storage data
         localStorage.removeItem("destination"); // Adjust key names as needed
         // window.location.href = "/trip"; // Redirect to trip page
@@ -302,21 +342,7 @@ const CreateTripP1 = ({ location }) => {
 
               
             </div>
-            <div className="bg-white rounded-lg shadow-md p-4">
-              <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={15}
-              >
-                {places.map((place) => (
-                  <Marker
-                    key={place.placeId}
-                    position={{ lat: place.latitude, lng: place.longitude }}
-                    title={place.name}
-                  />
-                ))}
-              </GoogleMap>
-            </div>
+            
           </div>
 
           <div className="w-full relative">
@@ -366,6 +392,21 @@ const CreateTripP1 = ({ location }) => {
                   </p>
                 )}
               </div>
+              <div className="bg-white rounded-lg shadow-md p-4">
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={15}
+              >
+                {places.map((place) => (
+                  <Marker
+                    key={place.placeId}
+                    position={{ lat: place.latitude, lng: place.longitude }}
+                    title={place.name}
+                  />
+                ))}
+              </GoogleMap>
+            </div>
             </div>
           </div>
 
@@ -381,6 +422,18 @@ const CreateTripP1 = ({ location }) => {
           onclose={() => setShowWarning(false)}
         />
       )}
+
+      {showSuccessAlert && (
+              <SuccessAlert
+                title={successTitle}
+                message={successMessage}
+                onclose={() => setShowSuccessAlert(false)}
+              />
+            )}
+
+      {showsaveContent && <SavedTrips/>
+
+      }
     </>
   );
 };

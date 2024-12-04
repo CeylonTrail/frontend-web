@@ -8,10 +8,10 @@ const CurrentTrip = ({ places }) => {
     };
 
     // Filter places based on the selected day
-    const filteredPlaces = places.filter((place) => place.dayNum === selectedDate);
+    const filteredPlaces = places ? places.filter((place) => place.dayNum === selectedDate) : [];
 
     useEffect(() => {
-        if (filteredPlaces.length) {
+        if (filteredPlaces.length && window.google) {
             const map = new window.google.maps.Map(document.getElementById("map"), {
                 center: {
                     lat: filteredPlaces[0].place.latitude,
@@ -31,6 +31,17 @@ const CurrentTrip = ({ places }) => {
         }
     }, [filteredPlaces]);
 
+    // Extract unique day numbers for dropdown
+    const uniqueDays = places ? [...new Set(places.map((place) => place.dayNum))] : [];
+
+    if (!places || places.length === 0) {
+        return (
+            <div className="w-[77%] fixed right-2 bg-white rounded p-6 h-[87.5vh] flex justify-center items-center">
+                <p className="text-gray-500 text-lg">No trip planned.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="w-[77%] fixed right-2 bg-white rounded p-6 h-[87.5vh] flex flex-row">
             {/* Left Section */}
@@ -43,9 +54,11 @@ const CurrentTrip = ({ places }) => {
                             onChange={handleDateChange}
                             className="p-2 border rounded w-full md:w-auto"
                         >
-                            <option value={1}>Day 1</option>
-                            <option value={2}>Day 2</option>
-                            <option value={3}>Day 3</option>
+                            {uniqueDays.map((day) => (
+                                <option key={day} value={day}>
+                                    Day {day}
+                                </option>
+                            ))}
                         </select>
                     </div>
 

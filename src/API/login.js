@@ -12,18 +12,23 @@ const login = async (data) => {
         });
         
         if (response.data.code === 200) {
-            const token = response.data.data.accessToken;
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+
+            localStorage.setItem('firstname', response.data.data.firstname);
+            localStorage.setItem('lastname', response.data.data.lastname);
+            localStorage.setItem('email', response.data.data.email);
+            localStorage.setItem('role', response.data.data.role);
+            localStorage.setItem('username', response.data.data.username);
+            localStorage.setItem('profilePictureUrl', response.data.data.profilePictureUrl);
+            localStorage.setItem('token', response.data.data.accessToken);
+
 
             if (response.data.data.role === "SERVICE_PROVIDER") {
                 if (response.data.data.setupState) {
                     return { 
                         status: 'success', 
                         message: 'Login success', 
-                        token: token,
-                        role: response.data.data.role,
                         setupState: true,
-                        userName: response.data.data.username,
                         serviceName: response.data.data.serviceName,
                         serviceType: response.data.data.serviceType
                     };
@@ -31,10 +36,7 @@ const login = async (data) => {
                     return { 
                         status: 'success', 
                         message: 'Login success', 
-                        token: token,
-                        role: response.data.data.role,
                         setupState: false,
-                        userName:response.data.data.username,
                         serviceName: response.data.data.serviceName,
                         serviceType: response.data.data.serviceType
                     };
@@ -43,8 +45,6 @@ const login = async (data) => {
                 return { 
                     status: 'success', 
                     message: 'Login success', 
-                    token: token,
-                    role:response.data.data.role,
                     userName:response.data.data.username 
                 };
             } 

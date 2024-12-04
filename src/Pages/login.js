@@ -40,17 +40,15 @@ export default () => {
             const response = await login(data);
 
             if (response.status === 'success') {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('userName', response.userName);
                 setAlertType('success');
                 setAlertMessage('Login success');
                 setAlertTitle('Success');
                 setShowAlert(true);
                 setTimeout(() => {
-                    if (response.role === 'TRAVELLER') {
+                    if (localStorage.getItem('role') === 'TRAVELLER') {
                         navigate('/community');
                     }
-                    else if (response.role === 'ADMIN') {
+                    else if (localStorage.getItem('role') === 'ADMIN') {
                         navigate('/admin');
                     } else {
                         localStorage.setItem('serviceName', response.serviceName);

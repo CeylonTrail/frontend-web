@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MarketPlaceBackgroundImg from "../../assets/img/shop_cover.png";
 import HotelCardImg from "../../assets/img/hotel-card.png";
@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import "../../assets/styles/form.css"; 
 import Header from "../../components/header.js";
+import { get_sp_profile, remove_ad, set_active_ad, set_inactive_ad } from "../../API/sp.js";
+import Loading from "../loading.js";
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const SpHotelProfileView = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,34 +30,52 @@ const SpHotelProfileView = () => {
   const [selectedCard, setSelectedCard] = useState(null); // State to track the selected card for boosting
   const [isEditHotelModalOpen, setIsEditHotelModalOpen] = useState(false); // State to control edit modal visibility
 
+
   const handleAddListingClick = () => {
-    console.log("Popup open");
-    setIsModalOpen(true); // Open the modal when "ADD LISTING" is clicked
+    if (data.verificationStatus === "PENDING") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Account Not Verified',
+        text: 'Your account is not verified yet. Please wait until your account is verified!',
+        confirmButtonText: 'OK'
+      });
+    } else if (data.verificationStatus === "REJECTED") {
+      // Display a SweetAlert when max ad count is reached
+      Swal.fire({
+        icon: 'warning',
+        title: 'Your Account is Rejected',
+        text: 'Your account is rejected. Please contact the admin for more information!',
+        confirmButtonText: 'OK'
+      });
+    } else if (data.publishedAddCount >= data.maxAddCount) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Max Advertisements Count Reached',
+        text: 'You have reached the maximum number of advertisements allowed. Please subscribe to add more!',
+        confirmButtonText: 'OK'
+      });
+    } else {
+      setIsModalOpen(true);
+    }
   };
-
-  const handleCloseModal = () => {
-    console.log("Closing modal");
-    setIsModalOpen(false);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission
-    alert("Form Submitted");
-    handleCloseModal(); // Close modal on form submission
-  };
+  
 
   const handleSubscribeClick = () => {
-    navigate("/subscription-plan"); // Redirect to the subscription plan page
+    navigate("/subscription-plan");
   };
 
   const editProfileClicked = () => {
-    navigate("/edit-market");
-    // Handle edit profile action
+    navigate(`/edit-market/${data.serviceProviderId}`);
   };
 
-  const handleBoostClick = (card) => {
-    setSelectedCard(card);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    fetchProfile();
+  };
+
+  const handleBoostClick = (id) => {
+    setSelectedCard(id);
     setIsBoostModalOpen(true);
   };
 
@@ -63,8 +84,8 @@ const SpHotelProfileView = () => {
     setIsBoostModalOpen(false);
   };
 
-  const handleEditListingClick = (card) => {
-    setSelectedCard(card);
+  const handleEditListingClick = (id) => {
+    setSelectedCard(id);
     setIsEditHotelModalOpen(true);
   };
 
@@ -72,95 +93,137 @@ const SpHotelProfileView = () => {
     setSelectedCard(null);
     setIsEditHotelModalOpen(false);
   };
+
+  const handleSetInactiveClick = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to set this advertisement as inactive?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, set it inactive!",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await set_inactive_ad(id);
+        if (response.status === "success") {
+          Swal.fire("Set Inactive!", "The advertisement is now inactive.", "success");
+          fetchProfile();
+        } else {
+          Swal.fire("Error", "Failed to set the advertisement as inactive.", "error");
+        }
+      } catch (error) {
+        Swal.fire("Error", "Something went wrong.", "error");
+        console.error(error);
+      }
+    }
+  };
+  
+  const handleSetActiveClick = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to set this advertisement as active?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, set it active!",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await set_active_ad(id);
+        if (response.status === "success") {
+          Swal.fire("Set Active!", "The advertisement is now active.", "success");
+          fetchProfile();
+        } else {
+          Swal.fire("Error", "Failed to set the advertisement as active.", "error");
+        }
+      } catch (error) {
+        Swal.fire("Error", "Something went wrong.", "error");
+        console.error(error);
+      }
+    }
+  };
+  
+  const handleRemoveClick = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to remove this advertisement? This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await remove_ad(id);
+        if (response.status === "success") {
+          Swal.fire("Removed!", "The advertisement has been removed.", "success");
+        } else {
+          Swal.fire("Error", "Failed to remove the advertisement.", "error");
+        }
+      } catch (error) {
+        Swal.fire("Error", "Something went wrong.", "error");
+        console.error(error);
+      }
+    }
+  };
+
    const handleRedirect = (event) => {
      event.preventDefault();
      navigate("/chat");
    };
 
-  const rooms = [
-    {
-      type: "Deluxe Rooms",
-      price: "LKR 5000/night",
-      rating: 4.7,
-      src: DeluxeRoomImg,
-    },
-    {
-      type: "Superior Rooms",
-      price: "LKR 3500/night",
-      rating: 5,
-      src: PremiumRoomImg,
-    },
-    {
-      type: "Executive Rooms",
-      price: "LKR 6500/night",
-      rating: 4.8,
-      src: ExecutiveRoomImg,
-    },
-    {
-      type: "Suits",
-      price: "LKR 4000/night",
-      rating: 4.4,
-      src: SuitRoomImg,
-    },
-    {
-      type: "Single Room 5",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 6",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 7",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 8",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 9",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 10",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 11",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-    {
-      type: "Single Room 12",
-      price: "LKR 350/night",
-      rating: 4.5,
-      src: HotelCardImg,
-    },
-  ];
+    const [data, setData] = useState(null);
+  
+    const fetchProfile = async () => {
+      try {
+        const response = await get_sp_profile();
+  
+        console.log(response);
+        if (response.status === 'success') {
+          setData(response.data);
+          
+        } else if (response.status === 'unauthorized') {
+          localStorage.clear();
+          navigate('/login');
+        } else {
+          console.error(response.message);
+        }
+  
+      } catch (error) {
+        console.error("Error fetching pending sps data:", error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchProfile();
+    }, []);
+  
+    // Display a loading message while data is being fetched
+    if (!data) {
+      return <Loading />;
+    }
+  
+    const rooms = data.ads;
 
-  // Calculate the current cards to display
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
+    console.log(data);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+
+  // // Calculate the current cards to display
+  // const indexOfLastCard = currentPage * cardsPerPage;
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // const currentCards = rooms.slice(indexOfFirstCard, indexOfLastCard);
+
+  // const pageNumbers = [];
+  // for (let i = 1; i <= Math.ceil(rooms.length / cardsPerPage); i++) {
+  //   pageNumbers.push(i);
+  // }
 
   const handleSeeReviewsClick = () => {
     navigate("/sp-view-review"); // Navigate to the /sp-review page
@@ -171,7 +234,7 @@ const SpHotelProfileView = () => {
     <>
       <Header
         type="serviceprovider"
-        profilePic={HotelProfileImg}
+        profilePic={data.profilePictureUrl || HotelProfileImg}
         funtion={() => {}}
       />
       <div className="relative mt-20 fixed right-2 overflow-auto h-[87.5vh] ">
@@ -181,7 +244,7 @@ const SpHotelProfileView = () => {
             <img
               style={{ width: "1250px", height: "350px" }}
               className="object-cover object-top"
-              src={MarketPlaceBackgroundImg}
+              src={data.coverPictureUrl || MarketPlaceBackgroundImg}
               alt="Cover"
             />
           </div>
@@ -194,7 +257,7 @@ const SpHotelProfileView = () => {
             >
               <img
                 className="object-cover object-center w-full h-full"
-                src={HotelProfileImg}
+                src={data.profilePictureUrl || HotelProfileImg}
                 alt="Hotel Profile"
               />
             </div>
@@ -229,13 +292,13 @@ const SpHotelProfileView = () => {
                 className="text-4xl font-semibold"
                 style={{ fontWeight: "400", fontSize: "40px" }}
               >
-                Blue Hills Residencies
+                {data.serviceName}
               </div>
               <div
                 className="text-xl font-light italic mt-2"
                 style={{ fontSize: "20px", fontWeight: "300" }}
               >
-                Good in quality
+                {data.description}
               </div>
               <div
                 className="text-lg font-light mt-2"
@@ -313,10 +376,10 @@ const SpHotelProfileView = () => {
             <div className="lg:w-1/2 flex flex-wrap gap-8 mt-8 lg:mt-0">
               <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
                 <div className="font-heading text-[2.6rem] font-semibold lg:text-4xl xl:text-4xl">
-                  100
+                  {data.publishedAddCount}
                 </div>
                 <p className="text-sm font-medium uppercase tracking-widest lg:text-base">
-                  Listings
+                  Advertisement
                 </p>
               </div>
               <div className="flex-1 text-center border-r-2 border-[#0F969C] pr-12 py-6">
@@ -350,37 +413,22 @@ const SpHotelProfileView = () => {
                 src={PlusImg}
                 alt="plus icon"
               />
-              ADD LISTING
+              Add Advertisement
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {currentCards.map((room, index) => (
+              {rooms.map((ad) => (
                 <HotelCard
-                  key={indexOfFirstCard + index}
-                  index={indexOfFirstCard + index}
-                  room={room}
+                  ad={ad}
                   handleBoostClick={handleBoostClick}
                   handleEditListingClick={handleEditListingClick}
+                  handleSetInactiveClick={handleSetInactiveClick}
+                  handleSetActiveClick={handleSetActiveClick}
+                  handleRemoveClick={handleRemoveClick}
                 />
               ))}
             </div>
           </div>
 
-          {/* Pagination Controls */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {pageNumbers.map((number) => (
-              <button
-                key={number}
-                className={`py-2 px-4 font-semibold rounded mb-5 ${
-                  currentPage === number
-                    ? "bg-[#0F969C] text-white"
-                    : "bg-white text-[#0F969C]"
-                } border border-[#0F969C] transition duration-300`}
-                onClick={() => setCurrentPage(number)}
-              >
-                {number}
-              </button>
-            ))}
-          </div>
           <div className="sp-own-view-floating-button">
             <a
               href="#!" // Set href to a dummy value
@@ -399,17 +447,16 @@ const SpHotelProfileView = () => {
         <Modal
           isOpen={isModalOpen}
           onRequestClose={handleCloseModal}
-          onSubmit={handleSubmit}
         />
         <BoostModal
           isOpen={isBoostModalOpen}
           onRequestClose={handleCloseBoostModal}
-          onSubmit={handleSubmit}
+          id = {selectedCard}
         />
         <EditHotelModal
           isOpen={isEditHotelModalOpen}
           onRequestClose={handleCloseEditHotelModal}
-          onSubmit={handleSubmit}
+          id = {selectedCard}
         />
       </div>
     </>

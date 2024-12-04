@@ -5,7 +5,7 @@ import "../../assets/styles/SetUpMarketPlace.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import set_marketplace from "../../API/sp.js";
+import {set_marketplace} from "../../API/sp.js";
 import {
   faFacebook,
   faInstagram,

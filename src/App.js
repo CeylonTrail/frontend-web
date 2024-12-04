@@ -75,7 +75,7 @@ function App() {
             }
           />
           <Route
-            path="/edit-market"
+            path="/edit-market/:id"
             element={
               <>
                 <EditMarketPlace />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/styles/SubscriptionPlan.css"; // Import the CSS file
 import { PrimaryButton } from "../../components/Button"; // Import the PrimaryButton component
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,10 +6,31 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"; // Import the a
 import { useNavigate } from "react-router-dom";
 import HotelProfileImg from "../../assets/img/hotel-profile.png";
 import Header from "../../components/header.js";
+import { get_subscriptions } from "../../API/sp.js";
+import Loading from "../loading.js";
 
 const SubscriptionPlan = () => {
   const navigate = useNavigate();
   const [selectedCard, setSelectedCard] = useState(null);
+  const [data, setData] = useState([]);
+
+  const fetchSubscriptions = async () => {
+    try {
+      const response = await get_subscriptions();
+      if (response.status === "success") {
+        setData(response.data);
+      } else if (response.status === "unauthorized") {
+        localStorage.clear();
+        navigate("/login");
+      } else console.error(response.message);
+    } catch (error) {
+      console.error("Error fetching sp data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubscriptions();
+  }, []);
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -24,56 +45,10 @@ const SubscriptionPlan = () => {
     console.log("Next button clicked");
   };
 
-  const plans = [
-    {
-      name: "Bronze",
-      price: "LKR 00",
-      features: [
-        "2 ad slots/month",
-        "Profile visibility to travelers",
-        "Ability to follow and be followed",
-        "Can get rated by traveller",
-      ],
-      description:
-        "Get started with basic visibility and essential features to connect with travelers easily and efficiently.",
-    },
-    {
-      name: "Silver",
-      price: "LKR 2000",
-      features: [
-        "1000+ Unique Story Structures",
-        "Profile visibility to travelers",
-        "Ability to follow and be followed",
-        "Can get rated by traveller",
-      ],
-      description:
-        "Increase your visibility and engagement with more ad slots and promotional opportunities.",
-    },
-    {
-      name: "Gold",
-      price: "LKR 3000",
-      features: [
-        "1500+ Unique Story Structures",
-        "Profile visibility to travelers",
-        "Ability to follow and be followed",
-        "Can get rated by traveller",
-      ],
-      description:
-        " Maximize your exposure and customer interaction with very enhanced ad slots and advanced features.",
-    },
-    // {
-    //   name: "Platinum",
-    //   price: "LKR 5500",
-    //   features: [
-    //     "2000+ Unique Story Structures",
-    //     "Profile visibility to travelers",
-    //     "Ability to follow and be followed",
-    //     "Can get rated by traveller",
-    //   ],
-    //   description:
-    //     "Achieve top-tier visibility and engagement with the highest number of ad slots and exclusive features.",
-    // },
-  ];
+  if (!data) {
+    return <Loading />;
+  }
+  const plans = data;
 
   return (
     <>
@@ -97,8 +72,12 @@ const SubscriptionPlan = () => {
                 key={plan.name}
                 className={`pricing-card ${
                   selectedCard === plan.name.toLowerCase() ? "selected" : ""
-                }`}
-                onClick={() => handleCardClick(plan.name.toLowerCase())}
+                } ${plan.subscriptionId === 1 ? "disabled" : ""}`}
+                onClick={
+                  plan.subscriptionId !== 1
+                    ? () => handleCardClick(plan.name.toLowerCase())
+                    : undefined
+                }
               >
                 <div className="pricing-card-header">
                   <a
@@ -111,13 +90,19 @@ const SubscriptionPlan = () => {
                 </div>
                 <div className="pricing-card-inner pricing-card-inner-sm">
                   <div className="pricing-card-price">
-                    <span> {plan.price} </span>
-                    <span2>/month</span2>
+                    <span> LKR {plan.price} </span>
+                    <span2>/Month</span2>
                   </div>
                   <p className="pricing-card-description">{plan.description}</p>
                 </div>
                 <div className="pricing-card-features">
                   <ul role="list" className="space-y-6">
+                    <li className="flex items-start">
+                      <p className="pricing-card-feature">
+                        <span className="feature-icon">✔</span>
+                        {plan.adCount} Publish Advertisements
+                      </p>
+                    </li>
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-start">
                         <p className="pricing-card-feature">

@@ -252,6 +252,35 @@ export const set_inactive_ad = async (id) => {
   }
 };
 
+export const get_subscriptions = async () => {
+    const url = `http://localhost:8083/api/v1/sp/subscription`;
+  
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+  
+        if (response.data.code === 200)
+            return { status: 'success', message: response.data.message, data: response.data.data };
+        else if (response.data.code === 401)
+            return { status: 'unauthorized', message: response.data.message };
+        else
+            return { status: 'error', message: 'An unknown error occurred' };
+  
+    } catch (error) {
+        console.error(error);
+        if (error.response) {
+            return { status: 'error', message: error.response.data.message || 'An unknown error occurred' };
+        } else {
+            return { status: 'error', message: 'An unknown error occurred' };
+        }
+    }
+  };
+
 const api = { 
   set_marketplace,
   get_sp_profile,
@@ -260,7 +289,8 @@ const api = {
   get_ad,
   remove_ad,
   set_active_ad,
-  set_inactive_ad
+  set_inactive_ad,
+    get_subscriptions,
  };
 
 export default api;

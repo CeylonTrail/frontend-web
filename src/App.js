@@ -15,6 +15,8 @@ import TrRestaurantProfileView from "./Pages/Restaurant/TrRestaurantProfileView"
 import SpEquipmentRentalProfileView from "./Pages/EquipmentRental/SpEquipmentRentalProfileView";
 import TrEquipmentRentalProfileView from "./Pages/EquipmentRental/TrEquipmentRentalProfileView";
 import MarketPlace from "./Pages/SP common/MarketPlace";
+import MarketPlacePublic from "./Pages/SP common/MarketPlaceCommon";
+
 import SPReviews from "./Pages/SP common/SPReviews";
 import SPViewReviews from "./Pages/SP common/SPViewReviews";
 import SavedItemsPage from "./Pages/SP common/SavedItemsPage";
@@ -24,35 +26,27 @@ import Login from "./Pages/login";
 import Community from "./Pages/Community/landing";
 // import LocationSelector from "./components/locationSelector";
 import Resetpw from "./Pages/resetpw";
-import TravellerProfile from "./Pages/Community/Profile"
+import TravellerProfile from "./Pages/Community/Profile";
 import Landing from "./Pages/landing";
-import TripDashboard from "./Pages/Trips/dashboard"
-import PlanTrips from "./Pages/Trips/planTrips";
-import CurrentTrip from "./Pages/Trips/currentTrip";
-import SavedTrips from "./Pages/Trips/savedTrips";
+import Trip from "./Pages/Trips/Trip";
 import EditProfile from "./Pages/Community/editProf";
-
 import CommunityPublic from "./Pages/Community/communityPublic";
+import Loading from "./Pages/loading";
 
+import Admin from "./Pages/Admin/AdminDashboard";
+import AdminUserManagement from "./Pages/Admin/AdminUserManagement";
+import AdminSubscriptionPlan from "./Pages/Admin/AdminSubscriptionPlan";
+import AdminSpPrflView from "./Pages/Admin/AdminSpPrflView";
+import AdminAddSubscriptionPlan from "./Pages/Admin/AdminAddSubscriptionPlan";
+import AdminEditSubscriptionPlan from "./Pages/Admin/AdminEditSubscriptionPlan";
+import AdminBusinessApproval from "./Pages/Admin/AdminBusinessApproval";
+import AdminBusinessApprovalView from "./Pages/Admin/AdminBusinessApprovalView";
+import AdminSubscriptionList from "./Pages/Admin/AdminSubscriptionList";
+import AdminPostReports from "./Pages/Admin/AdminPostReports";
+import AdminPostReportsView from "./Pages/Admin/AdminPostReportsView";
 
 function App() {
   return (
-    // <div className="App">
-    //   {/* <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header> */}
-    // </div>
     <div>
       <BrowserRouter>
         <Routes>
@@ -73,7 +67,7 @@ function App() {
             }
           />
           <Route
-            path="/set-market"
+            path="/sp-setup"
             element={
               <>
                 <SetUpMarketPlace />
@@ -81,7 +75,7 @@ function App() {
             }
           />
           <Route
-            path="/edit-market"
+            path="/edit-market/:id"
             element={
               <>
                 <EditMarketPlace />
@@ -170,6 +164,15 @@ function App() {
           />
 
           <Route
+            path="/market_public"
+            element={
+              <>
+                <MarketPlacePublic />
+              </>
+            }
+          />
+
+          <Route
             path="/market"
             element={
               <>
@@ -185,29 +188,50 @@ function App() {
               </>
             }
           />
+          {/* admin*/}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin-usermgt" element={<AdminUserManagement />} />
+          <Route
+            path="/admin-businessapp"
+            element={<AdminBusinessApproval />}
+          />
+          <Route
+            path="/admin-businessappview/:id"
+            element={<AdminBusinessApprovalView />}
+          />
+          <Route path="/admin-usermgt-sp/:id" element={<AdminSpPrflView />} />
+          <Route path="/admin-addplan" element={<AdminAddSubscriptionPlan />} />
+          <Route
+            path="/admin-editplan"
+            element={<AdminEditSubscriptionPlan />}
+          />
+          <Route
+            path="/admin-subscriptionplan"
+            element={<AdminSubscriptionPlan />}
+          />
+          <Route
+            path="/admin-subscriptionlist"
+            element={<AdminSubscriptionList />}
+          />
+          <Route path="/admin-post-reports" element={<AdminPostReports />} />
+          <Route
+            path="/admin-post-reports-view"
+            element={<AdminPostReportsView />}
+          />
 
           {/* log in and signup */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset_password" element={<Resetpw />} />
-
           {/* Community */}
           <Route path="/community" element={<Community />} />
           <Route path="/community_public" element={<CommunityPublic />} />
-
-
           <Route path="/profile" element={<TravellerProfile />} />
           <Route path="/edit_tr_profile" element={<EditProfile />} />
-
-
           {/* Trip */}
-          <Route path="/trip_dashboard" element={<TripDashboard />} />
-          <Route path="/plan_trip" element={<PlanTrips />} />
-          <Route path="/current_trip" element={<CurrentTrip />} />
-          <Route path="/saved_trips" element={<SavedTrips />} />
-
+          <Route path="/trip" element={<Trip />} />
           {/* Home Page */}
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </div>

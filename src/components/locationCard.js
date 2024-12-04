@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LocationCard = ({ image, title, rating, reviews }) => {
+const LocationCard = ({ image, title, rating,onClick,buttonText}) => {
     return (
         <div className="flex items-center bg-white rounded-lg shadow-md p-4 mb-4">
             <div className="w-16 h-16 bg-gray-200 rounded-md mr-4">
@@ -12,9 +12,9 @@ const LocationCard = ({ image, title, rating, reviews }) => {
                     <span className="text-yellow-500 mr-2">⭐️⭐️⭐️⭐️⭐️</span>
                     <span className="text-sm text-gray-500">{rating}</span>
                 </div>
-                <p className="text-sm text-gray-500">{reviews} reviews</p>
+                
             </div>
-            <button className="text-blue-500 font-semibold text-xl">+</button>
+            <button className="text-blue-500 font-semibold text-xl" onClick={onClick}>{buttonText}</button>
         </div>
     );
 };

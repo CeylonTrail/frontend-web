@@ -10,11 +10,13 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/img/logo circle.png";
 import { useEffect, useState } from "react";
+import button from "./Button";
+import LogOut from "../assets/img/logout.svg";
 
 const Traveller_navigation = [
 
   { name: 'Community', href: '/community', current: true },
-  { name: 'Trips', href: '/trip_dashboard', current: false },
+  { name: 'Trips', href: '/trip', current: false },
   { name: 'Market Place', href: '/market', current: false },
   { name: 'Places', href: '/places', current: false },
 
@@ -27,10 +29,13 @@ const SP_navigation = [
 ];
 
 const publicNav = [
-  { name: 'Community', href: '/community', current: true },
-  { name: 'Market Place', href: '/market', current: false },
+  { name: 'Community', href: '/community_public', current: true },
+  { name: 'Market Place', href: '/market_public', current: false },
   { name: 'Places', href: '/places', current: false },
 
+];
+
+const Admin_Navigation = [
 ];
 
 function classNames(...classes) {
@@ -38,35 +43,41 @@ function classNames(...classes) {
 }
 
 function handleLogoNavigate() {
-  window.location.href = "/landing";
+  window.location.href = "/";
 }
 
 export default function Example({ type, profilePic, funtion }) {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    // const savedNavigationState = localStorage.getItem('navigationState');
-    // if (savedNavigationState) {
-    //   setNavigation(JSON.parse(savedNavigationState));
-    // } else {
-      if (type == 'traveller') {
-        setNavigation(Traveller_navigation);
-      } else if (type =="serviceprovider") {
-        setNavigation(SP_navigation);
-      }
-      else if (type == "public") {
-      setNavigation(publicNav);
+
+    let navItems = [];
+    if (type === 'traveller') {
+      navItems = Traveller_navigation;
+    } else if (type === "serviceprovider") {
+      navItems = SP_navigation;
+    } else if (type === "public") {
+      navItems = publicNav;
+          } else if (type === "admin") {
+      navItems = Admin_Navigation;
+    } else {
+      navItems = SP_navigation;
     }
-      else {
-        setNavigation(SP_navigation);
-      }
-    
-  }, );
+
+    const currentPath = window.location.pathname;
+    const updatedNavItems = navItems.map((item) => ({
+      ...item,
+      current: item.href === currentPath,
+    }));
+
+    setNavigation(updatedNavItems);
+  }, [type]);
+
 
   const handleNavClick = (index) => {
     const newNavigation = navigation.map((item, idx) => ({
       ...item,
-      current: idx === index,
+      current: idx === index, // Set current to true for the clicked item, false for others
     }));
     setNavigation(newNavigation);
     localStorage.setItem('navigationState', JSON.stringify(newNavigation));
@@ -127,13 +138,17 @@ export default function Example({ type, profilePic, funtion }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+                {type === "public" ? (
+                  <a className="text-primary" href="/login">Log in</a>
+                ) : (<button
                   type="button"
                   className="bg-white p-1 rounded-full text-gray-400 hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button>)}
+                
+                
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -146,9 +161,23 @@ export default function Example({ type, profilePic, funtion }) {
                     </MenuButton>
                   </div>
                 </Menu>
+                {type!='public' && 
+                 <button
+                 type="button"
+                 className="ml-3 text-sm px-4 py-2 bg-red-500 text-primary font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                 onClick={() => {
+                   localStorage.clear(); 
+                   window.location.href = "/login"; 
+                 }}
+                 >
+                 <img src={LogOut}/>
+                 </button>
+                 }
+               
+              </div>
               </div>
             </div>
-          </div>
+          
           <DisclosurePanel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item, index) => (

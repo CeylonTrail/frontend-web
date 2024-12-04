@@ -11,6 +11,7 @@ const SimpleInput = ({ pholder, value, onChange, onBlur }) => {
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+              
             />
         </div>
     );

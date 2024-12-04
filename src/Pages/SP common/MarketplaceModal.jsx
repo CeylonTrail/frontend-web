@@ -14,7 +14,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom"; // Use useNavigate for React Router v6+
 
-const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) => {
+const MarketplaceModal = ({
+  isOpen,
+  onRequestClose,
+  marketcardDetails = {},
+}) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [userRating, setUserRating] = useState(0);
@@ -87,7 +91,7 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
               display: "flex",
               alignItems: "center",
               marginBottom: "20px",
-              marginRight: "45px"// Space below the profile section
+              marginRight: "45px", // Space below the profile section
             }}
           >
             <img
@@ -110,7 +114,10 @@ const MarketplaceModal = ({ isOpen, onRequestClose, marketcardDetails = {} }) =>
               src={cancelImg}
               alt="Close"
               className="modal-close-icon"
-              onClick={onRequestClose}
+              onClick={() => {
+                console.log("Close icon clicked");
+                onRequestClose(); // Ensure this function is called
+              }}
             />
           </div>
           <div className="modal-form">

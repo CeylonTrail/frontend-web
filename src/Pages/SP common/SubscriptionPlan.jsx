@@ -61,18 +61,18 @@ const SubscriptionPlan = () => {
       description:
         " Maximize your exposure and customer interaction with very enhanced ad slots and advanced features.",
     },
-    {
-      name: "Platinum",
-      price: "LKR 5500",
-      features: [
-        "2000+ Unique Story Structures",
-        "Profile visibility to travelers",
-        "Ability to follow and be followed",
-        "Can get rated by traveller",
-      ],
-      description:
-        "Achieve top-tier visibility and engagement with the highest number of ad slots and exclusive features.",
-    },
+    // {
+    //   name: "Platinum",
+    //   price: "LKR 5500",
+    //   features: [
+    //     "2000+ Unique Story Structures",
+    //     "Profile visibility to travelers",
+    //     "Ability to follow and be followed",
+    //     "Can get rated by traveller",
+    //   ],
+    //   description:
+    //     "Achieve top-tier visibility and engagement with the highest number of ad slots and exclusive features.",
+    // },
   ];
 
   return (

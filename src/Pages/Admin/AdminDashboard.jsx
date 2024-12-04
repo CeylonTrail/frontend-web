@@ -309,11 +309,11 @@ const Admin = () => {
                     Revenue
                   </h3>
                   <p className="text-3xl font-bold text-left">
-                    {totalRevenue}
+                    LKR {totalRevenue}
                   </p>
                   <p className="text-left text-sm text-gray-500 mt-1">
                     <span className="text-lg font-semibold">
-                      {recentRevenue}
+                      LKR {recentRevenue}
                     </span>{" "}
                     <span className="ml-1 text-400">New</span>
                   </p>

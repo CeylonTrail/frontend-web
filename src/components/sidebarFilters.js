@@ -79,7 +79,7 @@ const Sidebar = ({ posts, filterPosts }) => {
         }
         if (followedPosts) {
             // Replace with your logic to identify followed users
-            const followedUserIds = [2]; // Example user IDs
+            const followedUserIds = [61]; // Example user IDs
             filteredPosts = filteredPosts.filter((post) =>
                 followedUserIds.includes(post.user.userId)
             );

@@ -2,7 +2,7 @@ import React from 'react';
 // import PostsSection from '../../components/TravellerProfilecontent';
 // import ProfileSection from '../../components/TravellerProfileDetail';
 import Header from '../../components/header';
-import Profile from '../../assets/img/Profile.svg';
+import Profile from '../../assets/img/picskel.png';
 import Edit from '../../components/profileEdit';
 
 // Main component

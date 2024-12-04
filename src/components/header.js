@@ -18,7 +18,7 @@ const Traveller_navigation = [
   { name: 'Community', href: '/community', current: true },
   { name: 'Trips', href: '/trip', current: false },
   { name: 'Market Place', href: '/market', current: false },
-  { name: 'Places', href: '/places', current: false },
+  // { name: 'Places', href: '/places', current: false },
 
 ];
 
@@ -157,7 +157,7 @@ export default function Example({ type, profilePic, funtion }) {
                       onClick={funtion}
                     >
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={profilePic} alt="" />
+                      <img className="h-8 w-8 rounded-full" src={localStorage.getItem("profilePictureUrl")||profilePic} alt="" />
                     </MenuButton>
                   </div>
                 </Menu>

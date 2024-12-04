@@ -1,4 +1,3 @@
-
 import { PrimaryButton as Button } from './Button';
 import CommunityPost from './communityPost';
 import { SimpleInput } from './inputFields';
@@ -6,47 +5,28 @@ import Profile from '../assets/img/Profile.svg';
 import TripCard from './TripCardCommunity';
 import ImageGallery from './imageGallery';
 import { useState, useEffect } from 'react';
-import postAPI from '../API/post';
+import profileAPI from '../API/profile';
 
 const PostsSection = () => {
+    const [profile, setProfile] = useState(null);
 
-    const [posts, setPosts] = useState(null);
-
-    const fetchPosts = async () => {
+    const fetchProfile = async () => {
         try {
-            const response = await postAPI.get_public_community_post();
-            console.log("Response:", response);
+            const response = await profileAPI.get_user_profile();
+            console.log(response.data);
             if (response.status === "success") {
-                setPosts(response.data);
+                setProfile(response.data);
             } else {
-                console.error("Error in fetching posts");
+                console.error("Error in fetching profile");
             }
         } catch (error) {
             console.error("Error:", error);
         }
     };
 
-    // Using useEffect to call fetchPosts only once when the component mounts
     useEffect(() => {
-        fetchPosts();
+        fetchProfile();
     }, []);
-
-    // const posts = [
-    //     {
-    //         title: "What is SaaS? Software as a Service Explained",
-    //         desc: "Going into this journey, I had a standard therapy regimen, based on looking at the research literature...",
-    //         imgs: [
-    //             "https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    //             "https://images.unsplash.com/photo-1620287341056-49a2f1ab2fdc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    //             "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-    //         ],
-    //         authorLogo: Profile,
-    //         authorName: "Sidi dev",
-    //         date: "Jan 4 2022",
-    //         href: "javascript:void(0)"
-    //     },
-    //     // Add more posts here...
-    // ];
 
     const trips = [
         {
@@ -61,7 +41,6 @@ const PostsSection = () => {
             ],
             description: "It's the smells I remember most from Dave's place: the powerful aromas of curry leaves and mustard seeds, of turmeric and chilli powder, scents that seemed to have soaked into the walls of that house. Dave's mum always had something bubbling away on the stove when we came..."
         },
-        // Add more trips here if needed
     ];
 
     const [showPopup, setShowPopup] = useState(false);
@@ -91,7 +70,11 @@ const PostsSection = () => {
                     <SimpleInput pholder={"Create a post"} className="w-full ml-4" />
                 </span>
                 <div className="overflow-auto h-full w-full">
-                    <CommunityPost posts={posts} />
+                    {profile ? (
+                        <CommunityPost posts={profile.posts} />
+                    ) : (
+                        <p>Loading posts...</p>
+                    )}
                 </div>
             </>}
 
